@@ -1,0 +1,742 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Python 基础课程讲义：32-33.Web前端入门"><title>32-33.Web前端入门｜Python 编程基础</title><link rel="stylesheet" href="/style.css"><script>window.MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:true,processEnvironments:true},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body><header class="site-header"><div class="header-inner"><a class="brand" href="/index.html"><span>Python 编程基础</span><small>Python 基础课程讲义</small></a><a class="back-home" href="/index.html">课程首页</a></div></header><main class="page-layout"><aside class="course-nav" aria-label="课程章节" id="course-nav-list"><div class="course-nav-head"><div class="nav-title">课程章节</div><button class="course-nav-toggle" type="button" aria-expanded="true" aria-controls="course-nav-list">收起</button></div><div class="nav-group">01-基础语法</div><ul><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/01.%E5%88%9D%E8%AF%86Python.html">01.初识Python</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/02.%E7%AC%AC%E4%B8%80%E4%B8%AAPython%E7%A8%8B%E5%BA%8F.html">02.第一个Python程序</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/03.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F.html">03.Python语言中的变量</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/04.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6.html">04.Python语言中的运算符</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/05.%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84.html">05.分支结构</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/06.%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84.html">06.循环结构</a></li></ul><div class="nav-group">02-数据结构</div><ul><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/08.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-1.html">08.常用数据结构之列表-1</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/09.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-2.html">09.常用数据结构之列表-2</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/10.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%85%83%E7%BB%84.html">10.常用数据结构之元组</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/11.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2.html">11.常用数据结构之字符串</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/12.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E9%9B%86%E5%90%88.html">12.常用数据结构之集合</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/13.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E5%85%B8.html">13.常用数据结构之字典</a></li></ul><div class="nav-group">03-函数与模块</div><ul><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/14.%E5%87%BD%E6%95%B0%E5%92%8C%E6%A8%A1%E5%9D%97.html">14.函数和模块</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/16.%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E8%BF%9B%E9%98%B6.html">16.函数使用进阶</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/17.%E5%87%BD%E6%95%B0%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8.html">17.函数高级应用</a></li></ul><div class="nav-group">04-文件与异常</div><ul><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/21.%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html">21.文件读写和异常处理</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/22.%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96.html">22.对象的序列化和反序列化</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/23.Python%E8%AF%BB%E5%86%99CSV%E6%96%87%E4%BB%B6.html">23.Python读写CSV文件</a></li></ul><div class="nav-group">05-面向对象</div><ul><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/18.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8.html">18.面向对象编程入门</a></li><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/19.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6.html">19.面向对象编程进阶</a></li></ul><div class="nav-group">06-基础项目</div><ul><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/07.%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84%E5%AE%9E%E6%88%98.html">07.分支和循环结构实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/15.%E5%87%BD%E6%95%B0%E5%BA%94%E7%94%A8%E5%AE%9E%E6%88%98.html">15.函数应用实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/20.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%BA%94%E7%94%A8.html">20.面向对象编程应用</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/30.%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%BA%94%E7%94%A8.html">30.正则表达式的应用</a></li></ul><div class="nav-group">拓展-办公自动化</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/24.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-1.html">24.Python读写Excel文件-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/25.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-2.html">25.Python读写Excel文件-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/26.Python%E6%93%8D%E4%BD%9CWord%E5%92%8CPowerPoint%E6%96%87%E4%BB%B6.html">26.Python操作Word和PowerPoint文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/27.Python%E6%93%8D%E4%BD%9CPDF%E6%96%87%E4%BB%B6.html">27.Python操作PDF文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/28.Python%E5%A4%84%E7%90%86%E5%9B%BE%E5%83%8F.html">28.Python处理图像</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/29.Python%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E5%92%8C%E7%9F%AD%E4%BF%A1.html">29.Python发送邮件和短信</a></li></ul><div class="nav-group">拓展-Web与爬虫</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/31.Python%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6.html">31.Python语言进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/32-33.Web%E5%89%8D%E7%AB%AF%E5%85%A5%E9%97%A8.html">32-33.Web前端入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/34-35.%E7%8E%A9%E8%BD%ACLinux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.html">34-35.玩转Linux操作系统</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/36.%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CMySQL%E6%A6%82%E8%BF%B0.html">36.关系型数据库和MySQL概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/37.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDDL.html">37.SQL详解之DDL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/38.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDML.html">38.SQL详解之DML</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/39.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDQL.html">39.SQL详解之DQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/40.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDCL.html">40.SQL详解之DCL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/41.MySQL%E6%96%B0%E7%89%B9%E6%80%A7.html">41.MySQL新特性</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/42.%E8%A7%86%E5%9B%BE%E3%80%81%E5%87%BD%E6%95%B0%E5%92%8C%E8%BF%87%E7%A8%8B.html">42.视图、函数和过程</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/43.%E7%B4%A2%E5%BC%95.html">43.索引</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/44.Python%E6%8E%A5%E5%85%A5MySQL%E6%95%B0%E6%8D%AE%E5%BA%93.html">44.Python接入MySQL数据库</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/45.%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E5%92%8CHiveSQL.html">45.大数据平台和HiveSQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/46.Django%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.html">46.Django快速上手</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/47.%E6%B7%B1%E5%85%A5%E6%A8%A1%E5%9E%8B.html">47.深入模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/48.%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%92%8CAjax%E8%AF%B7%E6%B1%82.html">48.静态资源和Ajax请求</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/49.Cookie%E5%92%8CSession.html">49.Cookie和Session</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/50.%E5%88%B6%E4%BD%9C%E6%8A%A5%E8%A1%A8.html">50.制作报表</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/51.%E6%97%A5%E5%BF%97%E5%92%8C%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7%E6%A0%8F.html">51.日志和调试工具栏</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/52.%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E5%BA%94%E7%94%A8.html">52.中间件的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/53.%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8.html">53.前后端分离开发入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/54.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E5%85%A5%E9%97%A8.html">54.RESTful架构和DRF入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/55.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E8%BF%9B%E9%98%B6.html">55.RESTful架构和DRF进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/56.%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98.html">56.使用缓存</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/57.%E6%8E%A5%E5%85%A5%E4%B8%89%E6%96%B9%E5%B9%B3%E5%8F%B0.html">57.接入三方平台</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/58.%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1.html">58.异步任务和定时任务</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/59.%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95.html">59.单元测试</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/60.%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF.html">60.项目上线</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/61.%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E6%A6%82%E8%BF%B0.html">61.网络数据采集概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%8E%B7%E5%8F%96%E7%BD%91%E7%BB%9C%E8%B5%84%E6%BA%90-1.html">62.用Python获取网络资源-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%A7%A3%E6%9E%90HTML%E9%A1%B5%E9%9D%A2-2.html">62.用Python解析HTML页面-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-1.html">63.Python中的并发编程-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-2.html">63.Python中的并发编程-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-3.html">63.Python中的并发编程-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9C%A8%E7%88%AC%E8%99%AB%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html">63.并发编程在爬虫中的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/64.%E4%BD%BF%E7%94%A8Selenium%E6%8A%93%E5%8F%96%E7%BD%91%E9%A1%B5%E5%8A%A8%E6%80%81%E5%86%85%E5%AE%B9.html">64.使用Selenium抓取网页动态内容</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/65.%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6Scrapy%E7%AE%80%E4%BB%8B.html">65.爬虫框架Scrapy简介</a></li></ul><div class="nav-group">拓展-数据分析</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/66.%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A6%82%E8%BF%B0.html">66.数据分析概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/67.%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87.html">67.环境准备</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/68.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-1.html">68.NumPy的应用-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/69.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-2.html">69.NumPy的应用-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/70.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-3.html">70.NumPy的应用-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/71.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-4.html">71.NumPy的应用-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/72.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-1.html">72.深入浅出pandas-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/73.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-2.html">73.深入浅出pandas-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/74.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-3.html">74.深入浅出pandas-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/75.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-4.html">75.深入浅出pandas-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/76.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-5.html">76.深入浅出pandas-5</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/77.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-6.html">77.深入浅出pandas-6</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/78.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-1.html">78.数据可视化-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/79.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-2.html">79.数据可视化-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/80.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-3.html">80.数据可视化-3</a></li></ul><div class="nav-group">拓展-机器学习</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/81.%E6%B5%85%E8%B0%88%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0.html">81.浅谈机器学习</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/82.k%E6%9C%80%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95.html">82.k最近邻算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/83.%E5%86%B3%E7%AD%96%E6%A0%91%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97.html">83.决策树和随机森林</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/84.%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95.html">84.朴素贝叶斯算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/85.%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B.html">85.回归模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/86.K-Means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95.html">86.K-Means聚类算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/87.%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95.html">87.集成学习算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/88.%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B.html">88.神经网络模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/89.%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E5%85%A5%E9%97%A8.html">89.自然语言处理入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/90.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98.html">90.机器学习实战</a></li></ul></aside><aside class="lesson-toc" aria-label="本页目录"><div class="toc-title">本页目录</div><ul><li class="toc-level-2"><a href="#web前端概述">Web前端概述</a></li><li class="toc-level-3"><a href="#html简史">HTML简史</a></li><li class="toc-level-3"><a href="#使用标签承载内容">使用标签承载内容</a></li><li class="toc-level-3"><a href="#使用css渲染页面">使用CSS渲染页面</a></li><li class="toc-level-3"><a href="#使用javascript控制行为">使用JavaScript控制行为</a></li><li class="toc-level-3"><a href="#前端框架">前端框架</a></li></ul><a class="to-top" href="#top">回到顶部</a></aside><div class="content-area"><details class="mobile-course-nav"><summary>课程章节</summary><div class="mobile-course-links"><div class="nav-group">01-基础语法</div><ul><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/01.%E5%88%9D%E8%AF%86Python.html">01.初识Python</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/02.%E7%AC%AC%E4%B8%80%E4%B8%AAPython%E7%A8%8B%E5%BA%8F.html">02.第一个Python程序</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/03.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F.html">03.Python语言中的变量</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/04.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6.html">04.Python语言中的运算符</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/05.%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84.html">05.分支结构</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/06.%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84.html">06.循环结构</a></li></ul><div class="nav-group">02-数据结构</div><ul><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/08.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-1.html">08.常用数据结构之列表-1</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/09.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-2.html">09.常用数据结构之列表-2</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/10.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%85%83%E7%BB%84.html">10.常用数据结构之元组</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/11.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2.html">11.常用数据结构之字符串</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/12.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E9%9B%86%E5%90%88.html">12.常用数据结构之集合</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/13.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E5%85%B8.html">13.常用数据结构之字典</a></li></ul><div class="nav-group">03-函数与模块</div><ul><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/14.%E5%87%BD%E6%95%B0%E5%92%8C%E6%A8%A1%E5%9D%97.html">14.函数和模块</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/16.%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E8%BF%9B%E9%98%B6.html">16.函数使用进阶</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/17.%E5%87%BD%E6%95%B0%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8.html">17.函数高级应用</a></li></ul><div class="nav-group">04-文件与异常</div><ul><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/21.%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html">21.文件读写和异常处理</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/22.%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96.html">22.对象的序列化和反序列化</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/23.Python%E8%AF%BB%E5%86%99CSV%E6%96%87%E4%BB%B6.html">23.Python读写CSV文件</a></li></ul><div class="nav-group">05-面向对象</div><ul><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/18.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8.html">18.面向对象编程入门</a></li><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/19.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6.html">19.面向对象编程进阶</a></li></ul><div class="nav-group">06-基础项目</div><ul><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/07.%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84%E5%AE%9E%E6%88%98.html">07.分支和循环结构实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/15.%E5%87%BD%E6%95%B0%E5%BA%94%E7%94%A8%E5%AE%9E%E6%88%98.html">15.函数应用实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/20.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%BA%94%E7%94%A8.html">20.面向对象编程应用</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/30.%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%BA%94%E7%94%A8.html">30.正则表达式的应用</a></li></ul><div class="nav-group">拓展-办公自动化</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/24.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-1.html">24.Python读写Excel文件-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/25.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-2.html">25.Python读写Excel文件-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/26.Python%E6%93%8D%E4%BD%9CWord%E5%92%8CPowerPoint%E6%96%87%E4%BB%B6.html">26.Python操作Word和PowerPoint文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/27.Python%E6%93%8D%E4%BD%9CPDF%E6%96%87%E4%BB%B6.html">27.Python操作PDF文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/28.Python%E5%A4%84%E7%90%86%E5%9B%BE%E5%83%8F.html">28.Python处理图像</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/29.Python%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E5%92%8C%E7%9F%AD%E4%BF%A1.html">29.Python发送邮件和短信</a></li></ul><div class="nav-group">拓展-Web与爬虫</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/31.Python%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6.html">31.Python语言进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/32-33.Web%E5%89%8D%E7%AB%AF%E5%85%A5%E9%97%A8.html">32-33.Web前端入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/34-35.%E7%8E%A9%E8%BD%ACLinux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.html">34-35.玩转Linux操作系统</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/36.%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CMySQL%E6%A6%82%E8%BF%B0.html">36.关系型数据库和MySQL概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/37.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDDL.html">37.SQL详解之DDL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/38.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDML.html">38.SQL详解之DML</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/39.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDQL.html">39.SQL详解之DQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/40.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDCL.html">40.SQL详解之DCL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/41.MySQL%E6%96%B0%E7%89%B9%E6%80%A7.html">41.MySQL新特性</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/42.%E8%A7%86%E5%9B%BE%E3%80%81%E5%87%BD%E6%95%B0%E5%92%8C%E8%BF%87%E7%A8%8B.html">42.视图、函数和过程</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/43.%E7%B4%A2%E5%BC%95.html">43.索引</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/44.Python%E6%8E%A5%E5%85%A5MySQL%E6%95%B0%E6%8D%AE%E5%BA%93.html">44.Python接入MySQL数据库</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/45.%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E5%92%8CHiveSQL.html">45.大数据平台和HiveSQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/46.Django%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.html">46.Django快速上手</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/47.%E6%B7%B1%E5%85%A5%E6%A8%A1%E5%9E%8B.html">47.深入模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/48.%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%92%8CAjax%E8%AF%B7%E6%B1%82.html">48.静态资源和Ajax请求</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/49.Cookie%E5%92%8CSession.html">49.Cookie和Session</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/50.%E5%88%B6%E4%BD%9C%E6%8A%A5%E8%A1%A8.html">50.制作报表</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/51.%E6%97%A5%E5%BF%97%E5%92%8C%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7%E6%A0%8F.html">51.日志和调试工具栏</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/52.%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E5%BA%94%E7%94%A8.html">52.中间件的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/53.%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8.html">53.前后端分离开发入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/54.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E5%85%A5%E9%97%A8.html">54.RESTful架构和DRF入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/55.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E8%BF%9B%E9%98%B6.html">55.RESTful架构和DRF进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/56.%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98.html">56.使用缓存</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/57.%E6%8E%A5%E5%85%A5%E4%B8%89%E6%96%B9%E5%B9%B3%E5%8F%B0.html">57.接入三方平台</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/58.%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1.html">58.异步任务和定时任务</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/59.%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95.html">59.单元测试</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/60.%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF.html">60.项目上线</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/61.%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E6%A6%82%E8%BF%B0.html">61.网络数据采集概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%8E%B7%E5%8F%96%E7%BD%91%E7%BB%9C%E8%B5%84%E6%BA%90-1.html">62.用Python获取网络资源-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%A7%A3%E6%9E%90HTML%E9%A1%B5%E9%9D%A2-2.html">62.用Python解析HTML页面-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-1.html">63.Python中的并发编程-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-2.html">63.Python中的并发编程-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-3.html">63.Python中的并发编程-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9C%A8%E7%88%AC%E8%99%AB%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html">63.并发编程在爬虫中的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/64.%E4%BD%BF%E7%94%A8Selenium%E6%8A%93%E5%8F%96%E7%BD%91%E9%A1%B5%E5%8A%A8%E6%80%81%E5%86%85%E5%AE%B9.html">64.使用Selenium抓取网页动态内容</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/65.%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6Scrapy%E7%AE%80%E4%BB%8B.html">65.爬虫框架Scrapy简介</a></li></ul><div class="nav-group">拓展-数据分析</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/66.%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A6%82%E8%BF%B0.html">66.数据分析概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/67.%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87.html">67.环境准备</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/68.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-1.html">68.NumPy的应用-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/69.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-2.html">69.NumPy的应用-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/70.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-3.html">70.NumPy的应用-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/71.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-4.html">71.NumPy的应用-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/72.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-1.html">72.深入浅出pandas-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/73.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-2.html">73.深入浅出pandas-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/74.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-3.html">74.深入浅出pandas-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/75.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-4.html">75.深入浅出pandas-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/76.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-5.html">76.深入浅出pandas-5</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/77.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-6.html">77.深入浅出pandas-6</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/78.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-1.html">78.数据可视化-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/79.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-2.html">79.数据可视化-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/80.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-3.html">80.数据可视化-3</a></li></ul><div class="nav-group">拓展-机器学习</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/81.%E6%B5%85%E8%B0%88%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0.html">81.浅谈机器学习</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/82.k%E6%9C%80%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95.html">82.k最近邻算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/83.%E5%86%B3%E7%AD%96%E6%A0%91%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97.html">83.决策树和随机森林</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/84.%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95.html">84.朴素贝叶斯算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/85.%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B.html">85.回归模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/86.K-Means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95.html">86.K-Means聚类算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/87.%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95.html">87.集成学习算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/88.%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B.html">88.神经网络模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/89.%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E5%85%A5%E9%97%A8.html">89.自然语言处理入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/90.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98.html">90.机器学习实战</a></li></ul></div></details><article class="lesson"><div class="lesson-content" id="top"><h1 id="32-33-web前端入门">32-33.Web前端入门</h1><h2 id="web前端概述">Web前端概述</h2><blockquote>
+<p><strong>说明</strong>：本文使用的部分插图来自 <em>Jon Duckett</em> 的*<a href="https://www.amazon.cn/dp/1118008189/ref=sr_1_5?__mk_zh_CN=亚马逊网站&keywords=html+&+css&qid=1554609325&s=gateway&sr=8-5">HTML and CSS: Design and Build Websites</a>*一书，这是一本非常棒的前端入门书，有兴趣的读者可以在亚马逊或者其他网站上找到该书的购买链接。</p>
+</blockquote>
+<p>HTML 是用来描述网页的一种语言，全称是 Hyper-Text Markup Language，即超文本标记语言。我们浏览网页时看到的文字、按钮、图片、视频等元素，它们都是通过 HTML 书写并通过浏览器来呈现的。</p>
+<h3 id="html简史">HTML简史</h3><ol>
+<li>1991年10月：一个非正式CERN（<a href="https://zh.wikipedia.org/wiki/歐洲核子研究組織">欧洲核子研究中心</a>）文件首次公开18个HTML标签，这个文件的作者是物理学家<a href="https://zh.wikipedia.org/wiki/蒂姆·伯纳斯-李">蒂姆·伯纳斯-李</a>，因此他是<a href="https://zh.wikipedia.org/wiki/万维网">万维网</a>的发明者，也是<a href="https://zh.wikipedia.org/wiki/万维网联盟">万维网联盟</a>的主席。</li>
+<li>1995年11月：HTML 2.0标准发布（RFC 1866）。</li>
+<li>1997年1月：HTML 3.2作为<a href="https://zh.wikipedia.org/wiki/W3C">W3C</a>推荐标准发布。</li>
+<li>1997年12月：HTML 4.0作为W3C推荐标准发布。</li>
+<li>1999年12月：HTML4.01作为W3C推荐标准发布。</li>
+<li>2008年1月：HTML5由W3C作为工作草案发布。</li>
+<li>2011年5月：W3C将HTML5推进至“最终征求”（Last Call）阶段。</li>
+<li>2012年12月：W3C指定HTML5作为“候选推荐”阶段。</li>
+<li>2014年10月：HTML5作为稳定W3C推荐标准发布，这意味着HTML5的标准化已经完成。</li>
+</ol>
+<h4 id="html5新特性">HTML5新特性</h4><ol>
+<li>引入原生多媒体支持（audio和video标签）</li>
+<li>引入可编程内容（canvas标签）</li>
+<li>引入语义Web（article、aside、details、figure、footer、header、nav、section、summary等标签）</li>
+<li>引入新的表单控件（日历、邮箱、搜索、滑条等）</li>
+<li>引入对离线存储更好的支持（localStorage和sessionStorage）</li>
+<li>引入对定位、拖放、WebSocket、后台任务等的支持</li>
+</ol>
+<h3 id="使用标签承载内容">使用标签承载内容</h3><p><img src="https://gitee.com/jackfrued/mypic/raw/master/20211107163448.png" alt="" loading="lazy"></p>
+<p><img src="https://gitee.com/jackfrued/mypic/raw/master/20211107163741.png" alt="" loading="lazy"></p>
+<h4 id="结构">结构</h4><ul>
+<li>html<ul>
+<li>head<ul>
+<li>title</li>
+<li>meta</li>
+</ul>
+</li>
+<li>body</li>
+</ul>
+</li>
+</ul>
+<h4 id="文本">文本</h4><ul>
+<li>标题（heading）和段落（paragraph）<ul>
+<li>h1 ~ h6</li>
+<li>p</li>
+</ul>
+</li>
+<li>上标（superscript）和下标（subscript）<ul>
+<li>sup</li>
+<li>sub</li>
+</ul>
+</li>
+<li>空白（白色空间折叠）</li>
+<li>折行（break）和水平标尺（horizontal ruler）<ul>
+<li>br</li>
+<li>hr</li>
+</ul>
+</li>
+<li>语义化标签<ul>
+<li>加粗和强调 - strong</li>
+<li>引用 - blockquote</li>
+<li>缩写词和首字母缩写词 - abbr / acronym</li>
+<li>引文 - cite</li>
+<li>所有者联系信息 - address</li>
+<li>内容的修改 - ins / del</li>
+</ul>
+</li>
+</ul>
+<h4 id="列表-list">列表（list）</h4><ul>
+<li>有序列表（ordered list）- ol / li</li>
+<li>无序列表（unordered list）- ul / li</li>
+<li>定义列表（definition list）- dl / dt / dd</li>
+</ul>
+<h4 id="链接-anchor">链接（anchor）</h4><ul>
+<li>页面链接</li>
+<li>锚链接</li>
+<li>功能链接</li>
+</ul>
+<h4 id="图像-image">图像（image）</h4><ul>
+<li><p>图像存储位置</p>
+<p><img src="/assets/相对路径-20250605165224-hzqu5ys.png"" alt="" loading="lazy"></p>
+</li>
+<li><p>图像及其宽高</p>
+</li>
+<li><p>选择正确的图像格式</p>
+<ul>
+<li>JPEG</li>
+<li>GIF</li>
+<li>PNG</li>
+</ul>
+</li>
+<li><p>矢量图</p>
+</li>
+<li><p>语义化标签 - figure / figcaption</p>
+</li>
+</ul>
+<h4 id="表格-table">表格（table）</h4><ul>
+<li>基本的表格结构 - table / tr / td / th</li>
+<li>表格的标题 - caption</li>
+<li>跨行和跨列 - rowspan属性 / colspan属性</li>
+<li>长表格 - thead / tbody / tfoot</li>
+</ul>
+<h4 id="表单-form">表单（form）</h4><ul>
+<li>重要属性 - action / method / enctype</li>
+<li>表单控件（input）- type属性<ul>
+<li>文本框 - <code>text</code> / 密码框 - <code>password</code> / 数字框 - <code>number</code></li>
+<li>邮箱 - <code>email</code> / 电话 - <code>tel</code> / 日期 - <code>date</code> / 滑条 - <code>range</code> / URL - <code>url</code> / 搜索 - <code>search</code></li>
+<li>单选按钮 - <code>radio</code> / 复选按钮 - <code>checkbox</code></li>
+<li>文件上传 - <code>file</code> / 隐藏域 - <code>hidden</code></li>
+<li>提交按钮 - <code>submit</code> / 图像按钮 - <code>image</code>  / 重置按钮 - <code>reset</code></li>
+</ul>
+</li>
+<li>下拉列表 - select / option</li>
+<li>文本域（多行文本）- textarea</li>
+<li>组合表单元素 - fieldset / legend</li>
+</ul>
+<h4 id="音视频-audio---video">音视频（audio / video）</h4><ul>
+<li>视频格式和播放器</li>
+<li>视频托管服务</li>
+<li>添加视频的准备工作</li>
+<li>video标签和属性 - autoplay / controls / loop / muted / preload / src</li>
+<li>audio标签和属性 - autoplay / controls / loop / muted / preload / src / width / height / poster</li>
+</ul>
+<h4 id="窗口-frame">窗口（frame）</h4><ul>
+<li>框架集（过时，不建议使用） - frameset / frame</li>
+<li>内嵌窗口 - iframe</li>
+</ul>
+<h4 id="其他">其他</h4><ul>
+<li><p>文档类型</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-HTML">&lt;!doctype html&gt;</code></pre></div><div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-HTML">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"&gt;</code></pre></div><div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-HTML">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;</code></pre></div></li>
+<li><p>注释</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-HTML">&lt;!-- 这是一段注释，注释不能够嵌套 --&gt;</code></pre></div></li>
+<li><p>属性</p>
+<ul>
+<li>id：唯一标识</li>
+<li>class：元素所属的类，用于区分不同的元素</li>
+<li>title：元素的额外信息（鼠标悬浮时会显示工具提示文本）</li>
+<li>tabindex：Tab键切换顺序</li>
+<li>contenteditable：元素是否可编辑</li>
+<li>draggable：元素是否可拖拽</li>
+</ul>
+</li>
+<li><p>块级元素 / 行级元素</p>
+</li>
+<li><p>字符实体（实体替换符）</p>
+<p><img src="/assets/字符实体-20250605165224-tiiu0z4.png"" alt="" loading="lazy"></p>
+</li>
+</ul>
+<h3 id="使用css渲染页面">使用CSS渲染页面</h3><h4 id="简介">简介</h4><ul>
+<li><p>CSS的作用</p>
+</li>
+<li><p>CSS的工作原理</p>
+</li>
+<li><p>规则、属性和值</p>
+<p><img src="/assets/选择器语法-20250605165224-4f5r11f.png"" alt="" loading="lazy"></p>
+</li>
+<li><p>常用选择器</p>
+<p><img src="/assets/常用选择器-20250605165224-i6vi6hx.png"" alt="" loading="lazy"></p>
+</li>
+</ul>
+<h4 id="颜色-color">颜色（color）</h4><ul>
+<li>如何指定颜色</li>
+<li>颜色术语和颜色对比</li>
+<li>背景色</li>
+</ul>
+<h4 id="文本-text---font">文本（text / font）</h4><ul>
+<li><p>文本的大小和字型(font-size / font-family)</p>
+<p><img src="/assets/尺寸单位-20250605165224-1hthtgx.png"" alt="" loading="lazy"></p>
+<p><img src="/assets/衬线字体+非衬线字体+等宽字体-20250605165224-8bjf85s.png"" alt="" loading="lazy"></p>
+</li>
+<li><p>粗细、样式、拉伸和装饰(font-weight / font-style / font-stretch / text-decoration)</p>
+<p><img src="/assets/字体样式-20250605165224-dotcgmo.png"" alt="" loading="lazy"></p>
+</li>
+<li><p>行间距(line-height)、字母间距(letter-spacing)和单词间距(word-spacing)</p>
+</li>
+<li><p>对齐(text-align)方式和缩进(text-ident)</p>
+</li>
+<li><p>链接样式（:link / :visited / :active / :hover）</p>
+</li>
+<li><p>CSS3新属性</p>
+<ul>
+<li>阴影效果 - text-shadow</li>
+<li>首字母和首行文本(:first-letter / :first-line)</li>
+<li>响应用户</li>
+</ul>
+</li>
+</ul>
+<h4 id="盒子-box-model">盒子（box model）</h4><ul>
+<li><p>盒子大小的控制（width / height）</p>
+<p><img src="/assets/尺寸单位-20250605165224-1hthtgx.png"" alt="" loading="lazy"></p>
+</li>
+<li><p>盒子的边框、外边距和内边距（border /  margin / padding）</p>
+<p><img src="/assets/盒子模型-20250605165224-rtua4ys.png"" alt="" loading="lazy"></p>
+</li>
+<li><p>盒子的显示和隐藏（display / visibility）</p>
+</li>
+<li><p>CSS3新属性</p>
+<ul>
+<li>边框图像（border-image）</li>
+<li>投影（border-shadow）</li>
+<li>圆角（border-radius）</li>
+</ul>
+</li>
+</ul>
+<h4 id="列表-表格和表单">列表、表格和表单</h4><ul>
+<li>列表的项目符号（list-style）</li>
+<li>表格的边框和背景（border-collapse）</li>
+<li>表单控件的外观</li>
+<li>表单控件的对齐</li>
+<li>浏览器的开发者工具</li>
+</ul>
+<h4 id="图像">图像</h4><ul>
+<li>控制图像的大小（display: inline-block）</li>
+<li>对齐图像</li>
+<li>背景图像（background / background-image / background-repeat / background-position）</li>
+</ul>
+<h4 id="布局">布局</h4><ul>
+<li><p>控制元素的位置（position / z-index）</p>
+<ul>
+<li>普通流</li>
+<li>相对定位</li>
+<li>绝对定位</li>
+<li>固定定位</li>
+<li>浮动元素（float / clear）</li>
+</ul>
+</li>
+<li><p>网站布局</p>
+<ul>
+<li><p>HTML5布局</p>
+<p><img src="/assets/经典布局-2-20250605165224-pl0unkl.png"" alt="" loading="lazy"></p>
+</li>
+</ul>
+</li>
+<li><p>适配屏幕尺寸</p>
+<ul>
+<li>固定宽度布局</li>
+<li>流体布局</li>
+<li>布局网格</li>
+</ul>
+</li>
+</ul>
+<h3 id="使用javascript控制行为">使用JavaScript控制行为</h3><h4 id="javascript基本语法">JavaScript基本语法</h4><ul>
+<li>语句和注释</li>
+<li>变量和数据类型<ul>
+<li>声明和赋值</li>
+<li>简单数据类型和复杂数据类型</li>
+<li>变量的命名规则</li>
+</ul>
+</li>
+<li>表达式和运算符<ul>
+<li>赋值运算符</li>
+<li>算术运算符</li>
+<li>比较运算符</li>
+<li>逻辑运算符：<code>&amp;&amp;</code>、<code>||</code>、<code>!</code></li>
+</ul>
+</li>
+<li>分支结构<ul>
+<li><code>if...else...</code></li>
+<li><code>switch...cas...default...</code></li>
+</ul>
+</li>
+<li>循环结构<ul>
+<li><code>for</code>循环</li>
+<li><code>while</code>循环</li>
+<li><code>do...while</code>循环</li>
+</ul>
+</li>
+<li>数组<ul>
+<li>创建数组</li>
+<li>操作数组中的元素</li>
+</ul>
+</li>
+<li>函数<ul>
+<li>声明函数</li>
+<li>调用函数</li>
+<li>参数和返回值</li>
+<li>匿名函数</li>
+<li>立即调用函数</li>
+</ul>
+</li>
+</ul>
+<h4 id="面向对象">面向对象</h4><ul>
+<li>对象的概念</li>
+<li>创建对象的字面量语法</li>
+<li>访问成员运算符</li>
+<li>创建对象的构造函数语法<ul>
+<li><code>this</code>关键字</li>
+</ul>
+</li>
+<li>添加和删除属性<ul>
+<li><code>delete</code>关键字</li>
+</ul>
+</li>
+<li>标准对象<ul>
+<li><code>Number</code> / <code>String</code> / <code>Boolean</code> / <code>Symbol</code> / <code>Array</code> / <code>Function</code></li>
+<li><code>Date</code> / <code>Error</code> / <code>Math</code> / <code>RegExp</code> / <code>Object</code> / <code>Map</code> / <code>Set</code></li>
+<li><code>JSON</code> / <code>Promise</code> / <code>Generator</code> / <code>Reflect</code> / <code>Proxy</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="bom">BOM</h4><ul>
+<li><code>window</code>对象的属性和方法</li>
+<li><code>history</code>对象<ul>
+<li><code>forward()</code> / <code>back()</code> / <code>go()</code></li>
+</ul>
+</li>
+<li><code>location</code>对象</li>
+<li><code>navigator</code>对象</li>
+<li><code>screen</code>对象</li>
+</ul>
+<h4 id="dom">DOM</h4><ul>
+<li>DOM树</li>
+<li>访问元素<ul>
+<li><code>getElementById()</code> / <code>querySelector()</code></li>
+<li><code>getElementsByClassName()</code> / <code>getElementsByTagName()</code> / <code>querySelectorAll()</code></li>
+<li><code>parentNode</code> / <code>previousSibling</code> / <code>nextSibling</code> / <code>children</code> / <code>firstChild</code> / <code>lastChild</code></li>
+</ul>
+</li>
+<li>操作元素<ul>
+<li><code>nodeValue</code></li>
+<li><code>innerHTML</code> / <code>textContent</code> / <code>createElement()</code> / <code>createTextNode()</code> / <code>appendChild()</code> / <code>insertBefore()</code> / <code>removeChild()</code></li>
+<li><code>className</code> / <code>id</code> / <code>hasAttribute()</code> / <code>getAttribute()</code> / <code>setAttribute()</code> / <code>removeAttribute()</code></li>
+</ul>
+</li>
+<li>事件处理<ul>
+<li>事件类型<ul>
+<li>UI事件：<code>load</code> / <code>unload</code> / <code>error</code> / <code>resize</code> / <code>scroll</code></li>
+<li>键盘事件：<code>keydown</code> / <code>keyup</code> / <code>keypress</code></li>
+<li>鼠标事件：<code>click</code> / <code>dbclick</code> / <code>mousedown</code> / <code>mouseup</code> / <code>mousemove</code> / <code>mouseover</code> / <code>mouseout</code></li>
+<li>焦点事件：<code>focus</code> / <code>blur</code></li>
+<li>表单事件：<code>input</code> / <code>change</code> / <code>submit</code> / <code>reset</code> / <code>cut</code> / <code>copy</code> / <code>paste</code> / <code>select</code></li>
+</ul>
+</li>
+<li>事件绑定<ul>
+<li>HTML事件处理程序（不推荐使用，因为要做到标签与代码分离）</li>
+<li>传统的DOM事件处理程序（只能附加一个回调函数）</li>
+<li>事件监听器（旧的浏览器中不被支持）</li>
+</ul>
+</li>
+<li>事件流：事件捕获 / 事件冒泡</li>
+<li>事件对象（低版本IE中的window.event）<ul>
+<li><code>target</code>（有些浏览器使用srcElement）</li>
+<li><code>type</code></li>
+<li><code>cancelable</code></li>
+<li><code>preventDefault()</code></li>
+<li><code>stopPropagation()</code>（低版本IE中的cancelBubble）</li>
+</ul>
+</li>
+<li>鼠标事件 - 事件发生的位置<ul>
+<li>屏幕位置：<code>screenX</code>和<code>screenY</code></li>
+<li>页面位置：<code>pageX</code>和<code>pageY</code></li>
+<li>客户端位置：<code>clientX</code>和<code>clientY</code></li>
+</ul>
+</li>
+<li>键盘事件 - 哪个键被按下了<ul>
+<li><code>keyCode</code>属性（有些浏览器使用<code>which</code>）</li>
+<li><code>String.fromCharCode(event.keyCode)</code></li>
+</ul>
+</li>
+<li>HTML5事件<ul>
+<li><code>DOMContentLoaded</code></li>
+<li><code>hashchange</code></li>
+<li><code>beforeunload</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="javascript-api">JavaScript API</h4><ul>
+<li><p>客户端存储 - <code>localStorage</code>和<code>sessionStorage</code></p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-JavaScript">localStorage.colorSetting = '#a4509b';
+localStorage['colorSetting'] = '#a4509b';
+localStorage.setItem('colorSetting', '#a4509b');</code></pre></div></li>
+<li><p>获取位置信息 - <code>geolocation</code></p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-JavaScript">navigator.geolocation.getCurrentPosition(function(pos) {           
+    console.log(pos.coords.latitude)
+    console.log(pos.coords.longitude)
+})</code></pre></div></li>
+<li><p>从服务器获取数据 - Fetch API</p>
+</li>
+<li><p>绘制图形 - <code>&lt;canvas&gt;</code>的API</p>
+</li>
+<li><p>音视频 - <code>&lt;audio&gt;</code>和<code>&lt;video&gt;</code>的API</p>
+</li>
+</ul>
+<h3 id="前端框架">前端框架</h3><h4 id="渐进式框架----vue-js-https-cn-vuejs-org">渐进式框架 - [Vue.js](https://cn.vuejs.org/)</h4><p>前后端分离开发（前端渲染）必选框架。</p>
+<h5 id="快速上手">快速上手</h5><ol>
+<li><p>引入Vue的JavaScript文件，我们仍然推荐从CDN服务器加载它。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-HTML">&lt;script src="https://cdn.jsdelivr.net/npm/vue"&gt;&lt;/script&gt;</code></pre></div></li>
+<li><p>数据绑定（声明式渲染 ）。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-HTML">&lt;div id="app"&gt;
+    &lt;h1&gt;{{ product }}库存信息&lt;/h1&gt;
+&lt;/div&gt;
+
+&lt;script src="https://cdn.jsdelivr.net/npm/vue"&gt;&lt;/script&gt;
+&lt;script&gt;
+    const app = new Vue({
+        el: '#app',
+        data: {
+            product: 'iPhone X'
+        }
+    });
+&lt;/script&gt;</code></pre></div></li>
+<li><p>条件与循环。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-HTML">&lt;div id="app"&gt;
+    &lt;h1&gt;库存信息&lt;/h1&gt;
+    &lt;hr&gt;
+    &lt;ul&gt;
+        &lt;li v-for="product in products"&gt;
+            {{ product.name }} - {{ product.quantity }}
+            &lt;span v-if="product.quantity === 0"&gt;
+                已经售罄
+            &lt;/span&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;script src="https://cdn.jsdelivr.net/npm/vue"&gt;&lt;/script&gt;
+&lt;script&gt;
+    const app = new Vue({
+        el: '#app',
+        data: {
+            products: [
+                {"id": 1, "name": "iPhone X", "quantity": 20},
+                {"id": 2, "name": "华为 Mate20", "quantity": 0},
+                {"id": 3, "name": "小米 Mix3", "quantity": 50}
+            ]
+        }
+    });
+&lt;/script&gt;</code></pre></div></li>
+<li><p>计算属性。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-HTML">&lt;div id="app"&gt;
+    &lt;h1&gt;库存信息&lt;/h1&gt;
+    &lt;hr&gt;
+    &lt;ul&gt;
+        &lt;li v-for="product in products"&gt;
+            {{ product.name }} - {{ product.quantity }}
+            &lt;span v-if="product.quantity === 0"&gt;
+                已经售罄
+            &lt;/span&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;h2&gt;库存总量：{{ totalQuantity }}台&lt;/h2&gt;
+&lt;/div&gt;
+
+&lt;script src="https://cdn.jsdelivr.net/npm/vue"&gt;&lt;/script&gt;
+&lt;script&gt;
+    const app = new Vue({
+        el: '#app',
+        data: {
+            products: [
+                {"id": 1, "name": "iPhone X", "quantity": 20},
+                {"id": 2, "name": "华为 Mate20", "quantity": 0},
+                {"id": 3, "name": "小米 Mix3", "quantity": 50}
+            ]
+        },
+        computed: {
+            totalQuantity() {
+                return this.products.reduce((sum, product) =&gt; {
+                    return sum + product.quantity
+                }, 0);
+            }
+        }
+    });
+&lt;/script&gt;</code></pre></div></li>
+<li><p>处理事件。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-HTML">&lt;div id="app"&gt;
+    &lt;h1&gt;库存信息&lt;/h1&gt;
+    &lt;hr&gt;
+    &lt;ul&gt;
+        &lt;li v-for="product in products"&gt;
+            {{ product.name }} - {{ product.quantity }}
+            &lt;span v-if="product.quantity === 0"&gt;
+                已经售罄
+            &lt;/span&gt;
+            &lt;button @click="product.quantity += 1"&gt;
+                增加库存
+            &lt;/button&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;h2&gt;库存总量：{{ totalQuantity }}台&lt;/h2&gt;
+&lt;/div&gt;
+
+&lt;script src="https://cdn.jsdelivr.net/npm/vue"&gt;&lt;/script&gt;
+&lt;script&gt;
+    const app = new Vue({
+        el: '#app',
+        data: {
+            products: [
+                {"id": 1, "name": "iPhone X", "quantity": 20},
+                {"id": 2, "name": "华为 Mate20", "quantity": 0},
+                {"id": 3, "name": "小米 Mix3", "quantity": 50}
+            ]
+        },
+        computed: {
+            totalQuantity() {
+                return this.products.reduce((sum, product) =&gt; {
+                    return sum + product.quantity
+                }, 0);
+            }
+        }
+    });
+&lt;/script&gt;</code></pre></div></li>
+<li><p>用户输入。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-HTML">&lt;div id="app"&gt;
+    &lt;h1&gt;库存信息&lt;/h1&gt;
+    &lt;hr&gt;
+    &lt;ul&gt;
+        &lt;li v-for="product in products"&gt;
+            {{ product.name }} - 
+            &lt;input type="number" v-model.number="product.quantity" min="0"&gt;
+            &lt;span v-if="product.quantity === 0"&gt;
+                已经售罄
+            &lt;/span&gt;
+            &lt;button @click="product.quantity += 1"&gt;
+                增加库存
+            &lt;/button&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;h2&gt;库存总量：{{ totalQuantity }}台&lt;/h2&gt;
+&lt;/div&gt;
+
+&lt;script src="https://cdn.jsdelivr.net/npm/vue"&gt;&lt;/script&gt;
+&lt;script&gt;
+    const app = new Vue({
+        el: '#app',
+        data: {
+            products: [
+                {"id": 1, "name": "iPhone X", "quantity": 20},
+                {"id": 2, "name": "华为 Mate20", "quantity": 0},
+                {"id": 3, "name": "小米 Mix3", "quantity": 50}
+            ]
+        },
+        computed: {
+            totalQuantity() {
+                return this.products.reduce((sum, product) =&gt; {
+                    return sum + product.quantity
+                }, 0);
+            }
+        }
+    });
+&lt;/script&gt;</code></pre></div></li>
+<li><p>通过网络加载JSON数据。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-HTML">&lt;div id="app"&gt;
+    &lt;h2&gt;库存信息&lt;/h2&gt;
+    &lt;ul&gt;
+        &lt;li v-for="product in products"&gt;
+            {{ product.name }} - {{ product.quantity }}
+            &lt;span v-if="product.quantity === 0"&gt;
+                已经售罄
+            &lt;/span&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;script src="https://cdn.jsdelivr.net/npm/vue"&gt;&lt;/script&gt;
+&lt;script&gt;
+    const app = new Vue({
+        el: '#app',
+        data: {
+            products: []
+        }，
+        created() {
+            fetch('https://jackfrued.top/api/products')
+                .then(response =&gt; response.json())
+                .then(json =&gt; {
+                    this.products = json
+                });
+        }
+    });
+&lt;/script&gt;</code></pre></div></li>
+</ol>
+<h5 id="使用脚手架---vue-cli">使用脚手架 - vue-cli</h5><p>Vue为商业项目开发提供了非常便捷的脚手架工具vue-cli，通过工具可以省去手工配置开发环境、测试环境和运行环境的步骤，让开发者只需要关注要解决的问题。</p>
+<ol>
+<li>安装脚手架。</li>
+<li>创建项目。</li>
+<li>安装依赖包。</li>
+<li>运行项目。</li>
+</ol>
+<h4 id="ui框架----element-http-element-cn-eleme-io-zh-cn">UI框架 - [Element](http://element-cn.eleme.io/#/zh-CN)</h4><p>基于Vue 2.0的桌面端组件库，用于构造用户界面，支持响应式布局。</p>
+<ol>
+<li><p>引入Element的CSS和JavaScript文件。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-HTML">&lt;!-- 引入样式 --&gt;
+&lt;link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"&gt;
+&lt;!-- 引入组件库 --&gt;
+&lt;script src="https://unpkg.com/element-ui/lib/index.js"&gt;&lt;/script&gt;</code></pre></div></li>
+<li><p>一个简单的例子。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-HTML">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset="UTF-8"&gt;
+        &lt;link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div id="app"&gt;
+            &lt;el-button @click="visible = true"&gt;点我&lt;/el-button&gt;
+            &lt;el-dialog :visible.sync="visible" title="Hello world"&gt;
+                &lt;p&gt;开始使用Element吧&lt;/p&gt;
+            &lt;/el-dialog&gt;
+            &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;script src="https://unpkg.com/vue/dist/vue.js"&gt;&lt;/script&gt;
+    &lt;script src="https://unpkg.com/element-ui/lib/index.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+        new Vue({
+            el: '#app',
+            data: {
+                visible: false,
+            }
+        })
+    &lt;/script&gt;
+&lt;/html&gt;</code></pre></div></li>
+<li><p>使用组件。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-HTML">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset="UTF-8"&gt;
+        &lt;link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div id="app"&gt;
+            &lt;el-table :data="tableData" stripe style="width: 100%"&gt;
+                &lt;el-table-column prop="date" label="日期" width="180"&gt;
+                &lt;/el-table-column&gt;
+                &lt;el-table-column prop="name" label="姓名" width="180"&gt;
+                &lt;/el-table-column&gt;
+                &lt;el-table-column prop="address" label="地址"&gt;
+                &lt;/el-table-column&gt;
+            &lt;/el-table&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;script src="https://unpkg.com/vue/dist/vue.js"&gt;&lt;/script&gt;
+    &lt;script src="https://unpkg.com/element-ui/lib/index.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+        new Vue({
+            el: '#app',
+            data: {
+                tableData:  [
+                    {
+                        date: '2016-05-02',
+                        name: '王一霸',
+                        address: '上海市普陀区金沙江路 1518 弄'
+                    }, 
+                    {
+                        date: '2016-05-04',
+                        name: '刘二狗',
+                        address: '上海市普陀区金沙江路 1517 弄'
+                    }, 
+                    {
+                        date: '2016-05-01',
+                        name: '杨三萌',
+                        address: '上海市普陀区金沙江路 1519 弄'
+                    }, 
+                    {
+                        date: '2016-05-03',
+                        name: '陈四吹',
+                        address: '上海市普陀区金沙江路 1516 弄'
+                    }
+                ]
+            }
+        })
+    &lt;/script&gt;
+&lt;/html&gt;</code></pre></div></li>
+</ol>
+<h4 id="报表框架----echarts-https-echarts-baidu-com">报表框架 - [ECharts](https://echarts.baidu.com)</h4><p>百度出品的开源可视化库，常用于生成各种类型的报表。</p>
+<p><img src="/assets/baidu_echarts-20250605165224-pcfc71c.png"" alt="" loading="lazy"></p>
+<h4 id="基于弹性盒子的css框架----bulma-https-bulma-io">基于弹性盒子的CSS框架 - [Bulma](https://bulma.io/)</h4><p>Bulma是一个基于Flexbox的现代化的CSS框架，其初衷就是移动优先（Mobile First），模块化设计，可以轻松用来实现各种简单或者复杂的内容布局，即使不懂CSS的开发者也能够使用它定制出漂亮的页面。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-HTML">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+	&lt;meta charset="UTF-8"&gt;
+	&lt;title&gt;Bulma&lt;/title&gt;
+	&lt;link href="https://cdn.bootcss.com/bulma/0.7.4/css/bulma.min.css" rel="stylesheet"&gt;
+	&lt;style type="text/css"&gt;
+		div { margin-top: 10px; }
+		.column { color: #fff; background-color: #063; margin: 10px 10px; text-align: center; }
+	&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div class="columns"&gt;
+		&lt;div class="column"&gt;1&lt;/div&gt;
+		&lt;div class="column"&gt;2&lt;/div&gt;
+		&lt;div class="column"&gt;3&lt;/div&gt;
+		&lt;div class="column"&gt;4&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div&gt;
+		&lt;a class="button is-primary"&gt;Primary&lt;/a&gt;
+		&lt;a class="button is-link"&gt;Link&lt;/a&gt;
+		&lt;a class="button is-info"&gt;Info&lt;/a&gt;
+		&lt;a class="button is-success"&gt;Success&lt;/a&gt;
+		&lt;a class="button is-warning"&gt;Warning&lt;/a&gt;
+		&lt;a class="button is-danger"&gt;Danger&lt;/a&gt;
+	&lt;/div&gt;
+	&lt;div&gt;
+		&lt;progress class="progress is-danger is-medium" max="100"&gt;60%&lt;/progress&gt;
+	&lt;/div&gt;
+	&lt;div&gt;
+		&lt;table class="table is-hoverable"&gt;
+			&lt;tr&gt;
+				&lt;th&gt;One&lt;/th&gt;
+				&lt;th&gt;Two&lt;/th&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td&gt;Three&lt;/td&gt;
+				&lt;td&gt;Four&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td&gt;Five&lt;/td&gt;
+				&lt;td&gt;Six&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td&gt;Seven&lt;/td&gt;
+				&lt;td&gt;Eight&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td&gt;Nine&lt;/td&gt;
+				&lt;td&gt;Ten&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;td&gt;Eleven&lt;/td&gt;
+				&lt;td&gt;Twelve&lt;/td&gt;
+			&lt;/tr&gt;
+		&lt;/table&gt;
+	&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div><h4 id="响应式布局框架----bootstrap-http-www-bootcss-com">响应式布局框架 - [Bootstrap](http://www.bootcss.com/)</h4><p>用于快速开发Web应用程序的前端框架，支持响应式布局。</p>
+<ol>
+<li><p>特点</p>
+<ul>
+<li>支持主流的浏览器和移动设备</li>
+<li>容易上手</li>
+<li>响应式设计</li>
+</ul>
+</li>
+<li><p>内容</p>
+<ul>
+<li>网格系统</li>
+<li>封装的CSS</li>
+<li>现成的组件</li>
+<li>JavaScript插件</li>
+</ul>
+</li>
+<li><p>可视化</p>
+<p><img src="/assets/bootstrap-layoutit-20250605165224-644we3l.png"" alt="" loading="lazy"></p>
+</li>
+</ol>
+</div></article></div></main><footer>by天才程序员</footer><script src="/script.js"></script></body></html>

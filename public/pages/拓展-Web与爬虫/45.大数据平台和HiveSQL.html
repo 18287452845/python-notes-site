@@ -1,0 +1,259 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Python 基础课程讲义：45.大数据平台和HiveSQL"><title>45.大数据平台和HiveSQL｜Python 编程基础</title><link rel="stylesheet" href="/style.css"><script>window.MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:true,processEnvironments:true},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body><header class="site-header"><div class="header-inner"><a class="brand" href="/index.html"><span>Python 编程基础</span><small>Python 基础课程讲义</small></a><a class="back-home" href="/index.html">课程首页</a></div></header><main class="page-layout"><aside class="course-nav" aria-label="课程章节" id="course-nav-list"><div class="course-nav-head"><div class="nav-title">课程章节</div><button class="course-nav-toggle" type="button" aria-expanded="true" aria-controls="course-nav-list">收起</button></div><div class="nav-group">01-基础语法</div><ul><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/01.%E5%88%9D%E8%AF%86Python.html">01.初识Python</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/02.%E7%AC%AC%E4%B8%80%E4%B8%AAPython%E7%A8%8B%E5%BA%8F.html">02.第一个Python程序</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/03.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F.html">03.Python语言中的变量</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/04.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6.html">04.Python语言中的运算符</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/05.%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84.html">05.分支结构</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/06.%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84.html">06.循环结构</a></li></ul><div class="nav-group">02-数据结构</div><ul><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/08.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-1.html">08.常用数据结构之列表-1</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/09.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-2.html">09.常用数据结构之列表-2</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/10.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%85%83%E7%BB%84.html">10.常用数据结构之元组</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/11.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2.html">11.常用数据结构之字符串</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/12.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E9%9B%86%E5%90%88.html">12.常用数据结构之集合</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/13.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E5%85%B8.html">13.常用数据结构之字典</a></li></ul><div class="nav-group">03-函数与模块</div><ul><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/14.%E5%87%BD%E6%95%B0%E5%92%8C%E6%A8%A1%E5%9D%97.html">14.函数和模块</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/16.%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E8%BF%9B%E9%98%B6.html">16.函数使用进阶</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/17.%E5%87%BD%E6%95%B0%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8.html">17.函数高级应用</a></li></ul><div class="nav-group">04-文件与异常</div><ul><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/21.%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html">21.文件读写和异常处理</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/22.%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96.html">22.对象的序列化和反序列化</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/23.Python%E8%AF%BB%E5%86%99CSV%E6%96%87%E4%BB%B6.html">23.Python读写CSV文件</a></li></ul><div class="nav-group">05-面向对象</div><ul><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/18.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8.html">18.面向对象编程入门</a></li><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/19.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6.html">19.面向对象编程进阶</a></li></ul><div class="nav-group">06-基础项目</div><ul><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/07.%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84%E5%AE%9E%E6%88%98.html">07.分支和循环结构实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/15.%E5%87%BD%E6%95%B0%E5%BA%94%E7%94%A8%E5%AE%9E%E6%88%98.html">15.函数应用实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/20.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%BA%94%E7%94%A8.html">20.面向对象编程应用</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/30.%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%BA%94%E7%94%A8.html">30.正则表达式的应用</a></li></ul><div class="nav-group">拓展-办公自动化</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/24.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-1.html">24.Python读写Excel文件-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/25.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-2.html">25.Python读写Excel文件-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/26.Python%E6%93%8D%E4%BD%9CWord%E5%92%8CPowerPoint%E6%96%87%E4%BB%B6.html">26.Python操作Word和PowerPoint文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/27.Python%E6%93%8D%E4%BD%9CPDF%E6%96%87%E4%BB%B6.html">27.Python操作PDF文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/28.Python%E5%A4%84%E7%90%86%E5%9B%BE%E5%83%8F.html">28.Python处理图像</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/29.Python%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E5%92%8C%E7%9F%AD%E4%BF%A1.html">29.Python发送邮件和短信</a></li></ul><div class="nav-group">拓展-Web与爬虫</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/31.Python%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6.html">31.Python语言进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/32-33.Web%E5%89%8D%E7%AB%AF%E5%85%A5%E9%97%A8.html">32-33.Web前端入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/34-35.%E7%8E%A9%E8%BD%ACLinux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.html">34-35.玩转Linux操作系统</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/36.%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CMySQL%E6%A6%82%E8%BF%B0.html">36.关系型数据库和MySQL概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/37.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDDL.html">37.SQL详解之DDL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/38.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDML.html">38.SQL详解之DML</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/39.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDQL.html">39.SQL详解之DQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/40.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDCL.html">40.SQL详解之DCL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/41.MySQL%E6%96%B0%E7%89%B9%E6%80%A7.html">41.MySQL新特性</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/42.%E8%A7%86%E5%9B%BE%E3%80%81%E5%87%BD%E6%95%B0%E5%92%8C%E8%BF%87%E7%A8%8B.html">42.视图、函数和过程</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/43.%E7%B4%A2%E5%BC%95.html">43.索引</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/44.Python%E6%8E%A5%E5%85%A5MySQL%E6%95%B0%E6%8D%AE%E5%BA%93.html">44.Python接入MySQL数据库</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/45.%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E5%92%8CHiveSQL.html">45.大数据平台和HiveSQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/46.Django%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.html">46.Django快速上手</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/47.%E6%B7%B1%E5%85%A5%E6%A8%A1%E5%9E%8B.html">47.深入模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/48.%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%92%8CAjax%E8%AF%B7%E6%B1%82.html">48.静态资源和Ajax请求</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/49.Cookie%E5%92%8CSession.html">49.Cookie和Session</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/50.%E5%88%B6%E4%BD%9C%E6%8A%A5%E8%A1%A8.html">50.制作报表</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/51.%E6%97%A5%E5%BF%97%E5%92%8C%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7%E6%A0%8F.html">51.日志和调试工具栏</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/52.%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E5%BA%94%E7%94%A8.html">52.中间件的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/53.%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8.html">53.前后端分离开发入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/54.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E5%85%A5%E9%97%A8.html">54.RESTful架构和DRF入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/55.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E8%BF%9B%E9%98%B6.html">55.RESTful架构和DRF进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/56.%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98.html">56.使用缓存</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/57.%E6%8E%A5%E5%85%A5%E4%B8%89%E6%96%B9%E5%B9%B3%E5%8F%B0.html">57.接入三方平台</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/58.%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1.html">58.异步任务和定时任务</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/59.%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95.html">59.单元测试</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/60.%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF.html">60.项目上线</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/61.%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E6%A6%82%E8%BF%B0.html">61.网络数据采集概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%8E%B7%E5%8F%96%E7%BD%91%E7%BB%9C%E8%B5%84%E6%BA%90-1.html">62.用Python获取网络资源-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%A7%A3%E6%9E%90HTML%E9%A1%B5%E9%9D%A2-2.html">62.用Python解析HTML页面-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-1.html">63.Python中的并发编程-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-2.html">63.Python中的并发编程-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-3.html">63.Python中的并发编程-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9C%A8%E7%88%AC%E8%99%AB%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html">63.并发编程在爬虫中的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/64.%E4%BD%BF%E7%94%A8Selenium%E6%8A%93%E5%8F%96%E7%BD%91%E9%A1%B5%E5%8A%A8%E6%80%81%E5%86%85%E5%AE%B9.html">64.使用Selenium抓取网页动态内容</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/65.%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6Scrapy%E7%AE%80%E4%BB%8B.html">65.爬虫框架Scrapy简介</a></li></ul><div class="nav-group">拓展-数据分析</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/66.%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A6%82%E8%BF%B0.html">66.数据分析概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/67.%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87.html">67.环境准备</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/68.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-1.html">68.NumPy的应用-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/69.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-2.html">69.NumPy的应用-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/70.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-3.html">70.NumPy的应用-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/71.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-4.html">71.NumPy的应用-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/72.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-1.html">72.深入浅出pandas-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/73.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-2.html">73.深入浅出pandas-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/74.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-3.html">74.深入浅出pandas-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/75.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-4.html">75.深入浅出pandas-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/76.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-5.html">76.深入浅出pandas-5</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/77.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-6.html">77.深入浅出pandas-6</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/78.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-1.html">78.数据可视化-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/79.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-2.html">79.数据可视化-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/80.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-3.html">80.数据可视化-3</a></li></ul><div class="nav-group">拓展-机器学习</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/81.%E6%B5%85%E8%B0%88%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0.html">81.浅谈机器学习</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/82.k%E6%9C%80%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95.html">82.k最近邻算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/83.%E5%86%B3%E7%AD%96%E6%A0%91%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97.html">83.决策树和随机森林</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/84.%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95.html">84.朴素贝叶斯算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/85.%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B.html">85.回归模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/86.K-Means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95.html">86.K-Means聚类算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/87.%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95.html">87.集成学习算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/88.%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B.html">88.神经网络模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/89.%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E5%85%A5%E9%97%A8.html">89.自然语言处理入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/90.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98.html">90.机器学习实战</a></li></ul></aside><aside class="lesson-toc" aria-label="本页目录"><div class="toc-title">本页目录</div><ul><li class="toc-level-2"><a href="#hive简介">Hive简介</a></li><li class="toc-level-3"><a href="#准备工作">准备工作</a></li><li class="toc-level-3"><a href="#建库建表">建库建表</a></li><li class="toc-level-3"><a href="#查询">查询</a></li></ul><a class="to-top" href="#top">回到顶部</a></aside><div class="content-area"><details class="mobile-course-nav"><summary>课程章节</summary><div class="mobile-course-links"><div class="nav-group">01-基础语法</div><ul><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/01.%E5%88%9D%E8%AF%86Python.html">01.初识Python</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/02.%E7%AC%AC%E4%B8%80%E4%B8%AAPython%E7%A8%8B%E5%BA%8F.html">02.第一个Python程序</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/03.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F.html">03.Python语言中的变量</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/04.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6.html">04.Python语言中的运算符</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/05.%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84.html">05.分支结构</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/06.%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84.html">06.循环结构</a></li></ul><div class="nav-group">02-数据结构</div><ul><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/08.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-1.html">08.常用数据结构之列表-1</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/09.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-2.html">09.常用数据结构之列表-2</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/10.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%85%83%E7%BB%84.html">10.常用数据结构之元组</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/11.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2.html">11.常用数据结构之字符串</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/12.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E9%9B%86%E5%90%88.html">12.常用数据结构之集合</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/13.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E5%85%B8.html">13.常用数据结构之字典</a></li></ul><div class="nav-group">03-函数与模块</div><ul><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/14.%E5%87%BD%E6%95%B0%E5%92%8C%E6%A8%A1%E5%9D%97.html">14.函数和模块</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/16.%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E8%BF%9B%E9%98%B6.html">16.函数使用进阶</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/17.%E5%87%BD%E6%95%B0%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8.html">17.函数高级应用</a></li></ul><div class="nav-group">04-文件与异常</div><ul><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/21.%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html">21.文件读写和异常处理</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/22.%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96.html">22.对象的序列化和反序列化</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/23.Python%E8%AF%BB%E5%86%99CSV%E6%96%87%E4%BB%B6.html">23.Python读写CSV文件</a></li></ul><div class="nav-group">05-面向对象</div><ul><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/18.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8.html">18.面向对象编程入门</a></li><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/19.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6.html">19.面向对象编程进阶</a></li></ul><div class="nav-group">06-基础项目</div><ul><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/07.%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84%E5%AE%9E%E6%88%98.html">07.分支和循环结构实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/15.%E5%87%BD%E6%95%B0%E5%BA%94%E7%94%A8%E5%AE%9E%E6%88%98.html">15.函数应用实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/20.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%BA%94%E7%94%A8.html">20.面向对象编程应用</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/30.%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%BA%94%E7%94%A8.html">30.正则表达式的应用</a></li></ul><div class="nav-group">拓展-办公自动化</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/24.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-1.html">24.Python读写Excel文件-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/25.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-2.html">25.Python读写Excel文件-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/26.Python%E6%93%8D%E4%BD%9CWord%E5%92%8CPowerPoint%E6%96%87%E4%BB%B6.html">26.Python操作Word和PowerPoint文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/27.Python%E6%93%8D%E4%BD%9CPDF%E6%96%87%E4%BB%B6.html">27.Python操作PDF文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/28.Python%E5%A4%84%E7%90%86%E5%9B%BE%E5%83%8F.html">28.Python处理图像</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/29.Python%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E5%92%8C%E7%9F%AD%E4%BF%A1.html">29.Python发送邮件和短信</a></li></ul><div class="nav-group">拓展-Web与爬虫</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/31.Python%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6.html">31.Python语言进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/32-33.Web%E5%89%8D%E7%AB%AF%E5%85%A5%E9%97%A8.html">32-33.Web前端入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/34-35.%E7%8E%A9%E8%BD%ACLinux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.html">34-35.玩转Linux操作系统</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/36.%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CMySQL%E6%A6%82%E8%BF%B0.html">36.关系型数据库和MySQL概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/37.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDDL.html">37.SQL详解之DDL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/38.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDML.html">38.SQL详解之DML</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/39.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDQL.html">39.SQL详解之DQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/40.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDCL.html">40.SQL详解之DCL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/41.MySQL%E6%96%B0%E7%89%B9%E6%80%A7.html">41.MySQL新特性</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/42.%E8%A7%86%E5%9B%BE%E3%80%81%E5%87%BD%E6%95%B0%E5%92%8C%E8%BF%87%E7%A8%8B.html">42.视图、函数和过程</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/43.%E7%B4%A2%E5%BC%95.html">43.索引</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/44.Python%E6%8E%A5%E5%85%A5MySQL%E6%95%B0%E6%8D%AE%E5%BA%93.html">44.Python接入MySQL数据库</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/45.%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E5%92%8CHiveSQL.html">45.大数据平台和HiveSQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/46.Django%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.html">46.Django快速上手</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/47.%E6%B7%B1%E5%85%A5%E6%A8%A1%E5%9E%8B.html">47.深入模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/48.%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%92%8CAjax%E8%AF%B7%E6%B1%82.html">48.静态资源和Ajax请求</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/49.Cookie%E5%92%8CSession.html">49.Cookie和Session</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/50.%E5%88%B6%E4%BD%9C%E6%8A%A5%E8%A1%A8.html">50.制作报表</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/51.%E6%97%A5%E5%BF%97%E5%92%8C%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7%E6%A0%8F.html">51.日志和调试工具栏</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/52.%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E5%BA%94%E7%94%A8.html">52.中间件的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/53.%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8.html">53.前后端分离开发入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/54.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E5%85%A5%E9%97%A8.html">54.RESTful架构和DRF入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/55.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E8%BF%9B%E9%98%B6.html">55.RESTful架构和DRF进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/56.%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98.html">56.使用缓存</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/57.%E6%8E%A5%E5%85%A5%E4%B8%89%E6%96%B9%E5%B9%B3%E5%8F%B0.html">57.接入三方平台</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/58.%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1.html">58.异步任务和定时任务</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/59.%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95.html">59.单元测试</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/60.%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF.html">60.项目上线</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/61.%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E6%A6%82%E8%BF%B0.html">61.网络数据采集概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%8E%B7%E5%8F%96%E7%BD%91%E7%BB%9C%E8%B5%84%E6%BA%90-1.html">62.用Python获取网络资源-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%A7%A3%E6%9E%90HTML%E9%A1%B5%E9%9D%A2-2.html">62.用Python解析HTML页面-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-1.html">63.Python中的并发编程-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-2.html">63.Python中的并发编程-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-3.html">63.Python中的并发编程-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9C%A8%E7%88%AC%E8%99%AB%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html">63.并发编程在爬虫中的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/64.%E4%BD%BF%E7%94%A8Selenium%E6%8A%93%E5%8F%96%E7%BD%91%E9%A1%B5%E5%8A%A8%E6%80%81%E5%86%85%E5%AE%B9.html">64.使用Selenium抓取网页动态内容</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/65.%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6Scrapy%E7%AE%80%E4%BB%8B.html">65.爬虫框架Scrapy简介</a></li></ul><div class="nav-group">拓展-数据分析</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/66.%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A6%82%E8%BF%B0.html">66.数据分析概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/67.%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87.html">67.环境准备</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/68.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-1.html">68.NumPy的应用-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/69.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-2.html">69.NumPy的应用-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/70.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-3.html">70.NumPy的应用-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/71.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-4.html">71.NumPy的应用-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/72.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-1.html">72.深入浅出pandas-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/73.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-2.html">73.深入浅出pandas-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/74.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-3.html">74.深入浅出pandas-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/75.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-4.html">75.深入浅出pandas-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/76.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-5.html">76.深入浅出pandas-5</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/77.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-6.html">77.深入浅出pandas-6</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/78.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-1.html">78.数据可视化-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/79.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-2.html">79.数据可视化-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/80.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-3.html">80.数据可视化-3</a></li></ul><div class="nav-group">拓展-机器学习</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/81.%E6%B5%85%E8%B0%88%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0.html">81.浅谈机器学习</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/82.k%E6%9C%80%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95.html">82.k最近邻算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/83.%E5%86%B3%E7%AD%96%E6%A0%91%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97.html">83.决策树和随机森林</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/84.%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95.html">84.朴素贝叶斯算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/85.%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B.html">85.回归模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/86.K-Means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95.html">86.K-Means聚类算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/87.%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95.html">87.集成学习算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/88.%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B.html">88.神经网络模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/89.%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E5%85%A5%E9%97%A8.html">89.自然语言处理入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/90.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98.html">90.机器学习实战</a></li></ul></div></details><article class="lesson"><div class="lesson-content" id="top"><h1 id="45-大数据平台和hivesql">45.大数据平台和HiveSQL</h1><h2 id="hive简介">Hive简介</h2><p><a href="https://hive.apache.org/">Hive</a> 是 Facebook 开源的一款基于 Hadoop 的数据仓库工具，目前由 Apache 软件基金会维护，它是应用最广泛的大数据处理解决方案，它能将 SQL 查询转变为 MapReduce（Google提出的一个软件架构，用于大规模数据集的并行运算）任务，对 SQL 提供了完美的支持，能够非常方便的实现大数据统计。</p>
+<p><img src="/assets/sql_to_mr-20250605165225-73r9fzf.png"" alt="" loading="lazy"></p>
+<p><img src="/assets/HADOOP-ECOSYSTEM-Edureka-20250605165225-aegjg2q.png"" alt="" loading="lazy"></p>
+<blockquote>
+<p><strong>说明</strong>：可以通过<a href="https://www.edureka.co/blog/hadoop-ecosystem">https://www.edureka.co/blog/hadoop-ecosystem</a>来了解 Hadoop 生态圈。</p>
+</blockquote>
+<p>如果要简单的介绍 Hive，那么以下两点是其核心：</p>
+<ol>
+<li>把 HDFS 中结构化的数据映射成表。</li>
+<li>通过把 HQL 进行解析和转换，最终生成一系列基于 Hadoop 的 MapReduce 任务或 Spark 任务，通过执行这些任务完成对数据的处理。也就是说，即便不学习 Java、Scala 这样的编程语言，一样可以实现对数据的处理。</li>
+</ol>
+<p>Hive的应用场景。</p>
+<p><img src="/assets/what_hive_can_do-20250605165225-uvkj4tv.png"" alt="" loading="lazy"></p>
+<p><img src="/assets/what_hive_can_not_do-20250605165225-w4z5u6h.png"" alt="" loading="lazy"></p>
+<p>Hive和传统关系型数据库的对比如下图和下表所示。</p>
+<p><img src="/assets/hive_vs_rdbms-20250605165225-2bip38w.png"" alt="" loading="lazy"></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Hive</th>
+<th>RDBMS</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>查询语言</td>
+<td>HQL</td>
+<td>SQL</td>
+</tr>
+<tr>
+<td>存储数据</td>
+<td>HDFS</td>
+<td>本地文件系统</td>
+</tr>
+<tr>
+<td>执行方式</td>
+<td>MapReduce / Spark</td>
+<td>Executor</td>
+</tr>
+<tr>
+<td>执行延迟</td>
+<td>高</td>
+<td>低</td>
+</tr>
+<tr>
+<td>数据规模</td>
+<td>大</td>
+<td>小</td>
+</tr>
+</tbody></table>
+<h3 id="准备工作">准备工作</h3><ol>
+<li><p>搭建如下图所示的大数据平台。</p>
+<p><img src="/assets/20220210080638-20250605165225-8xa2gs2.png"" alt="" loading="lazy"></p>
+</li>
+<li><p>通过Client节点（跳板机）访问大数据平台。</p>
+<p><img src="/assets/20220210080655-20250605165225-fkqv6sl.png"" alt="" loading="lazy"></p>
+</li>
+<li><p>创建文件Hadoop的文件系统。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-Shell">hdfs dfs -mkdir /user/root</code></pre></div></li>
+<li><p>将准备好的数据文件拷贝到Hadoop文件系统中。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-Shell">hdfs dfs -put /home/ubuntu/data/* /user/root</code></pre></div></li>
+<li><p>进入 hive 命令行。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-Shell">hive</code></pre></div></li>
+</ol>
+<h3 id="建库建表">建库建表</h3><ol>
+<li><p>创建。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-SQL">create database eshop;</code></pre></div></li>
+<li><p>删除。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-SQL">drop database eshop cascade;</code></pre></div></li>
+<li><p>切换。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-SQL">use eshop;</code></pre></div></li>
+</ol>
+<h4 id="数据类型">数据类型</h4><p>Hive的数据类型如下所示。</p>
+<p><img src="/assets/hive_data_types-20250605165225-rqapmzk.png"" alt="" loading="lazy"></p>
+<p>基本数据类型：</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>占用空间</th>
+<th>支持版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>tinyint</td>
+<td>1-Byte</td>
+<td></td>
+</tr>
+<tr>
+<td>smallint</td>
+<td>2-Byte</td>
+<td></td>
+</tr>
+<tr>
+<td>int</td>
+<td>4-Byte</td>
+<td></td>
+</tr>
+<tr>
+<td>bigint</td>
+<td>8-Byte</td>
+<td></td>
+</tr>
+<tr>
+<td>boolean</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>float</td>
+<td>4-Byte</td>
+<td></td>
+</tr>
+<tr>
+<td>double</td>
+<td>8-Byte</td>
+<td></td>
+</tr>
+<tr>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>binary</td>
+<td></td>
+<td>0.8版本</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td></td>
+<td>0.8版本</td>
+</tr>
+<tr>
+<td>decimal</td>
+<td></td>
+<td>0.11版本</td>
+</tr>
+<tr>
+<td>char</td>
+<td></td>
+<td>0.13版本</td>
+</tr>
+<tr>
+<td>varchar</td>
+<td></td>
+<td>0.12版本</td>
+</tr>
+<tr>
+<td>date</td>
+<td></td>
+<td>0.12版本</td>
+</tr>
+</tbody></table>
+<p>复合数据类型：</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>描述</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>struct</td>
+<td>和C语言中的结构体类似</td>
+<td><code>struct&lt;first_name:string, last_name:string&gt;</code></td>
+</tr>
+<tr>
+<td>map</td>
+<td>由键值对构成的元素的集合</td>
+<td><code>map&lt;string,int&gt;</code></td>
+</tr>
+<tr>
+<td>array</td>
+<td>具有相同类型的变量的容器</td>
+<td><code>array&lt;string&gt;</code></td>
+</tr>
+</tbody></table>
+<ol start="4">
+<li><p>创建内部表。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-SQL">create table if not exists dim_user_info 
+(
+user_id string,
+user_name string, 
+sex string,
+age int,
+city string,
+firstactivetime string,
+level int,
+extra1 string,
+extra2 map&lt;string,string&gt;
+)
+row format delimited fields terminated by '\t'
+collection items terminated by ','
+map keys terminated by ':'
+lines terminated by '\n'
+stored as textfile;</code></pre></div></li>
+<li><p>加载数据。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-SQL">load data local inpath '/home/ubuntu/data/user_info/user_info.txt' overwrite into table dim_user_info;</code></pre></div><p>或</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-SQL">load data inpath '/user/root/user_info.txt' overwrite into table dim_user_info;</code></pre></div></li>
+<li><p>创建分区表。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-SQL">create table if not exists fact_user_trade 
+(
+user_name string,
+piece int,
+price double,
+pay_amount double,
+goods_category string,
+pay_time bigint
+)  
+partitioned by (dt string)
+row format delimited fields terminated by '\t';</code></pre></div></li>
+<li><p>提供分区数据。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-Shell">hdfs dfs -put /home/ubuntu/data/user_trade/* /user/hive/warehouse/eshop.db/fact_user_trade</code></pre></div></li>
+<li><p>设置动态分区。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-SQL">set hive.exec.dynamic.partition=true;
+set hive.exec.dynamic.partition.mode=nonstrict;
+set hive.exec.max.dynamic.partitions=10000;
+set hive.exec.max.dynamic.partitions.pernode=10000;</code></pre></div></li>
+<li><p>修复分区。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-SQL">msck repair table fact_user_trade;</code></pre></div></li>
+</ol>
+<h3 id="查询">查询</h3><h4 id="基本语法">基本语法</h4><div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-SQL">-- 查询北京女用户的姓名取前10个
+select user_name from dim_user_info where city='beijing' and sex='female' limit 10;
+
+-- 查询2019年3月24日购买了food类商品的用户名、购买数量和支付金额（不聚合）
+select user_name, piece, pay_amount from fact_user_trade where dt='2019-03-24' and goods_category='food';
+
+-- 统计用户 ELLA 在2018年的总支付金额和最近最远两次消费间隔天数
+select sum(pay_amount) as total, datediff(max(from_unixtime(pay_time, 'yyyy-MM-dd')), min(from_unixtime(pay_time, 'yyyy-MM-dd'))) from fact_user_trade where year(dt)='2018' and user_name='ELLA';</code></pre></div><h4 id="group-by">group by</h4><div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-SQL">-- 查询2019年1月到4月，每个品类有多少人购买，累计金额是多少
+select goods_category, count(distinct user_name) as total_user, sum(pay_amount) as total_pay from fact_user_trade where dt between '2019-01-01' and '2019-04-30' group by goods_category;</code></pre></div><div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-SQL">-- 查询2019年4月支付金额超过5万元的用户
+select user_name, sum(pay_amount) as total from fact_user_trade where dt between '2019-04-01' and '2019-04-30' group by user_name having sum(pay_amount) &gt; 50000;</code></pre></div><div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-hive">-- 查询2018年购买的商品品类在两个以上的用户数
+select count(tmp.user_name) from (select user_name, count(distinct goods_category) as total from fact_user_trade where year(dt)='2018' group by user_name having count(distinct goods_category)&gt;2) tmp;</code></pre></div><h4 id="order-by">order by</h4><div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-SQL">-- 查询2019年4月支付金额最多的用户前5名
+select user_name, sum(pay_amount) as total from fact_user_trade where dt between '2019-04-01' and '2019-04-30' group by user_name order by total desc limit 5;</code></pre></div><h4 id="常用函数">常用函数</h4><ol>
+<li><p><code>from_unixtime</code>：将时间戳转换成日期</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-hive">select from_unixtime(pay_time, 'yyyy-MM-dd hh:mm:ss') from fact_user_trade limit 10;</code></pre></div></li>
+<li><p><code>unix_timestamp</code>：将日期转换成时间戳</p>
+</li>
+<li><p><code>datediff</code>：计算两个日期的时间差</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-Hive">-- 用户首次激活时间与设定参照时间的间隔
+select user_name, datediff('2019-4-1', to_date(firstactivetime)) from dim_user_info limit 10;</code></pre></div></li>
+<li><p><code>if</code>：根据条件返回不同的值</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-Hive">-- 统计不同年龄段的用户数
+select case when age &lt; 20 then '20岁以下' when age &lt; 30 then '30岁以下' when age &lt; 40 then '40岁以下' else '40岁以上' end as age_seg, count(distinct user_id) as total from dim_user_info group by case when age &lt; 20 then '20岁以下' when age &lt; 30 then '30岁以下' when age &lt; 40 then '40岁以下' else '40岁以上' end;</code></pre></div><div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-Hive">-- 不同性别高级等用户数量
+select sex, if(level &gt; 5, '高', '低') as level_type, count(distinct user_id) as total from dim_user_info group by sex, if(level &gt; 5, '高', '低');</code></pre></div></li>
+<li><p><code>substr</code>：字符串取子串</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-Hive">-- 统计每个月激活的新用户数
+select substr(firstactivetime, 1, 7) as month, count(distinct user_id) as total from dim_user_info group by substr(firstactivetime, 1, 7);</code></pre></div></li>
+<li><p><code>get_json_object</code>：从JSON字符串中取出指定的<code>key</code>对应的<code>value</code>，如：<code>get_json_object(info, &#39;$.first_name&#39;)</code>。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-Hive">-- 统计不同手机品牌的用户数
+select get_json_object(extra1, '$.phonebrand') as phone, count(distinct user_id) as total from user_info group by get_json_object(extra1, '$.phonebrand');
+
+select extra2['phonebrand'] as phone, count(distinct user_id) as total from user_info group by extra2['phonebrand'];</code></pre></div><blockquote>
+<p>说明：MySQL对应的函数名字叫<code>json_extract</code>。</p>
+</blockquote>
+</li>
+</ol>
+</div></article></div></main><footer>by天才程序员</footer><script src="/script.js"></script></body></html>

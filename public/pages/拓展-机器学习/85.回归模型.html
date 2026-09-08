@@ -1,0 +1,468 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Python 基础课程讲义：85.回归模型"><title>85.回归模型｜Python 编程基础</title><link rel="stylesheet" href="/style.css"><script>window.MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:true,processEnvironments:true},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body><header class="site-header"><div class="header-inner"><a class="brand" href="/index.html"><span>Python 编程基础</span><small>Python 基础课程讲义</small></a><a class="back-home" href="/index.html">课程首页</a></div></header><main class="page-layout"><aside class="course-nav" aria-label="课程章节" id="course-nav-list"><div class="course-nav-head"><div class="nav-title">课程章节</div><button class="course-nav-toggle" type="button" aria-expanded="true" aria-controls="course-nav-list">收起</button></div><div class="nav-group">01-基础语法</div><ul><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/01.%E5%88%9D%E8%AF%86Python.html">01.初识Python</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/02.%E7%AC%AC%E4%B8%80%E4%B8%AAPython%E7%A8%8B%E5%BA%8F.html">02.第一个Python程序</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/03.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F.html">03.Python语言中的变量</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/04.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6.html">04.Python语言中的运算符</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/05.%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84.html">05.分支结构</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/06.%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84.html">06.循环结构</a></li></ul><div class="nav-group">02-数据结构</div><ul><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/08.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-1.html">08.常用数据结构之列表-1</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/09.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-2.html">09.常用数据结构之列表-2</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/10.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%85%83%E7%BB%84.html">10.常用数据结构之元组</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/11.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2.html">11.常用数据结构之字符串</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/12.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E9%9B%86%E5%90%88.html">12.常用数据结构之集合</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/13.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E5%85%B8.html">13.常用数据结构之字典</a></li></ul><div class="nav-group">03-函数与模块</div><ul><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/14.%E5%87%BD%E6%95%B0%E5%92%8C%E6%A8%A1%E5%9D%97.html">14.函数和模块</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/16.%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E8%BF%9B%E9%98%B6.html">16.函数使用进阶</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/17.%E5%87%BD%E6%95%B0%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8.html">17.函数高级应用</a></li></ul><div class="nav-group">04-文件与异常</div><ul><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/21.%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html">21.文件读写和异常处理</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/22.%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96.html">22.对象的序列化和反序列化</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/23.Python%E8%AF%BB%E5%86%99CSV%E6%96%87%E4%BB%B6.html">23.Python读写CSV文件</a></li></ul><div class="nav-group">05-面向对象</div><ul><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/18.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8.html">18.面向对象编程入门</a></li><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/19.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6.html">19.面向对象编程进阶</a></li></ul><div class="nav-group">06-基础项目</div><ul><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/07.%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84%E5%AE%9E%E6%88%98.html">07.分支和循环结构实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/15.%E5%87%BD%E6%95%B0%E5%BA%94%E7%94%A8%E5%AE%9E%E6%88%98.html">15.函数应用实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/20.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%BA%94%E7%94%A8.html">20.面向对象编程应用</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/30.%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%BA%94%E7%94%A8.html">30.正则表达式的应用</a></li></ul><div class="nav-group">拓展-办公自动化</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/24.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-1.html">24.Python读写Excel文件-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/25.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-2.html">25.Python读写Excel文件-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/26.Python%E6%93%8D%E4%BD%9CWord%E5%92%8CPowerPoint%E6%96%87%E4%BB%B6.html">26.Python操作Word和PowerPoint文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/27.Python%E6%93%8D%E4%BD%9CPDF%E6%96%87%E4%BB%B6.html">27.Python操作PDF文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/28.Python%E5%A4%84%E7%90%86%E5%9B%BE%E5%83%8F.html">28.Python处理图像</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/29.Python%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E5%92%8C%E7%9F%AD%E4%BF%A1.html">29.Python发送邮件和短信</a></li></ul><div class="nav-group">拓展-Web与爬虫</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/31.Python%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6.html">31.Python语言进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/32-33.Web%E5%89%8D%E7%AB%AF%E5%85%A5%E9%97%A8.html">32-33.Web前端入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/34-35.%E7%8E%A9%E8%BD%ACLinux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.html">34-35.玩转Linux操作系统</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/36.%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CMySQL%E6%A6%82%E8%BF%B0.html">36.关系型数据库和MySQL概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/37.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDDL.html">37.SQL详解之DDL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/38.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDML.html">38.SQL详解之DML</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/39.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDQL.html">39.SQL详解之DQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/40.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDCL.html">40.SQL详解之DCL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/41.MySQL%E6%96%B0%E7%89%B9%E6%80%A7.html">41.MySQL新特性</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/42.%E8%A7%86%E5%9B%BE%E3%80%81%E5%87%BD%E6%95%B0%E5%92%8C%E8%BF%87%E7%A8%8B.html">42.视图、函数和过程</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/43.%E7%B4%A2%E5%BC%95.html">43.索引</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/44.Python%E6%8E%A5%E5%85%A5MySQL%E6%95%B0%E6%8D%AE%E5%BA%93.html">44.Python接入MySQL数据库</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/45.%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E5%92%8CHiveSQL.html">45.大数据平台和HiveSQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/46.Django%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.html">46.Django快速上手</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/47.%E6%B7%B1%E5%85%A5%E6%A8%A1%E5%9E%8B.html">47.深入模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/48.%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%92%8CAjax%E8%AF%B7%E6%B1%82.html">48.静态资源和Ajax请求</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/49.Cookie%E5%92%8CSession.html">49.Cookie和Session</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/50.%E5%88%B6%E4%BD%9C%E6%8A%A5%E8%A1%A8.html">50.制作报表</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/51.%E6%97%A5%E5%BF%97%E5%92%8C%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7%E6%A0%8F.html">51.日志和调试工具栏</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/52.%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E5%BA%94%E7%94%A8.html">52.中间件的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/53.%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8.html">53.前后端分离开发入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/54.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E5%85%A5%E9%97%A8.html">54.RESTful架构和DRF入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/55.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E8%BF%9B%E9%98%B6.html">55.RESTful架构和DRF进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/56.%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98.html">56.使用缓存</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/57.%E6%8E%A5%E5%85%A5%E4%B8%89%E6%96%B9%E5%B9%B3%E5%8F%B0.html">57.接入三方平台</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/58.%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1.html">58.异步任务和定时任务</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/59.%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95.html">59.单元测试</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/60.%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF.html">60.项目上线</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/61.%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E6%A6%82%E8%BF%B0.html">61.网络数据采集概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%8E%B7%E5%8F%96%E7%BD%91%E7%BB%9C%E8%B5%84%E6%BA%90-1.html">62.用Python获取网络资源-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%A7%A3%E6%9E%90HTML%E9%A1%B5%E9%9D%A2-2.html">62.用Python解析HTML页面-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-1.html">63.Python中的并发编程-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-2.html">63.Python中的并发编程-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-3.html">63.Python中的并发编程-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9C%A8%E7%88%AC%E8%99%AB%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html">63.并发编程在爬虫中的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/64.%E4%BD%BF%E7%94%A8Selenium%E6%8A%93%E5%8F%96%E7%BD%91%E9%A1%B5%E5%8A%A8%E6%80%81%E5%86%85%E5%AE%B9.html">64.使用Selenium抓取网页动态内容</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/65.%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6Scrapy%E7%AE%80%E4%BB%8B.html">65.爬虫框架Scrapy简介</a></li></ul><div class="nav-group">拓展-数据分析</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/66.%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A6%82%E8%BF%B0.html">66.数据分析概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/67.%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87.html">67.环境准备</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/68.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-1.html">68.NumPy的应用-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/69.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-2.html">69.NumPy的应用-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/70.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-3.html">70.NumPy的应用-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/71.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-4.html">71.NumPy的应用-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/72.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-1.html">72.深入浅出pandas-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/73.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-2.html">73.深入浅出pandas-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/74.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-3.html">74.深入浅出pandas-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/75.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-4.html">75.深入浅出pandas-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/76.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-5.html">76.深入浅出pandas-5</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/77.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-6.html">77.深入浅出pandas-6</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/78.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-1.html">78.数据可视化-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/79.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-2.html">79.数据可视化-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/80.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-3.html">80.数据可视化-3</a></li></ul><div class="nav-group">拓展-机器学习</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/81.%E6%B5%85%E8%B0%88%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0.html">81.浅谈机器学习</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/82.k%E6%9C%80%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95.html">82.k最近邻算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/83.%E5%86%B3%E7%AD%96%E6%A0%91%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97.html">83.决策树和随机森林</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/84.%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95.html">84.朴素贝叶斯算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/85.%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B.html">85.回归模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/86.K-Means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95.html">86.K-Means聚类算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/87.%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95.html">87.集成学习算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/88.%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B.html">88.神经网络模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/89.%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E5%85%A5%E9%97%A8.html">89.自然语言处理入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/90.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98.html">90.机器学习实战</a></li></ul></aside><aside class="lesson-toc" aria-label="本页目录"><div class="toc-title">本页目录</div><ul><li class="toc-level-2"><a href="#回归模型">回归模型</a></li><li class="toc-level-3"><a href="#回归模型的分类">回归模型的分类</a></li><li class="toc-level-3"><a href="#回归系数的计算">回归系数的计算</a></li><li class="toc-level-3"><a href="#新数据集介绍">新数据集介绍</a></li><li class="toc-level-3"><a href="#线性回归代码实现">线性回归代码实现</a></li><li class="toc-level-3"><a href="#回归模型的评估">回归模型的评估</a></li><li class="toc-level-3"><a href="#引入正则化项">引入正则化项</a></li><li class="toc-level-3"><a href="#线性回归另一种实现">线性回归另一种实现</a></li><li class="toc-level-3"><a href="#多项式回归">多项式回归</a></li><li class="toc-level-3"><a href="#逻辑回归">逻辑回归</a></li><li class="toc-level-3"><a href="#总结">总结</a></li></ul><a class="to-top" href="#top">回到顶部</a></aside><div class="content-area"><details class="mobile-course-nav"><summary>课程章节</summary><div class="mobile-course-links"><div class="nav-group">01-基础语法</div><ul><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/01.%E5%88%9D%E8%AF%86Python.html">01.初识Python</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/02.%E7%AC%AC%E4%B8%80%E4%B8%AAPython%E7%A8%8B%E5%BA%8F.html">02.第一个Python程序</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/03.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F.html">03.Python语言中的变量</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/04.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6.html">04.Python语言中的运算符</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/05.%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84.html">05.分支结构</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/06.%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84.html">06.循环结构</a></li></ul><div class="nav-group">02-数据结构</div><ul><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/08.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-1.html">08.常用数据结构之列表-1</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/09.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-2.html">09.常用数据结构之列表-2</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/10.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%85%83%E7%BB%84.html">10.常用数据结构之元组</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/11.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2.html">11.常用数据结构之字符串</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/12.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E9%9B%86%E5%90%88.html">12.常用数据结构之集合</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/13.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E5%85%B8.html">13.常用数据结构之字典</a></li></ul><div class="nav-group">03-函数与模块</div><ul><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/14.%E5%87%BD%E6%95%B0%E5%92%8C%E6%A8%A1%E5%9D%97.html">14.函数和模块</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/16.%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E8%BF%9B%E9%98%B6.html">16.函数使用进阶</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/17.%E5%87%BD%E6%95%B0%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8.html">17.函数高级应用</a></li></ul><div class="nav-group">04-文件与异常</div><ul><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/21.%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html">21.文件读写和异常处理</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/22.%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96.html">22.对象的序列化和反序列化</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/23.Python%E8%AF%BB%E5%86%99CSV%E6%96%87%E4%BB%B6.html">23.Python读写CSV文件</a></li></ul><div class="nav-group">05-面向对象</div><ul><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/18.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8.html">18.面向对象编程入门</a></li><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/19.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6.html">19.面向对象编程进阶</a></li></ul><div class="nav-group">06-基础项目</div><ul><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/07.%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84%E5%AE%9E%E6%88%98.html">07.分支和循环结构实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/15.%E5%87%BD%E6%95%B0%E5%BA%94%E7%94%A8%E5%AE%9E%E6%88%98.html">15.函数应用实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/20.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%BA%94%E7%94%A8.html">20.面向对象编程应用</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/30.%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%BA%94%E7%94%A8.html">30.正则表达式的应用</a></li></ul><div class="nav-group">拓展-办公自动化</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/24.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-1.html">24.Python读写Excel文件-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/25.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-2.html">25.Python读写Excel文件-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/26.Python%E6%93%8D%E4%BD%9CWord%E5%92%8CPowerPoint%E6%96%87%E4%BB%B6.html">26.Python操作Word和PowerPoint文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/27.Python%E6%93%8D%E4%BD%9CPDF%E6%96%87%E4%BB%B6.html">27.Python操作PDF文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/28.Python%E5%A4%84%E7%90%86%E5%9B%BE%E5%83%8F.html">28.Python处理图像</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/29.Python%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E5%92%8C%E7%9F%AD%E4%BF%A1.html">29.Python发送邮件和短信</a></li></ul><div class="nav-group">拓展-Web与爬虫</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/31.Python%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6.html">31.Python语言进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/32-33.Web%E5%89%8D%E7%AB%AF%E5%85%A5%E9%97%A8.html">32-33.Web前端入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/34-35.%E7%8E%A9%E8%BD%ACLinux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.html">34-35.玩转Linux操作系统</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/36.%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CMySQL%E6%A6%82%E8%BF%B0.html">36.关系型数据库和MySQL概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/37.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDDL.html">37.SQL详解之DDL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/38.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDML.html">38.SQL详解之DML</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/39.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDQL.html">39.SQL详解之DQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/40.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDCL.html">40.SQL详解之DCL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/41.MySQL%E6%96%B0%E7%89%B9%E6%80%A7.html">41.MySQL新特性</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/42.%E8%A7%86%E5%9B%BE%E3%80%81%E5%87%BD%E6%95%B0%E5%92%8C%E8%BF%87%E7%A8%8B.html">42.视图、函数和过程</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/43.%E7%B4%A2%E5%BC%95.html">43.索引</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/44.Python%E6%8E%A5%E5%85%A5MySQL%E6%95%B0%E6%8D%AE%E5%BA%93.html">44.Python接入MySQL数据库</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/45.%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E5%92%8CHiveSQL.html">45.大数据平台和HiveSQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/46.Django%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.html">46.Django快速上手</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/47.%E6%B7%B1%E5%85%A5%E6%A8%A1%E5%9E%8B.html">47.深入模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/48.%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%92%8CAjax%E8%AF%B7%E6%B1%82.html">48.静态资源和Ajax请求</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/49.Cookie%E5%92%8CSession.html">49.Cookie和Session</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/50.%E5%88%B6%E4%BD%9C%E6%8A%A5%E8%A1%A8.html">50.制作报表</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/51.%E6%97%A5%E5%BF%97%E5%92%8C%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7%E6%A0%8F.html">51.日志和调试工具栏</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/52.%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E5%BA%94%E7%94%A8.html">52.中间件的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/53.%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8.html">53.前后端分离开发入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/54.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E5%85%A5%E9%97%A8.html">54.RESTful架构和DRF入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/55.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E8%BF%9B%E9%98%B6.html">55.RESTful架构和DRF进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/56.%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98.html">56.使用缓存</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/57.%E6%8E%A5%E5%85%A5%E4%B8%89%E6%96%B9%E5%B9%B3%E5%8F%B0.html">57.接入三方平台</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/58.%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1.html">58.异步任务和定时任务</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/59.%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95.html">59.单元测试</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/60.%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF.html">60.项目上线</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/61.%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E6%A6%82%E8%BF%B0.html">61.网络数据采集概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%8E%B7%E5%8F%96%E7%BD%91%E7%BB%9C%E8%B5%84%E6%BA%90-1.html">62.用Python获取网络资源-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%A7%A3%E6%9E%90HTML%E9%A1%B5%E9%9D%A2-2.html">62.用Python解析HTML页面-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-1.html">63.Python中的并发编程-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-2.html">63.Python中的并发编程-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-3.html">63.Python中的并发编程-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9C%A8%E7%88%AC%E8%99%AB%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html">63.并发编程在爬虫中的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/64.%E4%BD%BF%E7%94%A8Selenium%E6%8A%93%E5%8F%96%E7%BD%91%E9%A1%B5%E5%8A%A8%E6%80%81%E5%86%85%E5%AE%B9.html">64.使用Selenium抓取网页动态内容</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/65.%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6Scrapy%E7%AE%80%E4%BB%8B.html">65.爬虫框架Scrapy简介</a></li></ul><div class="nav-group">拓展-数据分析</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/66.%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A6%82%E8%BF%B0.html">66.数据分析概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/67.%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87.html">67.环境准备</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/68.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-1.html">68.NumPy的应用-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/69.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-2.html">69.NumPy的应用-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/70.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-3.html">70.NumPy的应用-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/71.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-4.html">71.NumPy的应用-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/72.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-1.html">72.深入浅出pandas-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/73.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-2.html">73.深入浅出pandas-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/74.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-3.html">74.深入浅出pandas-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/75.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-4.html">75.深入浅出pandas-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/76.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-5.html">76.深入浅出pandas-5</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/77.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-6.html">77.深入浅出pandas-6</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/78.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-1.html">78.数据可视化-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/79.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-2.html">79.数据可视化-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/80.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-3.html">80.数据可视化-3</a></li></ul><div class="nav-group">拓展-机器学习</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/81.%E6%B5%85%E8%B0%88%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0.html">81.浅谈机器学习</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/82.k%E6%9C%80%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95.html">82.k最近邻算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/83.%E5%86%B3%E7%AD%96%E6%A0%91%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97.html">83.决策树和随机森林</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/84.%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95.html">84.朴素贝叶斯算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/85.%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B.html">85.回归模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/86.K-Means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95.html">86.K-Means聚类算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/87.%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95.html">87.集成学习算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/88.%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B.html">88.神经网络模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/89.%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E5%85%A5%E9%97%A8.html">89.自然语言处理入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/90.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98.html">90.机器学习实战</a></li></ul></div></details><article class="lesson"><div class="lesson-content" id="top"><h1 id="85-回归模型">85.回归模型</h1><h2 id="回归模型">回归模型</h2><p>回归模型是机器学习和统计学中的一种基本模型，用于预测连续型输出变量。简单的说，给定一组输入变量（自变量）和对应的输出变量（因变量），回归模型旨在找到输入变量和输出变量之间的映射关系。回归模型的形式可能比较简单，但它确包含了机器学习中最主要的建模思想。通常，我们建立回归模型主要有两个目标：</p>
+<ol>
+<li><strong>描述数据之间的关系</strong>。我们之前讲过<strong>机器学习的关键就是要通过历史数据掌握如何从特征映射到目标值</strong>，这个过程不需要我们事先设置任何的规则，而是让机器通过对历史数据的学习来获得。回归模型可以帮助我们通过模型表达输入和输出之间的关系。</li>
+<li><strong>对未知数据做出预测</strong>。通过学习到的映射关系，模型可以对新的输入数据进行预测。</li>
+</ol>
+<p>回归模型的应用非常广泛，我们为大家举几个具体的例子：</p>
+<ol>
+<li><strong>零售行业</strong>。全球最大的电商平台亚马逊（Amazon）会根据历史销量、商品属性（价格、折扣、品牌、类别等）、时间特征（季节、工作日、节假日等）、外部因素（天气、社媒等）等特征创建回归模型预测未来一段时间内不同商品的需求量。在促销活动期间，会使用多元回归结合交互项来分析促销对销量的影响。</li>
+<li><strong>汽车行业</strong>。为了优化电池的充电策略，延长电池的使用寿命，为电车用户提供更准确的电量预警，特斯拉（Tesla）使用回归模型，通过电池充放电次数、环境温度、放电深度、电池物理参数等建立回归模型，预测电池的剩余寿命。</li>
+<li><strong>房地产行业</strong>。美国最大的在线房地产平台 Zillow 曾经使用回归模型帮助用户评估房屋的价值，通过房屋的面积、房龄、地理位置、房屋类型、社区安全等级、学校评分等对房屋的市场价格做出预测。</li>
+</ol>
+<h3 id="回归模型的分类">回归模型的分类</h3><p>根据模型的复杂程度和假设，回归模型可以分为以下几类：</p>
+<ol>
+<li><strong>线性回归</strong>（Linear Regression）：假设输入变量和输出变量之间是线性关系。</li>
+</ol>
+<p>一元线性回归：建立一个因变量与单个自变量之间线性关系的模型。</p>
+<p>$$
+y = \beta_0 + \beta_1 x + \varepsilon
+$$</p>
+<p>其中， $\small{y}$ 是目标变量（因变量）， $\small{x}$ 是输入变量（自变量）， $\small{\beta_{0}}$ 是截距，表示 $\small{x=0}$ 时的预测值， $\small{\beta_{1}}$ 是回归系数（斜率），表示输入变量对输出变量影响的大小， $\small{\varepsilon}$ 是误差项，用于表示数据中的随机噪声或无法解释的部分。</p>
+<p>多元线性回归：建立一个因变量与多个自变量之间线性关系的模型。</p>
+<p>$$
+y = \beta_{0} + \beta_{1} x_{1} + \beta_{2} x_{2} + \cdots + \beta_{n} x_{n} + \varepsilon
+$$</p>
+<p>上面的公式也可以用向量的形式简化表示为：</p>
+<p>$$
+y = \mathbf{x}^{T} \mathbf{\beta} + \varepsilon
+$$</p>
+<p>其中， $\small{\mathbf{x} = [1, x_{1}, x_{2}, \dots, x_{n}]^{T}}$ 是包含截距的输入向量， $\small{\mathbf{\beta} = [\beta_{0}, \beta_{1}, \beta_{2}, \dots, \beta_{n}]^{T}}$ 是模型参数（包括截距 $\small{\beta_{0}}$ 和回归系数 $\small{\beta_{1}, \beta_{2}, \cdots, \beta_{n}}$ ）， $\small{\varepsilon}$ 是误差项。</p>
+<ol start="2">
+<li><strong>多项式回归</strong>（Polynomial Regression）：引入高阶特征，使模型能拟合更复杂的非线性关系，属于线性模型的扩展，因为因为它对参数 $\small{\beta}$ 的求解仍然是线性形式，如下面所示的二次关系：</li>
+</ol>
+<p>$$
+y = \beta_{0} + \beta_{1} x + \beta_{2} x^{2} + \varepsilon
+$$</p>
+<ol start="3">
+<li><strong>非线性回归</strong>（Nonlinear Regression）：非线性回归完全放弃了线性假设，模型形式可以是任意非线性函数。</li>
+<li><strong>岭回归</strong>（Ridge Regression）、<strong>套索回归</strong>（Lasso Regression）、<strong>弹性网络回归</strong>（Elastic Net Regression）：在线性回归基础上加入正则化项，用于处理过拟合、多重共线性和特征筛选问题。</li>
+<li><strong>逻辑回归</strong>（Logistic Regression）：逻辑回归虽然名字中带“回归”，但实际上是用于分类问题的模型。它通过 Sigmoid 函数将线性组合的输入值映射到区间 $\small{(0, 1)}$ ，表示分类概率，适用于二分类问题；也可以扩展为 Softmax 回归，解决多分类问题。</li>
+</ol>
+<p>$$
+P(y=1 \vert x) = \frac{1}{1 + e^{-(\beta_{0} + \beta_{1} x_{1} + \cdots + \beta_{n} x_{n})}}
+$$</p>
+<h3 id="回归系数的计算">回归系数的计算</h3><p>建立回归模型的关键是找到最佳的回归系数 $\small{\mathbf{\beta}}$ ，所谓最佳回归系数是指让模型对数据的拟合效果达到最好的模型参数，即能够最小化模型的预测值 $\small{\hat{y_{i}}}$ 与实际观测值 $\small{y_{i}}$ 之间差异的模型参数。为此，我们先定义如下所示的损失函数。</p>
+<p>$$
+L(\mathbf{\beta}) = \sum_{i=1}^{m}(y_{i} - \hat{y_{i}})^{2}
+$$</p>
+<p>其中， $\small{m}$ 表示样本容量，代入回归模型，有：</p>
+<p>$$
+L(\mathbf{\beta}) = \sum_{i=1}^{m}(y_{i} - \mathbf{x}_{i}^{T}\mathbf{\beta})^{2}
+$$</p>
+<p>如果用矩阵形式表示，有：</p>
+<p>$$
+L(\mathbf{\beta}) = (\mathbf{y} - \mathbf{X\beta})^{T}(\mathbf{y} - \mathbf{X\beta})
+$$</p>
+<p>其中， $\mathbf{y}$ 是目标值的向量，大小为 $\small{m \times 1}$， $\mathbf{X}$ 是特征矩阵，大小为 $\small{m \times n}$， $\small{\mathbf{\beta}}$ 是回归系数的向量，大小为 $\small{n \times 1}$。</p>
+<p>通过最小化损失函数 $\small{L(\mathbf{\beta})}$ ，我们可以得到线性回归模型的解析解。对 $\small{L(\mathbf{\beta})}$ 求导并令其为 0，有：</p>
+<p>$$
+\frac{\partial{L(\mathbf{\beta})}}{\partial{\mathbf{\beta}}} = -2\mathbf{X}^{T}(\mathbf{y} - \mathbf{X\beta}) = 0
+$$</p>
+<p>整理后得到：</p>
+<p>$$
+\mathbf{\beta} = (\mathbf{X}^{T}\mathbf{X})^{-1}\mathbf{X}^{T}\mathbf{y}
+$$</p>
+<p>对于矩阵 $\small{\mathbf{X}^{T}\mathbf{X}}$ 不满秩的情况，可以通过添加正则化项的方式使得矩阵可逆，如下所示，这个就是线性回归的解析解。</p>
+<p>$$
+\mathbf{\beta} = (\mathbf{X}^{T}\mathbf{X} + \mathbf{\lambda \mit{I}})^{-1}\mathbf{X}^{T}\mathbf{y}
+$$</p>
+<blockquote>
+<p><strong>说明</strong>：如果你对这里提到的正则化不理解可以先放放，后面我们再来讨论这个问题。</p>
+</blockquote>
+<p>上述方法适用于小规模数据集，当数据体量不大（样本和特征数量较少）时，计算效率是没有问题的。对于大规模数据集或更为复杂的优化问题，我们可以使用<strong>梯度下降法</strong>，通过迭代更新参数来逐步逼近最优解。梯度下降法的目标也是最小化损失函数，该方法通过计算梯度方向进行参数更新。梯度是一个向量，包含了目标函数在各个参数方向上的偏导数。对于上面的损失函数 $\small{L(\mathbf{\beta})}$ ，梯度可以表示为：</p>
+<p>$$
+\nabla L(\mathbf{\beta}) = \left[ \frac{\partial{L}}{\partial{\beta_{1}}},  \frac{\partial{L}}{\partial{\beta_{2}}}, \cdots,  \frac{\partial{L}}{\partial{\beta_{n}}} \right]
+$$</p>
+<p>梯度下降法通过以下更新规则来更新参数 $\small{\mathbf{\beta}}$ ：</p>
+<p>$$
+\mathbf{\beta}^{\prime} = \mathbf{\beta} - \alpha \nabla L(\mathbf{\beta}) \\
+\mathbf{\beta} = \mathbf{\beta^{\prime}}
+$$</p>
+<p>其中， $\small{\alpha}$ 是学习率（step size），通常是一个较小的正数，用于控制每次更新的幅度。如果学习率 $\small{\alpha}$ 选择得当，梯度下降法将收敛到目标函数的局部最小值。如果学习率过大，可能导致震荡不收敛；如果学习率过小，则收敛的速度缓慢，需要更多次的迭代。</p>
+<h3 id="新数据集介绍">新数据集介绍</h3><p>之前介绍的鸢尾花数据集并不适合讲解回归模型，为此我们引入另一个经典的汽车 MPG 数据集。汽车 MPG 数据集最初由美国汽车协会提供，我们可以通过该数据集预测车辆的燃油效率，即每加仑燃料行驶的里程（Miles Per Gallon, MPG）。需要注意的是，scikit-learn 库没有内置该数据集，我们可以直接从 <a href="https://archive.ics.uci.edu/dataset/9/auto+mpg">UCI 机器学习仓库</a> 网站下载数据集，也可以通过执行下面的代码联网加载该数据集。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">import ssl
+import pandas as pd
+
+ssl._create_default_https_context = ssl._create_unverified_context
+df = pd.read_csv('https://archive.ics.uci.edu/static/public/9/data.csv')
+df.info()</code></pre></div><p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 398 entries, 0 to 397
+Data columns (total 9 columns):
+ #   Column        Non-Null Count  Dtype  
+---  ------        --------------  -----  
+ 0   car_name      398 non-null    object 
+ 1   cylinders     398 non-null    int64  
+ 2   displacement  398 non-null    float64
+ 3   horsepower    392 non-null    float64
+ 4   weight        398 non-null    int64  
+ 5   acceleration  398 non-null    float64
+ 6   model_year    398 non-null    int64  
+ 7   origin        398 non-null    int64  
+ 8   mpg           398 non-null    float64
+dtypes: float64(4), int64(4), object(1)
+memory usage: 28.1+ KB</code></pre></div><p>根据上面的输出，我们简单介绍下数据集的九个属性，前面八个都是输入变量（第一个暂不使用），最后一个是输出变量，具体如下表所示。</p>
+<table>
+<thead>
+<tr>
+<th>属性名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><em>car_name</em></td>
+<td>汽车的名称，字符串，这个属性对建模暂时没有帮助</td>
+</tr>
+<tr>
+<td><em>cylinders</em></td>
+<td>气缸数量，整数</td>
+</tr>
+<tr>
+<td><em>displacement</em></td>
+<td>发动机排量（立方英寸），浮点数</td>
+</tr>
+<tr>
+<td><em>horsepower</em></td>
+<td>马力，浮点数，有空值需要提前处理</td>
+</tr>
+<tr>
+<td><em>weight</em></td>
+<td>汽车重量（磅），整数</td>
+</tr>
+<tr>
+<td><em>acceleration</em></td>
+<td>加速（0 - 60 mph所需时间），浮点数</td>
+</tr>
+<tr>
+<td><em>model_year</em></td>
+<td>模型年份（1970年 - 1982年），这里用的是两位的年份</td>
+</tr>
+<tr>
+<td><em>origin</em></td>
+<td>汽车来源（1 = 美国, 2 = 欧洲, 3 = 日本），这里的<code>1</code>、<code>2</code>、<code>3</code>应该视为三种类别而不是整数</td>
+</tr>
+<tr>
+<td><em>mpg</em></td>
+<td>车辆的燃油效率，每加仑行驶的里程（目标变量）</td>
+</tr>
+</tbody></table>
+<p>我们先删除<code>car_name</code>这个暂时用不上的属性，然后使用<code>DataFrame</code>对象的<code>corr</code>方法检查输入变量（特征）与输出变量（目标值）之间是否存在相关性。通过相关性分析我们可以选择相关性强的特征，剔除掉那些与目标值相关性较弱的特征，这有助于减少模型的复杂性和过拟合的风险。在多元回归中，多重共线性（即输入变量之间高度相关）可能会影响回归系数的估计，导致模型不稳定。可以通过计算特征之间的相关性和方差膨胀因子（VIF）等来检测共线性问题。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python"># 删除指定的列
+df.drop(columns=['car_name'], inplace=True)
+# 计算相关系数矩阵
+df.corr()</code></pre></div><blockquote>
+<p><strong>说明</strong>：<code>DataFrame</code>对象的<code>corr</code>方法默认计算皮尔逊相关系数，皮尔逊相关系数适合来自于正态总体的连续值，对于等级数据之间相关性的判定，可以通过修改<code>method</code>参数为<code>spearmean</code>或<code>kendall</code>来计算斯皮尔曼秩相关或肯德尔系数。当然，连续值也可以通过分箱操作处理成等级数据，然后再进行相关性的判定。</p>
+</blockquote>
+<p>在使用该数据集建模之前，我们需要做一些准备工作，首先处理掉<code>horsepower</code>字段的空值，然后将<code>origin</code>字段处理成<strong>独热编码</strong>（One-Hot Encoding）。独热编码是一种用于处理分类变量的常见编码方式，通常分类数据（如性别、颜色、季节等）无法直接输入机器学习模型进行训练，因为大多数算法只能处理数值数据。独热编码通过将每个分类变量转换为若干个新的二元特征（<code>0</code>或<code> 1</code>）来表示，从而使得这些变量可以输入到机器学习模型中。假设我们有一个叫“颜色”的特征列，可能的取值有<code>红色</code>、<code>绿色</code>和<code>蓝色</code>，我们可以将其通过独热编码转换成三个二元特征，如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th align="center">红色</th>
+<th align="center">绿色</th>
+<th align="center">蓝色</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>说明</strong>：我们也可以只保留绿色和蓝色两个列，如果两个列的取值都为<code>0</code>，那么说明我们的颜色是红色。</p>
+</blockquote>
+<p>独热编码方法简单直观，容易理解和实现。对于无序类别独热编码是非常有效的，因为它不会引入任何虚假的顺序关系，处理后的数据类型是数值型的，很多机器学习算法都能很好的处理。当然，如果类别特征有大量不同的类别取值，独热编码会生成大量的新特征，可能导致数据的维度大幅增加，从而影响计算性能和存储效率，尤其是在数据中有很多稀疏类别时。</p>
+<p>下面的代码实现了对数据的预处理。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python"># 删除有缺失值的样本
+df.dropna(inplace=True)
+# 将origin字段处理为类别类型
+df['origin'] = df['origin'].astype('category') 
+# 将origin字段处理为独热编码
+df = pd.get_dummies(df, columns=['origin'], drop_first=True)
+df</code></pre></div><p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">     cylinders  displacement  horsepower  weight  ...  model_year   mpg  origin_2  origin_3
+0            8         307.0       130.0    3504  ...          70  18.0     False     False
+1            8         350.0       165.0    3693  ...          70  15.0     False     False
+2            8         318.0       150.0    3436  ...          70  18.0     False     False
+3            8         304.0       150.0    3433  ...          70  16.0     False     False
+4            8         302.0       140.0    3449  ...          70  17.0     False     False
+..         ...           ...         ...     ...  ...         ...   ...       ...       ...
+393          4         140.0        86.0    2790  ...          82  27.0     False     False
+394          4          97.0        52.0    2130  ...          82  44.0      True     False
+395          4         135.0        84.0    2295  ...          82  32.0     False     False
+396          4         120.0        79.0    2625  ...          82  28.0     False     False
+397          4         119.0        82.0    2720  ...          82  31.0     False     False
+
+[392 rows x 9 columns]</code></pre></div><blockquote>
+<p><strong>说明</strong>：上面调用 pandas 的<code>get_dummies</code>函数将<code>origin</code>列处理成了独热编码，由于将<code>drop_first</code>参数设置为<code>True</code>，所以原来的取值<code>1</code>、<code>2</code>、<code>3</code>只保留了两个列，分别叫<code>origin_2</code>和<code>origin_3</code>。Scikit-learn 库中<code>preprocessing</code>模块的<code>OneHotEncoder</code>也支持将类别特征处理成独热编码。</p>
+</blockquote>
+<p>接下来，我们还是将数据集拆分为训练集和测试集，代码如下所示。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">from sklearn.model_selection import train_test_split
+
+X, y = df.drop(columns='mpg').values, df['mpg'].values
+X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.8, random_state=3)</code></pre></div><h3 id="线性回归代码实现">线性回归代码实现</h3><p>我们首先使用 scikit-learn 库<code>linear_model</code>模块的<code>LinearRegression</code>来创建线性回归模型，<code>LinearRegression</code>使用最小二乘法计算回归模型的参数，代码如下所示。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">from sklearn.linear_model import LinearRegression
+
+model = LinearRegression()
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)</code></pre></div><p>如果想查看线性回归模型的参数（回归系数和截距），可以通过下面的代码来实现。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">print('回归系数:', model.coef_)
+print('截距:', model.intercept_)</code></pre></div><p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">回归系数: [-0.70865621  0.03138774 -0.03034065 -0.0064137   0.06224274  0.82866534
+  3.20888265  3.68252848]
+截距: -21.685482718950933</code></pre></div><h3 id="回归模型的评估">回归模型的评估</h3><p>回归模型的预测效果到底如何，我们可以通过下面的指标对其进行评估。</p>
+<ol>
+<li>均方误差（Mean Squared Error, MSE）。MSE 是回归模型最常用的评估指标之一，定义为预测值与真实值误差的平方平均值。</li>
+</ol>
+<p>$$
+\text{MSE} = \frac{1}{m} \sum_{i=1}^{m}(y_{i} - \hat{y_{i}})^{2}
+$$</p>
+<ol start="2">
+<li>均方根误差（Root Mean Squared Error, RMSE）。RMSE 是 MSE 的平方根形式，用于更直观地衡量误差的实际尺度（单位与目标变量一致）。</li>
+</ol>
+<p>$$
+\text{RMSE} = \sqrt{\text{MSE}} = \sqrt{\frac{1}{m} \sum_{i=1}^{m}(y_{i} - \hat{y_{i}})^{2}}
+$$</p>
+<ol start="3">
+<li>平均绝对误差（Mean Absolute Error, MAE）。MAE 是另一个常用的误差度量指标，定义为预测值与真实值误差的绝对值平均值。</li>
+</ol>
+<p>$$
+\text{MAE} = \frac{1}{m} \sum_{i=1}^{m} \lvert y_{i} - \hat{y_{i}} \rvert
+$$</p>
+<ol start="4">
+<li>决定系数（R-Squared, $\small{R^{2}}$）。 $\small{R^{2}}$ 是一个相对指标，用于衡量模型对数据的拟合程度，其值越接近 1 越好。 $\small{R^{2}}$ 的计算公式为：</li>
+</ol>
+<p>$$
+R^{2} = 1 - \frac{SS_{res}}{{SS}_{tot}}
+$$</p>
+<p>其中，  $\small{SS_{res} = \sum_{i=1}^{m}(y_{i} - \hat{y_{i}})^{2}}$ 为残差平方和； $\small{SS_{tot} = \sum_{i=1}^{m} (y_{i} - \bar{y})^{2}}$ 为总平方和，如下图所示。</p>
+<p><img src="/assets/05_regression_r2-20250605165226-tsoro6d.png"" alt="" loading="lazy"></p>
+<p>上图左边红色正方形的面积之和就是总平方和，右边蓝色正方形的面积之和就是残差平方和，很显然，模型拟合的效果越好，残差平方和除以总平方和的值就越接近 0， $\small{R^{2}}$ 的值就越接近 1。通常 $\small{R^{2} \ge 0.8}$ 时，我们认为模型的拟合效果已经很不错了。</p>
+<p>可以使用 scikit-learn 中封装好的函数计算出均方误差、平均绝对误差和 $\small{R^{2}}$ 的值，代码如下所示。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+
+mse = mean_squared_error(y_test, y_pred)
+mae = mean_absolute_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+print(f'均方误差: {mse:.4f}')
+print(f'平均绝对误差: {mae:.4f}')
+print(f'决定系数: {r2:.4f}')</code></pre></div><p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">均方误差: 13.1215
+平均绝对误差: 2.8571
+决定系数: 0.7848</code></pre></div><h3 id="引入正则化项">引入正则化项</h3><p>岭回归是在线性回归的基础上引入 $\small{L2}$ 正则化项，目的是防止模型过拟合，尤其是当特征数较多或特征之间存在共线性时。岭回归的损失函数如下所示：</p>
+<p>$$
+L(\beta) = \sum_{i=1}^{m}{(y_{i} - \hat{y_{i}})^{2}} + \lambda \cdot \sum_{j=1}^{n}{\beta_{j}^{2}}
+$$</p>
+<p>其中， $\small{L2}$ 正则化项 $\small{\lambda \sum_{j=1}^{n} \beta_{j}^{2}}$ 会惩罚较大的回归系数，相当于缩小了回归系数的大小，但不会使系数为 0（即不会进行特征选择）。可以通过 scikit-learn 库<code>linear_model</code>模块的<code>Ridge</code>类实现岭回归，代码如下所示。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">from sklearn.linear_model import Ridge
+
+model = Ridge()
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+print('回归系数:', model.coef_)
+print('截距:', model.intercept_)
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+print(f'均方误差: {mse:.4f}')
+print(f'决定系数: {r2:.4f}')</code></pre></div><p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">回归系数: [-0.68868217  0.03023126 -0.0291811  -0.00642523  0.06312298  0.82583962
+  3.04105754  3.49988826]
+截距: -21.390402697674855
+均方误差: 12.9604
+决定系数: 0.7874</code></pre></div><p>套索回归引入 $\small{L1}$ 正则化项，不仅防止过拟合，还具有特征选择的功，特别适用于高维数据。套索回归的损失函数如下所示：</p>
+<p>$$
+L(\mathbf{\beta}) = \sum_{i=1}^{m}{(y_{i} - \hat{y_i})^{2}} + \lambda \cdot \sum_{j=1}^{n}{\lvert \beta_{j} \rvert}
+$$</p>
+<p>其中， $\small{L1}$ 正则化项 $\small{\lambda \sum_{j=1}^{n} \lvert \beta_{j} \rvert}$ 会将某些不重要的回归系数缩减为 0，从而实现特征选择。可以通过 scikit-learn 库<code>linear_model</code>模块的<code>Lasso</code>类实现套索回归，代码如下所示。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">from sklearn.linear_model import Lasso
+
+model = Lasso()
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+print('回归系数:', model.coef_)
+print('截距:', model.intercept_)
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+print(f'均方误差: {mse:.4f}')
+print(f'决定系数: {r2:.4f}')</code></pre></div><p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">回归系数: [-0.00000000e+00  4.46821248e-04 -1.22830326e-02 -6.29725191e-03
+  0.00000000e+00  6.91590631e-01  0.00000000e+00  0.00000000e+00]
+截距: -9.109888229245005
+均方误差: 11.1035
+决定系数: 0.8179</code></pre></div><blockquote>
+<p><strong>注意</strong>：上面代码运行结果中的回归系数，有四个特征的回归系数被设置为 0，相当于从 8 个特征中选出了 4 个重要的特征。模型的拟合效果是优于之间的回归模型的，这一点从均方误差和决定系数可以看出。</p>
+</blockquote>
+<p>弹性网络回归结合了岭回归和套索回归的优点，通过同时引入 $\small{L1}$ 和 $\small{L2}$ 正则化项，适用于高维数据且特征之间存在相关的情况，其损失函数如下所示：</p>
+<p>$$
+L(\mathbf{\beta}) = \sum_{i=1}^{m}{(y_{i} - \hat{y_i})^{2}} + \alpha \cdot \lambda \sum_{j=1}^{n}{\lvert \beta_{j} \rvert} + (1 - \alpha) \cdot \lambda \cdot \sum_{j=1}^{n}{\beta_{j}^{2}}
+$$</p>
+<p>其中， $\small{\alpha}$ 是控制 $\small{L1}$ 和 $\small{L2}$ 正则化的权重比例。</p>
+<h3 id="线性回归另一种实现">线性回归另一种实现</h3><p>上面我们提到过，除了最小二乘法我们还可以使用梯度下降法来求解回归模型的参数，scikit-learn 库<code>linear_model</code>模块的<code>SGDRegressor</code>就使用了这种方法，SGD 就是 Stochastic Gradient Descent 的缩写。随机梯度下降每次迭代只使用一个随机样本来计算梯度，计算速度快，适合大规模数据集，而且可以跳出局部最优解。需要注意的是它的学习率，如果学习率设置得不合理，它的收敛性可能会发生波动，通常需要使用学习率衰减策略来促进收敛。此外，随机梯度下降对特征的尺度非常敏感，通常需要在训练之前对特征进行标准化或归一化处理，完整的代码如下所示。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">from sklearn.linear_model import SGDRegressor
+from sklearn.preprocessing import StandardScaler
+
+# 对特征进行选择和标准化处理
+scaler = StandardScaler()
+scaled_X = scaler.fit_transform(X[:, [1, 2, 3, 5]])
+# 重新拆分训练集和测试集
+X_train, X_test, y_train, y_test = train_test_split(scaled_X, y, train_size=0.8, random_state=3)
+
+# 模型的创建、训练和预测
+model = SGDRegressor()
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+print('回归系数:', model.coef_)
+print('截距:', model.intercept_)
+
+# 模型评估
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+print(f'均方误差: {mse:.4f}')
+print(f'决定系数: {r2:.4f}')</code></pre></div><p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">回归系数: [-0.25027084 -0.41349219 -4.9559786   2.83009217]
+截距: [23.48707219]
+均方误差: 11.3853
+决定系数: 0.8133</code></pre></div><p>这里，我们还需要强调一下<code>SGDRegressor</code>构造函数几个重要的参数，也是回归模型比较重要的超参数，如下所示：</p>
+<ol>
+<li><p><code>loss</code>：指定优化目标（损失函数），默认值为<code>&#39;squared_error&#39;</code>（最小二乘法），其他可以选择的值有：<code>&#39;huber&#39;</code>、<code>&#39;epsilon_insensitive&#39;</code> 和 <code>&#39;squared_epsilon_insensitive&#39;</code>，其中<code>&#39;huber&#39;</code>适用于对异常值更鲁棒的回归模型。</p>
+</li>
+<li><p><code>penalty</code>：指定正则化方法，用于防止过拟合，默认为<code>&#39;l2&#39;</code>（L2 正则化），其他可以选择的值有：<code>&#39;l1&#39;</code>（L1正则化）、<code>&#39;elasticnet&#39;</code>（弹性网络，L1 和 L2 的组合）、<code>None</code>（不使用正则化）。</p>
+</li>
+<li><p><code>alpha</code>：正则化强度的系数，控制正则化项的权重，默认值为<code>0.0001</code>。较大的 <code>alpha</code> 值会加重正则化的影响，从而限制模型复杂度；较小的值会让模型更关注训练数据的拟合。</p>
+</li>
+<li><p><code>l1_ratio</code>：当 <code>penalty=&#39;elasticnet&#39;</code> 时，控制 L1 和 L2 正则化之间的权重，默认值为<code>0.15</code>，取值范围为<code>[0, 1]</code>（<code>0</code> 表示完全使用 L2，<code>1</code> 表示完全使用 L1）。</p>
+</li>
+<li><p><code>tol</code>：优化算法的容差，即判断收敛的阈值，默认值为<code>1e-3</code>。当目标函数的改变量小于 <code>tol</code> 时，训练会提前终止；如果希望训练更加精确，可以适当降低 <code>tol</code>。</p>
+</li>
+<li><p><code>learning_rate</code>：指定学习率的调节策略，默认值为<code>&#39;constant&#39;</code>，表示使用固定学习率，具体的值由 <code>eta0</code> 指定；其他可选项包括：</p>
+<ul>
+<li><code>&#39;optimal&#39;</code>：基于公式<code>eta = 1.0 / (alpha * (t + t0))</code>自动调整。</li>
+<li><code>&#39;invscaling&#39;</code>：按 <code>eta = eta0 / pow(t, power_t)</code> 缩放学习率。</li>
+<li><code>&#39;adaptive&#39;</code>：动态调整，误差减少时保持当前学习率，否则减小学习率。</li>
+</ul>
+</li>
+<li><p><code>eta0</code>：初始学习率，默认值为<code>0.01</code>，当 <code>learning_rate=&#39;constant&#39;</code> 或其他策略使用时，<code>eta0</code> 决定了初始更新步长。</p>
+</li>
+<li><p><code>power_t</code>：当 <code>learning_rate=&#39;invscaling&#39;</code> 时，控制学习率衰减速度，默认值为<code>0.25</code>。较小的值会让学习率下降得更慢，从而更长时间地关注全局优化。</p>
+</li>
+<li><p><code>early_stopping</code>：是否启用早停机制，默认值为<code>False</code>。如果设置为 <code>True</code>，模型会根据验证集性能自动停止训练，防止过拟合。</p>
+</li>
+<li><p><code>validation_fraction</code>：指定用作验证集的训练数据比例，默认值为<code>0.1</code>。当 <code>early_stopping=True</code> 时，该参数会起作用。</p>
+</li>
+<li><p><code>max_iter</code>：训练的最大迭代次数，默认值为<code>1000</code>。当数据较大或学习率较小时，可能需要增加迭代次数以保证收敛。</p>
+</li>
+<li><p><code>shuffle</code>：是否在每个迭代轮次开始时打乱训练数据，默认值为<code>True</code>，表示打乱数据。打乱数据有助于提高模型的泛化能力。</p>
+</li>
+<li><p><code>warm_start</code>：是否使用上次训练的参数继续训练，默认值为<code>False</code>。当设置为 <code>True</code> 时，可以在已有模型的基础上进一步优化。</p>
+</li>
+<li><p><code>verbose</code>：控制训练过程的日志输出，默认值为<code>0</code>，可以设置为更高值以观察训练进度。</p>
+</li>
+</ol>
+<h3 id="多项式回归">多项式回归</h3><p>有的时候，我们关心的自变量和因变量之间并不是简单的线性关系，例如广告投入与销售额增长的关系、设备的使用时间与故障率之间的关系等。除此以外，如果数据中存在明显的拐点或者要通过简单的公式来近似某些复杂的现象，线性回归模型可能并不能满足这样的需求，这个时候我们就需要建立多项式回归模型。</p>
+<p>下面我们用一个简单的例子对多项式回归加以说明，我们先生成一组数据点并绘制出对应的散点图，代码如下所示。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(0, 6, 150)
+y = x ** 2 - 4 * x + 3 + np.random.normal(1, 1, 150)
+plt.scatter(x, y)
+plt.show()</code></pre></div><p>输出：</p>
+<p><img src="/assets/05_polynomial_scatter-20250605165226-ytmgnei.png"" alt="" loading="lazy"></p>
+<p>显然，这样的一组数据点是很难通过线性模型进行拟合的，下面的代码可以证明这一点。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-Python">x_ = x.reshape(-1, 1)
+
+model = LinearRegression()
+model.fit(x_, y)
+a, b = model.coef_[0], model.intercept_
+y_pred = a * x + b
+plt.scatter(x, y)
+plt.plot(x, y_pred, color='r')
+plt.show()</code></pre></div><p>输出：</p>
+<p><img src="/assets/05_polynomial_line_fit-20250605165226-vfaif1q.png"" alt="" loading="lazy"></p>
+<p>很显然，这是一个欠拟合的结果。我们再看看 $\small{R^{2}}$ 的值：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">r2 = r2_score(y, y_pred)
+print(f'决定系数: {r2:.4f}')</code></pre></div><p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">决定系数: 0.5933</code></pre></div><p>Scikit-learn 库<code>preprocessing</code>模块中的<code>PolynomialFeatures</code>类可以将原始特征扩展为多项式特征，从而将线性模型转换为具有高次项的模型。创建<code>PolynomialFeatures</code>对象时有几个重要的参数：</p>
+<ol>
+<li><code>degree</code>：设置多项式的最高次项。例如，<code>degree=3</code> 会生成包含一次项、二次项和三次项的特征。</li>
+<li><code>interaction_only</code>：默认值为<code>False</code>，如果设置为<code>True</code>，则只生成交互项（如 $\small{x_{1}x_{2}}$ ），不生成单独的高次项（如 $\small{x_{1}^{2}}$ 、 $\small{x_{2}^{2}}$ ）。</li>
+<li><code>include_bias</code>：默认值为<code>True</code>，表示包括常数项（通常为 1），设置为<code>False</code>则不包括常数项。</li>
+</ol>
+<p>下面我们通过代码来演示如何通过<code>PolynomialFeatures</code>类进行特征预处理，实现多项式回归。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">from sklearn.preprocessing import PolynomialFeatures
+
+poly = PolynomialFeatures(degree=2)
+x_ = poly.fit_transform(x_)
+
+model = LinearRegression()
+model.fit(x_, y)
+y_pred = model.predict(x_)
+r2 = r2_score(y, y_pred)
+print(f'决定系数: {r2:.4f}')</code></pre></div><p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">决定系数: 0.9497</code></pre></div><p>通过特征预处理引入了高次项之后，模型拟合的效果得到了明显的改善。如果希望只对一部分特征添加高次项，可以使用 scikit-learn 库<code>compose</code>模块的<code>ColumnTransformer</code>来定义处理规则，有兴趣的读者可以自行研究。需要注意的是，多项式回归时随着高次项的引入，模型发生过拟合的风险增加会大大增加，尤其在数据量较小时；另一方面，高次项的值可能会导致特征范围变得很大，要考虑对特征进行标准化处理。</p>
+<h3 id="逻辑回归">逻辑回归</h3><p>逻辑回归尽管名字中含有“回归”，但逻辑回归实际上是一种分类算法，用于处理二分类问题，例如电子邮件是不是垃圾邮件、用户是否会点击广告、信用卡客户是否存在违约风险等。逻辑回归的核心思想是通过 Sigmoid 函数将线性回归的输出映射到$\small{(0, 1)}$区间，作为对分类概率的预测。Sigmoid 函数的曲线如下图所示。</p>
+<p><img src="/assets/05_sigmoid_function-20250605165226-1j6yavr.png"" alt="" loading="lazy"></p>
+<p>下面，我们用 scikit-learn 库<code>datasets</code>模块提供的<code>make_classification</code>函数生成一组模拟数据， 通过逻辑回归来构建分类预测模型，代码如下所示。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">from sklearn.datasets import make_classification
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import classification_report
+
+# 生成1000条样本数据，每个样本包含6个特征
+X, y = make_classification(n_samples=1000, n_features=6, random_state=3)
+# 将1000条样本数据拆分为训练集和测试集
+X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.8, random_state=3)
+
+# 创建和训练逻辑回归模型
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+# 对测试集进行预测并评估
+y_pred = model.predict(X_test)
+print(classification_report(y_test, y_pred))</code></pre></div><p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">              precision    recall  f1-score   support
+
+           0       0.95      0.93      0.94       104
+           1       0.93      0.95      0.94        96
+
+    accuracy                           0.94       200
+   macro avg       0.94      0.94      0.94       200
+weighted avg       0.94      0.94      0.94       200</code></pre></div><p>这里，我们再强调一下<code>LogisticRegression</code>构造函数几个重要的参数，也是逻辑回归模型比较重要的超参数，如下所示：</p>
+<ol>
+<li><code>penalty</code>：指定正则化类型，用于控制模型复杂度，防止过拟合，默认值为<code>l2</code>。</li>
+<li><code>C</code>：正则化强度的倒数，默认值为<code>1.0</code>。较小的 <code>C</code> 值会加强正则化（更多限制模型复杂度），较大的 <code>C</code> 值会减弱正则化（更注重拟合训练数据）。</li>
+<li><code>solver</code>：指定优化算法，默认值为<code>lbfgs</code>，可选值包括：<ul>
+<li><code>&#39;newton-cg&#39;</code>、<code>&#39;lbfgs&#39;</code>、<code>&#39;sag&#39;</code>、<code>&#39;saga&#39;</code>：支持 L2 和无正则化。</li>
+<li><code>&#39;liblinear&#39;</code>：支持 L1 和 L2 正则化，适用于小型数据集。</li>
+<li><code>&#39;saga&#39;</code>：支持 L1、L2 和 ElasticNet，适用于大规模数据。</li>
+</ul>
+</li>
+<li><code>multi_class</code>：指定多分类问题的处理方式，默认值为<code>&#39;auto&#39;</code>，根据数据选择 <code>&#39;ovr&#39;</code> 或 <code>&#39;multinomial&#39;</code>，前者表示一对多策略，适合二分类或多分类的基础情况，后者表示多项式回归策略，适用于多分类问题，需与 <code>&#39;lbfgs&#39;</code>、<code>&#39;sag&#39;</code> 或 <code>&#39;saga&#39;</code> 搭配使用。</li>
+<li><code>fit_intercept</code>：是否计算截距（偏置项），默认值为<code>True</code>。</li>
+<li><code>class_weight</code>：类别权重，处理类别不平衡问题，默认值为<code>None</code>，设置为<code>&#39;balanced&#39;</code>可以根据类别频率自动调整权重。</li>
+</ol>
+<blockquote>
+<p><strong>说明</strong>：逻辑回归有些超参数跟我们之前讲的<code>SGDRegressor</code>是类似的，此处不再进行赘述。</p>
+</blockquote>
+<h3 id="总结">总结</h3><p>回归模型是一种统计分析方法，用于建立自变量与因变量之间的关系。它通过拟合数据来预测目标变量的值，在经济学、工程、医学等领域有着广泛的应用，可以帮助决策者进行数据驱动的预测和分析。</p>
+</div></article></div></main><footer>by天才程序员</footer><script src="/script.js"></script></body></html>

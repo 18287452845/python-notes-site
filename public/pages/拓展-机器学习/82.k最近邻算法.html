@@ -1,0 +1,344 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Python 基础课程讲义：82.k最近邻算法"><title>82.k最近邻算法｜Python 编程基础</title><link rel="stylesheet" href="/style.css"><script>window.MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:true,processEnvironments:true},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body><header class="site-header"><div class="header-inner"><a class="brand" href="/index.html"><span>Python 编程基础</span><small>Python 基础课程讲义</small></a><a class="back-home" href="/index.html">课程首页</a></div></header><main class="page-layout"><aside class="course-nav" aria-label="课程章节" id="course-nav-list"><div class="course-nav-head"><div class="nav-title">课程章节</div><button class="course-nav-toggle" type="button" aria-expanded="true" aria-controls="course-nav-list">收起</button></div><div class="nav-group">01-基础语法</div><ul><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/01.%E5%88%9D%E8%AF%86Python.html">01.初识Python</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/02.%E7%AC%AC%E4%B8%80%E4%B8%AAPython%E7%A8%8B%E5%BA%8F.html">02.第一个Python程序</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/03.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F.html">03.Python语言中的变量</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/04.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6.html">04.Python语言中的运算符</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/05.%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84.html">05.分支结构</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/06.%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84.html">06.循环结构</a></li></ul><div class="nav-group">02-数据结构</div><ul><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/08.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-1.html">08.常用数据结构之列表-1</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/09.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-2.html">09.常用数据结构之列表-2</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/10.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%85%83%E7%BB%84.html">10.常用数据结构之元组</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/11.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2.html">11.常用数据结构之字符串</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/12.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E9%9B%86%E5%90%88.html">12.常用数据结构之集合</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/13.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E5%85%B8.html">13.常用数据结构之字典</a></li></ul><div class="nav-group">03-函数与模块</div><ul><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/14.%E5%87%BD%E6%95%B0%E5%92%8C%E6%A8%A1%E5%9D%97.html">14.函数和模块</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/16.%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E8%BF%9B%E9%98%B6.html">16.函数使用进阶</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/17.%E5%87%BD%E6%95%B0%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8.html">17.函数高级应用</a></li></ul><div class="nav-group">04-文件与异常</div><ul><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/21.%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html">21.文件读写和异常处理</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/22.%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96.html">22.对象的序列化和反序列化</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/23.Python%E8%AF%BB%E5%86%99CSV%E6%96%87%E4%BB%B6.html">23.Python读写CSV文件</a></li></ul><div class="nav-group">05-面向对象</div><ul><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/18.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8.html">18.面向对象编程入门</a></li><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/19.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6.html">19.面向对象编程进阶</a></li></ul><div class="nav-group">06-基础项目</div><ul><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/07.%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84%E5%AE%9E%E6%88%98.html">07.分支和循环结构实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/15.%E5%87%BD%E6%95%B0%E5%BA%94%E7%94%A8%E5%AE%9E%E6%88%98.html">15.函数应用实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/20.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%BA%94%E7%94%A8.html">20.面向对象编程应用</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/30.%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%BA%94%E7%94%A8.html">30.正则表达式的应用</a></li></ul><div class="nav-group">拓展-办公自动化</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/24.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-1.html">24.Python读写Excel文件-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/25.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-2.html">25.Python读写Excel文件-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/26.Python%E6%93%8D%E4%BD%9CWord%E5%92%8CPowerPoint%E6%96%87%E4%BB%B6.html">26.Python操作Word和PowerPoint文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/27.Python%E6%93%8D%E4%BD%9CPDF%E6%96%87%E4%BB%B6.html">27.Python操作PDF文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/28.Python%E5%A4%84%E7%90%86%E5%9B%BE%E5%83%8F.html">28.Python处理图像</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/29.Python%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E5%92%8C%E7%9F%AD%E4%BF%A1.html">29.Python发送邮件和短信</a></li></ul><div class="nav-group">拓展-Web与爬虫</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/31.Python%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6.html">31.Python语言进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/32-33.Web%E5%89%8D%E7%AB%AF%E5%85%A5%E9%97%A8.html">32-33.Web前端入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/34-35.%E7%8E%A9%E8%BD%ACLinux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.html">34-35.玩转Linux操作系统</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/36.%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CMySQL%E6%A6%82%E8%BF%B0.html">36.关系型数据库和MySQL概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/37.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDDL.html">37.SQL详解之DDL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/38.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDML.html">38.SQL详解之DML</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/39.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDQL.html">39.SQL详解之DQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/40.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDCL.html">40.SQL详解之DCL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/41.MySQL%E6%96%B0%E7%89%B9%E6%80%A7.html">41.MySQL新特性</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/42.%E8%A7%86%E5%9B%BE%E3%80%81%E5%87%BD%E6%95%B0%E5%92%8C%E8%BF%87%E7%A8%8B.html">42.视图、函数和过程</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/43.%E7%B4%A2%E5%BC%95.html">43.索引</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/44.Python%E6%8E%A5%E5%85%A5MySQL%E6%95%B0%E6%8D%AE%E5%BA%93.html">44.Python接入MySQL数据库</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/45.%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E5%92%8CHiveSQL.html">45.大数据平台和HiveSQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/46.Django%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.html">46.Django快速上手</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/47.%E6%B7%B1%E5%85%A5%E6%A8%A1%E5%9E%8B.html">47.深入模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/48.%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%92%8CAjax%E8%AF%B7%E6%B1%82.html">48.静态资源和Ajax请求</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/49.Cookie%E5%92%8CSession.html">49.Cookie和Session</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/50.%E5%88%B6%E4%BD%9C%E6%8A%A5%E8%A1%A8.html">50.制作报表</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/51.%E6%97%A5%E5%BF%97%E5%92%8C%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7%E6%A0%8F.html">51.日志和调试工具栏</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/52.%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E5%BA%94%E7%94%A8.html">52.中间件的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/53.%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8.html">53.前后端分离开发入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/54.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E5%85%A5%E9%97%A8.html">54.RESTful架构和DRF入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/55.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E8%BF%9B%E9%98%B6.html">55.RESTful架构和DRF进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/56.%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98.html">56.使用缓存</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/57.%E6%8E%A5%E5%85%A5%E4%B8%89%E6%96%B9%E5%B9%B3%E5%8F%B0.html">57.接入三方平台</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/58.%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1.html">58.异步任务和定时任务</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/59.%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95.html">59.单元测试</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/60.%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF.html">60.项目上线</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/61.%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E6%A6%82%E8%BF%B0.html">61.网络数据采集概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%8E%B7%E5%8F%96%E7%BD%91%E7%BB%9C%E8%B5%84%E6%BA%90-1.html">62.用Python获取网络资源-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%A7%A3%E6%9E%90HTML%E9%A1%B5%E9%9D%A2-2.html">62.用Python解析HTML页面-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-1.html">63.Python中的并发编程-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-2.html">63.Python中的并发编程-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-3.html">63.Python中的并发编程-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9C%A8%E7%88%AC%E8%99%AB%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html">63.并发编程在爬虫中的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/64.%E4%BD%BF%E7%94%A8Selenium%E6%8A%93%E5%8F%96%E7%BD%91%E9%A1%B5%E5%8A%A8%E6%80%81%E5%86%85%E5%AE%B9.html">64.使用Selenium抓取网页动态内容</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/65.%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6Scrapy%E7%AE%80%E4%BB%8B.html">65.爬虫框架Scrapy简介</a></li></ul><div class="nav-group">拓展-数据分析</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/66.%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A6%82%E8%BF%B0.html">66.数据分析概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/67.%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87.html">67.环境准备</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/68.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-1.html">68.NumPy的应用-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/69.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-2.html">69.NumPy的应用-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/70.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-3.html">70.NumPy的应用-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/71.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-4.html">71.NumPy的应用-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/72.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-1.html">72.深入浅出pandas-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/73.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-2.html">73.深入浅出pandas-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/74.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-3.html">74.深入浅出pandas-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/75.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-4.html">75.深入浅出pandas-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/76.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-5.html">76.深入浅出pandas-5</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/77.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-6.html">77.深入浅出pandas-6</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/78.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-1.html">78.数据可视化-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/79.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-2.html">79.数据可视化-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/80.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-3.html">80.数据可视化-3</a></li></ul><div class="nav-group">拓展-机器学习</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/81.%E6%B5%85%E8%B0%88%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0.html">81.浅谈机器学习</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/82.k%E6%9C%80%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95.html">82.k最近邻算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/83.%E5%86%B3%E7%AD%96%E6%A0%91%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97.html">83.决策树和随机森林</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/84.%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95.html">84.朴素贝叶斯算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/85.%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B.html">85.回归模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/86.K-Means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95.html">86.K-Means聚类算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/87.%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95.html">87.集成学习算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/88.%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B.html">88.神经网络模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/89.%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E5%85%A5%E9%97%A8.html">89.自然语言处理入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/90.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98.html">90.机器学习实战</a></li></ul></aside><aside class="lesson-toc" aria-label="本页目录"><div class="toc-title">本页目录</div><ul><li class="toc-level-2"><a href="#k最近邻算法">k最近邻算法</a></li><li class="toc-level-3"><a href="#距离的度量">距离的度量</a></li><li class="toc-level-3"><a href="#数据集介绍">数据集介绍</a></li><li class="toc-level-3"><a href="#knn分类的实现">kNN分类的实现</a></li><li class="toc-level-3"><a href="#模型评估">模型评估</a></li><li class="toc-level-3"><a href="#参数调优">参数调优</a></li><li class="toc-level-3"><a href="#knn回归">kNN回归</a></li><li class="toc-level-3"><a href="#总结">总结</a></li></ul><a class="to-top" href="#top">回到顶部</a></aside><div class="content-area"><details class="mobile-course-nav"><summary>课程章节</summary><div class="mobile-course-links"><div class="nav-group">01-基础语法</div><ul><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/01.%E5%88%9D%E8%AF%86Python.html">01.初识Python</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/02.%E7%AC%AC%E4%B8%80%E4%B8%AAPython%E7%A8%8B%E5%BA%8F.html">02.第一个Python程序</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/03.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F.html">03.Python语言中的变量</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/04.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6.html">04.Python语言中的运算符</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/05.%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84.html">05.分支结构</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/06.%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84.html">06.循环结构</a></li></ul><div class="nav-group">02-数据结构</div><ul><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/08.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-1.html">08.常用数据结构之列表-1</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/09.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-2.html">09.常用数据结构之列表-2</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/10.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%85%83%E7%BB%84.html">10.常用数据结构之元组</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/11.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2.html">11.常用数据结构之字符串</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/12.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E9%9B%86%E5%90%88.html">12.常用数据结构之集合</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/13.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E5%85%B8.html">13.常用数据结构之字典</a></li></ul><div class="nav-group">03-函数与模块</div><ul><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/14.%E5%87%BD%E6%95%B0%E5%92%8C%E6%A8%A1%E5%9D%97.html">14.函数和模块</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/16.%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E8%BF%9B%E9%98%B6.html">16.函数使用进阶</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/17.%E5%87%BD%E6%95%B0%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8.html">17.函数高级应用</a></li></ul><div class="nav-group">04-文件与异常</div><ul><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/21.%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html">21.文件读写和异常处理</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/22.%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96.html">22.对象的序列化和反序列化</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/23.Python%E8%AF%BB%E5%86%99CSV%E6%96%87%E4%BB%B6.html">23.Python读写CSV文件</a></li></ul><div class="nav-group">05-面向对象</div><ul><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/18.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8.html">18.面向对象编程入门</a></li><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/19.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6.html">19.面向对象编程进阶</a></li></ul><div class="nav-group">06-基础项目</div><ul><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/07.%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84%E5%AE%9E%E6%88%98.html">07.分支和循环结构实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/15.%E5%87%BD%E6%95%B0%E5%BA%94%E7%94%A8%E5%AE%9E%E6%88%98.html">15.函数应用实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/20.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%BA%94%E7%94%A8.html">20.面向对象编程应用</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/30.%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%BA%94%E7%94%A8.html">30.正则表达式的应用</a></li></ul><div class="nav-group">拓展-办公自动化</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/24.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-1.html">24.Python读写Excel文件-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/25.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-2.html">25.Python读写Excel文件-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/26.Python%E6%93%8D%E4%BD%9CWord%E5%92%8CPowerPoint%E6%96%87%E4%BB%B6.html">26.Python操作Word和PowerPoint文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/27.Python%E6%93%8D%E4%BD%9CPDF%E6%96%87%E4%BB%B6.html">27.Python操作PDF文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/28.Python%E5%A4%84%E7%90%86%E5%9B%BE%E5%83%8F.html">28.Python处理图像</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/29.Python%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E5%92%8C%E7%9F%AD%E4%BF%A1.html">29.Python发送邮件和短信</a></li></ul><div class="nav-group">拓展-Web与爬虫</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/31.Python%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6.html">31.Python语言进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/32-33.Web%E5%89%8D%E7%AB%AF%E5%85%A5%E9%97%A8.html">32-33.Web前端入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/34-35.%E7%8E%A9%E8%BD%ACLinux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.html">34-35.玩转Linux操作系统</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/36.%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CMySQL%E6%A6%82%E8%BF%B0.html">36.关系型数据库和MySQL概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/37.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDDL.html">37.SQL详解之DDL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/38.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDML.html">38.SQL详解之DML</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/39.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDQL.html">39.SQL详解之DQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/40.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDCL.html">40.SQL详解之DCL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/41.MySQL%E6%96%B0%E7%89%B9%E6%80%A7.html">41.MySQL新特性</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/42.%E8%A7%86%E5%9B%BE%E3%80%81%E5%87%BD%E6%95%B0%E5%92%8C%E8%BF%87%E7%A8%8B.html">42.视图、函数和过程</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/43.%E7%B4%A2%E5%BC%95.html">43.索引</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/44.Python%E6%8E%A5%E5%85%A5MySQL%E6%95%B0%E6%8D%AE%E5%BA%93.html">44.Python接入MySQL数据库</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/45.%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E5%92%8CHiveSQL.html">45.大数据平台和HiveSQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/46.Django%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.html">46.Django快速上手</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/47.%E6%B7%B1%E5%85%A5%E6%A8%A1%E5%9E%8B.html">47.深入模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/48.%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%92%8CAjax%E8%AF%B7%E6%B1%82.html">48.静态资源和Ajax请求</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/49.Cookie%E5%92%8CSession.html">49.Cookie和Session</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/50.%E5%88%B6%E4%BD%9C%E6%8A%A5%E8%A1%A8.html">50.制作报表</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/51.%E6%97%A5%E5%BF%97%E5%92%8C%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7%E6%A0%8F.html">51.日志和调试工具栏</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/52.%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E5%BA%94%E7%94%A8.html">52.中间件的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/53.%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8.html">53.前后端分离开发入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/54.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E5%85%A5%E9%97%A8.html">54.RESTful架构和DRF入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/55.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E8%BF%9B%E9%98%B6.html">55.RESTful架构和DRF进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/56.%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98.html">56.使用缓存</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/57.%E6%8E%A5%E5%85%A5%E4%B8%89%E6%96%B9%E5%B9%B3%E5%8F%B0.html">57.接入三方平台</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/58.%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1.html">58.异步任务和定时任务</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/59.%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95.html">59.单元测试</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/60.%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF.html">60.项目上线</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/61.%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E6%A6%82%E8%BF%B0.html">61.网络数据采集概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%8E%B7%E5%8F%96%E7%BD%91%E7%BB%9C%E8%B5%84%E6%BA%90-1.html">62.用Python获取网络资源-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%A7%A3%E6%9E%90HTML%E9%A1%B5%E9%9D%A2-2.html">62.用Python解析HTML页面-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-1.html">63.Python中的并发编程-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-2.html">63.Python中的并发编程-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-3.html">63.Python中的并发编程-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9C%A8%E7%88%AC%E8%99%AB%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html">63.并发编程在爬虫中的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/64.%E4%BD%BF%E7%94%A8Selenium%E6%8A%93%E5%8F%96%E7%BD%91%E9%A1%B5%E5%8A%A8%E6%80%81%E5%86%85%E5%AE%B9.html">64.使用Selenium抓取网页动态内容</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/65.%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6Scrapy%E7%AE%80%E4%BB%8B.html">65.爬虫框架Scrapy简介</a></li></ul><div class="nav-group">拓展-数据分析</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/66.%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A6%82%E8%BF%B0.html">66.数据分析概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/67.%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87.html">67.环境准备</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/68.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-1.html">68.NumPy的应用-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/69.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-2.html">69.NumPy的应用-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/70.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-3.html">70.NumPy的应用-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/71.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-4.html">71.NumPy的应用-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/72.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-1.html">72.深入浅出pandas-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/73.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-2.html">73.深入浅出pandas-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/74.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-3.html">74.深入浅出pandas-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/75.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-4.html">75.深入浅出pandas-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/76.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-5.html">76.深入浅出pandas-5</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/77.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-6.html">77.深入浅出pandas-6</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/78.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-1.html">78.数据可视化-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/79.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-2.html">79.数据可视化-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/80.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-3.html">80.数据可视化-3</a></li></ul><div class="nav-group">拓展-机器学习</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/81.%E6%B5%85%E8%B0%88%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0.html">81.浅谈机器学习</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/82.k%E6%9C%80%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95.html">82.k最近邻算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/83.%E5%86%B3%E7%AD%96%E6%A0%91%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97.html">83.决策树和随机森林</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/84.%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95.html">84.朴素贝叶斯算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/85.%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B.html">85.回归模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/86.K-Means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95.html">86.K-Means聚类算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/87.%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95.html">87.集成学习算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/88.%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B.html">88.神经网络模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/89.%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E5%85%A5%E9%97%A8.html">89.自然语言处理入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/90.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98.html">90.机器学习实战</a></li></ul></div></details><article class="lesson"><div class="lesson-content" id="top"><h1 id="82-k最近邻算法">82.k最近邻算法</h1><h2 id="k最近邻算法">k最近邻算法</h2><p>k 最近邻算法（kNN）是一种用于分类和回归的非参数统计方法，由美国统计学家伊芙琳·费克斯和小约瑟夫·霍奇斯于 1951 年提出。kNN 算法的原理是从历史数据中找到 $\small{k}$ 个跟新输入的实例最邻近的实例，根据它们中的多数所属的类别来对新实例进行分类或者输出新实例的目标值，这种算法我们在前面已经为大家做了简单的展示。与主流的机器学习算法不同，k 最近邻算法没有显式的学习训练过程，它用的是“近朱者赤，近墨者黑”这样一种简单朴素的思想来实现分类或回归。k 最近邻算法有两个关键问题，第一个是 $\small{k}$ 值如何选择，即用多少个最近邻来判定新实例所属的类别或确定其目标值；第二个是如何判定两个实例是近还是远，这里就涉及到度量距离的问题。</p>
+<h3 id="距离的度量">距离的度量</h3><p>我们可以用距离（distance）来衡量特征空间中两个实例之间的相似度，常用的距离度量包括闵氏距离、马氏距离、余弦距离、编辑距离等。闵氏距离全称闵可夫斯基距离（Minkowski Distance），对于两个 $\small{n}$ 维向量 $\small{\mathbf{x}=(x_{1}, x_{2}, \cdots, x_{n})}$ 和 $\small{\mathbf{y}=(y_{1}, y_{2}, \cdots, y_{n})}$ ，它们之间的距离可以定义为：</p>
+<p>$$
+d(\mathbf{x}, \mathbf{y}) = (\sum_{i=1}^{n}{\vert x_{i} - y_{i} \rvert}^{p})^{\frac{1}{p}}
+$$</p>
+<p>其中， $\small{p \ge 1}$ ，虽然 $\small{p \lt 1}$ 可以计算，但不再严格满足距离的定义，通常不被视为真正的距离。</p>
+<p>当 $\small{p = 1}$ 时，闵氏距离即<strong>曼哈顿距离</strong>：</p>
+<p>$$
+d(\mathbf{x}, \mathbf{y}) = \sum_{i=1}^{n} \lvert x_{i} - y_{i} \rvert
+$$</p>
+<p>当 $\small{p = 2}$ 时，闵氏距离即<strong>欧几里得距离</strong>：</p>
+<p>$$
+d(\mathbf{x}, \mathbf{y}) = \sqrt{\sum_{i=1}^{n}(x_{i} - y_{i})^{2}}
+$$</p>
+<p>当 $\small{p \to \infty}$ 时，闵氏距离即<strong>切比雪夫距离</strong>：</p>
+<p>$$
+d(\mathbf{x}, \mathbf{y}) = \underset{i}{max}(\lvert x_{i} - y_{i} \rvert)
+$$</p>
+<p>其他的距离度量方式我们等用到的时候再为大家介绍。在使用 k 最近邻算法做分类时，我们的数据集通常都是数值型数据，此时直接使用欧几里得距离是一个不错的选择。</p>
+<p><img src="/assets/02_distance_measurement-20250605165226-dwsrn58.jpeg"" alt="" loading="lazy"></p>
+<h3 id="数据集介绍">数据集介绍</h3><p>接下来为大家隆重介绍一下我们后续会使用到的一个重要的数据集——鸢尾花数据集（iris dataset）。鸢尾花数据集是机器学习领域中最著名、最经典的数据集之一，由植物学家 <em>Edgar S. Anderson</em> 在加拿大魁北克加斯帕半岛采集，由英国统计学家 <em>Ronald A. Fisher</em> 于 1936 年在他的论文 <em>《The Use of Multiple Measurements in Taxonomic Problems》</em> 中首次引入，被广泛用于机器学习算法的入门和实验。</p>
+<p><img src="/assets/02_iris_dataset-20250605165226-cgyg1u3.png"" alt="" loading="lazy"></p>
+<p>鸢尾花数据集共有 150 条样本，其中包含 3 种类型的鸢尾花，分别是山鸢尾（Iris setosa）、多彩鸢尾（Iris versicolor）和为吉尼亚鸢尾（Iris virginica），如上图所示，每种各有50条样本。样本数据包含了 4 个特征（features）和 1 个类别标签（class label），4 个特征分别是花萼长度（Sepal length）、花萼宽度（Sepal width）、花瓣长度（Petal length）、花瓣宽度（Petal width），都是以厘米为单位的正数，数据集中的类别标签有 0、1、2 三个值，对应上面提到的三种鸢尾花类型。</p>
+<h4 id="数据集的加载">数据集的加载</h4><p>我们可以通过著名的 Python 机器学习库 scikit-learn 来加载这个数据集，scikit-learn 包含了各种分类、回归、聚类算法，同时还提供了多层感知机、支持向量机、随机森林等模型，覆盖了从数据预处理、特征工程到模型训练、模型评估和参数调优等各项功能，如下图所示。我们推荐大家使用这个库来完成机器学习中的各种操作，scikit-learn 的<a href="https://scikit-learn.org/stable/">官方网站</a>上面还提供了用户指南、API 文档和案例等内容，有兴趣的读者可以自行访问。</p>
+<p><img src="/assets/02_scikit-learn_introduction-20250605165226-akxylgp.png"" alt="" loading="lazy"></p>
+<p>由于我们后续的课程基本都会用到这个库，大家可以先通过下面的命令安装这个库。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">pip install scikit-learn</code></pre></div><p>如果你已经打开了 IPython 或 Jupyter 但尚未安装 scikit-learn，可以通过下面的魔法指令来安装这个库。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">%pip install scikit-learn</code></pre></div><p>在安装完成之后，我们可以通过下面的代码加载鸢尾花数据集并查看该数据集的介绍。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-Python">from sklearn.datasets import load_iris
+
+# 加载鸢尾花数据集
+iris = load_iris()
+# 查看数据集的介绍
+print(iris.DESCR)</code></pre></div><p>接下来，我们可以获得数据集中的特征和标签，代码如下所示。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python"># 特征（150行4列的二维数组，分别是花萼长、花萼宽、花瓣长、花瓣宽）
+X = iris.data
+# 标签（150个元素的一维数组，包含0、1、2三个值分别代表三种鸢尾花）
+y = iris.target</code></pre></div><p>如果希望更直观的查看鸢尾花数据集，我们可以用上面获得的特征和标签来创建一个 DataFrame 对象，有兴趣的读者可以自己试一试。</p>
+<h4 id="数据集的划分">数据集的划分</h4><p>通常，我们需要将原始数据划分成训练集和测试集，其中训练集是为了训练模型选择的数据，而测试集则是为了测试模型训练效果保留的数据。对于上面的鸢尾花数据集，我们可以选择 80% 的数据（120 条）作为训练集，保留 20% 的数据（30 条）作为测试集，下面的代码用 NumPy 实现了对数据集的划分。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python"># 将特征和标签堆叠到同一个数组中
+data = np.hstack((X, y.reshape(-1, 1)))
+# 通过随机乱序函数将原始数据打乱
+np.random.shuffle(data)
+# 选择80%的数据作为训练集
+train_size = int(y.size * 0.8)
+train, test = data[:train_size], data[train_size:]
+X_train, y_train = train[:, :-1], train[:, -1]
+X_test, y_test = test[:, :-1], test[:, -1]</code></pre></div><p>当然，更简便的划分数据集的方式是使用 scikit-learn 封装好的函数<code>train_test_split</code>，我们只需要传入特征和标签，指定好<code>train_size</code>或<code>test_size</code>就可以实现同样的操作。<code>train_test_split</code>函数返回一个四元组，四个元素分别代表用于训练的特征、用于训练的标签、用于测试的特征和用于测试的标签。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.8, random_state=3)</code></pre></div><blockquote>
+<p><strong>说明</strong>：上面代码中<code>train_test_split</code>函数的<code>random_state</code>参数可以理解成随机数的种子，如果你使用跟我相同的随机数种子，那么我们划分的训练集和测试集也是完全相同的。</p>
+</blockquote>
+<h3 id="knn分类的实现">kNN分类的实现</h3><p>下面我们先不用 scikit-learn 而是用基础的数据科学库 NumPy 和 SciPy 来实现 kNN 算法，这样做的目的是帮助大家更好的理解算法原理，在此基础上我们再感受 scikit-learn 的强大并明白其中类、函数、参数等为什么要如此设定。</p>
+<h4 id="基于numpy的实现">基于NumPy的实现</h4><p>k 最近邻算法需要计算距离，下面我们先设计计算两个数据点欧式距离的函数，代码如下所示。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">import numpy as np
+
+
+def euclidean_distance(u, v):
+    """计算两个n维向量的欧式距离"""
+    return np.sqrt(np.sum(np.abs(u - v) ** 2))</code></pre></div><p>接下来，我们设计根据邻居的标签为新数据生成标签的函数。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">from scipy import stats
+
+
+def make_label(X_train, y_train, X_one, k):
+    """
+    根据历史数据中k个最近邻为新数据生成标签
+    :param X_train: 训练集中的特征
+    :param y_train: 训练集中的标签
+    :param X_one: 待预测的样本（新数据）特征
+    :param k: 邻居的数量
+    :return: 为待预测样本生成的标签（邻居标签的众数）
+    """
+    # 计算x跟每个训练样本的距离
+    distes = [euclidean_distance(X_one, X_i) for X_i in X_train]
+    # 通过一次划分找到k个最小距离对应的索引并获取到相应的标签
+    labels = y_train[np.argpartition(distes, k - 1)[:k]]
+    # 获取标签的众数
+    return stats.mode(labels).mode</code></pre></div><blockquote>
+<p><strong>说明</strong>：<code>np.partition</code>函数可以对数组进行一次划分，将 k 个比较小的元素放在数组的左边，n - k 个比较大的元素放在数组的右边，跟快速排序算法中做一次划分操作的效果是一样的。上面代码中的<code>np.argpartition</code>函数是把 k 个较小元素的索引放在数组的左边，这样经过<code>[:k]</code>切片操作和对<code>y_train</code>的花式索引运算，就可以获得 k 个跟新数据距离较小的样本对应的标签。最后，我们通过 scipy 库的 stats 模块的<code>mode</code>函数可以获得标签的众数，并用它作为我们给新数据预测的类别标签。</p>
+</blockquote>
+<p>在完成上述准备工作后，用 k 最近邻做预测的函数就呼之欲出了，代码如下所示。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">def predict_by_knn(X_train, y_train, X_new, k=5):
+    """
+    KNN算法
+    :param X_train: 训练集中的特征
+    :param y_train: 训练集中的标签
+    :param X_new: 待预测的样本构成的数组
+    :param k: 邻居的数量（默认值为5）
+    :return: 保存预测结果（标签）的数组
+    """
+    return np.array([make_label(X_train, y_train, X, k) for X in X_new])</code></pre></div><p>我们用上面准备好的鸢尾花数据的训练集和测试集来做实验，看看我们的<code>predict_by_knn</code>函数能否很好的运转起来。下面代码中的<code>y_pred</code>是我们通过函数预测的30条鸢尾花的类型，我们跟<code>y_test</code>做一个比较，就可以看到我们的预测效果。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">y_pred = predict_by_knn(X_train, y_train, X_test)
+y_pred == y_test</code></pre></div><p>我这里的输出是：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">array([ True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True, False,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True])</code></pre></div><p>输出的结果中有一个<code>False</code>，这表示预测的标签跟真实的标签并不相同，是一个错误的预测结果，也就是说我们预测的准确率为 $\small{\frac{29}{30}}$ ，即<code>96.67%</code>。当然，如果你划分训练集和测试集时跟我指定的<code>random_state</code>参数不相同，这里得到的结果可能会跟我不同。</p>
+<h4 id="基于scikit-learn的实现">基于scikit-learn的实现</h4><p>使用 scikit-learn 来实现 kNN 算法就要简单许多了，我们基本上只需要做三个动作就可以得到想要的结果，代码如下所示。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">from sklearn.neighbors import KNeighborsClassifier
+
+# 创建模型
+model = KNeighborsClassifier()
+# 训练模型
+model.fit(X_train, y_train)
+# 预测结果
+y_pred = model.predict(X_test)</code></pre></div><p>我们来看看输出的结果，是不是跟我们自己手撕的代码完全一致。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">y_pred == y_test</code></pre></div><p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">array([ True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True,  True,  True,  True, False,  True,
+        True,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True])</code></pre></div><p>当然，scikit-learn 库考虑到的东西肯定比我们自己手撕的代码丰富得多，例如我们想知道模型预测的准确率（accuracy），可以使用下面的函数。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">model.score(X_test, y_test)</code></pre></div><p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">0.9666666666666667</code></pre></div><h3 id="模型评估">模型评估</h3><p>当然，评价一个分类器的预测效果是否良好，不能只简单的看一下准确率，因为在类别不平衡的情况下，准确率很可能会误导你的判断。例如，我们的测试数据中维吉尼亚鸢尾花的样本数量非常小，那么即便我们的模型根本无法判断维吉尼亚鸢尾花，模型也会表现出很高的准确率。所以，我们还要考察查准率（精确率）、查全率（召回率）、F1 分数等指标，而<strong>混淆矩阵</strong>则是用于详细展示分类模型性能的工具，适用于二分类和多分类任务，二分类问题的混淆矩阵如下所示。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>预测为正类（Positive）</strong></th>
+<th><strong>预测为负类（Negative）</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>实际为正类（Positive）</strong></td>
+<td>True Positive（TP）</td>
+<td>False Negative（FN）</td>
+</tr>
+<tr>
+<td><strong>实际为负类（Negative）</strong></td>
+<td>False Positive（FP）</td>
+<td>True Negative（TN）</td>
+</tr>
+</tbody></table>
+<p>我们举一个例子来说明如何使用混淆矩阵并计算出分类模型的评估指标。假设某种医学检测系统的目标预测是否患有某种疾病，类别“正类”表示“患病”，类别“负类”表示“未患病”，1000个样本的测试结果如下所示。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>预测为患病</strong></th>
+<th><strong>预测为未患病</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>实际为患病</strong></td>
+<td>80（TP）</td>
+<td>20（FN）</td>
+</tr>
+<tr>
+<td><strong>实际为未患病</strong></td>
+<td>30（FP）</td>
+<td>870（TN）</td>
+</tr>
+</tbody></table>
+<ol>
+<li><strong>准确率</strong>（Accuracy）。</li>
+</ol>
+<p>$$
+\text{Accuracy} = \frac{\text{TP} + \text{TN}}{\text{TP} + \text{FP} + \text{FN} + \text{TN}}
+$$</p>
+<p>上面的例子，模型预测的准确率为： $\frac{80 + 870}{80 + 30 + 20 + 870} = \frac{950}{1000} = 0.95$ 。</p>
+<ol start="2">
+<li><strong>精确率</strong>（Precesion）。精确率用于衡量在所有被预测为正类的样本中，实际上属于正类的比例，通常也被称为查准率。</li>
+</ol>
+<p>$$
+\text{Precesion} = \frac{\text{TP}}{\text{TP} + \text{FP}}
+$$</p>
+<p>上面的例子，模型预测的精确率为： $\frac{80}{80 + 30} = \frac{80}{110} = 0.73$ 。</p>
+<ol start="3">
+<li><strong>召回率</strong>（Recall）。召回率用于衡量在所有实际为正类的样本中，被模型正确预测为正类的比例，通常也被称为查全率或真正例率（True Positive Rate）。</li>
+</ol>
+<p>$$
+\text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}}
+$$</p>
+<p>上面的例子，模型预测的召回率为： $\frac{80}{80 + 20} = \frac{80}{100} = 0.8$ 。</p>
+<ol start="4">
+<li><strong>F1 分数</strong>（F1 Score）。F1 分数是精确率和召回率的调和平均数，它在精确率和召回率之间寻求一个平衡，尤其适用于在两者之间有权衡的情况。</li>
+</ol>
+<p>$$
+\text{F1 Score} = \frac{2}{\frac{1}{\text{Precision}} + \frac{1}{\text{Recall}}} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precesion} + \text{Recall}}
+$$</p>
+<p>上面的例子，模型预测的F1 分数为： $2 \times \frac{0.7273 * 0.8}{0.7273 + 0.8} = 0.76$ 。</p>
+<ol start="5">
+<li><strong>特异度</strong>（Specificity）和<strong>假正例率</strong>（False Positive Rate，简称 FPR）。特异度用于衡量的是在所有实际为负类的样本中，被模型正确预测为负类的比例，类似于召回率，只不过针对的是负类样本。</li>
+</ol>
+<p>$$
+\text{Specificity} = \frac{\text{TN}}{\text{TN} + \text{FP}} \\
+\text{FPR} = 1 - \text{Specificity}
+$$</p>
+<p>上面的例子，模型预测的特异度为： $\frac{870}{870 + 30} = \frac{870}{900} = 0.97$ 。</p>
+<ol start="6">
+<li><p><strong>ROC</strong> 和 <strong>AUC</strong>。</p>
+<ul>
+<li><p><strong>ROC</strong>（Receiver Operating Characteristic Curve）绘制了召回率与假正例率的关系，如下图所示。</p>
+<p><img src="/assets/02_ROC_curve-20250605165226-lqinpjx.png"" alt="" loading="lazy"></p>
+</li>
+<li><p><strong>AUC</strong>（Area Under the Curve）是 ROC 曲线下的面积，衡量模型区分正类和负类的能力。AUC 值的范围是 $\small[0, 1]$ ，值越接近 1，表示模型区分正负类的能力越强。0.5 &lt; AUC &lt; 1，说明我们的模型优于随机猜测，只要这个分类器（模型）妥善设置阈值的话，就有预测价值。AUC = 0.5，说明我们的模型跟随机猜测一样，模型没有预测价值。AUC &lt; 0.5，模型比随机猜测还差，但只要总能反向预测，它的实际效果就优于随机猜测。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>对于多分类问题，混淆矩阵的行数和列数都等于类别数，混淆矩阵是一个方阵，也就是说如果有 $\small{n}$ 个类别，那么混淆矩阵就是一个 $\small{n \times n}$ 的方阵。根据上面我们得到的鸢尾花数据集的预测结果，我们先输出真实值和预测值，然后制作对应的混淆矩阵，如下所示。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">print(y_test)
+print(y_pred)</code></pre></div><p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">[0 0 0 0 0 2 1 0 2 1 1 0 1 1 2 0 1 2 2 0 2 2 2 1 0 2 2 1 1 1]
+[0 0 0 0 0 2 1 0 2 1 1 0 1 1 2 0 2 2 2 0 2 2 2 1 0 2 2 1 1 1]</code></pre></div><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="center"><strong>预测为类别0（山鸢尾）</strong></th>
+<th align="center"><strong>预测为类别1（多彩鸢尾）</strong></th>
+<th align="center"><strong>预测为类别2（为吉尼亚鸢尾）</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>实际为类别0（山鸢尾）</strong></td>
+<td align="center">10</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="left"><strong>实际为类别1（多彩鸢尾）</strong></td>
+<td align="center">0</td>
+<td align="center">9</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="left"><strong>实际为类别2（吉尼亚鸢尾）</strong></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">10</td>
+</tr>
+</tbody></table>
+<p>我们可以用 scikit-learn 中的<code>confusion_matrix</code>和<code>classification_report</code>函数来输出混淆矩阵和评估报告，代码如下所示。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">from sklearn.metrics import classification_report, confusion_matrix
+
+# 输出分类模型混淆矩阵
+print('混淆矩阵: ')
+print(confusion_matrix(y_test, y_pred))
+# 输出分类模型评估报告
+print('评估报告: ')
+print(classification_report(y_test, y_pred))</code></pre></div><p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">混淆矩阵: 
+[[10  0  0]
+ [ 0  9  1]
+ [ 0  0 10]]
+评估报告: 
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00        10
+           1       1.00      0.90      0.95        10
+           2       0.91      1.00      0.95        10
+
+    accuracy                           0.97        30
+   macro avg       0.97      0.97      0.97        30
+weighted avg       0.97      0.97      0.97        30</code></pre></div><p>如果希望用可视化的方式输出混淆矩阵，可以使用如下所示的代码。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">import matplotlib.pyplot as plt
+from sklearn.metrics import ConfusionMatrixDisplay
+
+# 创建混淆矩阵显示对象
+cm_display_obj = ConfusionMatrixDisplay(confusion_matrix(y_test, y_pred), display_labels=iris.target_names)
+# 绘制并显示混淆矩阵
+cm_display_obj.plot(cmap=plt.cm.Reds)
+plt.show()</code></pre></div><blockquote>
+<p><strong>说明</strong>：其中的<code>iris.target_names</code>就是类别标签<code>0</code>、<code>1</code>、<code>2</code>对应的三种鸢尾花的英文名。</p>
+</blockquote>
+<p><img src="/assets/02_confusion_matrix-20250605165226-ds8qx9o.png"" alt="" loading="lazy"></p>
+<p>对于二分类问题，如果想要绘制出 ROC 曲线并显示 AUC 值，可以使用如下所示的代码。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">from sklearn.metrics import roc_curve, auc
+from sklearn.metrics import RocCurveDisplay
+
+# 手动构造一组真实值和对应的预测值
+y_test_ex = np.array([0, 0, 0, 1, 1, 0, 1, 1, 1, 0])
+y_pred_ex = np.array([1, 0, 0, 1, 1, 0, 1, 1, 0, 1])
+# 通过roc_curve函数计算出FPR（假正例率）和TPR（真正例率）
+fpr, tpr, _ = roc_curve(y_test_ex, y_pred_ex)
+# 通过auc函数计算出AUC值并通过RocCurveDisplay类绘制图形
+RocCurveDisplay(fpr=fpr, tpr=tpr, roc_auc=auc(fpr, tpr)).plot()
+plt.show()</code></pre></div><p><img src="/assets/02_ROC_plot-20250605165226-1sgds4z.png"" alt="" loading="lazy"></p>
+<h3 id="参数调优">参数调优</h3><p>之前我们说过，kNN 算法有两个关键问题，一是距离的度量，二是 k 值的选择。我们使用 scikit-learn 的<code>KNeighborsClassifier</code>创建分类器模型时，可以对模型的超参数进行设置，这里有几个比较重要的参数：</p>
+<ol>
+<li><code>n_neighbors</code>：近邻的数量，就是 kNN 算法中 k 的值。</li>
+<li><code>weights</code>：可以选择<code>uniform</code>或<code>distance</code>，前者表示所有样本的权重相同，后者表示距离越近权重越高，默认值是<code>uniform</code>。当然，我们也可以通过传入自定义的函数来确定每个样本的权重。</li>
+<li><code>algorithm</code>：有<code>auto</code>、<code>ball_tree</code>、<code>kd_tree</code>、<code>brute</code>四个选项，默认值为<code>auto</code>。其中<code>ball_tree</code>是一种树形结构，基于球体划分的方法将数据点分配到层次化的树结构中，在高维数据和稀疏数据场景下有较好的性能；<code>kd_tree</code>也是一种树形结构，通过选择一个维度将空间划分为若干个子区域再进行搜索，从而避免跟所有的邻居进行比较，对于低维度和空间分布均匀的数据，后者有较好的效果，在高维空间中会遇到的维度灾难问题；<code>auto</code>选项是根据输入数据的维度自动选择<code>ball_tree</code>或<code>kd_tree</code>；<code>brute</code>选项则是使用暴力搜索算法（穷举法），再处理小数据集时，它是一个简单且有效的选择。</li>
+<li><code>leaf_size</code>：使用<code>ball_tree</code>或<code>kd_tree</code>算法时，该参数用于限制树结构叶子节点最大样本数量，默认值为<code>30</code>，该参数会影响树的构建和节点查找的性能。</li>
+<li><code>p</code>：闵可夫斯基距离公式中的<code>p</code>，默认值为2，计算欧氏距离。</li>
+</ol>
+<p>我们可以使用<strong>网格搜索</strong>（Grid Search）和<strong>交叉验证</strong>（Cross Validation）的方式对模型的超参数进行调整，评估模型的泛化能力，提升模型的预测效果。网格搜索就是通过穷举法遍历给定的超参数空间，找到最优的超参数组合；交叉验证则是将训练集分成多个子集，通过在不同的训练集和验证集上进行多次训练和评估，对模型的预测效果进行综合评判。K-Fold交叉验证是最常用的交叉验证方法，通过将数据集划分为 K 个子集，每次选取其中一个子集作为验证集，剩下的 K-1 个子集作为训练集，对每个子集重复这个过程，完成 K 次训练和评估并将平均值作为模型的最终性能评估，如下图所示。</p>
+<p><img src="/assets/02_k-fold_cross_validation-20250605165226-ah5g9mi.png"" alt="" loading="lazy"></p>
+<p>下面的代码了 scikit-learn 库中的<code>GridSearchCV</code>来做网格搜索和交叉验证，通过这种方式找到针对鸢尾花数据集实施 kNN 算法的最优参数。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">from sklearn.model_selection import GridSearchCV
+
+# 网格搜索交叉验证
+gs = GridSearchCV(
+    estimator=KNeighborsClassifier(),
+    param_grid={
+        'n_neighbors': [1, 3, 5, 7, 9, 11, 13, 15],
+        'weights': ['uniform', 'distance'],
+        'p': [1, 2]
+    },
+    cv=5
+)
+gs.fit(X_train, y_train)</code></pre></div><p>可以通过下面的代码获得最优参数及其评分。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">print('最优参数:', gs.best_params_)
+print('评分:', gs.best_score_)</code></pre></div><p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">最优参数: {'n_neighbors': 5, 'p': 2, 'weights': 'uniform'}
+评分: 0.9666666666666666</code></pre></div><p>如果需要使用训练好的最优模型进行预测，可以按照如下所示的代码进行操作。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">gs.predict(X_test)</code></pre></div><h3 id="knn回归">kNN回归</h3><p>kNN 算法通常用于解决分类问题，当然它也可以用于解决回归问题，其基本思想也是通过找出跟新实例最近的 k 个邻居，然后根据这 k 个邻居的标签（在回归问题中我们通常称之为目标值）来预测新实例的目标值。由于我们需要预测的不是类别标签而是一个数值，所以通常会使用平均或加权平均的方式来处理 k 个邻居的目标值，从而获得对新实例目标值的预测。让我们回到上一课用月收入预测网购支出的那个例子，然后使用 scikit-learn 中的<code>KNeighborsRegressor</code>来构建回归模型，我们先做一些准备工作，代码如下所示。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python"># 每月收入
+incomes = np.array([
+    9558, 8835, 9313, 14990, 5564, 11227, 11806, 10242, 11999, 11630,
+    6906, 13850, 7483, 8090, 9465, 9938, 11414, 3200, 10731, 19880,
+    15500, 10343, 11100, 10020, 7587, 6120, 5386, 12038, 13360, 10885,
+    17010, 9247, 13050, 6691, 7890, 9070, 16899, 8975, 8650, 9100,
+    10990, 9184, 4811, 14890, 11313, 12547, 8300, 12400, 9853, 12890
+])
+# 每月网购支出
+outcomes = np.array([
+    3171, 2183, 3091, 5928, 182, 4373, 5297, 3788, 5282, 4166,
+    1674, 5045, 1617, 1707, 3096, 3407, 4674, 361, 3599, 6584,
+    6356, 3859, 4519, 3352, 1634, 1032, 1106, 4951, 5309, 3800,
+    5672, 2901, 5439, 1478, 1424, 2777, 5682, 2554, 2117, 2845,
+    3867, 2962,  882, 5435, 4174, 4948, 2376, 4987, 3329, 5002
+])
+X = np.sort(incomes).reshape(-1, 1)  # 将收入排序后处理成二维数组
+y = outcomes[np.argsort(incomes)]    # 将网购支出按照收入进行排序</code></pre></div><blockquote>
+<p><strong>说明</strong>：即便只有一个特征，我们也需要将自变量处理二维数组的形式，因为我们训练模型时使用的<code>fit</code>方法并不能接受一维数组作为它的第一个参数。这里提前对 X 和 y 排序是为了待会绘制散点图和折线图的时候根据 X 的值从小到大依次绘制。</p>
+</blockquote>
+<p>接下来，我们创建 kNN 回归模型。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">from sklearn.neighbors import KNeighborsRegressor
+
+# 创建模型
+model = KNeighborsRegressor()
+# 训练模型
+model.fit(X, y)
+# 预测结果
+y_pred = model.predict(X)</code></pre></div><p>上面我们直接用所有的历史数据进行模型训练，然后通过绘制下面的图形来看看预测效果到底如何。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python"># 原始数据散点图
+plt.scatter(X, y, color='navy')
+# 预测结果折线图
+plt.plot(X, y_pred, color='coral')
+plt.show()</code></pre></div><p><img src="/assets/02_knn_regression_plot-20250605165226-i3zebmy.png"" alt="" loading="lazy"></p>
+<p>kNN 回归模型计算复杂度较高，而且对噪声数据非常敏感，在很多时候它可能并不是一个很好的选择。当然，如何评估一个回归模型的效果，这个问题我们留到后续的章节再为大家进行讲解。</p>
+<h3 id="总结">总结</h3><p>kNN 算法是一种简单但不失强大的机器学习算法，适用于小数据集上的分类和回归任务，它的优点是简单易懂，没有显示的训练过程，不依赖于对数据分布的假设，可以适应复杂的数据模式。当然，kNN 算法的缺点也非常明显，最大的问题在于计算效率，所以在数据集较大时可能并不是最好的选择。除此以外，kNN 算法对噪声非常敏感，同时预测结果依赖于 k 的取值和样本是否均衡（各个类别的样本数量是否大致相等），k 值过小可能导致过拟合，k值过大又可能导致欠拟合，而不均衡的样本可能会导致类别偏倚（Class Imbalance Bias），也就是说，如果大部分训练样本都属于类别 A，而类别 B 样本较少，那么在分类时，KNN 更容易将测试样本预测为类别 A。</p>
+</div></article></div></main><footer>by天才程序员</footer><script src="/script.js"></script></body></html>

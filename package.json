@@ -1,0 +1,12 @@
+{
+  "name": "python-notes-site",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "build": "node scripts/build-site.cjs",
+    "check": "node scripts/check-site.cjs"
+  },
+  "dependencies": {
+    "marked": "18.0.11"
+  }
+}

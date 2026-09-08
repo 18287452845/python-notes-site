@@ -1,0 +1,450 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Python 基础课程讲义：71.NumPy的应用-4"><title>71.NumPy的应用-4｜Python 编程基础</title><link rel="stylesheet" href="/style.css"><script>window.MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:true,processEnvironments:true},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body><header class="site-header"><div class="header-inner"><a class="brand" href="/index.html"><span>Python 编程基础</span><small>Python 基础课程讲义</small></a><a class="back-home" href="/index.html">课程首页</a></div></header><main class="page-layout"><aside class="course-nav" aria-label="课程章节" id="course-nav-list"><div class="course-nav-head"><div class="nav-title">课程章节</div><button class="course-nav-toggle" type="button" aria-expanded="true" aria-controls="course-nav-list">收起</button></div><div class="nav-group">01-基础语法</div><ul><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/01.%E5%88%9D%E8%AF%86Python.html">01.初识Python</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/02.%E7%AC%AC%E4%B8%80%E4%B8%AAPython%E7%A8%8B%E5%BA%8F.html">02.第一个Python程序</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/03.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F.html">03.Python语言中的变量</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/04.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6.html">04.Python语言中的运算符</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/05.%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84.html">05.分支结构</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/06.%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84.html">06.循环结构</a></li></ul><div class="nav-group">02-数据结构</div><ul><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/08.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-1.html">08.常用数据结构之列表-1</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/09.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-2.html">09.常用数据结构之列表-2</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/10.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%85%83%E7%BB%84.html">10.常用数据结构之元组</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/11.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2.html">11.常用数据结构之字符串</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/12.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E9%9B%86%E5%90%88.html">12.常用数据结构之集合</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/13.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E5%85%B8.html">13.常用数据结构之字典</a></li></ul><div class="nav-group">03-函数与模块</div><ul><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/14.%E5%87%BD%E6%95%B0%E5%92%8C%E6%A8%A1%E5%9D%97.html">14.函数和模块</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/16.%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E8%BF%9B%E9%98%B6.html">16.函数使用进阶</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/17.%E5%87%BD%E6%95%B0%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8.html">17.函数高级应用</a></li></ul><div class="nav-group">04-文件与异常</div><ul><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/21.%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html">21.文件读写和异常处理</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/22.%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96.html">22.对象的序列化和反序列化</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/23.Python%E8%AF%BB%E5%86%99CSV%E6%96%87%E4%BB%B6.html">23.Python读写CSV文件</a></li></ul><div class="nav-group">05-面向对象</div><ul><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/18.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8.html">18.面向对象编程入门</a></li><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/19.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6.html">19.面向对象编程进阶</a></li></ul><div class="nav-group">06-基础项目</div><ul><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/07.%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84%E5%AE%9E%E6%88%98.html">07.分支和循环结构实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/15.%E5%87%BD%E6%95%B0%E5%BA%94%E7%94%A8%E5%AE%9E%E6%88%98.html">15.函数应用实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/20.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%BA%94%E7%94%A8.html">20.面向对象编程应用</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/30.%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%BA%94%E7%94%A8.html">30.正则表达式的应用</a></li></ul><div class="nav-group">拓展-办公自动化</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/24.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-1.html">24.Python读写Excel文件-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/25.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-2.html">25.Python读写Excel文件-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/26.Python%E6%93%8D%E4%BD%9CWord%E5%92%8CPowerPoint%E6%96%87%E4%BB%B6.html">26.Python操作Word和PowerPoint文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/27.Python%E6%93%8D%E4%BD%9CPDF%E6%96%87%E4%BB%B6.html">27.Python操作PDF文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/28.Python%E5%A4%84%E7%90%86%E5%9B%BE%E5%83%8F.html">28.Python处理图像</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/29.Python%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E5%92%8C%E7%9F%AD%E4%BF%A1.html">29.Python发送邮件和短信</a></li></ul><div class="nav-group">拓展-Web与爬虫</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/31.Python%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6.html">31.Python语言进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/32-33.Web%E5%89%8D%E7%AB%AF%E5%85%A5%E9%97%A8.html">32-33.Web前端入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/34-35.%E7%8E%A9%E8%BD%ACLinux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.html">34-35.玩转Linux操作系统</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/36.%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CMySQL%E6%A6%82%E8%BF%B0.html">36.关系型数据库和MySQL概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/37.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDDL.html">37.SQL详解之DDL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/38.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDML.html">38.SQL详解之DML</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/39.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDQL.html">39.SQL详解之DQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/40.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDCL.html">40.SQL详解之DCL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/41.MySQL%E6%96%B0%E7%89%B9%E6%80%A7.html">41.MySQL新特性</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/42.%E8%A7%86%E5%9B%BE%E3%80%81%E5%87%BD%E6%95%B0%E5%92%8C%E8%BF%87%E7%A8%8B.html">42.视图、函数和过程</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/43.%E7%B4%A2%E5%BC%95.html">43.索引</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/44.Python%E6%8E%A5%E5%85%A5MySQL%E6%95%B0%E6%8D%AE%E5%BA%93.html">44.Python接入MySQL数据库</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/45.%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E5%92%8CHiveSQL.html">45.大数据平台和HiveSQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/46.Django%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.html">46.Django快速上手</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/47.%E6%B7%B1%E5%85%A5%E6%A8%A1%E5%9E%8B.html">47.深入模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/48.%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%92%8CAjax%E8%AF%B7%E6%B1%82.html">48.静态资源和Ajax请求</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/49.Cookie%E5%92%8CSession.html">49.Cookie和Session</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/50.%E5%88%B6%E4%BD%9C%E6%8A%A5%E8%A1%A8.html">50.制作报表</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/51.%E6%97%A5%E5%BF%97%E5%92%8C%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7%E6%A0%8F.html">51.日志和调试工具栏</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/52.%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E5%BA%94%E7%94%A8.html">52.中间件的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/53.%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8.html">53.前后端分离开发入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/54.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E5%85%A5%E9%97%A8.html">54.RESTful架构和DRF入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/55.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E8%BF%9B%E9%98%B6.html">55.RESTful架构和DRF进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/56.%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98.html">56.使用缓存</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/57.%E6%8E%A5%E5%85%A5%E4%B8%89%E6%96%B9%E5%B9%B3%E5%8F%B0.html">57.接入三方平台</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/58.%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1.html">58.异步任务和定时任务</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/59.%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95.html">59.单元测试</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/60.%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF.html">60.项目上线</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/61.%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E6%A6%82%E8%BF%B0.html">61.网络数据采集概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%8E%B7%E5%8F%96%E7%BD%91%E7%BB%9C%E8%B5%84%E6%BA%90-1.html">62.用Python获取网络资源-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%A7%A3%E6%9E%90HTML%E9%A1%B5%E9%9D%A2-2.html">62.用Python解析HTML页面-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-1.html">63.Python中的并发编程-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-2.html">63.Python中的并发编程-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-3.html">63.Python中的并发编程-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9C%A8%E7%88%AC%E8%99%AB%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html">63.并发编程在爬虫中的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/64.%E4%BD%BF%E7%94%A8Selenium%E6%8A%93%E5%8F%96%E7%BD%91%E9%A1%B5%E5%8A%A8%E6%80%81%E5%86%85%E5%AE%B9.html">64.使用Selenium抓取网页动态内容</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/65.%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6Scrapy%E7%AE%80%E4%BB%8B.html">65.爬虫框架Scrapy简介</a></li></ul><div class="nav-group">拓展-数据分析</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/66.%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A6%82%E8%BF%B0.html">66.数据分析概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/67.%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87.html">67.环境准备</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/68.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-1.html">68.NumPy的应用-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/69.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-2.html">69.NumPy的应用-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/70.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-3.html">70.NumPy的应用-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/71.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-4.html">71.NumPy的应用-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/72.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-1.html">72.深入浅出pandas-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/73.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-2.html">73.深入浅出pandas-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/74.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-3.html">74.深入浅出pandas-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/75.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-4.html">75.深入浅出pandas-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/76.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-5.html">76.深入浅出pandas-5</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/77.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-6.html">77.深入浅出pandas-6</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/78.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-1.html">78.数据可视化-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/79.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-2.html">79.数据可视化-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/80.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-3.html">80.数据可视化-3</a></li></ul><div class="nav-group">拓展-机器学习</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/81.%E6%B5%85%E8%B0%88%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0.html">81.浅谈机器学习</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/82.k%E6%9C%80%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95.html">82.k最近邻算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/83.%E5%86%B3%E7%AD%96%E6%A0%91%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97.html">83.决策树和随机森林</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/84.%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95.html">84.朴素贝叶斯算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/85.%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B.html">85.回归模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/86.K-Means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95.html">86.K-Means聚类算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/87.%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95.html">87.集成学习算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/88.%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B.html">88.神经网络模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/89.%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E5%85%A5%E9%97%A8.html">89.自然语言处理入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/90.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98.html">90.机器学习实战</a></li></ul></aside><aside class="lesson-toc" aria-label="本页目录"><div class="toc-title">本页目录</div><ul><li class="toc-level-2"><a href="#numpy的应用-4">NumPy的应用-4</a></li><li class="toc-level-3"><a href="#向量">向量</a></li><li class="toc-level-3"><a href="#行列式">行列式</a></li><li class="toc-level-3"><a href="#矩阵">矩阵</a></li><li class="toc-level-3"><a href="#多项式">多项式</a></li></ul><a class="to-top" href="#top">回到顶部</a></aside><div class="content-area"><details class="mobile-course-nav"><summary>课程章节</summary><div class="mobile-course-links"><div class="nav-group">01-基础语法</div><ul><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/01.%E5%88%9D%E8%AF%86Python.html">01.初识Python</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/02.%E7%AC%AC%E4%B8%80%E4%B8%AAPython%E7%A8%8B%E5%BA%8F.html">02.第一个Python程序</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/03.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F.html">03.Python语言中的变量</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/04.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6.html">04.Python语言中的运算符</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/05.%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84.html">05.分支结构</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/06.%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84.html">06.循环结构</a></li></ul><div class="nav-group">02-数据结构</div><ul><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/08.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-1.html">08.常用数据结构之列表-1</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/09.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-2.html">09.常用数据结构之列表-2</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/10.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%85%83%E7%BB%84.html">10.常用数据结构之元组</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/11.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2.html">11.常用数据结构之字符串</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/12.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E9%9B%86%E5%90%88.html">12.常用数据结构之集合</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/13.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E5%85%B8.html">13.常用数据结构之字典</a></li></ul><div class="nav-group">03-函数与模块</div><ul><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/14.%E5%87%BD%E6%95%B0%E5%92%8C%E6%A8%A1%E5%9D%97.html">14.函数和模块</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/16.%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E8%BF%9B%E9%98%B6.html">16.函数使用进阶</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/17.%E5%87%BD%E6%95%B0%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8.html">17.函数高级应用</a></li></ul><div class="nav-group">04-文件与异常</div><ul><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/21.%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html">21.文件读写和异常处理</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/22.%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96.html">22.对象的序列化和反序列化</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/23.Python%E8%AF%BB%E5%86%99CSV%E6%96%87%E4%BB%B6.html">23.Python读写CSV文件</a></li></ul><div class="nav-group">05-面向对象</div><ul><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/18.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8.html">18.面向对象编程入门</a></li><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/19.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6.html">19.面向对象编程进阶</a></li></ul><div class="nav-group">06-基础项目</div><ul><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/07.%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84%E5%AE%9E%E6%88%98.html">07.分支和循环结构实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/15.%E5%87%BD%E6%95%B0%E5%BA%94%E7%94%A8%E5%AE%9E%E6%88%98.html">15.函数应用实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/20.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%BA%94%E7%94%A8.html">20.面向对象编程应用</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/30.%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%BA%94%E7%94%A8.html">30.正则表达式的应用</a></li></ul><div class="nav-group">拓展-办公自动化</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/24.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-1.html">24.Python读写Excel文件-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/25.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-2.html">25.Python读写Excel文件-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/26.Python%E6%93%8D%E4%BD%9CWord%E5%92%8CPowerPoint%E6%96%87%E4%BB%B6.html">26.Python操作Word和PowerPoint文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/27.Python%E6%93%8D%E4%BD%9CPDF%E6%96%87%E4%BB%B6.html">27.Python操作PDF文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/28.Python%E5%A4%84%E7%90%86%E5%9B%BE%E5%83%8F.html">28.Python处理图像</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/29.Python%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E5%92%8C%E7%9F%AD%E4%BF%A1.html">29.Python发送邮件和短信</a></li></ul><div class="nav-group">拓展-Web与爬虫</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/31.Python%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6.html">31.Python语言进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/32-33.Web%E5%89%8D%E7%AB%AF%E5%85%A5%E9%97%A8.html">32-33.Web前端入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/34-35.%E7%8E%A9%E8%BD%ACLinux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.html">34-35.玩转Linux操作系统</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/36.%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CMySQL%E6%A6%82%E8%BF%B0.html">36.关系型数据库和MySQL概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/37.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDDL.html">37.SQL详解之DDL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/38.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDML.html">38.SQL详解之DML</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/39.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDQL.html">39.SQL详解之DQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/40.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDCL.html">40.SQL详解之DCL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/41.MySQL%E6%96%B0%E7%89%B9%E6%80%A7.html">41.MySQL新特性</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/42.%E8%A7%86%E5%9B%BE%E3%80%81%E5%87%BD%E6%95%B0%E5%92%8C%E8%BF%87%E7%A8%8B.html">42.视图、函数和过程</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/43.%E7%B4%A2%E5%BC%95.html">43.索引</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/44.Python%E6%8E%A5%E5%85%A5MySQL%E6%95%B0%E6%8D%AE%E5%BA%93.html">44.Python接入MySQL数据库</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/45.%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E5%92%8CHiveSQL.html">45.大数据平台和HiveSQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/46.Django%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.html">46.Django快速上手</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/47.%E6%B7%B1%E5%85%A5%E6%A8%A1%E5%9E%8B.html">47.深入模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/48.%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%92%8CAjax%E8%AF%B7%E6%B1%82.html">48.静态资源和Ajax请求</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/49.Cookie%E5%92%8CSession.html">49.Cookie和Session</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/50.%E5%88%B6%E4%BD%9C%E6%8A%A5%E8%A1%A8.html">50.制作报表</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/51.%E6%97%A5%E5%BF%97%E5%92%8C%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7%E6%A0%8F.html">51.日志和调试工具栏</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/52.%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E5%BA%94%E7%94%A8.html">52.中间件的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/53.%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8.html">53.前后端分离开发入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/54.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E5%85%A5%E9%97%A8.html">54.RESTful架构和DRF入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/55.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E8%BF%9B%E9%98%B6.html">55.RESTful架构和DRF进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/56.%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98.html">56.使用缓存</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/57.%E6%8E%A5%E5%85%A5%E4%B8%89%E6%96%B9%E5%B9%B3%E5%8F%B0.html">57.接入三方平台</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/58.%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1.html">58.异步任务和定时任务</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/59.%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95.html">59.单元测试</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/60.%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF.html">60.项目上线</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/61.%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E6%A6%82%E8%BF%B0.html">61.网络数据采集概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%8E%B7%E5%8F%96%E7%BD%91%E7%BB%9C%E8%B5%84%E6%BA%90-1.html">62.用Python获取网络资源-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%A7%A3%E6%9E%90HTML%E9%A1%B5%E9%9D%A2-2.html">62.用Python解析HTML页面-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-1.html">63.Python中的并发编程-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-2.html">63.Python中的并发编程-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-3.html">63.Python中的并发编程-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9C%A8%E7%88%AC%E8%99%AB%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html">63.并发编程在爬虫中的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/64.%E4%BD%BF%E7%94%A8Selenium%E6%8A%93%E5%8F%96%E7%BD%91%E9%A1%B5%E5%8A%A8%E6%80%81%E5%86%85%E5%AE%B9.html">64.使用Selenium抓取网页动态内容</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/65.%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6Scrapy%E7%AE%80%E4%BB%8B.html">65.爬虫框架Scrapy简介</a></li></ul><div class="nav-group">拓展-数据分析</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/66.%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A6%82%E8%BF%B0.html">66.数据分析概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/67.%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87.html">67.环境准备</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/68.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-1.html">68.NumPy的应用-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/69.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-2.html">69.NumPy的应用-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/70.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-3.html">70.NumPy的应用-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/71.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-4.html">71.NumPy的应用-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/72.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-1.html">72.深入浅出pandas-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/73.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-2.html">73.深入浅出pandas-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/74.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-3.html">74.深入浅出pandas-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/75.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-4.html">75.深入浅出pandas-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/76.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-5.html">76.深入浅出pandas-5</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/77.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-6.html">77.深入浅出pandas-6</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/78.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-1.html">78.数据可视化-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/79.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-2.html">79.数据可视化-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/80.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-3.html">80.数据可视化-3</a></li></ul><div class="nav-group">拓展-机器学习</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/81.%E6%B5%85%E8%B0%88%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0.html">81.浅谈机器学习</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/82.k%E6%9C%80%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95.html">82.k最近邻算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/83.%E5%86%B3%E7%AD%96%E6%A0%91%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97.html">83.决策树和随机森林</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/84.%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95.html">84.朴素贝叶斯算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/85.%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B.html">85.回归模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/86.K-Means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95.html">86.K-Means聚类算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/87.%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95.html">87.集成学习算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/88.%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B.html">88.神经网络模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/89.%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E5%85%A5%E9%97%A8.html">89.自然语言处理入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/90.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98.html">90.机器学习实战</a></li></ul></div></details><article class="lesson"><div class="lesson-content" id="top"><h1 id="71-numpy的应用-4">71.NumPy的应用-4</h1><h2 id="numpy的应用-4">NumPy的应用-4</h2><h3 id="向量">向量</h3><p><strong>向量</strong>（<em>vector</em>）也叫<strong>矢量</strong>，是一个同时具有大小和方向，且满足平行四边形法则的几何对象。与向量相对的概念叫<strong>标量</strong>或<strong>数量</strong>，标量只有大小，绝大多数情况下没有方向。我们通常用带箭头的线段来表示向量，在平面直角坐标系中的向量如下图所示。需要注意的是，向量是表达大小和方向的量，并没有规定起点和终点，所以相同的向量可以画在任意位置，例如下图中 $\small{\boldsymbol{w}}$ 和 $\small{\boldsymbol{u}}$ 两个向量并没有什么区别。</p>
+<p><img src="/assets/vector_1-20250605165226-q2irp58.png"" alt="" loading="lazy"></p>
+<p>向量有很多种代数表示法，对于二维空间的向量，下面几种写法都是可以的。</p>
+<p>$$
+\boldsymbol{a} = \langle a_1, a_2 \rangle = (a_1, a_2) = \begin{pmatrix} a_1 \\ a_2 \end{pmatrix} = \begin{bmatrix} a_1 \\ a_2 \end{bmatrix}
+$$</p>
+<p>向量的大小称为向量的模，它是一个标量，对于二维空间的向量，模可以通过下面的公式计算。</p>
+<p>$$
+\lvert \boldsymbol{a} \rvert = \sqrt{a_{1}^{2} + a_{2}^{2}}
+$$</p>
+<p>注意，这里的 $\small{\lvert \boldsymbol{a} \rvert}$ 并不是绝对值，你可以将其称为向量 $\small{\boldsymbol{a}}$ 的二范数，这是数学中的符号重用现象。上面的写法和概念也可以推广到 $\small{n}$ 维空间，我们通常用 $\small{\boldsymbol{R^{n}}}$ 表示 $\small{n}$ 维空间，我们刚才说的二维空间可以记为 $\small{\boldsymbol{R^{2}}}$ ，三维空间可以记为 $\small{\boldsymbol{R^{3}}}$ 。虽然生活在三维空间的我们很难想象四维空间、五维空间是什么样子，但是这并不影响我们探讨高维空间，机器学习中，我们经常把有 $\small{n}$ 个特征的训练样本称为一个 $\small{n}$ 维向量。</p>
+<h4 id="向量的加法">向量的加法</h4><p>相同维度的向量可以相加得到一个新的向量，运算的方法是将向量的每个分量相加，如下所示。</p>
+<p>$$
+\boldsymbol{u} = \begin{bmatrix} u_1 \\ u_2 \\ \vdots \\ u_n \end{bmatrix}, \quad
+\boldsymbol{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}, \quad
+\boldsymbol{u} + \boldsymbol{v} = \begin{bmatrix} u_1 + v_1 \\ u_2 + v_2 \\ \vdots \\ u_n + v_n \end{bmatrix}
+$$</p>
+<p>向量的加法满足“平行四边形法则”，即两个向量 $\small{\boldsymbol{u}}$ 和 $\small{\boldsymbol{v}}$ 构成了平行四边形的两条邻边，相加的结果是平行四边形的对角线，如下图所示。</p>
+<p><img src="/assets/vector_2-20250605165226-krstw90.png"" alt="" loading="lazy"></p>
+<h4 id="向量的数乘">向量的数乘</h4><p>一个向量 $\small{\boldsymbol{v}}$ 可以和一个标量 $\small{k}$ 相乘，运算的方法是将向量中的每个分量与该标量相乘即可，如下所示。</p>
+<p>$$
+\boldsymbol{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}, \quad
+k \cdot \boldsymbol{v} = \begin{bmatrix} k \cdot v_1 \\ k \cdot v_2 \\ \vdots \\ k \cdot v_n \end{bmatrix}
+$$</p>
+<p>我们可以用 NumPy 的数组来表示向量，向量的加法可以通过两个数组的加法来实现，向量的数乘可以通过数组和标量的乘法来实现，此处不再进行赘述。</p>
+<h4 id="向量的点积">向量的点积</h4><p>点积（<em>dot product</em>）是两个向量之间最为重要的运算之一，运算的方法是将两个向量对应分量的乘积求和，所以点积的结果是一个标量，其几何意义是两个向量的模乘以二者夹角的余弦如下所示。</p>
+<p>$$
+\boldsymbol{u} = \begin{bmatrix} u_1 \\ u_2 \\ \vdots \\ u_n \end{bmatrix}, \quad
+\boldsymbol{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix} \quad
+$$</p>
+<p>$$
+\boldsymbol{u} \cdot \boldsymbol{v} = \sum_{i=1}^{n}{u_iv_i} = \lvert \boldsymbol{u} \rvert \lvert \boldsymbol{v} \rvert cos\theta
+$$</p>
+<p>假如我们用三维向量来表示用户对喜剧片、言情片和动作片这三类电影的偏好，我们用 1 到 5 的数字来表示喜欢的程度，其中 5 表示非常喜欢，4 表示比较喜欢，3 表示无感，2 表示比较反感，1 表示特别反感。那么，下面的向量表示用户非常喜欢喜剧片，特别反感言情片，对动作片不喜欢也不反感。</p>
+<p>$$
+\boldsymbol{u} = \begin{pmatrix} 5 \\ 1 \\ 3 \end{pmatrix}
+$$</p>
+<p>现在有两部电影上映了，一部属于言情喜剧片，一部属于喜剧动作片，我们把两部电影也通过3维向量的方式进行表示，如下所示。</p>
+<p>$$
+\boldsymbol{m_1} = \begin{pmatrix} 4 \\ 5 \\ 1 \end{pmatrix}, \quad \boldsymbol{m_2} = \begin{pmatrix} 5 \\ 1 \\ 5 \end{pmatrix}
+$$</p>
+<p>如果现在我们需要向刚才的用户推荐一部电影，我们应该给他推荐哪一部呢？我们可以将代表用户的向量 $\small{\boldsymbol{u}}$ 和代表电影的向量 $\small{\boldsymbol{m_{1}}}$ 和 $\small{\boldsymbol{m_{2}}}$ 分别进行点积运算，再除以向量的模长，得到向量夹角的余弦值，余弦值越接近 1，说明向量的夹角越接近 0 度，也就是两个向量的相似度越高。很显然，我们应该向用户推荐跟他观影喜好相似度更高的电影。</p>
+<p>$$
+cos\theta_1 = \frac{\boldsymbol{u} \cdot \boldsymbol{m1}}{|\boldsymbol{u}||\boldsymbol{m1}|} \approx \frac{4 \times 5 + 5 \times 1 + 3 \times 1}{5.92 \times 6.48} \approx 0.73
+$$</p>
+<p>$$
+cos\theta_2 = \frac{\boldsymbol{u} \cdot \boldsymbol{m2}}{|\boldsymbol{u}||\boldsymbol{m2}|} \approx \frac{5 \times 5 + 1 \times 1 + 3 \times 5}{5.92 \times 7.14} \approx 0.97
+$$</p>
+<p>大家可能会说，向量 $\small{\boldsymbol{m_{2}}}$ 代表的电影肉眼可见跟用户是更加匹配的。的确，对于一个三维向量我们凭借直觉也能够给出正确的答案，但是对于一个 $\small{n}$ 维向量，当 $\small{n}$ 的值非常大时，你还有信心凭借肉眼的观察和本能的直觉给出准确的答案吗？向量的点积可以通过<code>dot</code>函数来计算，而向量的模长可以通过 NumPy 的<code>linalg</code>模块中的<code>norm</code>函数来计算，代码如下所示。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">u = np.array([5, 1, 3])
+m1 = np.array([4, 5, 1])
+m2 = np.array([5, 1, 5])
+print(np.dot(u, m1) / (np.linalg.norm(u) * np.linalg.norm(m1)))  # 0.7302967433402214
+print(np.dot(u, m2) / (np.linalg.norm(u) * np.linalg.norm(m2)))  # 0.9704311900788593</code></pre></div><h4 id="向量的叉积">向量的叉积</h4><p>在二维空间，两个向量的叉积是这样定义的：</p>
+<p>$$
+\boldsymbol{A} = \begin{pmatrix} a_{1} \\ a_{2} \end{pmatrix}, \quad \boldsymbol{B} = \begin{pmatrix} b_{1} \\ b_{2} \end{pmatrix}
+$$</p>
+<p>$$
+\boldsymbol{A} \times \boldsymbol{B} = \begin{vmatrix} a_{1} \quad a_{2} \\ b_{1} \quad b_{2} \end{vmatrix} = a_{1}b_{2} - a_{2}b_{1}
+$$</p>
+<p>对于三维空间，两个向量的叉积结果是一个向量，如下所示：</p>
+<p>$$
+\boldsymbol{A} = \begin{pmatrix} a_{1} \\ a_{2} \\ a_{3} \end{pmatrix}, \quad \boldsymbol{B} = \begin{pmatrix} b_{1} \\ b_{2} \\ b_{3} \end{pmatrix}
+$$</p>
+<p>$$
+\boldsymbol{A} \times \boldsymbol{B} = \begin{vmatrix} \boldsymbol{\hat{i}} \quad \boldsymbol{\hat{j}} \quad \boldsymbol{\hat{k}} \\ a_{1} \quad a_{2} \quad a_{3} \\ b_{1} \quad b_{2} \quad b_{3} \end{vmatrix} = \langle \boldsymbol{\hat{i}}\begin{vmatrix} a_{2} \quad a_{3} \\ b_{2} \quad b_{3} \end{vmatrix}, -\boldsymbol{\hat{j}}\begin{vmatrix} a_{1} \quad a_{3} \\ b_{1} \quad b_{3} \end{vmatrix}, \boldsymbol{\hat{k}}\begin{vmatrix} a_{1} \quad a_{2} \\ b_{1} \quad b_{2} \end{vmatrix} \rangle
+$$</p>
+<p>因为叉积的结果是向量，所以 $\small{\boldsymbol{A} \times \boldsymbol{B}}$ 和 $\small{\boldsymbol{B} \times \boldsymbol{A}}$ 的结果并不相同，事实上：</p>
+<p>$$
+\boldsymbol{A} \times \boldsymbol{B} = -(\boldsymbol{B} \times \boldsymbol{A})
+$$</p>
+<p>NumPy 中可以通过<code>cross</code>函数来计算向量的叉积，代码如下所示。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">print(np.cross(u, m1))  # [-14   7  21]
+print(np.cross(m1, u))  # [ 14  -7 -21]</code></pre></div><h3 id="行列式">行列式</h3><p><strong>行列式</strong>（<em>determinant</em>）通常记作 $\small{det(\boldsymbol{A})}$ 或 $\small{ \lvert \boldsymbol{A} \rvert}$ ，其中 $\small{\boldsymbol{A}}$ 是一个 $\small{n}$ 阶方阵。行列式可以看做是有向面积或体积的概念在一般欧几里得空间的推广，或者说行列式描述的是一个线性变换对“体积”所造成的影响。行列式的概念最早出现在解线性方程组的过程中，十七世纪晚期，关孝和（日本江户时代的数学家）与莱布尼茨的著作中已经使用行列式来确定线性方程组解的个数以及形式；十八世纪开始，行列式开始作为独立的数学概念被研究；十九世纪以后，行列式理论进一步得到发展和完善。</p>
+<h4 id="行列式的性质">行列式的性质</h4><p>行列式是由向量引出的，所以行列式解释的其实是向量的性质。</p>
+<p><strong>性质1</strong>：如果 $\small{det(\boldsymbol{A})}$ 中某行（或某列）的元素全部为 0，那么 $\small{det(\boldsymbol{A}) = 0}$ 。</p>
+<p><strong>性质2</strong>：如果 $\small{det(\boldsymbol{A})}$ 中某行（或某列）有公共因子 $\small{k}$ ，则可以提出 $\small{k}$ ，得到行列式 $\small{det(\boldsymbol{A^{&#39;}})}$ ，且 $\small{det(\boldsymbol{A}) = k \cdot det(\boldsymbol{A^{&#39;}})}$ 。</p>
+<p>$$
+det(\boldsymbol{A})={\begin{vmatrix}a_{11}&amp;a_{12}&amp;\dots &amp;a_{1n}\\\vdots &amp;\vdots &amp;\ddots &amp;\vdots \\{\color {blue}k}a_{i1}&amp;{\color {blue}k}a_{i2}&amp;\dots &amp;{\color {blue}k}a_{in}\\\vdots &amp;\vdots &amp;\ddots &amp;\vdots \\a_{n1}&amp;a_{n2}&amp;\dots &amp;a_{nn}\end{vmatrix}}={\color {blue}k}{\begin{vmatrix}a_{11}&amp;a_{12}&amp;\dots &amp;a_{1n}\\\vdots &amp;\vdots &amp;\ddots &amp;\vdots \\a_{i1}&amp;a_{i2}&amp;\dots &amp;a_{in}\\\vdots &amp;\vdots &amp;\ddots &amp;\vdots \\a_{n1}&amp;a_{n2}&amp;\dots &amp;a_{nn}\end{vmatrix}}={\color {blue}k} \cdot det(\boldsymbol{A^{&#39;}})
+$$</p>
+<p><strong>性质3</strong>：如果 $\small{det(\boldsymbol{A})}$ 中某行（或某列）的每个元素是两数之和，则此行列式可拆分为两个行列式相加，如下所示。</p>
+<p>$$
+{\begin{vmatrix}a_{11}&amp;a_{12}&amp;\dots &amp;a_{1n}\\\vdots &amp;\vdots &amp;\ddots &amp;\vdots \\{\color {blue}a_{i1}}+{\color {OliveGreen}b_{i1}}&amp;{\color {blue}a_{i2}}+{\color {OliveGreen}b_{i2}}&amp;\dots &amp;{\color {blue}a_{in}}+{\color {OliveGreen}b_{in}}\\\vdots &amp;\vdots &amp;\ddots &amp;\vdots \\a_{n1}&amp;a_{n2}&amp;\dots &amp;a_{nn}\end{vmatrix}}={\begin{vmatrix}a_{11}&amp;a_{12}&amp;\dots &amp;a_{1n}\\\vdots &amp;\vdots &amp;\ddots &amp;\vdots \\{\color {blue}a_{i1}}&amp;{\color {blue}a_{i2}}&amp;\dots &amp;{\color {blue}a_{in}}\\\vdots &amp;\vdots &amp;\ddots &amp;\vdots \\a_{n1}&amp;a_{n2}&amp;\dots &amp;a_{nn}\end{vmatrix}}+{\begin{vmatrix}a_{11}&amp;a_{12}&amp;\dots &amp;a_{1n}\\\vdots &amp;\vdots &amp;\ddots &amp;\vdots \\{\color {OliveGreen}b_{i1}}&amp;{\color {OliveGreen}b_{i2}}&amp;\dots &amp;{\color {OliveGreen}b_{in}}\\\vdots &amp;\vdots &amp;\ddots &amp;\vdots \\a_{n1}&amp;a_{n2}&amp;\dots &amp;a_{nn}\end{vmatrix}}
+$$</p>
+<p><strong>性质4</strong>：如果 $\small{det(\boldsymbol{A})}$ 中两行（或两列）元素对应成比例，那么 $\small{det(\boldsymbol{A}) = 0}$ 。</p>
+<p><strong>性质5</strong>：如果 $\small{det(\boldsymbol{A})}$ 中两行（或两列）互换得到 $\small{det(\boldsymbol{A^{&#39;}})}$ ，那么 $\small{det(\boldsymbol{A}) = -det(\boldsymbol{A^{&#39;}})}$ 。</p>
+<p><strong>性质6</strong>：将 $\small{det(\boldsymbol{A})}$ 中某行（或某列）的 $\small{k}$ 倍加进另一行（或另一列）里，行列式的值不变，如下所示。</p>
+<p>$$
+{\begin{vmatrix}\vdots &amp;\vdots &amp;\vdots &amp;\vdots \\ a_{i1}&amp;a_{i2}&amp;\dots &amp;a_{in} \\ a_{j1}&amp;a_{j2}&amp;\dots &amp;a_{jn}\\\vdots &amp;\vdots &amp;\vdots &amp;\vdots \\ \end{vmatrix}}={\begin{vmatrix}\vdots &amp;\vdots &amp;\vdots &amp;\vdots \\ a_{i1}&amp;a_{i2}&amp;\dots &amp;a_{in} \\ a_{j1}{\color {blue}+ka_{i1}}&amp;a_{j2}{\color {blue}+ka_{i2}}&amp;\dots &amp;a_{jn}{\color {blue}+ka_{in}} \\ \vdots &amp;\vdots &amp;\vdots &amp;\vdots \\ \end{vmatrix}}
+$$</p>
+<p><strong>性质7</strong>：将行列式的行列互换，行列式的值不变，如下所示。</p>
+<p>$$
+{\begin{vmatrix}a_{11}&amp;a_{12}&amp;\dots &amp;a_{1n} \\ a_{21}&amp;a_{22}&amp;\dots &amp;a_{2n} \\ \vdots &amp;\vdots &amp;\ddots &amp;\vdots  \\ a_{n1}&amp;a_{n2}&amp;\dots &amp;a_{nn}\end{vmatrix}}={\begin{vmatrix}a_{11}&amp;a_{21}&amp;\dots &amp;a_{n1} \\ a_{12}&amp;a_{22}&amp;\dots &amp;a_{n2} \\ \vdots &amp;\vdots &amp;\ddots &amp;\vdots  \\ a_{1n}&amp;a_{2n}&amp;\dots &amp;a_{nn}\end{vmatrix}}
+$$</p>
+<p><strong>性质8</strong>：方块矩阵 $\small{\boldsymbol{A}}$ 和 $\small{\boldsymbol{B}}$ 的乘积的行列式等于其行列式的乘积，即 $\small{det(\boldsymbol{A}\boldsymbol{B}) = det(\boldsymbol{A})det(\boldsymbol{B})}$ 。特别的，若将矩阵中的每一行都乘以常数 $\small{r}$ ，那么行列式的值将是原来的 $\small{r^{n}}$ 倍，即 $\small{det(r\boldsymbol{A}) = det(r\boldsymbol{I_{n}} \cdot \boldsymbol{A}) = r^{n}det(\boldsymbol{A})}$ ，其中 $\small{\boldsymbol{I_{n}}}$ 是 $\small{n}$ 阶单位矩阵。</p>
+<p><strong>性质9</strong>：若 $\small{\boldsymbol{A}}$ 是可逆矩阵，那么 $\small{det(\boldsymbol{A}^{-1}) = (det(\boldsymbol{A}))^{-1}}$ 。</p>
+<h4 id="行列式的计算">行列式的计算</h4><p>$\small{n}$ 阶行列式的计算公式如下所示：</p>
+<p>$$
+det(\boldsymbol{A})=\sum_{n!} \pm {a_{1\alpha}a_{2\beta} \cdots a_{n\omega}}
+$$</p>
+<p>对于二阶行列式，上面的公式相当于：</p>
+<p>$$
+\begin{vmatrix} a_{11} \quad a_{12} \\ a_{21} \quad a_{22} \end{vmatrix} = a_{11}a_{22} - a_{12}a_{21}
+$$</p>
+<p>对于三阶行列式，上面的计算公式相当于：</p>
+<p>$$
+\begin{vmatrix} a_{11} \quad a_{12} \quad a_{13} \\ a_{21} \quad a_{22} \quad a_{23} \\ a_{31} \quad a_{32} \quad a_{33} \end{vmatrix} = a_{11}a_{22}a_{33} + a_{12}a_{23}a_{31} + a_{13}a_{21}a_{32} - a_{11}a_{23}a_{32} - a_{12}a_{21}a_{33} - a_{13}a_{22}a_{31}
+$$</p>
+<p>高阶行列式可以用<strong>代数余子式</strong>（<em>cofactor</em>）展开成多个低阶行列式，如下所示：</p>
+<p>$$
+det(\boldsymbol{A})=a_{11}C_{11}+a_{12}C_{12}+ \cdots +a_{1n}C_{1n} = \sum_{i=1}^{n}{a_{1i}C_{1i}}
+$$</p>
+<p>其中， $\small{C_{11}}$ 是原行列式去掉 $\small{a_{11}}$ 所在行和列之后剩余的部分构成的行列式，以此类推。</p>
+<h3 id="矩阵">矩阵</h3><p><strong>矩阵</strong>（<em>matrix</em>）是由一系列元素排成的矩形阵列，矩阵里的元素可以是数字、符号或数学公式。矩阵可以进行<strong>加法</strong>、<strong>减法</strong>、<strong>数乘</strong>、<strong>转置</strong>、<strong>矩阵乘法</strong>等运算，如下图所示。</p>
+<p><img src="/assets/matrix_operation-20250605165226-mredwze.png"" alt="" loading="lazy"></p>
+<p>值得一提的是矩阵乘法运算，该运算仅当第一个矩阵 $\small{\boldsymbol{A}}$ 的列数和另一个矩阵 $\small{\boldsymbol{B}}$ 的行数相等时才能定义。如果 $\small{\boldsymbol{A}}$ 是一个 $\small{m \times n}$ 的矩阵， $\small{\boldsymbol{B}}$ 是一个 $\small{n \times k}$ 矩阵，它们的乘积是一个 $\small{m \times k}$ 的矩阵，如下图所示。</p>
+<p><img src="/assets/matrix_multiply-20250605165226-7hzbmb6.png"" alt="" loading="lazy"></p>
+<p>例如：</p>
+<p>$$
+\begin{bmatrix} 1 &amp; 0 &amp; 2 \\ -1 &amp; 3 &amp; 1 \end{bmatrix} \times \begin{bmatrix} 3 &amp; 1 \\ 2 &amp; 1 \\ 1 &amp; 0 \end{bmatrix} = \begin{bmatrix} (1 \times 3  +  0 \times 2  +  2 \times 1) &amp; (1 \times 1   +   0 \times 1   +   2 \times 0) \\ (-1 \times 3  +  3 \times 2  +  1 \times 1) &amp; (-1 \times 1   +   3 \times 1   +   1 \times 0) \end{bmatrix} = \begin{bmatrix} 5 &amp; 1 \\ 4 &amp; 2 \end{bmatrix}
+$$</p>
+<p>矩阵的乘法满足结合律和对矩阵加法的分配律：</p>
+<p>结合律： $\small{(\boldsymbol{AB})\boldsymbol{C} = \boldsymbol{A}(\boldsymbol{BC})}$ 。</p>
+<p>左分配律： $\small{(\boldsymbol{A} + \boldsymbol{B})\boldsymbol{C} = \boldsymbol{AC} + \boldsymbol{BC}}$ 。</p>
+<p>右分配律： $\small{\boldsymbol{C}(\boldsymbol{A} + \boldsymbol{B}) = \boldsymbol{CA} + \boldsymbol{CB}}$。</p>
+<p><strong>矩阵乘法不满足交换律</strong>。一般情况下，矩阵 $\small{\boldsymbol{A}}$ 和 $\small{\boldsymbol{B}}$ 的乘积 $\small{\boldsymbol{AB}}$ 存在，但 $\small{\boldsymbol{BA}}$ 不一定存在，即便 $\small{\boldsymbol{BA}}$ 存在，大多数时候 $\small{\boldsymbol{AB} \neq \boldsymbol{BA}}$ 。</p>
+<p>矩阵乘法的一个基本应用是在线性方程组上。线性方程组是方程组的一种，它符合以下的形式：</p>
+<p>$$
+\begin{cases}
+     a_{1,1}x_{1} + a_{1,2}x_{2} + \cdots + a_{1,n}x_{n}=  b_{1} \\
+     a_{2,1}x_{1} + a_{2,2}x_{2} + \cdots + a_{2,n}x_{n}=  b_{2} \\
+     \vdots \quad \quad \quad \vdots \\
+     a_{m,1}x_{1} + a_{m,2}x_{2} + \cdots + a_{m,n}x_{n}=  b_{m}
+ \end{cases}
+$$</p>
+<p>运用矩阵的方式，可以将线性方程组写成一个向量方程：</p>
+<p>$$
+\boldsymbol{Ax} = \boldsymbol{b}
+$$</p>
+<p>其中， $\small{\boldsymbol{A}}$ 是由方程组里未知数的系数排成的 $\small{m \times n}$ 矩阵， $\small{\boldsymbol{x}}$ 是含有 $\small{n}$ 个元素的行向量， $\small{\boldsymbol{b}}$ 是含有 $\small{m}$ 个元素的行向量。</p>
+<p>矩阵是线性变换（保持向量加法和标量乘法的函数）的便利表达法。矩阵乘法的本质在联系到线性变换的时候最能体现，因为矩阵乘法和线性变换的合成有以下的联系，即每个 $\small{m \times n}$ 的矩阵 $\small{\boldsymbol{A}}$ 都代表了一个从 $\small{\boldsymbol{R}^{n}}$ 射到 $\small{\boldsymbol{R}^{m}}$ 的线性变换。如果无法理解上面这些内容，推荐大家看看B站上名为<a href="https://www.bilibili.com/video/BV1ib411t7YR/">《线性代数的本质》</a>的视频，相信这套视频会让你对线性代数有一个更好的认知。</p>
+<p>下图是一个来自于维基百科的例子，图中展示了一些典型的二维实平面上的线性变换对平面向量（图形）造成的效果以及它们对应的二维矩阵，其中每个线性变换将蓝色图形映射成绿色图形；平面的原点 $\small{(0, 0)}$ 用黑点表示。</p>
+<p><img src="/assets/linear_transformation-20250605165226-cw964bx.png"" alt="" loading="lazy"></p>
+<h4 id="矩阵对象">矩阵对象</h4><p>NumPy 中提供了专门用于线性代数（<em>linear algebra</em>）的模块和表示矩阵的类型<code>matrix</code>，当然我们通过二维数组也可以表示一个矩阵，官方并不推荐使用<code>matrix</code>类而是建议使用二维数组，而且有可能在将来的版本中会移除<code>matrix</code>类。无论如何，利用这些已经封装好的类和函数，我们可以轻松愉快的实现很多对矩阵的操作。</p>
+<p>我们可以通过下面的代码来创建矩阵（<code>matrix</code>）对象。</p>
+<p>代码：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-Python">m1 = np.matrix('1 2 3; 4 5 6')
+m1</code></pre></div><blockquote>
+<p><strong>说明</strong>：<code>matrix</code>构造器可以传入类数组对象也可以传入字符串来构造矩阵对象。</p>
+</blockquote>
+<p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">matrix([[1, 2, 3],
+        [4, 5, 6]])</code></pre></div><p>代码：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-Python">m2 = np.asmatrix(np.array([[1, 1], [2, 2], [3, 3]]))
+m2</code></pre></div><blockquote>
+<p><strong>说明</strong>：<code>asmatrix</code>函数也可以用<code>mat</code>函数代替，这两个函数其实是同一个函数。</p>
+</blockquote>
+<p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">matrix([[1, 1],
+        [2, 2],
+        [3, 3]])</code></pre></div><p>代码：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-Python">m1 * m2</code></pre></div><p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">matrix([[14, 14],
+        [32, 32]])</code></pre></div><blockquote>
+<p><strong>说明</strong>：注意<code>matrix</code>对象和<code>ndarray</code>对象乘法运算的差别，<code>matrix</code>对象的<code>*</code>运算是矩阵乘法运算。如果两个二维数组要做矩阵乘法运算，应该使用<code>@</code>运算符或<code>matmul</code>函数，而不是<code>*</code>运算符。</p>
+</blockquote>
+<p>矩阵对象的属性如下表所示。</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>A</code></td>
+<td>获取矩阵对象对应的<code>ndarray</code>对象</td>
+</tr>
+<tr>
+<td><code>A1</code></td>
+<td>获取矩阵对象对应的扁平化后的<code>ndarray</code>对象</td>
+</tr>
+<tr>
+<td><code>I</code></td>
+<td>可逆矩阵的逆矩阵</td>
+</tr>
+<tr>
+<td><code>T</code></td>
+<td>矩阵的转置</td>
+</tr>
+<tr>
+<td><code>H</code></td>
+<td>矩阵的共轭转置</td>
+</tr>
+<tr>
+<td><code>shape</code></td>
+<td>矩阵的形状</td>
+</tr>
+<tr>
+<td><code>size</code></td>
+<td>矩阵元素的个数</td>
+</tr>
+</tbody></table>
+<p>矩阵对象的方法跟之前讲过的<code>ndarray</code>数组对象的方法基本差不多，此处不再进行赘述。</p>
+<h4 id="线性代数模块">线性代数模块</h4><p>NumPy 的<code>linalg</code>模块中有一组标准的矩阵分解运算以及诸如求逆和行列式之类的函数，它们跟 MATLAB 和 R 等语言所使用的是相同的行业标准线性代数库，下面的表格列出了<code>numpy</code>以及<code>linalg</code>模块中一些常用的线性代数相关函数。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>diag</code></td>
+<td>以一维数组的形式返回方阵的对角线元素或将一维数组转换为方阵（非对角元素元素为0）</td>
+</tr>
+<tr>
+<td><code>matmul</code></td>
+<td>矩阵乘法运算</td>
+</tr>
+<tr>
+<td><code>trace</code></td>
+<td>计算对角线元素的和</td>
+</tr>
+<tr>
+<td><code>norm</code></td>
+<td>求矩阵或向量的范数</td>
+</tr>
+<tr>
+<td><code>det</code></td>
+<td>计算行列式的值</td>
+</tr>
+<tr>
+<td><code>matrix_rank</code></td>
+<td>计算矩阵的秩</td>
+</tr>
+<tr>
+<td><code>eig</code></td>
+<td>计算矩阵的特征值（<em>eigenvalue</em>）和特征向量（<em>eigenvector</em>）</td>
+</tr>
+<tr>
+<td><code>inv</code></td>
+<td>计算非奇异矩阵（ $\small{n}$ 阶方阵）的逆矩阵</td>
+</tr>
+<tr>
+<td><code>pinv</code></td>
+<td>计算矩阵的摩尔-彭若斯（<em>Moore-Penrose</em>）广义逆</td>
+</tr>
+<tr>
+<td><code>qr</code></td>
+<td>QR分解（把矩阵分解成一个正交矩阵与一个上三角矩阵的积）</td>
+</tr>
+<tr>
+<td><code>svd</code></td>
+<td>计算奇异值分解（<em>singular value decomposition</em>）</td>
+</tr>
+<tr>
+<td><code>solve</code></td>
+<td>解线性方程组 $\small{\boldsymbol{Ax}=\boldsymbol{b}}$，其中 $\small{\boldsymbol{A}}$ 是一个方阵</td>
+</tr>
+<tr>
+<td><code>lstsq</code></td>
+<td>计算 $\small{\boldsymbol{Ax}=\boldsymbol{b}}$ 的最小二乘解</td>
+</tr>
+</tbody></table>
+<p>下面我们简单尝试一下上面的函数，先试一试求逆矩阵。</p>
+<p>代码：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-Python">m3 = np.array([[1., 2.], [3., 4.]])
+m4 = np.linalg.inv(m3)
+m4</code></pre></div><p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">array([[-2. ,  1. ],
+       [ 1.5, -0.5]])</code></pre></div><p>代码：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-Python">np.around(m3 @ m4)</code></pre></div><blockquote>
+<p><strong>说明</strong>：<code>around</code>函数对数组元素进行四舍五入操作，默认小数点后面的位数为0。</p>
+</blockquote>
+<p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">array([[1., 0.],
+       [0., 1.]])</code></pre></div><blockquote>
+<p><strong>说明</strong>：矩阵和它的逆矩阵做矩阵乘法会得到单位矩阵。</p>
+</blockquote>
+<p>计算行列式的值。</p>
+<p>代码：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-Python">m5 = np.array([[1, 3, 5], [2, 4, 6], [4, 7, 9]])
+np.linalg.det(m5)</code></pre></div><p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">2</code></pre></div><p>计算矩阵的秩。</p>
+<p>代码：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-Python">np.linalg.matrix_rank(m5)</code></pre></div><p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">3</code></pre></div><p>求解线性方程组。</p>
+<p>$$
+\begin{cases}
+x_1 + 2x_2 + x_3 = 8 \\
+3x_1 + 7x_2 + 2x_3 = 23 \\
+2x_1 + 2x_2 + x_3 = 9
+\end{cases}
+$$</p>
+<p>对于上面的线性方程组，我们可以用矩阵的形式来表示它，如下所示。</p>
+<p>$$
+\boldsymbol{A} = \begin{bmatrix}
+1 &amp; 2 &amp; 1 \\
+3 &amp; 7 &amp; 2 \\
+2 &amp; 2 &amp; 1
+\end{bmatrix}, \quad
+\boldsymbol{x} = \begin{bmatrix}
+x_1 \\
+x_2 \\
+x_3
+\end{bmatrix}, \quad
+\boldsymbol{b} = \begin{bmatrix}
+8 \\
+23 \\
+9
+\end{bmatrix}
+$$</p>
+<p>$$
+\boldsymbol{Ax} = \boldsymbol{b}
+$$</p>
+<p>线性方程组有唯一解的条件：系数矩阵 $\small{\boldsymbol{A}}$ 的秩等于增广矩阵 $\small{\boldsymbol{Ab}}$ 的秩，而且跟未知数的个数相同。</p>
+<p>代码：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-Python">A = np.array([[1, 2, 1], [3, 7, 2], [2, 2, 1]])
+b = np.array([8, 23, 9]).reshape(-1, 1)
+print(np.linalg.matrix_rank(A))
+print(np.linalg.matrix_rank(np.hstack((A, b))))</code></pre></div><blockquote>
+<p><strong>说明</strong>：使用数组对象的<code>reshape</code>方法调形时，如果其中一个参数为-1，那么该维度有多少个元素是通过数组元素个数（<code>size</code>属性）和其他维度的元素个数自动计算出来的。</p>
+</blockquote>
+<p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">3
+3</code></pre></div><p>代码：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-Python">np.linalg.solve(A, b)</code></pre></div><p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">array([[1.],
+       [2.],
+       [3.]])</code></pre></div><blockquote>
+<p><strong>说明</strong>：上面的结果表示，线性方程组的解为： $\small{x_1 = 1, x_2 = 2, x_3 = 3}$ 。</p>
+</blockquote>
+<p>下面是另一种求解线性方程组的方法，大家可以停下来思考下为什么。</p>
+<p>$$
+\boldsymbol{x} = \boldsymbol{A}^{-1} \cdot \boldsymbol{b}
+$$</p>
+<p>代码：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-Python">np.linalg.inv(A) @ b</code></pre></div><p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">array([[1.],
+       [2.],
+       [3.]])</code></pre></div><h3 id="多项式">多项式</h3><p>除了数组，NumPy 中还封装了用于<strong>多项式</strong>（<em>polynomial</em>）运算的数据类型。多项式是变量的整数次幂与系数的乘积之和，形如：</p>
+<p>$$
+f(x)=a_nx^n + a_{n-1}x^{n-1} + \cdots + a_1x^{1} + a_0x^{0}
+$$</p>
+<p>在 NumPy 1.4版本之前，我们可以用<code>poly1d</code>类型来表示多项式，目前它仍然可用，但是官方提供了新的模块<code>numpy.polynomial</code>，它除了支持基本的幂级数多项式外，还可以支持切比雪夫多项式、拉盖尔多项式等。</p>
+<h4 id="创建多项式对象">创建多项式对象</h4><p>创建<code>poly1d</code>对象，例如： $\small{f(x)=3x^{2}+2x+1}$ 。</p>
+<p>代码：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">p1 = np.poly1d([3, 2, 1])
+p2 = np.poly1d([1, 2, 3])
+print(p1)
+print(p2)</code></pre></div><p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">   2
+3 x + 2 x + 1
+   2
+1 x + 2 x + 3</code></pre></div><h4 id="多项式的操作">多项式的操作</h4><p><strong>获取多项式的系数</strong></p>
+<p>代码：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">print(p1.coefficients)
+print(p2.coeffs)</code></pre></div><p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">[3 2 1]
+[1 2 3]</code></pre></div><p><strong>两个多项式的四则运算</strong></p>
+<p>代码：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">print(p1 + p2)
+print(p1 * p2)</code></pre></div><p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">   2
+4 x + 4 x + 4
+   4     3      2
+3 x + 8 x + 14 x + 8 x + 3</code></pre></div><p>**带入 <strong>​</strong>$\small{x}$<strong>​ ** 求多项式的值</strong></p>
+<p>代码：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">print(p1(3))
+print(p2(3))</code></pre></div><p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">34
+18</code></pre></div><p><strong>多项式求导和不定积分</strong></p>
+<p>代码：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">print(p1.deriv())
+print(p1.integ())</code></pre></div><p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">
+6 x + 2
+   3     2
+1 x + 1 x + 1 x</code></pre></div><p><strong>求多项式的根</strong></p>
+<p>例如有多项式 $\small{f(x)=x^2+3x+2}$ ，多项式的根即一元二次方程 $\small{x^2+3x+2=0}$ 的解。</p>
+<p>代码：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">p3 = np.poly1d([1, 3, 2])
+print(p3.roots)</code></pre></div><p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">[-2. -1.]</code></pre></div><p>如果使用<code>numpy.polynomial</code>模块的<code>Polynomial</code>类来表示多项式对象，那么对应的操作如下所示。</p>
+<p>代码：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">from numpy.polynomial import Polynomial
+
+p3 = Polynomial((2, 3, 1))
+print(p3)           # 输出多项式
+print(p3(3))        # 令x=3，计算多项式的值
+print(p3.roots())   # 计算多项式的根
+print(p3.degree())  # 获得多项式的次数
+print(p3.deriv())   # 求导
+print(p3.integ())   # 求不定积分</code></pre></div><p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">2.0 + 3.0·x + 1.0·x²
+20.0
+[-2. -1.]
+2
+3.0 + 2.0·x
+0.0 + 2.0·x + 1.5·x² + 0.33333333·x³</code></pre></div><h4 id="最小二乘解">最小二乘解</h4><p><code>Polynomial</code>类还有一个名为<code>fit</code>的类方法，它可以给多项式求最小二乘解。所谓最小二乘解（least-squares solution），是用最小二乘法通过最小化误差的平方和来寻找数据的最佳匹配函数的系数。假设多项式为 $\small{f(x)=ax+b}$ ，最小二乘解就是让下面的残差平方和 $\small{RSS}$ 达到最小的 $\small{a}$ 和 $\small{b}$。</p>
+<p>$$
+RSS = \sum_{i=0}^{k}{(f(x_i) - y_i)^{2}}
+$$</p>
+<p>例如，我们想利用收集到的月收入和网购支出的历史数据来建立一个预测模型，以达到通过某人的月收入预测他网购支出金额的目标，下面是我们收集到的收入和网购支出的数据，保存在两个数组中。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">x = np.array([
+    25000, 15850, 15500, 20500, 22000, 20010, 26050, 12500, 18500, 27300,
+    15000,  8300, 23320,  5250,  5800,  9100,  4800, 16000, 28500, 32000,
+    31300, 10800,  6750,  6020, 13300, 30020,  3200, 17300,  8835,  3500
+])
+y = np.array([
+    2599, 1400, 1120, 2560, 1900, 1200, 2320,  800, 1650, 2200,
+     980,  580, 1885,  600,  400,  800,  420, 1380, 1980, 3999,
+    3800,  725,  520,  420, 1200, 4020,  350, 1500,  560,  500
+])</code></pre></div><p>我们可以先绘制散点图来了解两组数据是否具有正相关或负相关关系。正相关意味着数组<code>x</code>中较大的值对应到数组<code>y</code>中也是较大的值，而负相关则意味着数组<code>x</code>中较大的值对应到数组<code>y</code>中较小的值。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">import matplotlib.pyplot as plt
+
+plt.figure(dpi=120)
+plt.scatter(x, y, color='blue')
+plt.show()</code></pre></div><p>输出：</p>
+<p><img src="/assets/in_out_scatter_plot-20250605165226-k5jdqee.png"" alt="" loading="lazy"></p>
+<p>如果需要定量的研究两组数据的相关性，我们可以计算协方差或相关系数，对应的 NumPy 函数分别是<code>cov</code>和<code>corrcoef</code>。</p>
+<p>代码：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">np.corrcoef(x, y)</code></pre></div><p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">array([[1.        , 0.92275889],
+       [0.92275889, 1.        ]])</code></pre></div><blockquote>
+<p><strong>说明</strong>：相关系数是一个<code>-1</code>到<code>1</code>之间的值，越靠近<code>1</code> 说明正相关性越强，越靠近<code>-1</code>说明负相关性越强，靠近<code>0</code>则说明两组数据没有明显的相关性。上面月收入和网购支出之间的相关系数是<code>0.92275889</code>，说明二者是强正相关关系。</p>
+</blockquote>
+<p>通过上面的操作，我们确定了收入和网购支出之前存在强正相关关系，于是我们用这些数据来创建一个回归模型，找出一条能够很好的拟合这些数据点的直线。这里，我们就可以用到上面提到的<code>fit</code>方法，具体的代码如下所示。</p>
+<p>代码：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">from numpy.polynomial import Polynomial
+
+Polynomial.fit(x, y, deg=1).convert().coef</code></pre></div><blockquote>
+<p><strong>说明</strong>：<code>deg=1</code>说明回归模型最高次项就是1次项，回归模型形如 $\small{y=ax+b}$ ；如果要生一个类似于 $\small{y=ax^2+bx+c}$ 的模型，就需要设置<code>deg=2</code>，以此类推。</p>
+</blockquote>
+<p>输出：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">array([-2.94883437e+02,  1.10333716e-01])</code></pre></div><p>根据上面输出的结果，我们的回归方程应该是 $\small{y=0.110333716x-294.883437}$ 。我们将这个回归方程绘制到刚才的散点图上，红色的点是我们的预测值，蓝色的点是历史数据，也就是真实值。</p>
+<p>代码：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">import matplotlib.pyplot as plt
+
+plt.scatter(x, y, color='blue')
+plt.scatter(x, 0.110333716 * x - 294.883437, color='red')
+plt.plot(x, 0.110333716 * x - 294.883437, color='darkcyan')
+plt.show()</code></pre></div><p>输出：</p>
+<p><img src="/assets/in_out_regression_result-20250605165226-sdlq9ky.png"" alt="" loading="lazy"></p>
+<p>如果不使用<code>Polynomial</code>类型的<code>fit</code>方法，我们也可以通过 NumPy 提供的<code>polyfit</code>函数来完成同样的操作，有兴趣的读者可以自行研究。</p>
+<blockquote>
+<p><strong>说明</strong>：本章部分图片来自于维基百科。</p>
+</blockquote>
+</div></article></div></main><footer>by天才程序员</footer><script src="/script.js"></script></body></html>

@@ -1,0 +1,27 @@
+const fs = require('node:fs');
+const path = require('node:path');
+const { marked } = require('marked');
+const root = process.env.CONTENT_DIR || path.resolve(__dirname, '../../python-notes-content');
+const out = process.argv[2] || path.resolve(__dirname, '../public');
+const groups = ['01-基础语法','02-数据结构','03-函数与模块','04-文件与异常','05-面向对象','06-基础项目','拓展-办公自动化','拓展-Web与爬虫','拓展-数据分析','拓展-机器学习'];
+const files=[];
+for(const group of groups){const dir=path.join(root,group); if(!fs.existsSync(dir)) continue; for(const name of fs.readdirSync(dir)){if(name.endsWith('.md')) files.push({group,name,src:path.join(dir,name)});}}
+const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+const slug=s=>s.toLowerCase().replace(/<[^>]+>/g,'').trim().replace(/\s+/g,'-').replace(/[^\w\-\u4e00-\u9fff]+/g,'-').replace(/^-+|-+$/g,'');
+const titleOf=name=>name.replace(/\.md$/,'');
+const allLinks=files.map(f=>`/pages/${encodeURIComponent(f.group)}/${encodeURIComponent(titleOf(f.name))}.html`);
+const byGroup={}; for(const f of files)(byGroup[f.group]??=[]).push(f);
+const nav=()=>groups.filter(g=>byGroup[g]?.length).map(g=>`<div class="nav-group">${g}</div><ul>${byGroup[g].map(f=>`<li><a href="/pages/${encodeURIComponent(f.group)}/${encodeURIComponent(titleOf(f.name))}.html">${titleOf(f.name)}</a></li>`).join('')}</ul>`).join('');
+const renderer=new marked.Renderer();
+renderer.heading=({text,depth})=>`<h${depth} id="${slug(text)}">${text}</h${depth}>`;
+renderer.image=({href,title,text})=>`<img src="${href}" alt="${text||''}"${title?` title="${title}"`:''} loading="lazy">`;
+renderer.link=({href,title,text})=>`<a href="${href}"${title?` title="${title}"`:''}>${text}</a>`;
+renderer.code=({text,lang})=>`<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-${lang||'text'}">${text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</code></pre></div>`;
+marked.setOptions({renderer,gfm:true,breaks:false});
+function toc(html){return [...html.matchAll(/<h([23]) id="([^"]+)">([^<]+)<\/h\1>/g)].map(m=>`<li class="toc-level-${m[1]}"><a href="#${m[2]}">${m[3]}</a></li>`).join('');}
+const shell=(title,body)=>`<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Python 基础课程讲义：${title}"><title>${title}｜Python 编程基础</title><link rel="stylesheet" href="/style.css"><script>window.MathJax={tex:{inlineMath:[["$","$"],["\\\\(","\\\\)"]],displayMath:[["$$","$$"],["\\\\[","\\\\]"]],processEscapes:true,processEnvironments:true},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body><header class="site-header"><div class="header-inner"><a class="brand" href="/index.html"><span>Python 编程基础</span><small>Python 基础课程讲义</small></a><a class="back-home" href="/index.html">课程首页</a></div></header><main class="page-layout"><aside class="course-nav" aria-label="课程章节"><div class="nav-title">课程章节</div>${nav()}</aside><div class="content-area"><details class="mobile-course-nav"><summary>课程章节</summary><div class="mobile-course-links">${nav()}</div></details><article class="lesson"><div class="lesson-toc"><div class="toc-title">本页目录</div><ul>${toc(body)}</ul><a class="to-top" href="#top">回到顶部</a></div><div class="lesson-content" id="top">${body}</div></article></div></main><footer>by天才程序员</footer><script src="/script.js"></script></body></html>`;
+for(const f of files){const md=fs.readFileSync(f.src,'utf8').replace(/^\uFEFF/,''); let body=marked.parse(md); const rel=path.join('pages',f.group,titleOf(f.name)+'.html'); const target=path.join(out,rel); fs.mkdirSync(path.dirname(target),{recursive:true}); body=body.replace(/src="(?!https?:\/\/|\/)([^"#?]+)/g,(m,p)=>`src="/assets/${p.replace(/^.*[\\/]/,'')}"`); fs.writeFileSync(target,shell(titleOf(f.name),body));}
+const index=`<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Python 基础课程讲义"><title>Python 编程基础</title><link rel="stylesheet" href="/style.css"></head><body><header class="site-header"><div class="header-inner"><div class="brand"><span>Python 编程基础</span><small>Python 基础课程讲义</small></div></div></header><main class="home-main"><section class="intro-card"><div class="eyebrow">COURSE NOTES</div><h1>Python 编程基础</h1><p>面向初学者的 Python 基础课程讲义，按学习顺序整理基础语法、数据结构、函数与模块。</p><div class="intro-meta"><span>支持公式渲染</span><span>代码彩色高亮</span><span>代码一键复制</span><span>移动端适配</span></div></section><div class="index-grid">${groups.filter(g=>byGroup[g]?.length).map(g=>`<section class="index-section"><h2>${g}</h2><ul>${byGroup[g].map(f=>`<li><a href="/pages/${encodeURIComponent(f.group)}/${encodeURIComponent(titleOf(f.name))}.html">${titleOf(f.name)}</a></li>`).join('')}</ul></section>`).join('')}</div></main><footer>by天才程序员</footer><script src="/script.js"></script></body></html>`;
+fs.writeFileSync(path.join(out,'index.html'),index);
+fs.writeFileSync(path.join(out,'script.js'),`document.querySelectorAll('.copy-code').forEach(b=>b.addEventListener('click',async()=>{const code=b.nextElementSibling.innerText;await navigator.clipboard.writeText(code);const t=b.textContent;b.textContent='已复制';setTimeout(()=>b.textContent=t,1200)}));`);
+console.log(JSON.stringify({files:files.length,links:allLinks.length,out}));
