@@ -134,11 +134,11 @@ print('状态码描述:', description)</code></pre></div><p>运行结果：</p>
 <div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">响应状态码: 403
 状态码描述: Not Allowed</code></pre></div><h3 id="分支结构的应用">分支结构的应用</h3><h4 id="例子1-分段函数求值">例子1：分段函数求值</h4><p>有如下所示的分段函数，要求输入<code>x</code>，计算出<code>y</code>。</p>
 <p>$$
-\begin{aligned}
-y &amp;= 3x - 5, &amp;&amp; x &gt; 1 \
-y &amp;= x + 2, &amp;&amp; -1 \le x \le 1 \
-y &amp;= 5x + 3, &amp;&amp; x &lt; -1
-\end{aligned}
+y = \begin{cases}
+3x - 5, &amp; x &gt; 1 \\
+x + 2, &amp; -1 \le x \le 1 \\
+5x + 3, &amp; x &lt; -1
+\end{cases}
 $$</p>
 <div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">
 x = float(input('x = '))
