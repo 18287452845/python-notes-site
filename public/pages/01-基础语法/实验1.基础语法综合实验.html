@@ -1,163 +1,486 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Python 基础课程讲义：实验1.基础语法综合实验"><title>实验1.基础语法综合实验｜Python 编程基础</title><link rel="stylesheet" href="/style.css"><script>window.MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:true,processEnvironments:true},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body><header class="site-header"><div class="header-inner"><a class="brand" href="/index.html"><span>Python 编程基础</span><small>Python 基础课程讲义</small></a><a class="back-home" href="/index.html">课程首页</a></div></header><main class="page-layout"><aside class="course-nav" aria-label="课程章节" id="course-nav-list"><div class="course-nav-head"><div class="nav-title">课程章节</div><button class="course-nav-toggle" type="button" aria-expanded="true" aria-controls="course-nav-list">收起</button></div><div class="nav-group">01-基础语法</div><ul><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/01.%E5%88%9D%E8%AF%86Python.html">01.初识Python</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/02.%E7%AC%AC%E4%B8%80%E4%B8%AAPython%E7%A8%8B%E5%BA%8F.html">02.第一个Python程序</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/03.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F.html">03.Python语言中的变量</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/04.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6.html">04.Python语言中的运算符</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/05.%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84.html">05.分支结构</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/06.%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84.html">06.循环结构</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/%E5%AE%9E%E9%AA%8C1.%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验1.基础语法综合实验</a></li></ul><div class="nav-group">02-数据结构</div><ul><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/08.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-1.html">08.常用数据结构之列表-1</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/09.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-2.html">09.常用数据结构之列表-2</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/10.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%85%83%E7%BB%84.html">10.常用数据结构之元组</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/11.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2.html">11.常用数据结构之字符串</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/12.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E9%9B%86%E5%90%88.html">12.常用数据结构之集合</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/13.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E5%85%B8.html">13.常用数据结构之字典</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%AE%9E%E9%AA%8C2.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验2.数据结构综合实验</a></li></ul><div class="nav-group">03-函数与模块</div><ul><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/14.%E5%87%BD%E6%95%B0%E5%92%8C%E6%A8%A1%E5%9D%97.html">14.函数和模块</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/16.%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E8%BF%9B%E9%98%B6.html">16.函数使用进阶</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/17.%E5%87%BD%E6%95%B0%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8.html">17.函数高级应用</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/%E5%AE%9E%E9%AA%8C3.%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验3.函数与模块综合实验</a></li></ul><div class="nav-group">04-文件与异常</div><ul><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/21.%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html">21.文件读写和异常处理</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/22.%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96.html">22.对象的序列化和反序列化</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/23.Python%E8%AF%BB%E5%86%99CSV%E6%96%87%E4%BB%B6.html">23.Python读写CSV文件</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/%E5%AE%9E%E9%AA%8C4.%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验4.文件与异常综合实验</a></li></ul><div class="nav-group">05-面向对象</div><ul><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/18.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8.html">18.面向对象编程入门</a></li><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/19.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6.html">19.面向对象编程进阶</a></li></ul><div class="nav-group">06-基础项目</div><ul><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/07.%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84%E5%AE%9E%E6%88%98.html">07.分支和循环结构实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/15.%E5%87%BD%E6%95%B0%E5%BA%94%E7%94%A8%E5%AE%9E%E6%88%98.html">15.函数应用实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/20.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%BA%94%E7%94%A8.html">20.面向对象编程应用</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/30.%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%BA%94%E7%94%A8.html">30.正则表达式的应用</a></li></ul><div class="nav-group">拓展-办公自动化</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/24.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-1.html">24.Python读写Excel文件-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/25.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-2.html">25.Python读写Excel文件-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/26.Python%E6%93%8D%E4%BD%9CWord%E5%92%8CPowerPoint%E6%96%87%E4%BB%B6.html">26.Python操作Word和PowerPoint文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/27.Python%E6%93%8D%E4%BD%9CPDF%E6%96%87%E4%BB%B6.html">27.Python操作PDF文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/28.Python%E5%A4%84%E7%90%86%E5%9B%BE%E5%83%8F.html">28.Python处理图像</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/29.Python%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E5%92%8C%E7%9F%AD%E4%BF%A1.html">29.Python发送邮件和短信</a></li></ul><div class="nav-group">拓展-Web与爬虫</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/31.Python%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6.html">31.Python语言进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/32-33.Web%E5%89%8D%E7%AB%AF%E5%85%A5%E9%97%A8.html">32-33.Web前端入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/34-35.%E7%8E%A9%E8%BD%ACLinux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.html">34-35.玩转Linux操作系统</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/36.%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CMySQL%E6%A6%82%E8%BF%B0.html">36.关系型数据库和MySQL概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/37.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDDL.html">37.SQL详解之DDL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/38.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDML.html">38.SQL详解之DML</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/39.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDQL.html">39.SQL详解之DQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/40.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDCL.html">40.SQL详解之DCL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/41.MySQL%E6%96%B0%E7%89%B9%E6%80%A7.html">41.MySQL新特性</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/42.%E8%A7%86%E5%9B%BE%E3%80%81%E5%87%BD%E6%95%B0%E5%92%8C%E8%BF%87%E7%A8%8B.html">42.视图、函数和过程</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/43.%E7%B4%A2%E5%BC%95.html">43.索引</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/44.Python%E6%8E%A5%E5%85%A5MySQL%E6%95%B0%E6%8D%AE%E5%BA%93.html">44.Python接入MySQL数据库</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/45.%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E5%92%8CHiveSQL.html">45.大数据平台和HiveSQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/46.Django%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.html">46.Django快速上手</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/47.%E6%B7%B1%E5%85%A5%E6%A8%A1%E5%9E%8B.html">47.深入模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/48.%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%92%8CAjax%E8%AF%B7%E6%B1%82.html">48.静态资源和Ajax请求</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/49.Cookie%E5%92%8CSession.html">49.Cookie和Session</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/50.%E5%88%B6%E4%BD%9C%E6%8A%A5%E8%A1%A8.html">50.制作报表</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/51.%E6%97%A5%E5%BF%97%E5%92%8C%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7%E6%A0%8F.html">51.日志和调试工具栏</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/52.%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E5%BA%94%E7%94%A8.html">52.中间件的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/53.%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8.html">53.前后端分离开发入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/54.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E5%85%A5%E9%97%A8.html">54.RESTful架构和DRF入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/55.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E8%BF%9B%E9%98%B6.html">55.RESTful架构和DRF进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/56.%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98.html">56.使用缓存</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/57.%E6%8E%A5%E5%85%A5%E4%B8%89%E6%96%B9%E5%B9%B3%E5%8F%B0.html">57.接入三方平台</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/58.%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1.html">58.异步任务和定时任务</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/59.%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95.html">59.单元测试</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/60.%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF.html">60.项目上线</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/61.%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E6%A6%82%E8%BF%B0.html">61.网络数据采集概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%8E%B7%E5%8F%96%E7%BD%91%E7%BB%9C%E8%B5%84%E6%BA%90-1.html">62.用Python获取网络资源-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%A7%A3%E6%9E%90HTML%E9%A1%B5%E9%9D%A2-2.html">62.用Python解析HTML页面-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-1.html">63.Python中的并发编程-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-2.html">63.Python中的并发编程-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-3.html">63.Python中的并发编程-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9C%A8%E7%88%AC%E8%99%AB%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html">63.并发编程在爬虫中的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/64.%E4%BD%BF%E7%94%A8Selenium%E6%8A%93%E5%8F%96%E7%BD%91%E9%A1%B5%E5%8A%A8%E6%80%81%E5%86%85%E5%AE%B9.html">64.使用Selenium抓取网页动态内容</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/65.%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6Scrapy%E7%AE%80%E4%BB%8B.html">65.爬虫框架Scrapy简介</a></li></ul><div class="nav-group">拓展-数据分析</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/66.%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A6%82%E8%BF%B0.html">66.数据分析概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/67.%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87.html">67.环境准备</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/68.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-1.html">68.NumPy的应用-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/69.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-2.html">69.NumPy的应用-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/70.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-3.html">70.NumPy的应用-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/71.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-4.html">71.NumPy的应用-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/72.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-1.html">72.深入浅出pandas-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/73.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-2.html">73.深入浅出pandas-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/74.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-3.html">74.深入浅出pandas-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/75.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-4.html">75.深入浅出pandas-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/76.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-5.html">76.深入浅出pandas-5</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/77.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-6.html">77.深入浅出pandas-6</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/78.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-1.html">78.数据可视化-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/79.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-2.html">79.数据可视化-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/80.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-3.html">80.数据可视化-3</a></li></ul><div class="nav-group">拓展-机器学习</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/81.%E6%B5%85%E8%B0%88%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0.html">81.浅谈机器学习</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/82.k%E6%9C%80%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95.html">82.k最近邻算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/83.%E5%86%B3%E7%AD%96%E6%A0%91%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97.html">83.决策树和随机森林</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/84.%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95.html">84.朴素贝叶斯算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/85.%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B.html">85.回归模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/86.K-Means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95.html">86.K-Means聚类算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/87.%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95.html">87.集成学习算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/88.%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B.html">88.神经网络模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/89.%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E5%85%A5%E9%97%A8.html">89.自然语言处理入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/90.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98.html">90.机器学习实战</a></li></ul></aside><aside class="lesson-toc" aria-label="本页目录"><div class="toc-title">本页目录</div><ul><li class="toc-level-2"><a href="#基础语法综合实验">基础语法综合实验</a></li><li class="toc-level-3"><a href="#实验目标">实验目标</a></li><li class="toc-level-3"><a href="#实验任务">实验任务</a></li><li class="toc-level-3"><a href="#参考实现">参考实现</a></li><li class="toc-level-3"><a href="#操作示例">操作示例</a></li><li class="toc-level-3"><a href="#扩展挑战">扩展挑战</a></li><li class="toc-level-3"><a href="#知识点总结">知识点总结</a></li></ul><a class="to-top" href="#top">回到顶部</a></aside><div class="content-area"><details class="mobile-course-nav"><summary>课程章节</summary><div class="mobile-course-links"><div class="nav-group">01-基础语法</div><ul><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/01.%E5%88%9D%E8%AF%86Python.html">01.初识Python</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/02.%E7%AC%AC%E4%B8%80%E4%B8%AAPython%E7%A8%8B%E5%BA%8F.html">02.第一个Python程序</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/03.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F.html">03.Python语言中的变量</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/04.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6.html">04.Python语言中的运算符</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/05.%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84.html">05.分支结构</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/06.%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84.html">06.循环结构</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/%E5%AE%9E%E9%AA%8C1.%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验1.基础语法综合实验</a></li></ul><div class="nav-group">02-数据结构</div><ul><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/08.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-1.html">08.常用数据结构之列表-1</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/09.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-2.html">09.常用数据结构之列表-2</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/10.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%85%83%E7%BB%84.html">10.常用数据结构之元组</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/11.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2.html">11.常用数据结构之字符串</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/12.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E9%9B%86%E5%90%88.html">12.常用数据结构之集合</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/13.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E5%85%B8.html">13.常用数据结构之字典</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%AE%9E%E9%AA%8C2.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验2.数据结构综合实验</a></li></ul><div class="nav-group">03-函数与模块</div><ul><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/14.%E5%87%BD%E6%95%B0%E5%92%8C%E6%A8%A1%E5%9D%97.html">14.函数和模块</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/16.%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E8%BF%9B%E9%98%B6.html">16.函数使用进阶</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/17.%E5%87%BD%E6%95%B0%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8.html">17.函数高级应用</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/%E5%AE%9E%E9%AA%8C3.%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验3.函数与模块综合实验</a></li></ul><div class="nav-group">04-文件与异常</div><ul><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/21.%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html">21.文件读写和异常处理</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/22.%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96.html">22.对象的序列化和反序列化</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/23.Python%E8%AF%BB%E5%86%99CSV%E6%96%87%E4%BB%B6.html">23.Python读写CSV文件</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/%E5%AE%9E%E9%AA%8C4.%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验4.文件与异常综合实验</a></li></ul><div class="nav-group">05-面向对象</div><ul><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/18.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8.html">18.面向对象编程入门</a></li><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/19.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6.html">19.面向对象编程进阶</a></li></ul><div class="nav-group">06-基础项目</div><ul><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/07.%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84%E5%AE%9E%E6%88%98.html">07.分支和循环结构实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/15.%E5%87%BD%E6%95%B0%E5%BA%94%E7%94%A8%E5%AE%9E%E6%88%98.html">15.函数应用实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/20.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%BA%94%E7%94%A8.html">20.面向对象编程应用</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/30.%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%BA%94%E7%94%A8.html">30.正则表达式的应用</a></li></ul><div class="nav-group">拓展-办公自动化</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/24.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-1.html">24.Python读写Excel文件-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/25.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-2.html">25.Python读写Excel文件-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/26.Python%E6%93%8D%E4%BD%9CWord%E5%92%8CPowerPoint%E6%96%87%E4%BB%B6.html">26.Python操作Word和PowerPoint文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/27.Python%E6%93%8D%E4%BD%9CPDF%E6%96%87%E4%BB%B6.html">27.Python操作PDF文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/28.Python%E5%A4%84%E7%90%86%E5%9B%BE%E5%83%8F.html">28.Python处理图像</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/29.Python%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E5%92%8C%E7%9F%AD%E4%BF%A1.html">29.Python发送邮件和短信</a></li></ul><div class="nav-group">拓展-Web与爬虫</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/31.Python%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6.html">31.Python语言进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/32-33.Web%E5%89%8D%E7%AB%AF%E5%85%A5%E9%97%A8.html">32-33.Web前端入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/34-35.%E7%8E%A9%E8%BD%ACLinux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.html">34-35.玩转Linux操作系统</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/36.%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CMySQL%E6%A6%82%E8%BF%B0.html">36.关系型数据库和MySQL概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/37.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDDL.html">37.SQL详解之DDL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/38.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDML.html">38.SQL详解之DML</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/39.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDQL.html">39.SQL详解之DQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/40.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDCL.html">40.SQL详解之DCL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/41.MySQL%E6%96%B0%E7%89%B9%E6%80%A7.html">41.MySQL新特性</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/42.%E8%A7%86%E5%9B%BE%E3%80%81%E5%87%BD%E6%95%B0%E5%92%8C%E8%BF%87%E7%A8%8B.html">42.视图、函数和过程</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/43.%E7%B4%A2%E5%BC%95.html">43.索引</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/44.Python%E6%8E%A5%E5%85%A5MySQL%E6%95%B0%E6%8D%AE%E5%BA%93.html">44.Python接入MySQL数据库</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/45.%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E5%92%8CHiveSQL.html">45.大数据平台和HiveSQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/46.Django%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.html">46.Django快速上手</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/47.%E6%B7%B1%E5%85%A5%E6%A8%A1%E5%9E%8B.html">47.深入模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/48.%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%92%8CAjax%E8%AF%B7%E6%B1%82.html">48.静态资源和Ajax请求</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/49.Cookie%E5%92%8CSession.html">49.Cookie和Session</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/50.%E5%88%B6%E4%BD%9C%E6%8A%A5%E8%A1%A8.html">50.制作报表</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/51.%E6%97%A5%E5%BF%97%E5%92%8C%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7%E6%A0%8F.html">51.日志和调试工具栏</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/52.%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E5%BA%94%E7%94%A8.html">52.中间件的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/53.%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8.html">53.前后端分离开发入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/54.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E5%85%A5%E9%97%A8.html">54.RESTful架构和DRF入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/55.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E8%BF%9B%E9%98%B6.html">55.RESTful架构和DRF进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/56.%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98.html">56.使用缓存</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/57.%E6%8E%A5%E5%85%A5%E4%B8%89%E6%96%B9%E5%B9%B3%E5%8F%B0.html">57.接入三方平台</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/58.%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1.html">58.异步任务和定时任务</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/59.%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95.html">59.单元测试</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/60.%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF.html">60.项目上线</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/61.%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E6%A6%82%E8%BF%B0.html">61.网络数据采集概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%8E%B7%E5%8F%96%E7%BD%91%E7%BB%9C%E8%B5%84%E6%BA%90-1.html">62.用Python获取网络资源-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%A7%A3%E6%9E%90HTML%E9%A1%B5%E9%9D%A2-2.html">62.用Python解析HTML页面-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-1.html">63.Python中的并发编程-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-2.html">63.Python中的并发编程-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-3.html">63.Python中的并发编程-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9C%A8%E7%88%AC%E8%99%AB%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html">63.并发编程在爬虫中的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/64.%E4%BD%BF%E7%94%A8Selenium%E6%8A%93%E5%8F%96%E7%BD%91%E9%A1%B5%E5%8A%A8%E6%80%81%E5%86%85%E5%AE%B9.html">64.使用Selenium抓取网页动态内容</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/65.%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6Scrapy%E7%AE%80%E4%BB%8B.html">65.爬虫框架Scrapy简介</a></li></ul><div class="nav-group">拓展-数据分析</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/66.%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A6%82%E8%BF%B0.html">66.数据分析概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/67.%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87.html">67.环境准备</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/68.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-1.html">68.NumPy的应用-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/69.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-2.html">69.NumPy的应用-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/70.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-3.html">70.NumPy的应用-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/71.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-4.html">71.NumPy的应用-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/72.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-1.html">72.深入浅出pandas-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/73.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-2.html">73.深入浅出pandas-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/74.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-3.html">74.深入浅出pandas-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/75.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-4.html">75.深入浅出pandas-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/76.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-5.html">76.深入浅出pandas-5</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/77.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-6.html">77.深入浅出pandas-6</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/78.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-1.html">78.数据可视化-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/79.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-2.html">79.数据可视化-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/80.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-3.html">80.数据可视化-3</a></li></ul><div class="nav-group">拓展-机器学习</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/81.%E6%B5%85%E8%B0%88%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0.html">81.浅谈机器学习</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/82.k%E6%9C%80%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95.html">82.k最近邻算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/83.%E5%86%B3%E7%AD%96%E6%A0%91%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97.html">83.决策树和随机森林</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/84.%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95.html">84.朴素贝叶斯算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/85.%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B.html">85.回归模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/86.K-Means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95.html">86.K-Means聚类算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/87.%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95.html">87.集成学习算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/88.%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B.html">88.神经网络模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/89.%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E5%85%A5%E9%97%A8.html">89.自然语言处理入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/90.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98.html">90.机器学习实战</a></li></ul></div></details><article class="lesson"><div class="lesson-content" id="top"><h1 id="实验1-基础语法综合实验">实验1.基础语法综合实验</h1><h2 id="基础语法综合实验">基础语法综合实验</h2><p>本实验把<strong>变量与类型、运算符、分支结构、循环结构</strong>串成一个可运行的小程序：成绩录入与统计控制台。请先完成 <code>01-基础语法</code> 中相关讲义，再动手实现。</p>
-<h3 id="实验目标">实验目标</h3><ol>
-<li>能用变量保存姓名、分数等数据，并正确选择 <code>int</code> / <code>float</code> / <code>str</code>。</li>
-<li>能用算术运算求平均分、及格率，用比较和逻辑运算做条件判断。</li>
-<li>能用 <code>if</code> / <code>elif</code> / <code>else</code> 实现成绩等级划分，用循环和菜单驱动程序。</li>
-<li>能用 <code>for-in</code>、<code>while</code>、<code>break</code>、<code>continue</code> 完成录入、统计和退出。</li>
-</ol>
-<h3 id="实验任务">实验任务</h3><p>编写程序 <code>score_console.py</code>，提供一个文字菜单：</p>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Python 基础课程讲义：实验1.基础语法综合实验"><title>实验1.基础语法综合实验｜Python 编程基础</title><link rel="stylesheet" href="/style.css"><script>window.MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:true,processEnvironments:true},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body><header class="site-header"><div class="header-inner"><a class="brand" href="/index.html"><span>Python 编程基础</span><small>Python 基础课程讲义</small></a><a class="back-home" href="/index.html">课程首页</a></div></header><main class="page-layout"><aside class="course-nav" aria-label="课程章节" id="course-nav-list"><div class="course-nav-head"><div class="nav-title">课程章节</div><button class="course-nav-toggle" type="button" aria-expanded="true" aria-controls="course-nav-list">收起</button></div><div class="nav-group">01-基础语法</div><ul><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/01.%E5%88%9D%E8%AF%86Python.html">01.初识Python</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/02.%E7%AC%AC%E4%B8%80%E4%B8%AAPython%E7%A8%8B%E5%BA%8F.html">02.第一个Python程序</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/03.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F.html">03.Python语言中的变量</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/04.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6.html">04.Python语言中的运算符</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/05.%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84.html">05.分支结构</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/06.%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84.html">06.循环结构</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/%E5%AE%9E%E9%AA%8C1.%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验1.基础语法综合实验</a></li></ul><div class="nav-group">02-数据结构</div><ul><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/08.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-1.html">08.常用数据结构之列表-1</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/09.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-2.html">09.常用数据结构之列表-2</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/10.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%85%83%E7%BB%84.html">10.常用数据结构之元组</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/11.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2.html">11.常用数据结构之字符串</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/12.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E9%9B%86%E5%90%88.html">12.常用数据结构之集合</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/13.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E5%85%B8.html">13.常用数据结构之字典</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%AE%9E%E9%AA%8C2.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验2.数据结构综合实验</a></li></ul><div class="nav-group">03-函数与模块</div><ul><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/14.%E5%87%BD%E6%95%B0%E5%92%8C%E6%A8%A1%E5%9D%97.html">14.函数和模块</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/16.%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E8%BF%9B%E9%98%B6.html">16.函数使用进阶</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/17.%E5%87%BD%E6%95%B0%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8.html">17.函数高级应用</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/%E5%AE%9E%E9%AA%8C3.%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验3.函数与模块综合实验</a></li></ul><div class="nav-group">04-文件与异常</div><ul><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/21.%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html">21.文件读写和异常处理</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/22.%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96.html">22.对象的序列化和反序列化</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/23.Python%E8%AF%BB%E5%86%99CSV%E6%96%87%E4%BB%B6.html">23.Python读写CSV文件</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/%E5%AE%9E%E9%AA%8C4.%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验4.文件与异常综合实验</a></li></ul><div class="nav-group">05-面向对象</div><ul><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/18.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8.html">18.面向对象编程入门</a></li><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/19.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6.html">19.面向对象编程进阶</a></li></ul><div class="nav-group">06-基础项目</div><ul><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/07.%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84%E5%AE%9E%E6%88%98.html">07.分支和循环结构实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/15.%E5%87%BD%E6%95%B0%E5%BA%94%E7%94%A8%E5%AE%9E%E6%88%98.html">15.函数应用实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/20.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%BA%94%E7%94%A8.html">20.面向对象编程应用</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/30.%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%BA%94%E7%94%A8.html">30.正则表达式的应用</a></li></ul><div class="nav-group">拓展-办公自动化</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/24.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-1.html">24.Python读写Excel文件-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/25.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-2.html">25.Python读写Excel文件-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/26.Python%E6%93%8D%E4%BD%9CWord%E5%92%8CPowerPoint%E6%96%87%E4%BB%B6.html">26.Python操作Word和PowerPoint文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/27.Python%E6%93%8D%E4%BD%9CPDF%E6%96%87%E4%BB%B6.html">27.Python操作PDF文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/28.Python%E5%A4%84%E7%90%86%E5%9B%BE%E5%83%8F.html">28.Python处理图像</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/29.Python%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E5%92%8C%E7%9F%AD%E4%BF%A1.html">29.Python发送邮件和短信</a></li></ul><div class="nav-group">拓展-Web与爬虫</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/31.Python%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6.html">31.Python语言进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/32-33.Web%E5%89%8D%E7%AB%AF%E5%85%A5%E9%97%A8.html">32-33.Web前端入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/34-35.%E7%8E%A9%E8%BD%ACLinux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.html">34-35.玩转Linux操作系统</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/36.%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CMySQL%E6%A6%82%E8%BF%B0.html">36.关系型数据库和MySQL概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/37.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDDL.html">37.SQL详解之DDL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/38.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDML.html">38.SQL详解之DML</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/39.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDQL.html">39.SQL详解之DQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/40.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDCL.html">40.SQL详解之DCL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/41.MySQL%E6%96%B0%E7%89%B9%E6%80%A7.html">41.MySQL新特性</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/42.%E8%A7%86%E5%9B%BE%E3%80%81%E5%87%BD%E6%95%B0%E5%92%8C%E8%BF%87%E7%A8%8B.html">42.视图、函数和过程</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/43.%E7%B4%A2%E5%BC%95.html">43.索引</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/44.Python%E6%8E%A5%E5%85%A5MySQL%E6%95%B0%E6%8D%AE%E5%BA%93.html">44.Python接入MySQL数据库</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/45.%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E5%92%8CHiveSQL.html">45.大数据平台和HiveSQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/46.Django%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.html">46.Django快速上手</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/47.%E6%B7%B1%E5%85%A5%E6%A8%A1%E5%9E%8B.html">47.深入模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/48.%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%92%8CAjax%E8%AF%B7%E6%B1%82.html">48.静态资源和Ajax请求</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/49.Cookie%E5%92%8CSession.html">49.Cookie和Session</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/50.%E5%88%B6%E4%BD%9C%E6%8A%A5%E8%A1%A8.html">50.制作报表</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/51.%E6%97%A5%E5%BF%97%E5%92%8C%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7%E6%A0%8F.html">51.日志和调试工具栏</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/52.%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E5%BA%94%E7%94%A8.html">52.中间件的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/53.%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8.html">53.前后端分离开发入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/54.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E5%85%A5%E9%97%A8.html">54.RESTful架构和DRF入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/55.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E8%BF%9B%E9%98%B6.html">55.RESTful架构和DRF进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/56.%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98.html">56.使用缓存</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/57.%E6%8E%A5%E5%85%A5%E4%B8%89%E6%96%B9%E5%B9%B3%E5%8F%B0.html">57.接入三方平台</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/58.%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1.html">58.异步任务和定时任务</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/59.%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95.html">59.单元测试</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/60.%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF.html">60.项目上线</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/61.%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E6%A6%82%E8%BF%B0.html">61.网络数据采集概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%8E%B7%E5%8F%96%E7%BD%91%E7%BB%9C%E8%B5%84%E6%BA%90-1.html">62.用Python获取网络资源-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%A7%A3%E6%9E%90HTML%E9%A1%B5%E9%9D%A2-2.html">62.用Python解析HTML页面-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-1.html">63.Python中的并发编程-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-2.html">63.Python中的并发编程-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-3.html">63.Python中的并发编程-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9C%A8%E7%88%AC%E8%99%AB%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html">63.并发编程在爬虫中的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/64.%E4%BD%BF%E7%94%A8Selenium%E6%8A%93%E5%8F%96%E7%BD%91%E9%A1%B5%E5%8A%A8%E6%80%81%E5%86%85%E5%AE%B9.html">64.使用Selenium抓取网页动态内容</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/65.%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6Scrapy%E7%AE%80%E4%BB%8B.html">65.爬虫框架Scrapy简介</a></li></ul><div class="nav-group">拓展-数据分析</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/66.%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A6%82%E8%BF%B0.html">66.数据分析概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/67.%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87.html">67.环境准备</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/68.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-1.html">68.NumPy的应用-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/69.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-2.html">69.NumPy的应用-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/70.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-3.html">70.NumPy的应用-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/71.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-4.html">71.NumPy的应用-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/72.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-1.html">72.深入浅出pandas-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/73.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-2.html">73.深入浅出pandas-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/74.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-3.html">74.深入浅出pandas-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/75.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-4.html">75.深入浅出pandas-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/76.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-5.html">76.深入浅出pandas-5</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/77.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-6.html">77.深入浅出pandas-6</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/78.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-1.html">78.数据可视化-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/79.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-2.html">79.数据可视化-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/80.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-3.html">80.数据可视化-3</a></li></ul><div class="nav-group">拓展-机器学习</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/81.%E6%B5%85%E8%B0%88%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0.html">81.浅谈机器学习</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/82.k%E6%9C%80%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95.html">82.k最近邻算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/83.%E5%86%B3%E7%AD%96%E6%A0%91%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97.html">83.决策树和随机森林</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/84.%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95.html">84.朴素贝叶斯算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/85.%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B.html">85.回归模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/86.K-Means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95.html">86.K-Means聚类算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/87.%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95.html">87.集成学习算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/88.%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B.html">88.神经网络模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/89.%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E5%85%A5%E9%97%A8.html">89.自然语言处理入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/90.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98.html">90.机器学习实战</a></li></ul></aside><aside class="lesson-toc" aria-label="本页目录"><div class="toc-title">本页目录</div><ul><li class="toc-level-2"><a href="#基础语法综合实验">基础语法综合实验</a></li><li class="toc-level-3"><a href="#实验目标">实验目标</a></li><li class="toc-level-2"><a href="#案例一-校园生活费用计算器">案例一：校园生活费用计算器</a></li><li class="toc-level-3"><a href="#任务描述">任务描述</a></li><li class="toc-level-3"><a href="#思路分析">思路分析</a></li><li class="toc-level-3"><a href="#分步实现">分步实现</a></li><li class="toc-level-3"><a href="#完整代码">完整代码</a></li><li class="toc-level-3"><a href="#课后练习">课后练习</a></li><li class="toc-level-2"><a href="#案例二-简易工资计算器">案例二：简易工资计算器</a></li><li class="toc-level-3"><a href="#任务描述">任务描述</a></li><li class="toc-level-3"><a href="#思路分析">思路分析</a></li><li class="toc-level-3"><a href="#分步实现">分步实现</a></li><li class="toc-level-3"><a href="#完整代码">完整代码</a></li><li class="toc-level-3"><a href="#课后练习">课后练习</a></li><li class="toc-level-2"><a href="#案例三-电影院购票计算器">案例三：电影院购票计算器</a></li><li class="toc-level-3"><a href="#任务描述">任务描述</a></li><li class="toc-level-3"><a href="#思路分析">思路分析</a></li><li class="toc-level-3"><a href="#分步实现">分步实现</a></li><li class="toc-level-3"><a href="#完整代码">完整代码</a></li><li class="toc-level-3"><a href="#课后练习">课后练习</a></li><li class="toc-level-2"><a href="#案例四-购物小票生成器">案例四：购物小票生成器</a></li><li class="toc-level-3"><a href="#任务描述">任务描述</a></li><li class="toc-level-3"><a href="#思路分析">思路分析</a></li><li class="toc-level-3"><a href="#分步实现">分步实现</a></li><li class="toc-level-3"><a href="#完整代码">完整代码</a></li><li class="toc-level-3"><a href="#课后练习">课后练习</a></li><li class="toc-level-2"><a href="#综合练习">综合练习</a></li><li class="toc-level-3"><a href="#知识点总结">知识点总结</a></li></ul><a class="to-top" href="#top">回到顶部</a></aside><div class="content-area"><details class="mobile-course-nav"><summary>课程章节</summary><div class="mobile-course-links"><div class="nav-group">01-基础语法</div><ul><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/01.%E5%88%9D%E8%AF%86Python.html">01.初识Python</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/02.%E7%AC%AC%E4%B8%80%E4%B8%AAPython%E7%A8%8B%E5%BA%8F.html">02.第一个Python程序</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/03.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F.html">03.Python语言中的变量</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/04.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6.html">04.Python语言中的运算符</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/05.%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84.html">05.分支结构</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/06.%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84.html">06.循环结构</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/%E5%AE%9E%E9%AA%8C1.%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验1.基础语法综合实验</a></li></ul><div class="nav-group">02-数据结构</div><ul><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/08.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-1.html">08.常用数据结构之列表-1</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/09.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-2.html">09.常用数据结构之列表-2</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/10.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%85%83%E7%BB%84.html">10.常用数据结构之元组</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/11.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2.html">11.常用数据结构之字符串</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/12.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E9%9B%86%E5%90%88.html">12.常用数据结构之集合</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/13.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E5%85%B8.html">13.常用数据结构之字典</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%AE%9E%E9%AA%8C2.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验2.数据结构综合实验</a></li></ul><div class="nav-group">03-函数与模块</div><ul><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/14.%E5%87%BD%E6%95%B0%E5%92%8C%E6%A8%A1%E5%9D%97.html">14.函数和模块</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/16.%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E8%BF%9B%E9%98%B6.html">16.函数使用进阶</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/17.%E5%87%BD%E6%95%B0%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8.html">17.函数高级应用</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/%E5%AE%9E%E9%AA%8C3.%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验3.函数与模块综合实验</a></li></ul><div class="nav-group">04-文件与异常</div><ul><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/21.%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E5%92%8C%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html">21.文件读写和异常处理</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/22.%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96.html">22.对象的序列化和反序列化</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/23.Python%E8%AF%BB%E5%86%99CSV%E6%96%87%E4%BB%B6.html">23.Python读写CSV文件</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/%E5%AE%9E%E9%AA%8C4.%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验4.文件与异常综合实验</a></li></ul><div class="nav-group">05-面向对象</div><ul><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/18.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8.html">18.面向对象编程入门</a></li><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/19.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6.html">19.面向对象编程进阶</a></li></ul><div class="nav-group">06-基础项目</div><ul><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/07.%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84%E5%AE%9E%E6%88%98.html">07.分支和循环结构实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/15.%E5%87%BD%E6%95%B0%E5%BA%94%E7%94%A8%E5%AE%9E%E6%88%98.html">15.函数应用实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/20.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%BA%94%E7%94%A8.html">20.面向对象编程应用</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/30.%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%BA%94%E7%94%A8.html">30.正则表达式的应用</a></li></ul><div class="nav-group">拓展-办公自动化</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/24.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-1.html">24.Python读写Excel文件-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/25.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-2.html">25.Python读写Excel文件-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/26.Python%E6%93%8D%E4%BD%9CWord%E5%92%8CPowerPoint%E6%96%87%E4%BB%B6.html">26.Python操作Word和PowerPoint文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/27.Python%E6%93%8D%E4%BD%9CPDF%E6%96%87%E4%BB%B6.html">27.Python操作PDF文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/28.Python%E5%A4%84%E7%90%86%E5%9B%BE%E5%83%8F.html">28.Python处理图像</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/29.Python%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E5%92%8C%E7%9F%AD%E4%BF%A1.html">29.Python发送邮件和短信</a></li></ul><div class="nav-group">拓展-Web与爬虫</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/31.Python%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6.html">31.Python语言进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/32-33.Web%E5%89%8D%E7%AB%AF%E5%85%A5%E9%97%A8.html">32-33.Web前端入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/34-35.%E7%8E%A9%E8%BD%ACLinux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.html">34-35.玩转Linux操作系统</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/36.%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CMySQL%E6%A6%82%E8%BF%B0.html">36.关系型数据库和MySQL概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/37.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDDL.html">37.SQL详解之DDL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/38.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDML.html">38.SQL详解之DML</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/39.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDQL.html">39.SQL详解之DQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/40.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDCL.html">40.SQL详解之DCL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/41.MySQL%E6%96%B0%E7%89%B9%E6%80%A7.html">41.MySQL新特性</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/42.%E8%A7%86%E5%9B%BE%E3%80%81%E5%87%BD%E6%95%B0%E5%92%8C%E8%BF%87%E7%A8%8B.html">42.视图、函数和过程</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/43.%E7%B4%A2%E5%BC%95.html">43.索引</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/44.Python%E6%8E%A5%E5%85%A5MySQL%E6%95%B0%E6%8D%AE%E5%BA%93.html">44.Python接入MySQL数据库</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/45.%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E5%92%8CHiveSQL.html">45.大数据平台和HiveSQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/46.Django%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.html">46.Django快速上手</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/47.%E6%B7%B1%E5%85%A5%E6%A8%A1%E5%9E%8B.html">47.深入模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/48.%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%92%8CAjax%E8%AF%B7%E6%B1%82.html">48.静态资源和Ajax请求</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/49.Cookie%E5%92%8CSession.html">49.Cookie和Session</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/50.%E5%88%B6%E4%BD%9C%E6%8A%A5%E8%A1%A8.html">50.制作报表</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/51.%E6%97%A5%E5%BF%97%E5%92%8C%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7%E6%A0%8F.html">51.日志和调试工具栏</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/52.%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E5%BA%94%E7%94%A8.html">52.中间件的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/53.%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8.html">53.前后端分离开发入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/54.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E5%85%A5%E9%97%A8.html">54.RESTful架构和DRF入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/55.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E8%BF%9B%E9%98%B6.html">55.RESTful架构和DRF进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/56.%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98.html">56.使用缓存</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/57.%E6%8E%A5%E5%85%A5%E4%B8%89%E6%96%B9%E5%B9%B3%E5%8F%B0.html">57.接入三方平台</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/58.%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1.html">58.异步任务和定时任务</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/59.%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95.html">59.单元测试</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/60.%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF.html">60.项目上线</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/61.%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E6%A6%82%E8%BF%B0.html">61.网络数据采集概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%8E%B7%E5%8F%96%E7%BD%91%E7%BB%9C%E8%B5%84%E6%BA%90-1.html">62.用Python获取网络资源-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%A7%A3%E6%9E%90HTML%E9%A1%B5%E9%9D%A2-2.html">62.用Python解析HTML页面-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-1.html">63.Python中的并发编程-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-2.html">63.Python中的并发编程-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-3.html">63.Python中的并发编程-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9C%A8%E7%88%AC%E8%99%AB%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html">63.并发编程在爬虫中的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/64.%E4%BD%BF%E7%94%A8Selenium%E6%8A%93%E5%8F%96%E7%BD%91%E9%A1%B5%E5%8A%A8%E6%80%81%E5%86%85%E5%AE%B9.html">64.使用Selenium抓取网页动态内容</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/65.%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6Scrapy%E7%AE%80%E4%BB%8B.html">65.爬虫框架Scrapy简介</a></li></ul><div class="nav-group">拓展-数据分析</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/66.%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A6%82%E8%BF%B0.html">66.数据分析概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/67.%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87.html">67.环境准备</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/68.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-1.html">68.NumPy的应用-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/69.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-2.html">69.NumPy的应用-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/70.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-3.html">70.NumPy的应用-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/71.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-4.html">71.NumPy的应用-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/72.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-1.html">72.深入浅出pandas-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/73.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-2.html">73.深入浅出pandas-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/74.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-3.html">74.深入浅出pandas-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/75.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-4.html">75.深入浅出pandas-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/76.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-5.html">76.深入浅出pandas-5</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/77.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-6.html">77.深入浅出pandas-6</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/78.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-1.html">78.数据可视化-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/79.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-2.html">79.数据可视化-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/80.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-3.html">80.数据可视化-3</a></li></ul><div class="nav-group">拓展-机器学习</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/81.%E6%B5%85%E8%B0%88%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0.html">81.浅谈机器学习</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/82.k%E6%9C%80%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95.html">82.k最近邻算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/83.%E5%86%B3%E7%AD%96%E6%A0%91%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97.html">83.决策树和随机森林</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/84.%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95.html">84.朴素贝叶斯算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/85.%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B.html">85.回归模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/86.K-Means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95.html">86.K-Means聚类算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/87.%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95.html">87.集成学习算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/88.%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B.html">88.神经网络模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/89.%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E5%85%A5%E9%97%A8.html">89.自然语言处理入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/90.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98.html">90.机器学习实战</a></li></ul></div></details><article class="lesson"><div class="lesson-content" id="top"><h1 id="实验1-基础语法综合实验">实验1.基础语法综合实验</h1><h2 id="基础语法综合实验">基础语法综合实验</h2><p>在前面的课程中，我们认识了变量和数据类型，学会了用<code>input()</code>函数获取键盘输入、用<code>int()</code>和<code>float()</code>完成类型转换，也把各种运算符和格式化输出的方法过了一遍。俗话说，光说不练假把式，这一次我们不再引入新知识，专门动手写程序，把已经学过的内容串起来，做出四个能真正跑起来的小工具。四个案例都只使用<strong>顺序结构</strong>，也就是代码从上到下一行一行执行，不会用到分支结构、循环结构，也不会使用列表和自定义函数，因为这些内容我们还没有正式学到。</p>
+<p>四个案例的难度依次递增，分别是：</p>
 <ol>
-<li>录入成绩（可连续录入多个，输入 <code>q</code> 结束本轮）</li>
-<li>查看全部成绩</li>
-<li>统计信息（平均分、最高分、最低分、及格人数、不及格人数）</li>
-<li>按等级查看（A/B/C/D/F）</li>
-<li>退出程序</li>
+<li>校园生活费用计算器</li>
+<li>简易工资计算器</li>
+<li>电影院购票计算器</li>
+<li>购物小票生成器</li>
 </ol>
-<p>等级规则（百分制）：</p>
+<p>每个案例都按照“任务描述—思路分析—分步实现—完整代码”的顺序展开，最后再通过一个综合练习检验大家的学习成果。强烈建议你不要只看不写，把每个案例的代码亲自敲一遍、运行一遍，看看程序给出的结果跟你预计的是不是一样。</p>
+<blockquote>
+<p><strong>说明</strong>：本实验暂时不处理“输入的内容不合法怎么办”“根据不同条件执行不同代码”这类问题。不是它们不重要，而是解决这些问题需要用到分支结构和循环结构。等学完后面的课程，我们会回过头来升级这里的程序，到时候你会发现，同样的需求可以用更优雅的代码来实现。</p>
+</blockquote>
+<p>建议大家在 PyCharm 项目中新建一个文件夹（例如<code>lab1</code>），把本实验的四个程序文件都放在这个文件夹里，方便统一管理。</p>
+<h3 id="实验目标">实验目标</h3><ol>
+<li>能够读懂案例需求，分析出程序需要哪些输入数据、要做什么计算、要输出哪些结果。</li>
+<li>能够使用变量保存字符串、整数、浮点数等不同类型的数据，并给变量取一个见名知意的名字。</li>
+<li>能够使用<code>input()</code>获取键盘输入，并根据数据的实际含义选择<code>int()</code>或<code>float()</code>完成类型转换。</li>
+<li>能够使用算术运算符、赋值运算符和括号，把计算公式正确地翻译成 Python 表达式。</li>
+<li>能够使用 f-string 配合格式说明符（如<code>:.2f</code>），把输出结果处理得清晰整齐。</li>
+<li>能够把一个生活中的计算问题拆解成“输入—处理—输出”三个步骤，独立写出顺序结构的小程序。</li>
+</ol>
+<h2 id="案例一-校园生活费用计算器">案例一：校园生活费用计算器</h2><h3 id="任务描述">任务描述</h3><blockquote>
+<p><strong>要求</strong>：编写一个校园生活费用计算器，让用户输入每日餐费、每日交通费、每月通信费、每月生活用品费用和每月在校天数，程序计算并输出每月的各项费用、每月生活总费用以及每天的平均费用。</p>
+</blockquote>
+<p>先来看看程序运行起来是什么效果：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">请输入每日餐费：25
+请输入每日交通费：4
+请输入每月通信费：80
+请输入每月生活用品费用：120
+请输入每月在校天数：22
+
+========== 校园生活费用 ==========
+每月餐费：550.00 元
+每月交通费：88.00 元
+每月固定费用：200.00 元
+每月生活总费用：838.00 元
+每天平均费用：38.09 元
+==================================</code></pre></div><h3 id="思路分析">思路分析</h3><p>拿到需求先不要急着写代码，把程序需要的数据一条一条列出来，再理清楚数据之间的计算关系。本案例需要输入的数据一共有 5 项：</p>
 <table>
 <thead>
 <tr>
-<th>分数区间</th>
-<th>等级</th>
+<th>数据</th>
+<th>说明</th>
+<th>类型</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>90 ~ 100</td>
-<td>A</td>
+<td>每日餐费</td>
+<td>一天的餐饮费用</td>
+<td><code>float</code></td>
 </tr>
 <tr>
-<td>80 ~ 89</td>
-<td>B</td>
+<td>每日交通费</td>
+<td>一天的交通费用</td>
+<td><code>float</code></td>
 </tr>
 <tr>
-<td>70 ~ 79</td>
-<td>C</td>
+<td>每月通信费</td>
+<td>每月固定的通信费用</td>
+<td><code>float</code></td>
 </tr>
 <tr>
-<td>60 ~ 69</td>
-<td>D</td>
+<td>每月生活用品费用</td>
+<td>每月固定购买用品的费用</td>
+<td><code>float</code></td>
 </tr>
 <tr>
-<td>0 ~ 59</td>
-<td>F</td>
+<td>每月在校天数</td>
+<td>一个月在学校的天数</td>
+<td><code>int</code></td>
 </tr>
 </tbody></table>
-<p>输入不在 0～100 时提示“分数无效”，不写入成绩列表。</p>
-<h3 id="参考实现">参考实现</h3><div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">"""
-成绩录入与统计控制台
-覆盖：变量与类型、运算符、if 分支、for/while 循环
+<p>接下来把费用之间的关系写成计算公式：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">每月餐费 = 每日餐费 × 每月在校天数
+每月交通费 = 每日交通费 × 每月在校天数
+每月固定费用 = 每月通信费 + 每月生活用品费用
+每月生活总费用 = 每月餐费 + 每月交通费 + 每月固定费用
+每天平均费用 = 每月生活总费用 ÷ 每月在校天数</code></pre></div><p>这里有两个细节需要注意。其一，餐费、交通费这类金额都可能出现小数，所以要使用<code>float()</code>函数转换，而在校天数是整数，使用<code>int()</code>函数转换就可以了。其二，公式一共有 5 个，我们不要试图把它们塞进一个特别长的表达式里，把每个结果都保存到单独的变量中，计算过程会更清晰，出了问题也更容易检查。</p>
+<h3 id="分步实现">分步实现</h3><h4 id="第-1-步-输入费用数据">第 1 步：输入费用数据</h4><div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">food_per_day = float(input('请输入每日餐费：'))
+transport_per_day = float(input('请输入每日交通费：'))
+phone_per_month = float(input('请输入每月通信费：'))
+supplies_per_month = float(input('请输入每月生活用品费用：'))
+school_days = int(input('请输入每月在校天数：'))</code></pre></div><blockquote>
+<p><strong>说明</strong>：<code>input()</code>函数从键盘拿到的内容永远是字符串，例如用户输入<code>25</code>，程序拿到手的是<code>&#39;25&#39;</code>，它没法直接参与乘法运算，所以要先使用<code>float()</code>或<code>int()</code>转换成数值，这一点在上一课中已经提醒过大家了。</p>
+</blockquote>
+<h4 id="第-2-步-计算每月餐费和每月交通费">第 2 步：计算每月餐费和每月交通费</h4><div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">food_per_month = food_per_day * school_days
+transport_per_month = transport_per_day * school_days</code></pre></div><p>每日费用乘以在校天数，就得到了每月对应的费用，这里使用的是乘法运算符<code>*</code>。</p>
+<h4 id="第-3-步-计算固定费用和每月生活总费用">第 3 步：计算固定费用和每月生活总费用</h4><div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">fixed_cost = phone_per_month + supplies_per_month
+total_cost = food_per_month + transport_per_month + fixed_cost</code></pre></div><p>先把通信费和生活用品费用加在一起，得到每月固定费用；再把餐费、交通费和固定费用三项相加，就是每月生活总费用。使用<code>fixed_cost</code>这样的中间变量，可以把一个复杂的公式拆成几个简单的步骤，这是写程序时非常常用的手段。</p>
+<h4 id="第-4-步-计算每天平均费用">第 4 步：计算每天平均费用</h4><div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">average_per_day = total_cost / school_days</code></pre></div><p>每月生活总费用除以在校天数，就是每天的平均费用。注意这里用的是除法运算符<code>/</code>，得到的结果一定是一个浮点数，哪怕刚好除尽也是如此。</p>
+<h3 id="完整代码">完整代码</h3><p>新建文件<code>campus_cost_calculator.py</code>（还记得吗？文件名用小写字母和下划线，做到见名知意），输入下面的完整代码并运行：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">"""
+校园生活费用计算器
+练习：输入、类型转换、变量和算术运算
 """
+food_per_day = float(input('请输入每日餐费：'))
+transport_per_day = float(input('请输入每日交通费：'))
+phone_per_month = float(input('请输入每月通信费：'))
+supplies_per_month = float(input('请输入每月生活用品费用：'))
+school_days = int(input('请输入每月在校天数：'))
 
-scores = []
+food_per_month = food_per_day * school_days
+transport_per_month = transport_per_day * school_days
+fixed_cost = phone_per_month + supplies_per_month
+total_cost = food_per_month + transport_per_month + fixed_cost
+average_per_day = total_cost / school_days
 
-while True:
-    print('====== 成绩管理 ======')
-    print('1. 录入成绩')
-    print('2. 查看全部成绩')
-    print('3. 统计信息')
-    print('4. 按等级查看')
-    print('5. 退出')
-    choice = input('请选择操作（1-5）：').strip()
-
-    if choice == '1':
-        while True:
-            raw = input('请输入 0~100 的成绩（输入 q 结束本轮）：').strip()
-            if raw.lower() == 'q':
-                break
-            # 用 isdigit 快速过滤：成绩按整数录入，便于初学者理解
-            if not raw.isdigit():
-                print('分数无效，请输入整数或 q。')
-                continue
-            score = int(raw)
-            if score &lt; 0 or score &gt; 100:
-                print('分数无效，必须在 0~100 之间。')
-                continue
-            scores.append(score)
-            print(f'已录入：{score}，当前共 {len(scores)} 条成绩。')
-
-    elif choice == '2':
-        if not scores:
-            print('暂无成绩，请先录入。')
-        else:
-            for i in range(len(scores)):
-                print(f'{i + 1}. {scores[i]}')
-
-    elif choice == '3':
-        if not scores:
-            print('暂无成绩，请先录入。')
-        else:
-            total = 0
-            max_score = scores[0]
-            min_score = scores[0]
-            pass_count = 0
-            for score in scores:
-                total += score
-                if score &gt; max_score:
-                    max_score = score
-                if score &lt; min_score:
-                    min_score = score
-                if score &gt;= 60:
-                    pass_count += 1
-            fail_count = len(scores) - pass_count
-            average = total / len(scores)
-            pass_rate = pass_count / len(scores) * 100
-            print(f'人数：{len(scores)}')
-            print(f'平均分：{average:.2f}')
-            print(f'最高分：{max_score}')
-            print(f'最低分：{min_score}')
-            print(f'及格：{pass_count} 人，不及格：{fail_count} 人')
-            print(f'及格率：{pass_rate:.1f}%')
-
-    elif choice == '4':
-        if not scores:
-            print('暂无成绩，请先录入。')
-        else:
-            level = input('请输入等级（A/B/C/D/F）：').strip().upper()
-            if level not in ('A', 'B', 'C', 'D', 'F'):
-                print('等级无效。')
-                continue
-            found = False
-            for score in scores:
-                if score &gt;= 90:
-                    current = 'A'
-                elif score &gt;= 80:
-                    current = 'B'
-                elif score &gt;= 70:
-                    current = 'C'
-                elif score &gt;= 60:
-                    current = 'D'
-                else:
-                    current = 'F'
-                if current == level:
-                    print(f'{score} -&gt; {current}')
-                    found = True
-            if not found:
-                print(f'没有 {level} 等级的成绩。')
-
-    elif choice == '5':
-        print('再见！')
-        break
-
-    else:
-        print('无效选项，请重新选择。')</code></pre></div><h3 id="操作示例">操作示例</h3><p>假设依次录入 <code>95</code>、<code>82</code>、<code>67</code>、<code>45</code>，然后选择统计，应看到：</p>
-<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">人数：4
-平均分：72.25
-最高分：95
-最低分：45
-及格：3 人，不及格：1 人
-及格率：75.0%</code></pre></div><p>选择等级 <code>B</code> 时应输出：<code>82 -&gt; B</code>。</p>
-<h3 id="扩展挑战">扩展挑战</h3><ol>
-<li>在录入时同时保存姓名，形成“姓名-分数”列表（可用列表存元组）。</li>
-<li>用 <code>match-case</code>（Python 3.10+）重写菜单选择，注意与 <code>if-elif</code> 的适用场景。</li>
-<li>统计时再输出“高于平均分的人数”。</li>
+print()  # 输出一个空行，让输入和结果隔开
+print('========== 校园生活费用 ==========')
+print(f'每月餐费：{food_per_month:.2f} 元')
+print(f'每月交通费：{transport_per_month:.2f} 元')
+print(f'每月固定费用：{fixed_cost:.2f} 元')
+print(f'每月生活总费用：{total_cost:.2f} 元')
+print(f'每天平均费用：{average_per_day:.2f} 元')
+print('==================================')</code></pre></div><p>运行程序，按照提示输入几组不同的数据，看看输出结果跟前面展示的运行效果是否一致。</p>
+<h3 id="课后练习">课后练习</h3><ol>
+<li>程序里没有“每月娱乐费用”这一项，试着增加一个输入项<code>fun_per_month</code>，并把它计入每月生活总费用。</li>
+<li>增加“每月在家天数”的输入，分别计算在校期间的生活费用和整个自然月的估算费用。</li>
+<li>把“每天平均费用”的格式说明符从<code>:.2f</code>改成<code>:.1f</code>，运行程序，观察输出有什么变化。</li>
+<li>思考题：如果你每天的餐费并不固定，当前这个程序还能算准确吗？为什么？</li>
 </ol>
-<h3 id="知识点总结">知识点总结</h3><ol>
-<li><strong>变量与类型</strong>：<code>scores</code> 用列表保存多条成绩；<code>input</code> 得到的永远是字符串，参与数值运算前要用 <code>int()</code> 转换；<code>len(scores)</code>、<code>total</code> 等保存中间状态。</li>
-<li><strong>运算符</strong>：<code>/</code> 得到浮点平均分，<code>* 100</code> 计算百分比；<code>&gt;=</code>、<code>and</code>、<code>or</code>、<code>not</code> 用于范围校验；<code>in</code> 判断菜单选项是否合法；<code>+=</code> 累加。</li>
-<li><strong>分支结构</strong>：外层菜单用多分支 <code>if-elif-else</code>；等级划分用<strong>从高到低</strong>的 <code>elif</code> 链，保证每个分数只命中一个等级；非法输入用 <code>continue</code> 回到循环开头，而不是让程序崩溃。</li>
-<li><strong>循环结构</strong>：外层 <code>while True</code> 做菜单；录入环节用内层 <code>while</code> + <code>break</code> 结束本轮；用 <code>for</code> + <code>range</code> 按下标打印，用 <code>for score in scores</code> 做统计。</li>
-<li><strong>程序结构</strong>：先清空列表再进入主循环；每个分支先判断“有没有数据”，再做计算，避免空列表导致 <code>scores[0]</code> 出错。</li>
-<li><strong>易错点</strong>：忘记把 <code>input</code> 转成数字；<code>elif</code> 条件顺序写反（如先判 <code>&gt;=60</code> 再判 <code>&gt;=90</code>）；比较时混用 <code>=</code> 与 <code>==</code>；不及格判断写成 <code>score &lt; 60 or score &gt; 100</code> 却没有先排除无效分。</li>
-<li><strong>学习重点</strong>：能独立写出“菜单 + 循环 + 分支 + 列表统计”的最小完整程序，这是后续数据结构和函数实验的语法底座。</li>
+<h2 id="案例二-简易工资计算器">案例二：简易工资计算器</h2><h3 id="任务描述">任务描述</h3><blockquote>
+<p><strong>要求</strong>：编写一个简易工资计算器，让用户输入基本工资、奖金、交通补贴、餐补、社保扣除和其他扣除，程序计算并输出补贴合计、应发工资、扣除总额和实发工资。</p>
+</blockquote>
+<p>运行结果：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">请输入基本工资：4000
+请输入奖金：800
+请输入交通补贴：300
+请输入餐补：200
+请输入社保扣除：500
+请输入其他扣除：120
+
+========== 工资计算结果 ==========
+基本工资：4000.00 元
+奖金：800.00 元
+补贴合计：500.00 元
+应发工资：5300.00 元
+扣除总额：620.00 元
+实发工资：4680.00 元
+==================================</code></pre></div><h3 id="思路分析">思路分析</h3><p>这个案例的输入数据比较多，一共 6 项，直接列公式容易乱。我们可以先把数据按照“收入”和“扣除”分成两类：</p>
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>数据</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>主要收入</td>
+<td>基本工资、奖金</td>
+<td><code>float</code></td>
+</tr>
+<tr>
+<td>补贴收入</td>
+<td>交通补贴、餐补</td>
+<td><code>float</code></td>
+</tr>
+<tr>
+<td>工资扣除</td>
+<td>社保扣除、其他扣除</td>
+<td><code>float</code></td>
+</tr>
+</tbody></table>
+<p>然后再写出计算公式：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">补贴合计 = 交通补贴 + 餐补
+应发工资 = 基本工资 + 奖金 + 补贴合计
+扣除总额 = 社保扣除 + 其他扣除
+实发工资 = 应发工资 - 扣除总额</code></pre></div><p>先算补贴合计和扣除总额，再算应发工资和实发工资，每一步只做一件事。工资金额都可能出现小数，所以 6 项输入统一使用<code>float()</code>转换，输出时统一保留两位小数。</p>
+<h3 id="分步实现">分步实现</h3><h4 id="第-1-步-输入收入和扣除数据">第 1 步：输入收入和扣除数据</h4><div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">base_salary = float(input('请输入基本工资：'))
+bonus = float(input('请输入奖金：'))
+transport_allowance = float(input('请输入交通补贴：'))
+meal_allowance = float(input('请输入餐补：'))
+social_security = float(input('请输入社保扣除：'))
+other_deduction = float(input('请输入其他扣除：'))</code></pre></div><blockquote>
+<p><strong>说明</strong>：变量名看起来有点长，但是每一个都能清楚地表达自己的含义，例如<code>base_salary</code>一眼就知道是基本工资。比起<code>a</code>、<code>b</code>、<code>c</code>这样的名字，长一点但见名知意的变量名更值得提倡，这一点在做综合练习时会再次体会到。</p>
+</blockquote>
+<h4 id="第-2-步-计算补贴合计和应发工资">第 2 步：计算补贴合计和应发工资</h4><div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">allowance = transport_allowance + meal_allowance
+gross_salary = base_salary + bonus + allowance</code></pre></div><p>先算两项补贴的和，再加上基本工资和奖金，就得到了扣除之前的应发工资。<code>gross_salary</code>和<code>net_salary</code>（实发工资）必须区分清楚，一个是“扣之前”，一个是“扣之后”，变量的名字要能准确表达它的含义。</p>
+<h4 id="第-3-步-计算扣除总额和实发工资">第 3 步：计算扣除总额和实发工资</h4><div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">deduction = social_security + other_deduction
+net_salary = gross_salary - deduction</code></pre></div><p>两项扣除相加得到扣除总额，再用应发工资减去扣除总额，就是真正到手的实发工资，这里用的是减法运算符<code>-</code>。</p>
+<h3 id="完整代码">完整代码</h3><p>新建文件<code>salary_calculator.py</code>，输入下面的完整代码并运行：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">"""
+简易工资计算器
+练习：多个变量、加法、减法和小数格式化
+"""
+base_salary = float(input('请输入基本工资：'))
+bonus = float(input('请输入奖金：'))
+transport_allowance = float(input('请输入交通补贴：'))
+meal_allowance = float(input('请输入餐补：'))
+social_security = float(input('请输入社保扣除：'))
+other_deduction = float(input('请输入其他扣除：'))
+
+allowance = transport_allowance + meal_allowance
+gross_salary = base_salary + bonus + allowance
+deduction = social_security + other_deduction
+net_salary = gross_salary - deduction
+
+print()  # 输出一个空行，让输入和结果隔开
+print('========== 工资计算结果 ==========')
+print(f'基本工资：{base_salary:.2f} 元')
+print(f'奖金：{bonus:.2f} 元')
+print(f'补贴合计：{allowance:.2f} 元')
+print(f'应发工资：{gross_salary:.2f} 元')
+print(f'扣除总额：{deduction:.2f} 元')
+print(f'实发工资：{net_salary:.2f} 元')
+print('==================================')</code></pre></div><h3 id="课后练习">课后练习</h3><ol>
+<li>增加“住房补贴”<code>house_allowance</code>，把它计入补贴合计，看看应发工资和实发工资会怎么变化。</li>
+<li>增加“每月工作小时数”的输入，用实发工资除以工作小时数，计算“每小时工资”并输出。</li>
+<li>试着不用中间变量<code>allowance</code>，把应发工资写成一行表达式，运行后对比两种写法的结果是否一致，再说说你更喜欢哪一种，为什么。</li>
+<li>思考题：实际的工资条上还有“个人所得税”这一项，为什么它不能用一个固定的数或者简单的加减法算出来？</li>
 </ol>
+<h2 id="案例三-电影院购票计算器">案例三：电影院购票计算器</h2><h3 id="任务描述">任务描述</h3><blockquote>
+<p><strong>要求</strong>：编写一个电影院购票计算器。用户输入成人票的数量、儿童票的数量和成人票的单价，程序按照“儿童票半价”的规则计算总票数和票款合计；如果用户持有会员卡，再按照会员折扣计算最终应付金额，没有会员卡时折扣输入<code>1</code>。</p>
+</blockquote>
+<p>运行结果：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">请输入成人票数量：2
+请输入儿童票数量：1
+请输入成人票单价：45
+请输入会员卡折扣（例如 0.95，没有请输入 1）：0.95
+
+========== 购票结算 ==========
+成人票：2 张，单价 45.00 元
+儿童票：1 张，单价 22.50 元
+总票数：3 张
+票款合计：112.50 元
+会员折扣后：106.88 元
+===============================</code></pre></div><h3 id="思路分析">思路分析</h3><p>先梳理数据和它们之间的关系：</p>
+<table>
+<thead>
+<tr>
+<th>数据</th>
+<th>说明</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>成人票数量</td>
+<td>用户输入</td>
+<td><code>int</code></td>
+</tr>
+<tr>
+<td>儿童票数量</td>
+<td>用户输入</td>
+<td><code>int</code></td>
+</tr>
+<tr>
+<td>成人票单价</td>
+<td>用户输入</td>
+<td><code>float</code></td>
+</tr>
+<tr>
+<td>会员卡折扣</td>
+<td>用户输入，没有折扣填<code>1</code></td>
+<td><code>float</code></td>
+</tr>
+</tbody></table>
+<p>儿童票的价格是成人票的一半，可以先算出儿童票单价，再分别计算两种票的小计：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">儿童票单价 = 成人票单价 ÷ 2
+成人票小计 = 成人票数量 × 成人票单价
+儿童票小计 = 儿童票数量 × 儿童票单价
+总票数 = 成人票数量 + 儿童票数量
+票款合计 = 成人票小计 + 儿童票小计
+会员折扣后金额 = 票款合计 × 会员卡折扣</code></pre></div><p>票数一定是整数，所以用<code>int()</code>转换；票价和折扣都可能是小数，所以用<code>float()</code>转换。两种数据不能混用同一种转换函数，这是本案例最值得体会的地方。</p>
+<blockquote>
+<p><strong>说明</strong>：按理说“有没有会员卡”应该走两条不同的计算流程，但我们暂时还不会分支结构。这里用了一个小技巧：让没有会员卡的用户输入<code>1</code>，任何数乘以<code>1</code>都等于它本身，这样同一个公式就能同时处理“有折扣”和“没折扣”两种情况。类似的小技巧在实际开发中很常见，大家先体会一下。</p>
+</blockquote>
+<h3 id="分步实现">分步实现</h3><h4 id="第-1-步-输入票数和成人票单价">第 1 步：输入票数和成人票单价</h4><div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">adult_count = int(input('请输入成人票数量：'))
+child_count = int(input('请输入儿童票数量：'))
+adult_price = float(input('请输入成人票单价：'))</code></pre></div><h4 id="第-2-步-计算儿童票单价和两种票的小计">第 2 步：计算儿童票单价和两种票的小计</h4><div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">child_price = adult_price / 2
+adult_total = adult_count * adult_price
+child_total = child_count * child_price
+ticket_count = adult_count + child_count</code></pre></div><p>儿童票单价是根据成人票单价算出来的，不需要用户再输入一次。<strong>能算出来的数据就不要让用户重复输入</strong>，这既能减少用户的负担，也能避免两个数据对不上的尴尬。</p>
+<h4 id="第-3-步-计算票款合计并应用会员折扣">第 3 步：计算票款合计并应用会员折扣</h4><div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">total_price = adult_total + child_total
+member_rate = float(input('请输入会员卡折扣（例如 0.95，没有请输入 1）：'))
+final_price = total_price * member_rate</code></pre></div><h3 id="完整代码">完整代码</h3><p>新建文件<code>movie_ticket.py</code>，输入下面的完整代码并运行：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">"""
+电影院购票计算器
+练习：int 与 float 的配合使用、算术运算符和格式化输出
+"""
+adult_count = int(input('请输入成人票数量：'))
+child_count = int(input('请输入儿童票数量：'))
+adult_price = float(input('请输入成人票单价：'))
+member_rate = float(input('请输入会员卡折扣（例如 0.95，没有请输入 1）：'))
+
+child_price = adult_price / 2
+adult_total = adult_count * adult_price
+child_total = child_count * child_price
+ticket_count = adult_count + child_count
+total_price = adult_total + child_total
+final_price = total_price * member_rate
+
+print()  # 输出一个空行，让输入和结果隔开
+print('========== 购票结算 ==========')
+print(f'成人票：{adult_count} 张，单价 {adult_price:.2f} 元')
+print(f'儿童票：{child_count} 张，单价 {child_price:.2f} 元')
+print(f'总票数：{ticket_count} 张')
+print(f'票款合计：{total_price:.2f} 元')
+print(f'会员折扣后：{final_price:.2f} 元')
+print('===============================')</code></pre></div><h3 id="课后练习">课后练习</h3><ol>
+<li>增加“老人票”，票价是成人票的七折，试着增加相应的输入和计算。</li>
+<li>如果是 3D 影厅，每张票要加收 10 元。暂时不用区分影厅类型，直接增加一个“加收费用”的输入，把它加到票款合计中。</li>
+<li>分别用折扣<code>1</code>和<code>0.8</code>运行程序，观察“会员折扣后”的金额有什么变化，并解释原因。</li>
+<li>思考题：如果影院规定“一次购票满 5 张打八五折”，当前程序为什么不方便实现？这个问题要等学了分支结构才能优雅地解决。</li>
+</ol>
+<h2 id="案例四-购物小票生成器">案例四：购物小票生成器</h2><h3 id="任务描述">任务描述</h3><blockquote>
+<p><strong>要求</strong>：编写一个购物小票生成器。用户输入两种商品的名称、单价和数量，以及折扣率和实付金额，程序计算每种商品的小计、商品总价、优惠金额、应付金额和找零金额，并输出一张购物小票。</p>
+</blockquote>
+<p>运行结果：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">请输入第 1 种商品名称：Python教材
+请输入第 1 种商品单价：45
+请输入第 1 种商品数量：2
+请输入第 2 种商品名称：笔记本
+请输入第 2 种商品单价：8.5
+请输入第 2 种商品数量：3
+请输入折扣率（例如 0.9）：0.9
+请输入实付款：120
+
+========== 购物小票 ==========
+商品1：Python教材  45.00 元 × 2 = 90.00 元
+商品2：笔记本  8.50 元 × 3 = 25.50 元
+商品总价：115.50 元
+优惠金额：11.55 元
+应付金额：103.95 元
+实付款：120.00 元
+找零金额：16.05 元
+==============================</code></pre></div><h3 id="思路分析">思路分析</h3><p>本案例比前面三个都要复杂一些，输入的数据更多，计算步骤也更多，但再复杂的程序也还是那个套路，仍然可以拆成“输入—处理—输出”三个阶段。</p>
+<h4 id="输入数据">输入数据</h4><ul>
+<li>两种商品的名称：字符串，不需要转换，直接用<code>input()</code>即可。</li>
+<li>两种商品的单价：浮点数，用<code>float()</code>转换。</li>
+<li>两种商品的数量：整数，用<code>int()</code>转换。</li>
+<li>折扣率：浮点数，用<code>float()</code>转换。</li>
+<li>实付款：浮点数，用<code>float()</code>转换。</li>
+</ul>
+<h4 id="处理数据">处理数据</h4><div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">商品小计 = 商品单价 × 商品数量
+商品总价 = 商品1小计 + 商品2小计
+应付金额 = 商品总价 × 折扣率
+优惠金额 = 商品总价 - 应付金额
+找零金额 = 实付款 - 应付金额</code></pre></div><p>折扣率用小数表示，例如九折写成<code>0.9</code>，八五折写成<code>0.85</code>，这样折扣率可以直接参与乘法运算。</p>
+<h4 id="输出数据">输出数据</h4><p>输出时既要用到用户输入的原始数据，也要用到计算的结果。金额统一保留两位小数，商品数量保持整数形式，这样小票看起来才整齐。</p>
+<h3 id="分步实现">分步实现</h3><h4 id="第-1-步-输入第一种商品的信息">第 1 步：输入第一种商品的信息</h4><div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">product_1_name = input('请输入第 1 种商品名称：')
+product_1_price = float(input('请输入第 1 种商品单价：'))
+product_1_quantity = int(input('请输入第 1 种商品数量：'))</code></pre></div><blockquote>
+<p><strong>说明</strong>：这一步一次性用到了三种数据类型：名称是字符串，直接保存；单价是浮点数，数量是整数，分别用<code>float()</code>和<code>int()</code>转换。大家可以对照代码，把三种类型指认一遍。</p>
+</blockquote>
+<h4 id="第-2-步-输入第二种商品的信息">第 2 步：输入第二种商品的信息</h4><div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">product_2_name = input('请输入第 2 种商品名称：')
+product_2_price = float(input('请输入第 2 种商品单价：'))
+product_2_quantity = int(input('请输入第 2 种商品数量：'))</code></pre></div><p>第二种商品和第一种商品的结构完全一样，只是变量名换成了<code>product_2</code>开头。变量名长一点没有关系，能把两种商品区分清楚才是最重要的。</p>
+<h4 id="第-3-步-计算小计-总价-应付金额和找零">第 3 步：计算小计、总价、应付金额和找零</h4><div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">product_1_total = product_1_price * product_1_quantity
+product_2_total = product_2_price * product_2_quantity
+total_price = product_1_total + product_2_total
+pay_rate = float(input('请输入折扣率（例如 0.9）：'))
+payable = total_price * pay_rate
+discount = total_price - payable
+paid = float(input('请输入实付款：'))
+change = paid - payable</code></pre></div><p>这段代码反复使用了前面已经算出来的变量，例如<code>total_price</code>既参与了<code>payable</code>的计算，又参与了<code>discount</code>的计算，这正是变量“保存一次、反复使用”的价值。</p>
+<h4 id="第-4-步-格式化输出小票">第 4 步：格式化输出小票</h4><div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">print(f'商品1：{product_1_name}  {product_1_price:.2f} 元 × {product_1_quantity} = {product_1_total:.2f} 元')
+print(f'商品总价：{total_price:.2f} 元')
+print(f'优惠金额：{discount:.2f} 元')
+print(f'应付金额：{payable:.2f} 元')
+print(f'实付款：{paid:.2f} 元')
+print(f'找零金额：{change:.2f} 元')</code></pre></div><blockquote>
+<p><strong>说明</strong>：一行 f-string 里可以嵌入多个<code>{}</code>占位符，占位符中还可以直接写格式说明符，例如<code>{product_1_price:.2f}</code>表示把这个变量保留两位小数后再嵌入。输出金额时统一使用<code>:.2f</code>，整张小票的数字才对得整齐。</p>
+</blockquote>
+<h3 id="完整代码">完整代码</h3><p>新建文件<code>shopping_receipt.py</code>，输入下面的完整代码并运行：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">"""
+购物小票生成器
+练习：输入、类型转换、变量、算术运算和格式化输出
+"""
+product_1_name = input('请输入第 1 种商品名称：')
+product_1_price = float(input('请输入第 1 种商品单价：'))
+product_1_quantity = int(input('请输入第 1 种商品数量：'))
+
+product_2_name = input('请输入第 2 种商品名称：')
+product_2_price = float(input('请输入第 2 种商品单价：'))
+product_2_quantity = int(input('请输入第 2 种商品数量：'))
+
+pay_rate = float(input('请输入折扣率（例如 0.9）：'))
+paid = float(input('请输入实付款：'))
+
+product_1_total = product_1_price * product_1_quantity
+product_2_total = product_2_price * product_2_quantity
+total_price = product_1_total + product_2_total
+payable = total_price * pay_rate
+discount = total_price - payable
+change = paid - payable
+
+print()  # 输出一个空行，让输入和结果隔开
+print('========== 购物小票 ==========')
+print(f'商品1：{product_1_name}  {product_1_price:.2f} 元 × {product_1_quantity} = {product_1_total:.2f} 元')
+print(f'商品2：{product_2_name}  {product_2_price:.2f} 元 × {product_2_quantity} = {product_2_total:.2f} 元')
+print(f'商品总价：{total_price:.2f} 元')
+print(f'优惠金额：{discount:.2f} 元')
+print(f'应付金额：{payable:.2f} 元')
+print(f'实付款：{paid:.2f} 元')
+print(f'找零金额：{change:.2f} 元')
+print('==============================')</code></pre></div><h3 id="课后练习">课后练习</h3><ol>
+<li>增加第三种商品，完成相应的输入、小计计算和小票输出。加完以后你会明显感觉到代码里出现了大量相似的语句，请先记住这种“别扭”的感觉，等学了列表和循环结构，这个问题会被轻松解决。</li>
+<li>增加“会员积分”：每消费 1 元积累 1 分，积分按应付金额计算并用<code>int()</code>只保留整数部分。</li>
+<li>增加“包装费”输入，把它加到应付金额中，注意找零金额也要跟着变化。</li>
+<li>把小票的标题和分隔线改成你自己设计的样式。也可以试一试<code>&#39;=&#39; * 30</code>这样的写法，看看会发生什么。</li>
+<li>思考题：如果商品的数量不固定，当前程序为什么不方便？这个问题可以在学完列表和循环结构之后回头解决。</li>
+</ol>
+<h2 id="综合练习">综合练习</h2><p>完成上面四个案例后，请大家独立完成下面的练习，检验一下自己的学习成果。</p>
+<p>编写一个“短途旅行预算计算器”。程序需要输入：交通费用（整个团队的总花费）、住宿天数、每晚住宿费用、每人每日餐费、景点门票费用（团队总花费）、其他费用和旅行人数，输出如下所示的预算结果：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">请输入交通费用：800
+请输入住宿天数：3
+请输入每晚住宿费用：280
+请输入每人每日餐费：100
+请输入景点门票费用：450
+请输入其他费用：200
+请输入旅行人数：4
+
+住宿总费用：840.00 元
+餐饮总费用：1200.00 元
+旅行总费用：3490.00 元
+每人平均费用：872.50 元</code></pre></div><p>如果一时没有思路，可以参考下面的顺序先把公式列出来：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">住宿总费用 = 住宿天数 × 每晚住宿费用
+餐饮总费用 = 住宿天数 × 每人每日餐费 × 旅行人数
+旅行总费用 = 交通费用 + 住宿总费用 + 餐饮总费用 + 景点门票费用 + 其他费用
+每人平均费用 = 旅行总费用 ÷ 旅行人数</code></pre></div><p>参考程序框架如下（强烈建议大家先自己写，写完之后再对照）：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">transport_cost = float(input('请输入交通费用：'))
+night_count = int(input('请输入住宿天数：'))
+hotel_per_night = float(input('请输入每晚住宿费用：'))
+food_per_day = float(input('请输入每人每日餐费：'))
+ticket_cost = float(input('请输入景点门票费用：'))
+other_cost = float(input('请输入其他费用：'))
+traveler_count = int(input('请输入旅行人数：'))
+
+hotel_cost = night_count * hotel_per_night
+food_cost = night_count * food_per_day * traveler_count
+total_cost = transport_cost + hotel_cost + food_cost + ticket_cost + other_cost
+average_cost = total_cost / traveler_count
+
+print(f'住宿总费用：{hotel_cost:.2f} 元')
+print(f'餐饮总费用：{food_cost:.2f} 元')
+print(f'旅行总费用：{total_cost:.2f} 元')
+print(f'每人平均费用：{average_cost:.2f} 元')</code></pre></div><p>你也可以仿照前面的案例，给输出加上标题和分隔线，把结果做得更漂亮。</p>
+<blockquote>
+<p><strong>说明</strong>：本练习中的人数、天数和费用项目都是固定的，输入的内容也都默认合法。等学完列表、分支结构和循环结构，这个程序还可以继续升级，例如支持人数不固定、检查输入是否合法、根据总费用给出不同的优惠等，大家可以期待一下。</p>
+</blockquote>
+<h3 id="知识点总结">知识点总结</h3><h4 id="一-分析问题的方法">一、分析问题的方法</h4><ul>
+<li>生活中的计算问题通常可以拆成“输入—处理—输出”三个阶段：先列出程序需要的所有数据，再理清数据之间的计算关系（公式），最后组织输出。</li>
+<li>不要试图把所有计算塞进一个特别长的表达式，把中间结果保存到单独的变量中，每一步只做一件事，程序更容易读懂，出了问题也更容易定位。</li>
+<li>能根据已有数据算出来的值，就不要让用户重复输入，例如儿童票单价由成人票单价除以 2 得到。</li>
+</ul>
+<h4 id="二-变量与数据类型">二、变量与数据类型</h4><ul>
+<li>字符串（<code>str</code>）用于保存姓名、商品名称等文本；整数（<code>int</code>）用于数量、天数等不带小数点的数据；浮点数（<code>float</code>）用于价格、金额等可能出现小数的数据。</li>
+<li>选择类型的原则是贴合数据的实际含义：票数、天数用<code>int</code>，金额、单价用<code>float</code>。</li>
+<li>变量的值可以被反复读取和参与运算，例如商品总价既用于计算应付金额，又用于计算优惠金额。</li>
+</ul>
+<h4 id="三-输入与类型转换">三、输入与类型转换</h4><ul>
+<li><code>input()</code>返回的永远是字符串，参与数值运算前必须用<code>int()</code>或<code>float()</code>转换。</li>
+<li>整数输入用<code>int()</code>转换，小数输入用<code>float()</code>转换；要根据数据的含义选择函数，而不是随便选一个。</li>
+<li><code>input()</code>的提示信息很重要，写清楚要输入什么、按什么格式输入（例如“折扣例如 0.95，没有请输入 1”），可以大幅减少误解。</li>
+</ul>
+<h4 id="四-算术运算符">四、算术运算符</h4><ul>
+<li>本实验主要用到了加（<code>+</code>）、减（<code>-</code>）、乘（<code>*</code>）、除（<code>/</code>）四种运算；除法的结果一定是浮点数。</li>
+<li>表达式中可以使用括号明确运算顺序，需要时也可以使用<code>**</code>（幂）、<code>//</code>（整除）、<code>%</code>（取余）等在第四课学过的运算符。</li>
+</ul>
+<h4 id="五-赋值与中间变量">五、赋值与中间变量</h4><ul>
+<li>使用<code>=</code>把数据保存到变量中，先算等号右边，再保存到等号左边的变量里。</li>
+<li><code>fixed_cost</code>、<code>allowance</code>、<code>total_price</code>这样的中间变量，可以把复杂公式拆成清晰的多个步骤，是本实验最重要的编程手段之一。</li>
+</ul>
+<h4 id="六-字符串与格式化输出">六、字符串与格式化输出</h4><ul>
+<li>字符串用单引号或双引号包裹；f-string 使用<code>f&#39;文本{变量}&#39;</code>的形式把变量嵌入输出内容。</li>
+<li>格式说明符<code>:.2f</code>表示保留两位小数，<code>.1f</code>表示保留一位小数；金额类输出通常统一使用<code>:.2f</code>。</li>
+<li><code>print()</code>不写任何参数可以输出一个空行，用来把输入部分和结果部分隔开。</li>
+</ul>
+<h4 id="七-命名惯例">七、命名惯例</h4><ul>
+<li>变量名和文件名都建议使用小写英文字母加下划线，例如<code>product_1_total</code>、<code>campus_cost_calculator.py</code>。</li>
+<li>变量名要做到见名知意，宁可长一点也不要用<code>a</code>、<code>b</code>、<code>c</code>；不要与<code>int</code>、<code>input</code>、<code>print</code>等内置函数重名。</li>
+</ul>
+<h4 id="八-复习时的易错点">八、复习时的易错点</h4><ul>
+<li>忘记把<code>input()</code>的结果转换成数值：字符串乘以整数得到的是重复的字符串，而不是数学运算的结果。</li>
+<li>用<code>int()</code>转换带小数点的输入（例如<code>3.5</code>），程序会直接报错，可能包含小数的数据应该使用<code>float()</code>。</li>
+<li>在代码中使用了中文标点（例如全角的<code>：</code>、<code>&#39;</code>、<code>（</code>），会导致语法错误，写代码时记得切换到英文输入法。</li>
+<li>变量名前后拼写不一致，例如前面写<code>product_1_price</code>，后面写成了<code>product_price</code>，程序会报“变量未定义”的错误。</li>
+<li>除数为<code>0</code>（例如在校天数输入<code>0</code>）会导致程序报错，等学了分支结构就可以提前判断并给出友好的提示。</li>
+</ul>
+<h4 id="九-本阶段的限制与学习重点">九、本阶段的限制与学习重点</h4><ul>
+<li>本实验的所有程序都是顺序结构，商品数量和输入项目是固定的，因此代码中出现了不少相似的语句，这是刻意为之的“伏笔”。</li>
+<li>商品数量不固定、输入校验、根据条件改变计算结果等问题，需要列表、分支结构和循环结构来解决，学完后续课程后欢迎回来升级这些程序。</li>
+<li>学习重点：能够把一个生活中的计算问题拆成若干计算步骤，独立完成“输入数据—保存变量—完成运算—格式化输出”的顺序结构程序。</li>
+</ul>
 </div></article></div></main><footer>by天才程序员</footer><script src="/script.js"></script></body></html>
