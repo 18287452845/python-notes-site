@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <title>Python for in range 执行流程</title>
+  <style>
+    .title { font: 700 32px "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; fill: #2f3437; }
+    .code { font: 23px Consolas, "Courier New", monospace; fill: #273238; }
+    .label { font: 600 23px "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; fill: #ffffff; }
+    .note { font: 20px "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; fill: #4b5153; }
+    .branch { font: 700 21px Consolas, "Courier New", monospace; fill: #b52d2d; }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#b52d2d"/></marker>
+  </defs>
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <text x="640" y="54" text-anchor="middle" class="title">Python for-in 循环的执行流程</text>
+  <rect x="42" y="110" width="380" height="300" rx="8" fill="#fffde9" stroke="#b52d2d" stroke-width="3"/>
+  <text x="70" y="160" class="code">for _ in range(3):</text>
+  <text x="70" y="220" class="code">    print('Hello World')</text>
+  <text x="70" y="300" class="note">range(3) 依次提供</text>
+  <text x="70" y="334" class="note">0、1、2 三个值</text>
+
+  <rect x="535" y="100" width="210" height="70" rx="8" fill="#b52d2d"/>
+  <text x="640" y="145" text-anchor="middle" class="label">取下一个值</text>
+  <path d="M640 170 V220" fill="none" stroke="#b52d2d" stroke-width="4" marker-end="url(#arrow)"/>
+  <polygon points="640,220 795,292 640,364 485,292" fill="#f4f7f7" stroke="#b52d2d" stroke-width="4"/>
+  <text x="640" y="285" text-anchor="middle" class="note">还有下一个值？</text>
+  <path d="M640 364 V414" fill="none" stroke="#b52d2d" stroke-width="4" marker-end="url(#arrow)"/>
+  <text x="660" y="405" class="branch">有</text>
+  <rect x="535" y="414" width="210" height="70" rx="8" fill="#b52d2d"/>
+  <text x="640" y="459" text-anchor="middle" class="label">执行循环体</text>
+  <path d="M535 449 H410 V292 H480" fill="none" stroke="#b52d2d" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M795 292 H1010 V560 H745" fill="none" stroke="#b52d2d" stroke-width="4" marker-end="url(#arrow)"/>
+  <text x="815" y="276" class="branch">没有</text>
+  <rect x="535" y="560" width="210" height="70" rx="8" fill="#4b5153"/>
+  <text x="640" y="605" text-anchor="middle" class="label">循环结束</text>
+  <text x="640" y="680" text-anchor="middle" class="note">循环体执行 3 次，循环结束后继续执行后面的代码</text>
+</svg>

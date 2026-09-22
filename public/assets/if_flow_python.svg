@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="700" viewBox="0 0 1280 700">
+  <title>Python if 分支执行流程</title>
+  <style>
+    .title { font: 700 32px "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; fill: #2f3437; }
+    .code { font: 23px Consolas, "Courier New", monospace; fill: #273238; }
+    .label { font: 600 24px "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; fill: #ffffff; }
+    .note { font: 20px "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; fill: #4b5153; }
+    .branch { font: 700 22px Consolas, "Courier New", monospace; fill: #b52d2d; }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#b52d2d"/></marker>
+  </defs>
+  <rect width="1280" height="700" fill="#ffffff"/>
+  <text x="640" y="54" text-anchor="middle" class="title">Python if 分支的执行流程</text>
+  <rect x="36" y="112" width="390" height="310" rx="8" fill="#fffde9" stroke="#b52d2d" stroke-width="3"/>
+  <text x="66" y="160" class="code">temperature = float(input(...))</text>
+  <text x="66" y="220" class="code">if temperature &gt; 37:</text>
+  <text x="66" y="280" class="code">    print('体温偏高')</text>
+  <text x="66" y="350" class="note">冒号后缩进的语句</text>
+  <text x="66" y="382" class="note">属于 if 代码块</text>
+
+  <path d="M760 86 V132" fill="none" stroke="#b52d2d" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M760 250 V306" fill="none" stroke="#b52d2d" stroke-width="4" marker-end="url(#arrow)"/>
+  <polygon points="760,132 910,205 760,278 610,205" fill="#f4f7f7" stroke="#b52d2d" stroke-width="4"/>
+  <text x="760" y="198" text-anchor="middle" class="note">temperature</text>
+  <text x="760" y="226" text-anchor="middle" class="note">&gt; 37？</text>
+  <text x="930" y="186" class="branch">False</text>
+  <text x="780" y="302" class="branch">True</text>
+
+  <rect x="640" y="306" width="240" height="70" rx="8" fill="#b52d2d"/>
+  <text x="760" y="351" text-anchor="middle" class="label">执行缩进代码</text>
+  <path d="M910 205 H1080 V475 H890" fill="none" stroke="#b52d2d" stroke-width="4" marker-end="url(#arrow)"/>
+  <rect x="640" y="475" width="240" height="70" rx="8" fill="#4b5153"/>
+  <text x="760" y="520" text-anchor="middle" class="label">离开分支</text>
+  <text x="760" y="620" text-anchor="middle" class="note">条件成立执行代码，条件不成立直接跳过</text>
+</svg>

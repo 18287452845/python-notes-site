@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="760" viewBox="0 0 1440 760">
+  <title>Python 程序的三种基本结构</title>
+  <style>
+    .title { font: 700 34px "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; fill: #2f3437; }
+    .heading { font: 700 28px "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; fill: #ffffff; }
+    .label { font: 600 22px "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; fill: #ffffff; }
+    .code { font: 22px Consolas, "Courier New", monospace; fill: #273238; }
+    .note { font: 20px "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; fill: #4b5153; }
+  </style>
+  <rect width="1440" height="760" fill="#ffffff"/>
+  <text x="720" y="58" text-anchor="middle" class="title">Python 程序的三种基本结构</text>
+  <line x1="120" y1="88" x2="1320" y2="88" stroke="#d8dcdd" stroke-width="2"/>
+
+  <g transform="translate(70 135)">
+    <circle cx="200" cy="72" r="72" fill="#b52d2d"/>
+    <text x="200" y="64" text-anchor="middle" class="heading">顺序结构</text>
+    <text x="200" y="98" text-anchor="middle" class="label">按顺序执行</text>
+    <rect x="0" y="175" width="400" height="270" rx="8" fill="#fffde9" stroke="#b52d2d" stroke-width="3"/>
+    <text x="28" y="218" class="code">name = input('姓名：')</text>
+    <text x="28" y="270" class="code">print(name)</text>
+    <line x1="200" y1="300" x2="200" y2="402" stroke="#b52d2d" stroke-width="4" marker-end="url(#arrow-red)"/>
+    <text x="200" y="432" text-anchor="middle" class="note">代码从上到下执行</text>
+  </g>
+
+  <g transform="translate(520 135)">
+    <circle cx="200" cy="72" r="72" fill="#4b5153"/>
+    <text x="200" y="64" text-anchor="middle" class="heading">分支结构</text>
+    <text x="200" y="98" text-anchor="middle" class="label">根据条件选择</text>
+    <rect x="0" y="175" width="400" height="270" rx="8" fill="#f4f7f7" stroke="#4b5153" stroke-width="3"/>
+    <text x="28" y="218" class="code">if score &gt;= 60:</text>
+    <text x="28" y="270" class="code">    print('通过')</text>
+    <text x="200" y="342" text-anchor="middle" class="note">True 执行分支</text>
+    <text x="200" y="386" text-anchor="middle" class="note">False 跳过或执行其他分支</text>
+  </g>
+
+  <g transform="translate(970 135)">
+    <circle cx="200" cy="72" r="72" fill="#b52d2d"/>
+    <text x="200" y="64" text-anchor="middle" class="heading">循环结构</text>
+    <text x="200" y="98" text-anchor="middle" class="label">重复执行</text>
+    <rect x="0" y="175" width="400" height="270" rx="8" fill="#fffde9" stroke="#b52d2d" stroke-width="3"/>
+    <text x="28" y="218" class="code">for _ in range(3):</text>
+    <text x="28" y="270" class="code">    print('学习')</text>
+    <path d="M70 370 H330 V320" fill="none" stroke="#b52d2d" stroke-width="4" marker-end="url(#arrow-red)"/>
+    <text x="200" y="432" text-anchor="middle" class="note">每次迭代执行循环体</text>
+  </g>
+
+  <defs>
+    <marker id="arrow-red" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#b52d2d"/>
+    </marker>
+  </defs>
+</svg>
