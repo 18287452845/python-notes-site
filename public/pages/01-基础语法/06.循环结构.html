@@ -34,9 +34,7 @@ import time
 
 for _ in range(3600):
     print('hello, world')
-    time.sleep(1)</code></pre></div><p>上面的代码要执行一个小时，如果想提前结束程序，在 PyCharm 中可以点击运行窗口上的停止按钮，如下图所示。如果在命令提示符或终端中运行代码，可以使用组合键<code>ctrl+c</code>来终止程序。</p>
-<p><img src="/assets/terminate_program-20250605165224-04qq5ia.png"" alt="" loading="lazy"></p>
-<p>下面，我们用<code>for-in</code>循环实现从 1 到 100 的整数求和，即 $\small{\sum_{n=1}^{100}{n}}$ 。</p>
+    time.sleep(1)</code></pre></div><p>上面的代码要执行一个小时，如果想提前结束程序，在 PyCharm 中可以点击运行窗口上的停止按钮，下面，我们用<code>for-in</code>循环实现从 1 到 100 的整数求和，即 $\small{\sum_{n=1}^{100}{n}}$ 。</p>
 <div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">"""
 从1到100的整数求和
 """
@@ -80,7 +78,47 @@ print(f'1到100的奇数和：{odd_total}')</code></pre></div><blockquote>
 <div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">"""
 从1到100的偶数求和
 """
-print(sum(range(2, 101, 2)))</code></pre></div><h3 id="while循环">while循环</h3><p>如果要构造循环结构但是又不能确定循环重复的次数，我们推荐使用<code>while</code>循环。<code>while</code>循环通过布尔值或能产生布尔值的表达式来控制循环，当布尔值或表达式的值为<code>True</code>时，循环体（<code>while</code>语句下方保持相同缩进的代码块）中的语句就会被重复执行，当表达式的值为<code>False</code>时，结束循环。</p>
+print(sum(range(2, 101, 2)))</code></pre></div><h4 id="例子-评委打分求平均分">例子：评委打分求平均分</h4><p>在歌唱、舞蹈、演讲等比赛中，通常会安排多位评委分别打分，最后根据所有评委的成绩计算平均分。现在先使用一个简单的规则：有 5 位评委，每位评委输入一个分数，程序把 5 个分数相加，再除以评委人数，得到选手的平均分。</p>
+<p><strong>问题描述</strong>：录入多位评委的成绩，计算选手的平均分。</p>
+<p><strong>输入和输出</strong>：</p>
+<ul>
+<li>输入：评委人数，以及每位评委给出的成绩。</li>
+<li>处理：累加所有成绩，再用总分除以评委人数。</li>
+<li>输出：评委总分和平均分，平均分保留 2 位小数。</li>
+</ul>
+<p><strong>问题拆解</strong>：</p>
+<ol>
+<li>先设置评委人数 <code>judge_count = 5</code>，表示本次有 5 位评委。</li>
+<li>设置累加变量 <code>total_score = 0</code>，用来保存所有评委成绩的总和。</li>
+<li>使用 <code>for</code> 循环，让循环变量依次表示第 1 位到第 5 位评委。</li>
+<li>在循环体中读取当前评委的成绩，并使用 <code>total_score += score</code> 累加。</li>
+<li>循环结束后，所有成绩都已经累加到 <code>total_score</code>，再计算 <code>total_score / judge_count</code>。</li>
+<li>用格式化字符串输出总分和平均分。平均分的计算必须放在循环结束之后，否则每次输入成绩都会提前输出一个不完整的平均分。</li>
+</ol>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">judge_count = 5
+total_score = 0
+
+for i in range(1, judge_count + 1):
+    score = float(input(f'请输入第{i}位评委的成绩：'))
+    total_score += score
+
+average_score = total_score / judge_count
+print(f'评委总分：{total_score:.1f}')
+print(f'选手平均分：{average_score:.2f}')</code></pre></div><p><strong>运行结果</strong>：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">请输入第1位评委的成绩：8.5
+请输入第2位评委的成绩：9
+请输入第3位评委的成绩：8
+请输入第4位评委的成绩：9.5
+请输入第5位评委的成绩：8.5
+评委总分：43.5
+选手平均分：8.70</code></pre></div><p><strong>代码说明</strong>：<code>judge_count</code> 表示需要重复输入的次数，<code>total_score</code> 表示不断变化的累加结果。<code>range(1, judge_count + 1)</code> 会产生 <code>1</code> 到 <code>5</code>，所以提示语中的评委编号正好是第 1 位到第 5 位。循环体中的 <code>total_score += score</code> 相当于 <code>total_score = total_score + score</code>，每轮把当前成绩加入总分；循环结束后再计算平均分，分母使用评委人数而不是最后一位评委的编号。</p>
+<blockquote>
+<p><strong>提示</strong>：本案例假设评委人数固定为 5，且输入的成绩都是有效数字。如果把评委人数也改成由用户输入，就需要先判断人数是否大于 0，避免出现除数为 0 的错误。</p>
+</blockquote>
+<blockquote>
+<p><strong>思考</strong>：比赛中常见的“去掉一个最高分和一个最低分后再求平均分”应该怎样修改？可以先把成绩保存到列表中，再使用 <code>max</code>、<code>min</code> 和 <code>sum</code> 完成计算。</p>
+</blockquote>
+<h3 id="while循环">while循环</h3><p>如果要构造循环结构但是又不能确定循环重复的次数，我们推荐使用<code>while</code>循环。<code>while</code>循环通过布尔值或能产生布尔值的表达式来控制循环，当布尔值或表达式的值为<code>True</code>时，循环体（<code>while</code>语句下方保持相同缩进的代码块）中的语句就会被重复执行，当表达式的值为<code>False</code>时，结束循环。</p>
 <p>循环体中需要有能改变控制变量的语句，例如 <code>count += 1</code>，这样条件才会在某一轮变为 <code>False</code>，循环才能结束。</p>
 <p><img src="/assets/while_flow_python.svg"" alt="" loading="lazy"></p>
 <div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python"># 需求：打印 5 行 Hello World
@@ -278,6 +316,7 @@ print(f'你一共猜了{counter}次.')</code></pre></div><blockquote>
 <li>计数问题通常先设置计数器为0，每满足一次条件就执行<code>counter += 1</code>。</li>
 <li>筛选问题可以把分支结构放进循环中，只处理满足条件的循环变量，例如利用<code>i % 2 == 0</code>筛选偶数。</li>
 <li>如果可以直接通过<code>range</code>的起点和步长生成目标数据，应优先缩小循环范围；如果有现成的内置函数，如求和可使用<code>sum</code>，应优先考虑简单清晰的写法。</li>
+<li>平均数的基本计算方式是“总和 ÷ 数据个数”。先在循环中累加所有数据，循环结束后再用总和除以数据个数；计算平均分时，分母应使用评委人数。</li>
 </ul>
 <h4 id="五-while-循环">五、`while`循环</h4><div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">while 条件:
     循环体</code></pre></div><ul>
