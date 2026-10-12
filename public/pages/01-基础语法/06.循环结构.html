@@ -206,7 +206,53 @@ print(total)</code></pre></div><blockquote>
 *****</code></pre></div><blockquote>
 <p><strong>说明</strong>：外层循环每执行一次，内层循环会完整执行一轮。因此上面的代码总共打印 <code>4 × 5 = 20</code> 个星号；内层循环结束后，外层循环体中的 <code>print()</code> 负责换行。</p>
 </blockquote>
-<p>和分支结构一样，循环结构也是可以嵌套的，也就是说在循环结构中还可以构造循环结构。下面的例子演示了如何通过嵌套的循环来输出一个乘法口诀表（九九表）。</p>
+<h4 id="例子-组成不重复的三位数">例子：组成不重复的三位数</h4><p>用数字 <code>1</code>、<code>2</code>、<code>3</code>、<code>4</code> 可以组成很多三位数。现在要求百位、十位和个位都从这四个数字中选择，而且同一个数字不能重复使用，输出所有符合要求的三位数。</p>
+<p><strong>问题拆解</strong>：</p>
+<ol>
+<li>百位、十位和个位分别需要遍历 <code>1</code> 到 <code>4</code>，因此需要三层循环。</li>
+<li>三层循环会产生所有可能的数字组合，例如 <code>111</code>、<code>112</code>、<code>123</code> 等。</li>
+<li>只有当百位、十位、个位两两不同时，组合才符合要求：<code>hundreds != tens</code>、<code>hundreds != ones</code>、<code>tens != ones</code>。</li>
+<li>满足条件时，把三个数字组成三位数并输出，同时用计数器记录符合条件的组合数量。</li>
+</ol>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">number_count = 0
+
+for hundreds in range(1, 5):
+    for tens in range(1, 5):
+        for ones in range(1, 5):
+            if hundreds != tens and hundreds != ones and tens != ones:
+                print(f'{hundreds}{tens}{ones}')
+                number_count += 1
+
+print(f'一共组成 {number_count} 个不同的三位数。')</code></pre></div><p>运行结果：</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">123
+124
+132
+134
+142
+143
+213
+214
+231
+234
+241
+243
+312
+314
+321
+324
+341
+342
+412
+413
+421
+423
+431
+432
+一共组成 24 个不同的三位数。</code></pre></div><p>外层循环确定百位，中间循环确定十位，内层循环确定个位。每确定一个数字，程序就继续遍历下一位的所有可能值；当三位数字两两不同时，<code>if</code> 条件成立，程序才输出这个组合。因此这个案例中，循环负责枚举所有候选组合，分支负责筛选符合要求的组合。</p>
+<blockquote>
+<p><strong>思考</strong>：如果要求组成四位数，并且仍然不能重复使用数字，需要增加哪一层循环？条件又要增加哪些比较？</p>
+</blockquote>
+<p>了解了固定行列和数字排列的嵌套循环之后，再通过经典案例输出乘法口诀表（九九表）。</p>
 <div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">"""
 打印乘法口诀表
 """
@@ -339,6 +385,7 @@ print(f'你一共猜了{counter}次.')</code></pre></div><blockquote>
 <li>外层循环通常控制行、批次或第一层对象，内层循环控制列、当前行中的元素或第二层对象。</li>
 <li>乘法口诀表的典型结构是：外层循环控制第几行，内层循环输出这一行中的各个乘法算式。</li>
 <li>4 行 5 列星号矩形的总输出次数为 <code>4 * 5 = 20</code>，可用来练习外层循环、内层循环和换行位置。</li>
+<li>三层循环可以依次枚举三位数的百位、十位和个位；把 <code>if</code> 放在最内层，可以筛选出三位数字互不相同的组合。</li>
 <li>嵌套循环的缩进必须清晰；内层循环结束后，内层循环外但外层循环内的语句仍会执行。</li>
 <li>嵌套层数越多，循环次数通常越多，编写时应关注循环范围和执行效率。</li>
 </ul>
