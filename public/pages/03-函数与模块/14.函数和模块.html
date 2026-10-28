@@ -156,9 +156,9 @@ def foo(*args, **kwargs):
     print(kwargs)
 
 
-foo(3, 2.1, True, name='骆昊', age=43, gpa=4.95)</code></pre></div><p>输出：</p>
+foo(3, 2.1, True, name='测试', age=43, gpa=4.95)</code></pre></div><p>输出：</p>
 <div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-text">(3, 2.1, True)
-{'name': '骆昊', 'age': 43, 'gpa': 4.95}</code></pre></div><h3 id="用模块管理函数">用模块管理函数</h3><p>不管用什么样的编程语言来写代码，给变量、函数起名字都是一个让人头疼的问题，因为我们会遇到<strong>命名冲突</strong>这种尴尬的情况。最简单的场景就是在同一个<code>.py</code>文件中定义了两个同名的函数，如下所示。</p>
+{'name': '测试', 'age': 43, 'gpa': 4.95}</code></pre></div><h3 id="用模块管理函数">用模块管理函数</h3><p>不管用什么样的编程语言来写代码，给变量、函数起名字都是一个让人头疼的问题，因为我们会遇到<strong>命名冲突</strong>这种尴尬的情况。最简单的场景就是在同一个<code>.py</code>文件中定义了两个同名的函数，如下所示。</p>
 <div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">def foo():
     print('hello, world!')
 

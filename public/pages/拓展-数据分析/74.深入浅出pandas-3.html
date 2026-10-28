@@ -20,7 +20,7 @@ eno
 9500	张三丰	   总裁	    NaN	     50000	 8000.0	 20
 9600	王大锤    程序员	   9800.0	8000	600.0	20
 9700	张三丰	   总裁	    NaN	     60000	 6000.0	 20
-9800	骆昊	    架构师	    7800.0	 30000	 5000.0	 20
+9800	测试	    架构师	    7800.0	 30000	 5000.0	 20
 9900	陈小刀	   分析师	   9800.0	10000	1200.0	20</code></pre></div><p>上面的代码将两个代表员工数据的<code>DataFrame</code>拼接到了一起，接下来我们使用<code>merge</code>函数将员工表和部门表的数据合并到一张表中，代码如下所示。</p>
 <p>先使用<code>reset_index</code>方法重新设置<code>all_emp_df</code>的索引，这样<code>eno</code> 不再是索引而是一个普通列，<code>reset_index</code>方法的<code>inplace</code>参数设置为<code>True</code>表示，重置索引的操作直接在<code>all_emp_df</code>上执行，而不是返回修改后的新对象。</p>
 <div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-Python">all_emp_df.reset_index(inplace=True)</code></pre></div><p>通过<code>merge</code>函数合并数据，当然，也可以调用<code>DataFrame</code>对象的<code>merge</code>方法来达到同样的效果。</p>
@@ -39,7 +39,7 @@ eno
 10	9500	张三丰	 总裁	     NaN	 50000	 8000.0	 20	    研发部	  成都
 11	9600	王大锤	 程序员	9800.0	8000	600.0	20	   研发部	 成都
 12	9700	张三丰	 总裁	     NaN	 60000	 6000.0	 20	    研发部	  成都
-13	9800	骆昊	  架构师	 7800.0	 30000	 5000.0	 20	    研发部	  成都
+13	9800	测试	  架构师	 7800.0	 30000	 5000.0	 20	    研发部	  成都
 14	9900	陈小刀	 分析师	9800.0	10000	1200.0	20	   研发部	 成都
 15	3577	杨过	  会计	  5566.0  2200	  NaN	  10	会计部	  北京
 16	3588	朱九真	 会计	     5566.0	 2500	 NaN	 10	   会计部	 北京

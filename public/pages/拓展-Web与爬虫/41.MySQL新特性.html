@@ -3,10 +3,10 @@
 <ol>
 <li>JSON 对象</li>
 </ol>
-<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-JSON">{"name": "骆昊", "tel": "13122335566", "QQ": "957658"}</code></pre></div><ol start="2">
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-JSON">{"name": "测试", "tel": "13122335566", "QQ": "957658"}</code></pre></div><ol start="2">
 <li>JSON 数组</li>
 </ol>
-<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-JSON">[1, 2, 3]</code></pre></div><div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-JSON">[{"name": "骆昊", "tel": "13122335566"}, {"name": "王大锤", "QQ": "123456"}]</code></pre></div><p>哪些地方需要用到JSON类型呢？举一个简单的例子，现在很多产品的用户登录都支持多种方式，例如手机号、微信、QQ、新浪微博等，但是一般情况下我们又不会要求用户提供所有的这些信息，那么用传统的设计方式，就需要设计多个列来对应多种登录方式，可能还需要允许这些列存在空值，这显然不是很好的选择；另一方面，如果产品又增加了一种登录方式，那么就必然要修改之前的表结构，这就更让人痛苦了。但是，有了 JSON 类型，刚才的问题就迎刃而解了，我们可以做出如下所示的设计。</p>
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-JSON">[1, 2, 3]</code></pre></div><div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-JSON">[{"name": "测试", "tel": "13122335566"}, {"name": "王大锤", "QQ": "123456"}]</code></pre></div><p>哪些地方需要用到JSON类型呢？举一个简单的例子，现在很多产品的用户登录都支持多种方式，例如手机号、微信、QQ、新浪微博等，但是一般情况下我们又不会要求用户提供所有的这些信息，那么用传统的设计方式，就需要设计多个列来对应多种登录方式，可能还需要允许这些列存在空值，这显然不是很好的选择；另一方面，如果产品又增加了一种登录方式，那么就必然要修改之前的表结构，这就更让人痛苦了。但是，有了 JSON 类型，刚才的问题就迎刃而解了，我们可以做出如下所示的设计。</p>
 <div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-SQL">CREATE TABLE `tb_test`
 (
 `user_id`    bigint unsigned,

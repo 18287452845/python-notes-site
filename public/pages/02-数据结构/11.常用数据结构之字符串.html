@@ -24,9 +24,9 @@ print(s1)
 print(s2)</code></pre></div><blockquote>
 <p><strong>说明</strong>：上面的变量<code>s1</code>中，<code>\t</code>、<code>\r</code>和<code>\n</code>都是转义字符。<code>\t</code>是制表符（table），<code>\n</code>是换行符（new line），<code>\r</code>是回车符（carriage return）相当于让输出回到了行首。对比一下两个<code>print</code>函数的输出，看看到底有什么区别！</p>
 </blockquote>
-<h4 id="字符的特殊表示">字符的特殊表示</h4><p>Python 中还允许在<code>\</code>后面还可以跟一个八进制或者十六进制数来表示字符，例如<code>\141</code>和<code>\x61</code>都代表小写字母<code>a</code>，前者是八进制的表示法，后者是十六进制的表示法。另外一种表示字符的方式是在<code>\u</code>后面跟 Unicode 字符编码，例如<code>\u9a86\u660a</code>代表的是中文“骆昊”。运行下面的代码，看看输出了什么。</p>
+<h4 id="字符的特殊表示">字符的特殊表示</h4><p>Python 中还允许在<code>\</code>后面还可以跟一个八进制或者十六进制数来表示字符，例如<code>\141</code>和<code>\x61</code>都代表小写字母<code>a</code>，前者是八进制的表示法，后者是十六进制的表示法。另外一种表示字符的方式是在<code>\u</code>后面跟 Unicode 字符编码，例如<code>\u6d4b\u8bd5</code>代表的是中文“测试”。运行下面的代码，看看输出了什么。</p>
 <div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">s1 = '\141\142\143\x61\x62\x63'
-s2 = '\u9a86\u660a'
+s2 = '\u6d4b\u8bd5'
 print(s1)
 print(s2)</code></pre></div><h3 id="字符串的运算">字符串的运算</h3><p>Python 语言为字符串类型提供了非常丰富的运算符，有很多运算符跟列表类型的运算符作用类似。例如，我们可以使用<code>+</code>运算符来实现字符串的拼接，可以使用<code>*</code>运算符来重复一个字符串的内容，可以使用<code>in</code>和<code>not in</code>来判断一个字符串是否包含另外一个字符串，我们也可以用<code>[]</code>和<code>[:]</code>运算符从字符串取出某个字符或某些字符。</p>
 <h4 id="拼接和重复">拼接和重复</h4><p>下面的例子演示了使用<code>+</code>和<code>*</code>运算符来实现字符串的拼接和重复操作。</p>
@@ -38,7 +38,7 @@ s1 += s2
 print(s1)    # hello, world!!!
 s1 *= 2
 print(s1)    # hello, world!!!hello, world!!!</code></pre></div><p>用<code>*</code>实现字符串的重复是非常有意思的一个运算符，在很多编程语言中，要表示一个有10个<code>a</code>的字符串，你只能写成<code>&#39;aaaaaaaaaa&#39;</code>，但是在 Python 中，你可以写成<code>&#39;a&#39; * 10</code>。你可能觉得<code>&#39;aaaaaaaaaa&#39;</code>这种写法也没有什么不方便的，但是请想一想，如果字符<code>a</code>要重复100次或者1000次又会如何呢？</p>
-<h4 id="比较运算">比较运算</h4><p>对于两个字符串类型的变量，可以直接使用比较运算符来判断两个字符串的相等性或比较大小。需要说明的是，因为字符串在计算机内存中也是以二进制形式存在的，那么字符串的大小比较比的是每个字符对应的编码的大小。例如<code>A</code>的编码是<code>65</code>， 而<code>a</code>的编码是<code>97</code>，所以<code>&#39;A&#39; &lt; &#39;a&#39;</code>的结果相当于就是<code>65 &lt; 97</code>的结果，这里很显然是<code>True</code>；而<code>&#39;boy&#39; &lt; &#39;bad&#39;</code>，因为第一个字符都是<code>&#39;b&#39;</code>比不出大小，所以实际比较的是第二个字符的大小，显然<code>&#39;o&#39; &lt; &#39;a&#39;</code>的结果是<code>False</code>，所以<code>&#39;boy&#39; &lt; &#39;bad&#39;</code>的结果是<code>False</code>。如果不清楚两个字符对应的编码到底是多少，可以使用<code>ord</code>函数来获得，之前我们有提到过这个函数。例如<code>ord(&#39;A&#39;)</code>的值是<code>65</code>，而<code>ord(&#39;昊&#39;)</code>的值是<code>26122</code>。下面的代码展示了字符串的比较运算，请大家仔细看看。</p>
+<h4 id="比较运算">比较运算</h4><p>对于两个字符串类型的变量，可以直接使用比较运算符来判断两个字符串的相等性或比较大小。需要说明的是，因为字符串在计算机内存中也是以二进制形式存在的，那么字符串的大小比较比的是每个字符对应的编码的大小。例如<code>A</code>的编码是<code>65</code>， 而<code>a</code>的编码是<code>97</code>，所以<code>&#39;A&#39; &lt; &#39;a&#39;</code>的结果相当于就是<code>65 &lt; 97</code>的结果，这里很显然是<code>True</code>；而<code>&#39;boy&#39; &lt; &#39;bad&#39;</code>，因为第一个字符都是<code>&#39;b&#39;</code>比不出大小，所以实际比较的是第二个字符的大小，显然<code>&#39;o&#39; &lt; &#39;a&#39;</code>的结果是<code>False</code>，所以<code>&#39;boy&#39; &lt; &#39;bad&#39;</code>的结果是<code>False</code>。如果不清楚两个字符对应的编码到底是多少，可以使用<code>ord</code>函数来获得，之前我们有提到过这个函数。例如<code>ord(&#39;A&#39;)</code>的值是<code>65</code>，而<code>ord(&#39;试&#39;)</code>的值是<code>35797</code>。下面的代码展示了字符串的比较运算，请大家仔细看看。</p>
 <div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">s1 = 'a whole new world'
 s2 = 'hello world'
 print(s1 == s2)             # False
@@ -46,9 +46,9 @@ print(s1 &lt; s2)              # True
 print(s1 == 'hello world')  # False
 print(s2 == 'hello world')  # True
 print(s2 != 'Hello world')  # True
-s3 = '骆昊'
-print(ord('骆'))            # 39558
-print(ord('昊'))            # 26122
+s3 = '测试'
+print(ord('测'))            # 27979
+print(ord('试'))            # 35797
 s4 = '王大锤'
 print(ord('王'))            # 29579
 print(ord('大'))            # 22823
@@ -234,13 +234,13 @@ words = s.split('#')
 print(words)  # ['I', 'love', 'you', 'so', 'much']
 words = s.split('#', 2)
 print(words)  # ['I', 'love', 'you#so#much']</code></pre></div><h4 id="编码和解码">编码和解码</h4><p>Python 中除了字符串<code>str</code>类型外，还有一种表示二进制数据的字节串类型（<code>bytes</code>）。所谓字节串，就是<strong>由零个或多个字节组成的有限序列</strong>。通过字符串的<code>encode</code>方法，我们可以按照某种编码方式将字符串编码为字节串，我们也可以使用字节串的<code>decode</code>方法，将字节串解码为字符串，代码如下所示。</p>
-<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">a = '骆昊'
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">a = '测试'
 b = a.encode('utf-8')
 c = a.encode('gbk')
-print(b)                  # b'\xe9\xaa\x86\xe6\x98\x8a'
-print(c)                  # b'\xc2\xe6\xea\xbb'
-print(b.decode('utf-8'))  # 骆昊
-print(c.decode('gbk'))    # 骆昊</code></pre></div><p>注意，如果编码和解码的方式不一致，会导致乱码问题（无法再现原始的内容）或引发<code>UnicodeDecodeError</code>错误，导致程序崩溃。</p>
+print(b)                  # b'\xe6\xb5\x8b\xe8\xaf\x95'
+print(c)                  # b'\xb2\xe2\xca\xd4'
+print(b.decode('utf-8'))  # 测试
+print(c.decode('gbk'))    # 测试</code></pre></div><p>注意，如果编码和解码的方式不一致，会导致乱码问题（无法再现原始的内容）或引发<code>UnicodeDecodeError</code>错误，导致程序崩溃。</p>
 <h4 id="其他方法">其他方法</h4><p>对于字符串类型来说，还有一个常用的操作是对字符串进行匹配检查，即检查字符串是否满足某种特定的模式。例如，一个网站对用户注册信息中用户名和邮箱的检查，就属于模式匹配检查。实现模式匹配检查的工具叫做正则表达式，Python 语言通过标准库中的<code>re</code>模块提供了对正则表达式的支持，我们会在后续的课程中为大家讲解这个知识点。</p>
 <h3 id="总结">总结</h3><p>知道如何表示和操作字符串对程序员来说是非常重要的，因为我们经常需要处理文本信息，Python 中操作字符串可以用拼接、索引、切片等运算符，也可以使用字符串类型提供的非常丰富的方法。</p>
 </div></article></div></main><footer>by天才程序员</footer><script src="/script.js"></script></body></html>

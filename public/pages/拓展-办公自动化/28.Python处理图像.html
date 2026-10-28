@@ -65,17 +65,17 @@ image.thumbnail((128, 128))
 image.show()</code></pre></div><p><img src="/assets/20210803202722-20250605165224-0rgq21v.png"" alt="" loading="lazy"></p>
 </li>
 <li><p>缩放和黏贴图像</p>
-<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python"># 读取骆昊的照片获得Image对象
-luohao_image = Image.open('luohao.png')
+<div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python"># 读取测试的照片获得Image对象
+ceshi_image = Image.open('ceshi.png')
 # 读取吉多的照片获得Image对象
 guido_image = Image.open('guido.jpg')
 # 从吉多的照片上剪裁出吉多的头
 guido_head = guido_image.crop((80, 20, 310, 360))
 width, height = guido_head.size
 # 使用Image对象的resize方法修改图像的尺寸
-# 使用Image对象的paste方法将吉多的头粘贴到骆昊的照片上
-luohao_image.paste(guido_head.resize((int(width / 1.5), int(height / 1.5))), (172, 40))
-luohao_image.show()</code></pre></div><p><img src="/assets/20210803202749-20250605165224-0ehm94t.png"" alt="" loading="lazy"></p>
+# 使用Image对象的paste方法将吉多的头粘贴到测试的照片上
+ceshi_image.paste(guido_head.resize((int(width / 1.5), int(height / 1.5))), (172, 40))
+ceshi_image.show()</code></pre></div><p><img src="/assets/20210803202749-20250605165224-0ehm94t.png"" alt="" loading="lazy"></p>
 </li>
 <li><p>旋转和翻转</p>
 <div class="code-wrap"><button class="copy-code" type="button">复制</button><pre><code class="language-python">image = Image.open('guido.jpg')
