@@ -1,3 +1,30 @@
-const fs=require('node:fs'),path=require('node:path');
-const build=process.argv[2] || path.resolve(__dirname, '../public');
-function walk(d){for(const n of fs.readdirSync(d)){const p=path.join(d,n),s=fs.statSync(p);if(s.isDirectory())walk(p);else if(n.endsWith('.html')&&n!=='index.html'){let h=fs.readFileSync(p,'utf8');h=h.replace('<div class="nav-title">课程章节</div>','<div class="course-nav-head"><div class="nav-title">课程章节</div><button class="course-nav-toggle" type="button" aria-expanded="true" aria-controls="course-nav-list">收起</button></div>');h=h.replace('<aside class="course-nav" aria-label="课程章节">','<aside class="course-nav" aria-label="课程章节" id="course-nav-list">');const m=h.match(/<div class="lesson-toc">[\s\S]*?<a class="to-top" href="#top">回到顶部<\/a><\/div>/);if(m){const inner=m[0].slice('<div class="lesson-toc">'.length,-'</div>'.length);const toc=`<aside class="lesson-toc" aria-label="本页目录">${inner}</aside>`;h=h.replace('<article class="lesson">'+m[0],'<article class="lesson">');h=h.replace('<div class="content-area">',toc+'<div class="content-area">');}fs.writeFileSync(p,h)}}}walk(build);
+const fs = require('node:fs');
+const path = require('node:path');
+
+/**
+ * 后处理：在生成的讲义页面上补充阅读进度条。
+ * 课程目录与本页目录的折叠按钮已由 build-content.cjs 直接输出，
+ * 此处不再重复注入，避免与新结构冲突。
+ */
+const build = process.argv[2] || path.resolve(__dirname, '../public');
+
+function walk(dir) {
+  for (const name of fs.readdirSync(dir)) {
+    const file = path.join(dir, name);
+    const stat = fs.statSync(file);
+    if (stat.isDirectory()) {
+      walk(file);
+    } else if (name.endsWith('.html') && name !== 'index.html') {
+      let html = fs.readFileSync(file, 'utf8');
+      if (!html.includes('reading-progress')) {
+        html = html.replace(
+          '<body>',
+          '<body><div class="reading-progress" id="reading-progress" aria-hidden="true"></div>'
+        );
+        fs.writeFileSync(file, html);
+      }
+    }
+  }
+}
+
+walk(build);

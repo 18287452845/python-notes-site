@@ -12,13 +12,15 @@ function walk(dir) {
       const html = fs.readFileSync(file, 'utf8');
       if (entry.name !== 'index.html') {
         if (!html.includes('<aside class="lesson-toc"')) failures.push(`${file}: missing page toc`);
-        if (!html.includes('course-nav-toggle')) failures.push(`${file}: missing course nav toggle`);
+        if (!html.includes('data-panel-toggle="courseNav"')) failures.push(`${file}: missing course nav toggle`);
+        if (!html.includes('data-panel-toggle="lessonToc"')) failures.push(`${file}: missing toc toggle`);
+        if (!html.includes('data-panel-rail=')) failures.push(`${file}: missing panel rail icon`);
       }
     }
   }
 }
 walk(root);
-for (const file of ['style.css', 'script.js', 'assets/highlight.common.min.js', 'assets/highlight.github-dark.min.css']) {
+for (const file of ['style.css', 'script.js', 'assets/highlight.common.min.js', 'assets/highlight.github.min.css']) {
   if (!fs.existsSync(path.join(root, file))) failures.push(`missing ${file}`);
 }
 if (failures.length) {

@@ -23,7 +23,7 @@ run('build-content.cjs', [out]);
 fs.copyFileSync(path.join(siteRoot, 'templates', 'style.css'), path.join(out, 'style.css'));
 fs.copyFileSync(path.join(siteRoot, 'templates', 'script.js'), path.join(out, 'script.js'));
 fs.mkdirSync(path.join(out, 'assets'), { recursive: true });
-for (const file of ['highlight.common.min.js', 'highlight.github-dark.min.css']) {
+for (const file of ['highlight.common.min.js', 'highlight.github.min.css']) {
   fs.copyFileSync(path.join(siteRoot, 'templates', file), path.join(out, 'assets', file));
 }
 
