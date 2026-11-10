@@ -1,0 +1,325 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Python 基础课程讲义：21.异常处理"><title>21.异常处理｜Python 编程基础</title><link rel="stylesheet" href="/style.css"><script>window.MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:true,processEnvironments:true},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body><div class="reading-progress" id="reading-progress" aria-hidden="true"></div><header class="site-header"><div class="header-inner"><a class="brand" href="/index.html"><span class="brand-icon">🐍</span><span class="brand-text"><span>Python 编程基础</span><small>Python 基础课程讲义</small></span></a><a class="back-home" href="/index.html">课程首页</a></div></header><main class="page-layout"><aside class="course-nav" aria-label="课程章节"><div class="course-nav-inner"><div class="nav-title">课程章节</div><div class="nav-group"><span class="group-icon">🧱</span>01-基础语法</div><ul><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/01.%E5%88%9D%E8%AF%86Python.html">01.初识Python</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/02.%E7%AC%AC%E4%B8%80%E4%B8%AAPython%E7%A8%8B%E5%BA%8F.html">02.第一个Python程序</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/03.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F.html">03.Python语言中的变量</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/04.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6.html">04.Python语言中的运算符</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/05.%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84.html">05.分支结构</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/06.%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84.html">06.循环结构</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/%E5%AE%9E%E9%AA%8C1.%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验1.基础语法综合实验</a></li></ul><div class="nav-group"><span class="group-icon">🗂</span>02-数据结构</div><ul><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/08.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-1.html">08.常用数据结构之列表-1</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/09.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-2.html">09.常用数据结构之列表-2</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/10.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%85%83%E7%BB%84.html">10.常用数据结构之元组</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/11.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2.html">11.常用数据结构之字符串</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/12.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E9%9B%86%E5%90%88.html">12.常用数据结构之集合</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/13.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E5%85%B8.html">13.常用数据结构之字典</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%AE%9E%E9%AA%8C2.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验2.数据结构综合实验</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%AE%9E%E9%AA%8C%E6%89%8B%E5%86%8C.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80%E5%AE%9E%E9%AA%8C.html">实验手册.数据结构基础实验</a></li></ul><div class="nav-group"><span class="group-icon">🔧</span>03-函数与模块</div><ul><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/14.%E5%87%BD%E6%95%B0%E5%92%8C%E6%A8%A1%E5%9D%97.html">14.函数和模块</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/16.%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E8%BF%9B%E9%98%B6.html">16.函数使用进阶</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/17.%E5%87%BD%E6%95%B0%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8.html">17.函数高级应用</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/%E5%AE%9E%E9%AA%8C3.%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验3.函数与模块综合实验</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/%E5%AE%9E%E9%AA%8C%E6%89%8B%E5%86%8C.%E5%87%BD%E6%95%B0%E4%B8%8E%E5%BC%82%E5%B8%B8%E5%9F%BA%E7%A1%80%E5%AE%9E%E9%AA%8C.html">实验手册.函数与异常基础实验</a></li></ul><div class="nav-group"><span class="group-icon">📁</span>04-文件与异常</div><ul><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/21.%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html">21.异常处理</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/22.%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99.html">22.文件读写</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/23.%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96.html">23.对象的序列化和反序列化</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/24.Python%E8%AF%BB%E5%86%99CSV%E6%96%87%E4%BB%B6.html">24.Python读写CSV文件</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/%E5%AE%9E%E9%AA%8C4.%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验4.文件与异常综合实验</a></li></ul><div class="nav-group"><span class="group-icon">🧩</span>05-面向对象</div><ul><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/18.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8.html">18.面向对象编程入门</a></li><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/19.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6.html">19.面向对象编程进阶</a></li></ul><div class="nav-group"><span class="group-icon">🛠</span>06-基础项目</div><ul><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/07.%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84%E5%AE%9E%E6%88%98.html">07.分支和循环结构实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/15.%E5%87%BD%E6%95%B0%E5%BA%94%E7%94%A8%E5%AE%9E%E6%88%98.html">15.函数应用实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/20.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%BA%94%E7%94%A8.html">20.面向对象编程应用</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/30.%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%BA%94%E7%94%A8.html">30.正则表达式的应用</a></li></ul><div class="nav-group"><span class="group-icon">📊</span>拓展-办公自动化</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/24.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-1.html">24.Python读写Excel文件-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/25.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-2.html">25.Python读写Excel文件-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/26.Python%E6%93%8D%E4%BD%9CWord%E5%92%8CPowerPoint%E6%96%87%E4%BB%B6.html">26.Python操作Word和PowerPoint文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/27.Python%E6%93%8D%E4%BD%9CPDF%E6%96%87%E4%BB%B6.html">27.Python操作PDF文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/28.Python%E5%A4%84%E7%90%86%E5%9B%BE%E5%83%8F.html">28.Python处理图像</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/29.Python%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E5%92%8C%E7%9F%AD%E4%BF%A1.html">29.Python发送邮件和短信</a></li></ul><div class="nav-group"><span class="group-icon">🌐</span>拓展-Web与爬虫</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/31.Python%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6.html">31.Python语言进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/32-33.Web%E5%89%8D%E7%AB%AF%E5%85%A5%E9%97%A8.html">32-33.Web前端入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/34-35.%E7%8E%A9%E8%BD%ACLinux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.html">34-35.玩转Linux操作系统</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/36.%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CMySQL%E6%A6%82%E8%BF%B0.html">36.关系型数据库和MySQL概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/37.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDDL.html">37.SQL详解之DDL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/38.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDML.html">38.SQL详解之DML</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/39.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDQL.html">39.SQL详解之DQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/40.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDCL.html">40.SQL详解之DCL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/41.MySQL%E6%96%B0%E7%89%B9%E6%80%A7.html">41.MySQL新特性</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/42.%E8%A7%86%E5%9B%BE%E3%80%81%E5%87%BD%E6%95%B0%E5%92%8C%E8%BF%87%E7%A8%8B.html">42.视图、函数和过程</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/43.%E7%B4%A2%E5%BC%95.html">43.索引</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/44.Python%E6%8E%A5%E5%85%A5MySQL%E6%95%B0%E6%8D%AE%E5%BA%93.html">44.Python接入MySQL数据库</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/45.%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E5%92%8CHiveSQL.html">45.大数据平台和HiveSQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/46.Django%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.html">46.Django快速上手</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/47.%E6%B7%B1%E5%85%A5%E6%A8%A1%E5%9E%8B.html">47.深入模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/48.%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%92%8CAjax%E8%AF%B7%E6%B1%82.html">48.静态资源和Ajax请求</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/49.Cookie%E5%92%8CSession.html">49.Cookie和Session</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/50.%E5%88%B6%E4%BD%9C%E6%8A%A5%E8%A1%A8.html">50.制作报表</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/51.%E6%97%A5%E5%BF%97%E5%92%8C%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7%E6%A0%8F.html">51.日志和调试工具栏</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/52.%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E5%BA%94%E7%94%A8.html">52.中间件的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/53.%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8.html">53.前后端分离开发入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/54.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E5%85%A5%E9%97%A8.html">54.RESTful架构和DRF入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/55.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E8%BF%9B%E9%98%B6.html">55.RESTful架构和DRF进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/56.%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98.html">56.使用缓存</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/57.%E6%8E%A5%E5%85%A5%E4%B8%89%E6%96%B9%E5%B9%B3%E5%8F%B0.html">57.接入三方平台</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/58.%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1.html">58.异步任务和定时任务</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/59.%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95.html">59.单元测试</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/60.%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF.html">60.项目上线</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/61.%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E6%A6%82%E8%BF%B0.html">61.网络数据采集概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%8E%B7%E5%8F%96%E7%BD%91%E7%BB%9C%E8%B5%84%E6%BA%90-1.html">62.用Python获取网络资源-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%A7%A3%E6%9E%90HTML%E9%A1%B5%E9%9D%A2-2.html">62.用Python解析HTML页面-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-1.html">63.Python中的并发编程-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-2.html">63.Python中的并发编程-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-3.html">63.Python中的并发编程-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9C%A8%E7%88%AC%E8%99%AB%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html">63.并发编程在爬虫中的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/64.%E4%BD%BF%E7%94%A8Selenium%E6%8A%93%E5%8F%96%E7%BD%91%E9%A1%B5%E5%8A%A8%E6%80%81%E5%86%85%E5%AE%B9.html">64.使用Selenium抓取网页动态内容</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/65.%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6Scrapy%E7%AE%80%E4%BB%8B.html">65.爬虫框架Scrapy简介</a></li></ul><div class="nav-group"><span class="group-icon">📈</span>拓展-数据分析</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/66.%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A6%82%E8%BF%B0.html">66.数据分析概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/67.%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87.html">67.环境准备</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/68.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-1.html">68.NumPy的应用-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/69.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-2.html">69.NumPy的应用-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/70.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-3.html">70.NumPy的应用-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/71.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-4.html">71.NumPy的应用-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/72.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-1.html">72.深入浅出pandas-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/73.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-2.html">73.深入浅出pandas-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/74.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-3.html">74.深入浅出pandas-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/75.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-4.html">75.深入浅出pandas-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/76.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-5.html">76.深入浅出pandas-5</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/77.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-6.html">77.深入浅出pandas-6</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/78.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-1.html">78.数据可视化-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/79.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-2.html">79.数据可视化-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/80.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-3.html">80.数据可视化-3</a></li></ul><div class="nav-group"><span class="group-icon">🤖</span>拓展-机器学习</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/81.%E6%B5%85%E8%B0%88%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0.html">81.浅谈机器学习</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/82.k%E6%9C%80%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95.html">82.k最近邻算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/83.%E5%86%B3%E7%AD%96%E6%A0%91%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97.html">83.决策树和随机森林</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/84.%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95.html">84.朴素贝叶斯算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/85.%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B.html">85.回归模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/86.K-Means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95.html">86.K-Means聚类算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/87.%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95.html">87.集成学习算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/88.%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B.html">88.神经网络模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/89.%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E5%85%A5%E9%97%A8.html">89.自然语言处理入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/90.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98.html">90.机器学习实战</a></li></ul></div><button class="panel-toggle" type="button" data-panel-toggle="courseNav" aria-expanded="true" aria-label="折叠课程目录" title="折叠课程目录"><svg class="ico-collapse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5 9 12l5.5 5.5"/><path d="M19 6.5 13.5 12 19 17.5"/></svg><svg class="ico-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 6.5 15 12l-5.5 5.5"/><path d="M5 6.5 10.5 12 5 17.5"/></svg></button><button class="panel-rail-icon" type="button" data-panel-rail="courseNav" aria-label="展开课程目录" title="展开课程目录"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 6.5 15 12l-5.5 5.5"/><path d="M5 6.5 10.5 12 5 17.5"/></svg></button></aside><div class="content-area"><details class="mobile-course-nav"><summary>课程章节</summary><div class="mobile-course-links"><div class="nav-group"><span class="group-icon">🧱</span>01-基础语法</div><ul><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/01.%E5%88%9D%E8%AF%86Python.html">01.初识Python</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/02.%E7%AC%AC%E4%B8%80%E4%B8%AAPython%E7%A8%8B%E5%BA%8F.html">02.第一个Python程序</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/03.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F.html">03.Python语言中的变量</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/04.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6.html">04.Python语言中的运算符</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/05.%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84.html">05.分支结构</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/06.%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84.html">06.循环结构</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/%E5%AE%9E%E9%AA%8C1.%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验1.基础语法综合实验</a></li></ul><div class="nav-group"><span class="group-icon">🗂</span>02-数据结构</div><ul><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/08.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-1.html">08.常用数据结构之列表-1</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/09.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-2.html">09.常用数据结构之列表-2</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/10.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%85%83%E7%BB%84.html">10.常用数据结构之元组</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/11.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2.html">11.常用数据结构之字符串</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/12.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E9%9B%86%E5%90%88.html">12.常用数据结构之集合</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/13.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E5%85%B8.html">13.常用数据结构之字典</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%AE%9E%E9%AA%8C2.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验2.数据结构综合实验</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%AE%9E%E9%AA%8C%E6%89%8B%E5%86%8C.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80%E5%AE%9E%E9%AA%8C.html">实验手册.数据结构基础实验</a></li></ul><div class="nav-group"><span class="group-icon">🔧</span>03-函数与模块</div><ul><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/14.%E5%87%BD%E6%95%B0%E5%92%8C%E6%A8%A1%E5%9D%97.html">14.函数和模块</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/16.%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E8%BF%9B%E9%98%B6.html">16.函数使用进阶</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/17.%E5%87%BD%E6%95%B0%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8.html">17.函数高级应用</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/%E5%AE%9E%E9%AA%8C3.%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验3.函数与模块综合实验</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/%E5%AE%9E%E9%AA%8C%E6%89%8B%E5%86%8C.%E5%87%BD%E6%95%B0%E4%B8%8E%E5%BC%82%E5%B8%B8%E5%9F%BA%E7%A1%80%E5%AE%9E%E9%AA%8C.html">实验手册.函数与异常基础实验</a></li></ul><div class="nav-group"><span class="group-icon">📁</span>04-文件与异常</div><ul><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/21.%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html">21.异常处理</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/22.%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99.html">22.文件读写</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/23.%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96.html">23.对象的序列化和反序列化</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/24.Python%E8%AF%BB%E5%86%99CSV%E6%96%87%E4%BB%B6.html">24.Python读写CSV文件</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/%E5%AE%9E%E9%AA%8C4.%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验4.文件与异常综合实验</a></li></ul><div class="nav-group"><span class="group-icon">🧩</span>05-面向对象</div><ul><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/18.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8.html">18.面向对象编程入门</a></li><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/19.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6.html">19.面向对象编程进阶</a></li></ul><div class="nav-group"><span class="group-icon">🛠</span>06-基础项目</div><ul><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/07.%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84%E5%AE%9E%E6%88%98.html">07.分支和循环结构实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/15.%E5%87%BD%E6%95%B0%E5%BA%94%E7%94%A8%E5%AE%9E%E6%88%98.html">15.函数应用实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/20.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%BA%94%E7%94%A8.html">20.面向对象编程应用</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/30.%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%BA%94%E7%94%A8.html">30.正则表达式的应用</a></li></ul><div class="nav-group"><span class="group-icon">📊</span>拓展-办公自动化</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/24.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-1.html">24.Python读写Excel文件-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/25.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-2.html">25.Python读写Excel文件-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/26.Python%E6%93%8D%E4%BD%9CWord%E5%92%8CPowerPoint%E6%96%87%E4%BB%B6.html">26.Python操作Word和PowerPoint文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/27.Python%E6%93%8D%E4%BD%9CPDF%E6%96%87%E4%BB%B6.html">27.Python操作PDF文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/28.Python%E5%A4%84%E7%90%86%E5%9B%BE%E5%83%8F.html">28.Python处理图像</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/29.Python%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E5%92%8C%E7%9F%AD%E4%BF%A1.html">29.Python发送邮件和短信</a></li></ul><div class="nav-group"><span class="group-icon">🌐</span>拓展-Web与爬虫</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/31.Python%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6.html">31.Python语言进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/32-33.Web%E5%89%8D%E7%AB%AF%E5%85%A5%E9%97%A8.html">32-33.Web前端入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/34-35.%E7%8E%A9%E8%BD%ACLinux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.html">34-35.玩转Linux操作系统</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/36.%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CMySQL%E6%A6%82%E8%BF%B0.html">36.关系型数据库和MySQL概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/37.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDDL.html">37.SQL详解之DDL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/38.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDML.html">38.SQL详解之DML</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/39.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDQL.html">39.SQL详解之DQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/40.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDCL.html">40.SQL详解之DCL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/41.MySQL%E6%96%B0%E7%89%B9%E6%80%A7.html">41.MySQL新特性</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/42.%E8%A7%86%E5%9B%BE%E3%80%81%E5%87%BD%E6%95%B0%E5%92%8C%E8%BF%87%E7%A8%8B.html">42.视图、函数和过程</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/43.%E7%B4%A2%E5%BC%95.html">43.索引</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/44.Python%E6%8E%A5%E5%85%A5MySQL%E6%95%B0%E6%8D%AE%E5%BA%93.html">44.Python接入MySQL数据库</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/45.%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E5%92%8CHiveSQL.html">45.大数据平台和HiveSQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/46.Django%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.html">46.Django快速上手</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/47.%E6%B7%B1%E5%85%A5%E6%A8%A1%E5%9E%8B.html">47.深入模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/48.%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%92%8CAjax%E8%AF%B7%E6%B1%82.html">48.静态资源和Ajax请求</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/49.Cookie%E5%92%8CSession.html">49.Cookie和Session</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/50.%E5%88%B6%E4%BD%9C%E6%8A%A5%E8%A1%A8.html">50.制作报表</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/51.%E6%97%A5%E5%BF%97%E5%92%8C%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7%E6%A0%8F.html">51.日志和调试工具栏</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/52.%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E5%BA%94%E7%94%A8.html">52.中间件的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/53.%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8.html">53.前后端分离开发入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/54.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E5%85%A5%E9%97%A8.html">54.RESTful架构和DRF入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/55.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E8%BF%9B%E9%98%B6.html">55.RESTful架构和DRF进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/56.%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98.html">56.使用缓存</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/57.%E6%8E%A5%E5%85%A5%E4%B8%89%E6%96%B9%E5%B9%B3%E5%8F%B0.html">57.接入三方平台</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/58.%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1.html">58.异步任务和定时任务</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/59.%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95.html">59.单元测试</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/60.%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF.html">60.项目上线</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/61.%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E6%A6%82%E8%BF%B0.html">61.网络数据采集概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%8E%B7%E5%8F%96%E7%BD%91%E7%BB%9C%E8%B5%84%E6%BA%90-1.html">62.用Python获取网络资源-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%A7%A3%E6%9E%90HTML%E9%A1%B5%E9%9D%A2-2.html">62.用Python解析HTML页面-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-1.html">63.Python中的并发编程-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-2.html">63.Python中的并发编程-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-3.html">63.Python中的并发编程-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9C%A8%E7%88%AC%E8%99%AB%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html">63.并发编程在爬虫中的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/64.%E4%BD%BF%E7%94%A8Selenium%E6%8A%93%E5%8F%96%E7%BD%91%E9%A1%B5%E5%8A%A8%E6%80%81%E5%86%85%E5%AE%B9.html">64.使用Selenium抓取网页动态内容</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/65.%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6Scrapy%E7%AE%80%E4%BB%8B.html">65.爬虫框架Scrapy简介</a></li></ul><div class="nav-group"><span class="group-icon">📈</span>拓展-数据分析</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/66.%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A6%82%E8%BF%B0.html">66.数据分析概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/67.%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87.html">67.环境准备</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/68.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-1.html">68.NumPy的应用-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/69.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-2.html">69.NumPy的应用-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/70.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-3.html">70.NumPy的应用-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/71.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-4.html">71.NumPy的应用-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/72.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-1.html">72.深入浅出pandas-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/73.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-2.html">73.深入浅出pandas-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/74.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-3.html">74.深入浅出pandas-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/75.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-4.html">75.深入浅出pandas-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/76.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-5.html">76.深入浅出pandas-5</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/77.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-6.html">77.深入浅出pandas-6</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/78.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-1.html">78.数据可视化-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/79.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-2.html">79.数据可视化-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/80.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-3.html">80.数据可视化-3</a></li></ul><div class="nav-group"><span class="group-icon">🤖</span>拓展-机器学习</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/81.%E6%B5%85%E8%B0%88%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0.html">81.浅谈机器学习</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/82.k%E6%9C%80%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95.html">82.k最近邻算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/83.%E5%86%B3%E7%AD%96%E6%A0%91%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97.html">83.决策树和随机森林</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/84.%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95.html">84.朴素贝叶斯算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/85.%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B.html">85.回归模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/86.K-Means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95.html">86.K-Means聚类算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/87.%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95.html">87.集成学习算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/88.%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B.html">88.神经网络模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/89.%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E5%85%A5%E9%97%A8.html">89.自然语言处理入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/90.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98.html">90.机器学习实战</a></li></ul></div></details><article class="lesson"><div class="lesson-content" id="top"><h1 id="21-异常处理">21.异常处理</h1><h2 id="异常处理">异常处理</h2><p>写代码的时候，我们总希望程序能按照我们的想法一直跑下去。但现实是：程序运行时总会遇到各种意外，比如把一个字符串转成整数、拿 0 去做除法、访问列表中不存在的元素……Python 遇到这些情况时会怎么做？它会<strong>抛出（raise）一个异常</strong>，然后程序就中断了。</p>
+<p>这一讲我们专门学习 Python 的<strong>异常处理机制</strong>，它的作用是：<strong>让程序遇到意外时不要&quot;当场崩溃&quot;，而是优雅地处理掉，然后继续往下跑</strong>。</p>
+<blockquote>
+<p><strong>课时安排</strong>：课时三学习&quot;异常处理基础&quot;（什么是异常、<code>try...except</code>、<code>else</code>、<code>finally</code>），课时四学习&quot;异常处理进阶&quot;（<code>raise</code>、自定义异常、断言、实战与规范）。</p>
+</blockquote>
+<h3 id="什么是异常">什么是异常</h3><p>我们先来看一段&quot;会出问题&quot;的代码，代码如下所示。</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">python</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-python">print(10 / 0)</code></pre></div><p>运行上面的代码，程序会立刻中断，屏幕上会出现这样一段信息：</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">text</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-text">Traceback (most recent call last):
+  File "demo.py", line 1, in &lt;module&gt;
+    print(10 / 0)
+ZeroDivisionError: division by zero</code></pre></div><p>这段信息叫做<strong>调用栈追踪（Traceback）</strong>，它告诉我们三件事：程序在哪里出的问题（第几行）、是什么问题（<code>ZeroDivisionError</code>）、问题的说明是什么（<code>division by zero</code>，即&quot;除数为零&quot;）。</p>
+<p>Python 把这类&quot;运行时错误&quot;统一称为<strong>异常</strong>（exception），每一种异常都有自己对应的类型。常见的异常类型如下表所示。</p>
+<table>
+<thead>
+<tr>
+<th>异常类型</th>
+<th>说明</th>
+<th>典型例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ZeroDivisionError</code></td>
+<td>除数为零</td>
+<td><code>10 / 0</code></td>
+</tr>
+<tr>
+<td><code>ValueError</code></td>
+<td>值不合法</td>
+<td><code>int(&#39;abc&#39;)</code></td>
+</tr>
+<tr>
+<td><code>TypeError</code></td>
+<td>类型不对</td>
+<td><code>&#39;a&#39; + 1</code></td>
+</tr>
+<tr>
+<td><code>NameError</code></td>
+<td>使用了不存在的名字</td>
+<td><code>print(undefined_name)</code></td>
+</tr>
+<tr>
+<td><code>IndexError</code></td>
+<td>下标越界</td>
+<td><code>[1, 2, 3][10]</code></td>
+</tr>
+<tr>
+<td><code>KeyError</code></td>
+<td>字典中不存在的键</td>
+<td><code>d[&#39;x&#39;]</code></td>
+</tr>
+<tr>
+<td><code>AttributeError</code></td>
+<td>对象没有这个属性</td>
+<td><code>&#39;abc&#39;.uppercase()</code></td>
+</tr>
+<tr>
+<td><code>FileNotFoundError</code></td>
+<td>文件不存在</td>
+<td><code>open(&#39;不存在.txt&#39;)</code></td>
+</tr>
+</tbody></table>
+<p>既然异常会让程序中断，那么我们的目标就是：<strong>让程序遇到意外时不要&quot;当场崩溃&quot;，而是优雅地处理它，然后继续往下跑</strong>。这就要用到 Python 的异常处理机制。</p>
+<h3 id="try-except">try...except</h3><p>Python中和异常相关的关键字有五个，分别是<code>try</code>、<code>except</code>、<code>else</code>、<code>finally</code>和<code>raise</code>，我们先看看下面的代码，再来为大家介绍这些关键字的用法。</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">python</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-python">try:
+    # 可能出错的代码写在 try 代码块中
+    print(10 / 0)
+except ZeroDivisionError:
+    # 如果出现了 ZeroDivisionError，就执行这里的代码
+    print('除数不能为 0')</code></pre></div><p>运行上面的代码，输出如下所示。</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">text</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-text">除数不能为 0</code></pre></div><p>这就是最基本的异常处理：<strong>把可能出错的代码放进<code>try</code>代码块，把出错了怎么办的代码放进<code>except</code>代码块</strong>。当<code>try</code>中的代码正常执行时，<code>except</code>中的代码会被跳过；当<code>try</code>中的代码抛出异常时，程序会到<code>except</code>中去找匹配的异常类型，找到就执行对应的处理代码，程序不会中断。</p>
+<p>一个<code>try</code>后面可以跟上一个或多个<code>except</code>块，分别处理不同的异常，代码如下所示。</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">python</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-python">num = input('请输入一个整数：')
+try:
+    num = int(num)
+    print(100 / num)
+except ValueError:
+    print('您输入的不是合法的整数')
+except ZeroDivisionError:
+    print('除数不能为 0')</code></pre></div><p>如果希望在处理异常时<strong>同时拿到异常的具体信息</strong>，可以在<code>except</code>后面加上<code>as 变量名</code>，代码如下所示。</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">python</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-python">try:
+    print(10 / 0)
+except ZeroDivisionError as e:
+    print('出错了：', e)</code></pre></div><p>输出：</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">text</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-text">出错了： division by zero</code></pre></div><p>我们也可以用一个<code>except</code>同时捕获多种异常，这时需要把异常类型写成元组，代码如下所示。</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">python</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-python">try:
+    num = int(input('请输入一个整数：'))
+    print(100 / num)
+except (ValueError, ZeroDivisionError) as e:
+    print('输入的数据有问题：', e)</code></pre></div><p>如果希望<strong>无论发生什么异常都能接住</strong>，可以捕获<code>Exception</code>类（它是绝大多数常规异常的父类），代码如下所示。</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">python</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-python">try:
+    print(10 / 0)
+except Exception as e:
+    print('程序出错了：', e)</code></pre></div><blockquote>
+<p><strong>注意</strong>：上面这种&quot;什么都接住&quot;的写法虽然方便，但会把代码中的真实错误一起隐藏掉，导致问题难以排查。实际开发中请尽量捕获<strong>具体</strong>的异常类型；只有在确实需要&quot;无论如何都要兜住&quot;的场合（比如服务器长期运行的程序）才考虑捕获<code>Exception</code>。</p>
+</blockquote>
+<h3 id="else和finally">else和finally</h3><p><code>try</code>代码块除了可以跟<code>except</code>，还可以跟<code>else</code>和<code>finally</code>代码块。</p>
+<ul>
+<li><code>else</code>代码块中的代码<strong>只有在<code>try</code>中没有发生异常时才会执行</strong>；</li>
+<li><code>finally</code>代码块中的代码<strong>无论有没有发生异常都会执行</strong>，所以它被称为&quot;总是执行代码块&quot;，最适合用来做释放外部资源之类的收尾工作。</li>
+</ul>
+<p>我们用一段代码把三个关键字的效果都体现出来，代码如下所示。</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">python</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-python">num = input('请输入一个整数：')
+try:
+    num = int(num)
+    print(100 / num)
+except ValueError:
+    print('您输入的不是合法的整数')
+except ZeroDivisionError:
+    print('除数不能为 0')
+else:
+    print('一切正常，结果是：', 100 / num)
+finally:
+    print('本次计算结束')</code></pre></div><p>运行上面的代码（输入 20），输出如下所示。</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">text</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-text">一切正常，结果是： 5.0
+本次计算结束</code></pre></div><p>如果把上面代码中输入的内容改成<code>abc</code>，输出则是：</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">text</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-text">您输入的不是合法的整数
+本次计算结束</code></pre></div><p>可以看到，<code>else</code>部分的代码在发生异常时并没有执行，而<code>finally</code>部分的代码两种情况下都执行了。</p>
+<p><code>finally</code>最大的用途是<strong>释放资源</strong>，比如关闭文件、释放锁。另外还有一条重要的注意事项：<strong>不要在<code>finally</code>代码块中写<code>return</code>语句</strong>，否则会把<code>try</code>中原本要抛出的异常&quot;吃掉&quot;，让程序以为一切正常。</p>
+<h3 id="raise">raise</h3><p>前面我们一直在&quot;处理&quot;别人抛出的异常，其实我们也可以<strong>主动抛出异常</strong>。</p>
+<p>在 Python 中，可以使用<code>raise</code>关键字来引发异常，当函数收到的参数不合法时，用抛出异常的方式告知调用者问题出在哪里，代码如下所示。</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">python</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-python">def check_age(age):
+    """检查年龄是否合法"""
+    if age &lt; 0:
+        raise ValueError('年龄不能为负数')
+    if age &gt; 150:
+        raise ValueError('年龄太大了，请确认输入')
+    return age
+
+
+print(check_age(20))   # 20
+print(check_age(-1))   # ValueError: 年龄不能为负数</code></pre></div><blockquote>
+<p><strong>说明</strong>：上面代码的第二行会打印出一段 Traceback，这<strong>不是代码写错了</strong>，而是因为我们没有捕获这个异常——异常一旦抛出又没人接住，程序就只能中断了。</p>
+</blockquote>
+<p>这里的思路是：<strong>函数只负责&quot;检查&quot;，发现输入不合法就抛异常，具体怎么应对由调用者决定</strong>。调用者如果希望程序遇到非法输入就直接结束，那么不捕获这个异常即可；如果希望给出友好的提示，就用<code>try...except</code>接住它，代码如下所示。</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">python</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-python">try:
+    age = int(input('请输入您的年龄：'))
+    print(check_age(age))
+except ValueError as e:
+    print('输入有误：', e)</code></pre></div><h3 id="自定义异常类型">自定义异常类型</h3><p>Python 内置的异常类型已经能满足大部分需求，如果我们需要表达更具体的业务含义，还可以定义自己的异常类型。</p>
+<p>自定义异常类型的规则很简单：<strong>写一个类，继承<code>Exception</code>（或者某个内置异常类）即可</strong>。代码如下所示。</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">python</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-python">class ScoreError(Exception):
+    """自定义的成绩异常类型"""
+    pass
+
+
+def check_score(score):
+    """检查成绩是否合法"""
+    if not 0 &lt;= score &lt;= 100:
+        raise ScoreError('成绩必须在 0~100 之间')
+    return score
+
+
+print(check_score(90))   # 90
+print(check_score(120))  # ScoreError: 成绩必须在 0~100 之间</code></pre></div><blockquote>
+<p><strong>说明</strong>：类的定义语法我们在《面向对象编程》一章会详细介绍，这里先了解&quot;自定义异常 = 继承 Exception 的一个类&quot;即可。如果希望自己的异常也能被<code>except ValueError</code>这样的代码捕获，把<code>Exception</code>换成<code>ValueError</code>就可以了。</p>
+</blockquote>
+<h3 id="断言">断言</h3><p>除了主动抛出异常，Python 还提供了一个专门用来做&quot;内部检查&quot;的语句——<strong>断言</strong>（assert）。</p>
+<p>断言的语法非常简单：<code>assert 条件, &#39;断言失败时的提示信息&#39;</code>。当条件为真（True）时，程序什么都不做，继续往下执行；当条件为假（False）时，Python 会抛出一个<code>AssertionError</code>异常，程序就此中断。</p>
+<p>我们先来看一个例子，代码如下所示。</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">python</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-python">def check_age(age):
+    """检查年龄是否合法"""
+    assert 0 &lt;= age &lt;= 150, '年龄必须在 0~150 之间'
+    return age
+
+
+print(check_age(20))   # 20
+print(check_age(200))  # AssertionError: 年龄必须在 0~150 之间</code></pre></div><p>可以看到，断言失败时抛出的异常类型是<code>AssertionError</code>，它同样是<code>Exception</code>的子类，因此我们也可以用<code>try...except</code>接住它，代码如下所示。</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">python</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-python">try:
+    age = int(input('请输入您的年龄：'))
+    print(check_age(age))
+except AssertionError as e:
+    print('输入有误：', e)</code></pre></div><h4 id="断言和raise有什么区别">断言和raise有什么区别</h4><p>这两者看起来很像，都是&quot;条件不满足就报错&quot;，但用途完全不同。</p>
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th><code>assert</code>断言</th>
+<th><code>raise</code>主动抛出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>检查的对象</td>
+<td>程序内部的&quot;不应该发生&quot;的情况</td>
+<td>需要通知给调用者的错误</td>
+</tr>
+<tr>
+<td>面向的对象</td>
+<td>程序员自己</td>
+<td>调用者（用户或其他代码）</td>
+</tr>
+<tr>
+<td>典型场景</td>
+<td>函数的前置条件、算法的前提假设</td>
+<td>用户输入非法、参数不合法</td>
+</tr>
+<tr>
+<td>能否被关闭</td>
+<td>能，用<code>python -O</code>启动时断言不执行</td>
+<td>不能</td>
+</tr>
+</tbody></table>
+<p>下面两个函数实现的功能完全一样，但表达的意思不同。第一个函数里的断言是&quot;写给程序员自己看的&quot;——在调用方已经检查过输入的前提下，<code>scores</code>一定是个非空列表，这条断言平时不会被触发，它只是防止将来有人改动代码时破坏了这个前提。</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">python</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-python">def average(scores):
+    """计算平均分（断言版）"""
+    assert len(scores) &gt; 0, '成绩列表不能为空'
+    return sum(scores) / len(scores)</code></pre></div><p>第二个函数才是真正把错误&quot;抛给调用者&quot;，让调用者能够给出友好的提示。</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">python</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-python">def average(scores):
+    """计算平均分（异常版）"""
+    if not scores:
+        raise ValueError('成绩列表不能为空')
+    return sum(scores) / len(scores)</code></pre></div><p><strong>使用断言的三条注意事项</strong>：</p>
+<ol>
+<li><strong>断言是&quot;保险丝&quot;而不是&quot;校验&quot;</strong>：它用来检查程序内部的不变量，不要拿它校验用户输入——用户输入是不可控的外部数据，应该用<code>if</code>加<code>raise</code>来处理；</li>
+<li><strong>不要在断言中写有副作用的表达式</strong>：因为断言可能被禁用，里面的副作用就不会发生；</li>
+<li><strong>断言是可以被关闭的</strong>：用<code>python -O</code>（优化模式）启动程序时，所有断言都不会执行，所以关键的业务逻辑不要写在断言里。</li>
+</ol>
+<p>我们用上面的<code>average</code>函数做一次对比实验就很清楚了。正常启动时，传入空列表会得到一条清晰的<code>AssertionError</code>：</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">text</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-text">AssertionError: 成绩列表不能为空</code></pre></div><p>而用<code>python -O</code>启动时，断言被跳过，程序会一路算下去，最终抛出让人一头雾水的<code>ZeroDivisionError</code>（除数为零）：</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">text</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-text">ZeroDivisionError: division by zero</code></pre></div><p>这正是&quot;关键逻辑不能写在断言里&quot;的原因——断言一旦被关掉，它保护的东西就没人管了。</p>
+<blockquote>
+<p><strong>说明</strong>：Python 在启动时如果带上<code>-O</code>参数，<code>__debug__</code>的值会变成<code>False</code>，我们也可以借助它来判断当前是否处于优化模式。</p>
+</blockquote>
+<h3 id="异常处理实战">异常处理实战</h3><p>下面我们把前面学到的知识组合起来，写一个&quot;成绩录入&quot;的小程序：不断提示用户输入成绩，直到输入合法为止，代码如下所示。</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">python</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-python">class ScoreError(Exception):
+    """自定义的成绩异常类型"""
+    pass
+
+
+def input_score():
+    """录入一个成绩并返回它，录入不合法就一直提示"""
+    while True:
+        try:
+            score = int(input('请输入成绩（0~100）：'))
+            if not 0 &lt;= score &lt;= 100:
+                # 成绩不合法，主动抛出自定义异常
+                raise ScoreError('成绩必须在 0~100 之间')
+            return score
+        except ScoreError as e:
+            print('输入有误：', e)
+        except ValueError:
+            print('请输入一个整数！')
+
+
+score = input_score()
+print('录入成功，成绩是：', score)</code></pre></div><p>我们来分析一下上面的代码。</p>
+<ul>
+<li><code>try</code>中先把输入转换成整数，如果用户输入了<code>abc</code>，<code>int()</code>会抛出<code>ValueError</code>，被下面的<code>except ValueError</code>接住；</li>
+<li>转换成功后检查成绩范围，如果不在 0~100 之间，就用<code>raise</code>抛出自定义的<code>ScoreError</code>；</li>
+<li><code>except ScoreError as e</code>负责接住成绩不合法的情况，打印提示后<code>while True</code>继续下一轮循环；</li>
+<li>直到用户输入了合法成绩，函数才<code>return</code>结束。</li>
+</ul>
+<p>再看一个&quot;菜单选择&quot;的例子，这是我们在《分支和循环结构》一章中写过的猜数字游戏的改进版，代码如下所示。</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">python</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-python">import random
+
+
+def guess_number():
+    """猜数字小游戏"""
+    answer = random.randint(1, 100)
+    print('我已经想好了一个 1~100 之间的整数，来猜猜看！')
+    while True:
+        try:
+            guess = int(input('请输入你猜的数字：'))
+        except ValueError:
+            print('请输入一个整数！')
+            continue
+        if guess &lt; answer:
+            print('猜小了，再试试。')
+        elif guess &gt; answer:
+            print('猜大了，再试试。')
+        else:
+            print('恭喜你，猜对了！')
+            return
+
+
+guess_number()</code></pre></div><p>上面的代码中，输入不合法时用<code>continue</code>跳过本轮循环，让用户重新输入；输入合法之后，再进行大小比较。</p>
+<h3 id="异常处理小结">异常处理小结</h3><table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>try</code></td>
+<td>放置可能出现异常的代码</td>
+</tr>
+<tr>
+<td><code>except</code></td>
+<td>捕获异常并进行处理，可以写多个，也可以用<code>as</code>获取异常信息</td>
+</tr>
+<tr>
+<td><code>else</code></td>
+<td><code>try</code>中没有发生异常时才执行</td>
+</tr>
+<tr>
+<td><code>finally</code></td>
+<td>无论是否发生异常都会执行，适合做释放资源的收尾工作</td>
+</tr>
+<tr>
+<td><code>raise</code></td>
+<td>主动抛出异常，常用于参数校验</td>
+</tr>
+<tr>
+<td><code>assert</code></td>
+<td>断言，条件不成立时抛出<code>AssertionError</code>，常用于检查程序内部的前提</td>
+</tr>
+</tbody></table>
+<p><strong>使用异常处理的几条原则</strong>：</p>
+<ol>
+<li><strong>不要用异常机制处理正常业务逻辑或控制程序流程</strong>，简单的说就是不要滥用异常机制，这是初学者常犯的错误；</li>
+<li><strong>尽量捕获具体的异常类型</strong>，不要动不动就<code>except Exception</code>，否则会掩盖代码中的真实错误；</li>
+<li><strong>捕获异常后不要&quot;装作没看见&quot;</strong>，至少要给出提示信息或记录日志，否则问题会被悄悄吞掉；</li>
+<li><strong>不要在<code>finally</code>中写<code>return</code></strong>，否则会吞掉原本要抛出的异常；</li>
+<li><strong>异常信息要写得有意义</strong>，例如<code>raise ValueError(&#39;年龄不能为负数&#39;)</code>比<code>raise ValueError(&#39;error&#39;)</code>要有用得多。</li>
+</ol>
+<h3 id="知识点总结">知识点总结</h3><p>本讲我们学习了 Python 的异常处理机制，目标是让程序在遇到意外时不至于&quot;当场崩溃&quot;。</p>
+<ul>
+<li><strong>概念</strong>：<strong>异常</strong>是程序运行时出现的错误，Python 会抛出异常并给出 Traceback；异常处理机制由<code>try</code>、<code>except</code>、<code>else</code>、<code>finally</code>和<code>raise</code>五个关键字组成；<strong>断言</strong>（<code>assert</code>）是条件不成立时抛出<code>AssertionError</code>的语句，用来检查程序内部的前提；<strong>自定义异常</strong>就是继承<code>Exception</code>（或某个内置异常类）写出来的类。</li>
+<li><strong>操作方法</strong>：把可能出错的代码放进<code>try</code>，用<code>except</code>捕获并处理（可以写多个，也可以用<code>except ... as e</code>拿到异常信息，用元组一次捕获多种异常）；<code>else</code>仅在没有异常时执行，<code>finally</code>始终执行，适合释放资源；用<code>raise</code>主动抛出异常；用<code>assert 条件, &#39;提示&#39;</code>做内部检查。</li>
+<li><strong>代码要点</strong>：捕获异常时尽量写具体的异常类型；<code>AssertionError</code>同样能被<code>except</code>捕获；<code>finally</code>中不要写<code>return</code>，否则会吞掉异常；异常信息要写得能说明问题，例如<code>raise ValueError(&#39;年龄不能为负数&#39;)</code>。</li>
+<li><strong>命名规则</strong>：自定义异常类名以<code>Error</code>结尾（如<code>ScoreError</code>），一眼就能看出它是一个异常类型；函数名要能体现&quot;检查什么&quot;，如<code>check_age</code>、<code>check_score</code>。</li>
+<li><strong>注意事项</strong>：不要用异常机制来处理正常业务逻辑或控制程序流程；不要动不动就捕获<code>Exception</code>，否则会掩盖代码中的真实错误；捕获后不要&quot;装作没看见&quot;；<strong>断言只用来检查程序内部的前提，不要用它校验用户输入</strong>，而且它会被<code>python -O</code>关闭，关键业务逻辑不能写在断言里。</li>
+<li><strong>学习重点</strong>：能独立写出一个包含<code>try...except...else...finally</code>的完整异常处理结构，并能说清楚每一部分什么时候执行；会用<code>raise</code>为函数做参数校验、知道<code>assert</code>与<code>raise</code>的区别；能自己定义一个异常类型并正确地抛出和捕获它。</li>
+</ul>
+</div></article></div><aside class="lesson-toc" aria-label="本页目录"><div class="lesson-toc-inner"><div class="toc-title">本页目录</div><ul><li class="toc-level-2"><a href="#异常处理">异常处理</a></li><li class="toc-level-3"><a href="#什么是异常">什么是异常</a></li><li class="toc-level-3"><a href="#try-except">try...except</a></li><li class="toc-level-3"><a href="#else和finally">else和finally</a></li><li class="toc-level-3"><a href="#raise">raise</a></li><li class="toc-level-3"><a href="#自定义异常类型">自定义异常类型</a></li><li class="toc-level-3"><a href="#断言">断言</a></li><li class="toc-level-3"><a href="#异常处理实战">异常处理实战</a></li><li class="toc-level-3"><a href="#异常处理小结">异常处理小结</a></li><li class="toc-level-3"><a href="#知识点总结">知识点总结</a></li></ul><a class="to-top" href="#top">回到顶部</a></div><button class="panel-toggle" type="button" data-panel-toggle="lessonToc" aria-expanded="true" aria-label="折叠本页目录" title="折叠本页目录"><svg class="ico-collapse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 6.5 15 12l-5.5 5.5"/><path d="M5 6.5 10.5 12 5 17.5"/></svg><svg class="ico-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5 9 12l5.5 5.5"/><path d="M19 6.5 13.5 12 19 17.5"/></svg></button><button class="panel-rail-icon" type="button" data-panel-rail="lessonToc" aria-label="展开本页目录" title="展开本页目录"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5 9 12l5.5 5.5"/><path d="M19 6.5 13.5 12 19 17.5"/></svg></button></aside></main><footer>by天才程序员</footer><script src="/script.js"></script></body></html>

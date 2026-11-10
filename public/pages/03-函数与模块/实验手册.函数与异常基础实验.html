@@ -1,0 +1,498 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Python 基础课程讲义：实验手册.函数与异常基础实验"><title>实验手册.函数与异常基础实验｜Python 编程基础</title><link rel="stylesheet" href="/style.css"><script>window.MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:true,processEnvironments:true},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body><div class="reading-progress" id="reading-progress" aria-hidden="true"></div><header class="site-header"><div class="header-inner"><a class="brand" href="/index.html"><span class="brand-icon">🐍</span><span class="brand-text"><span>Python 编程基础</span><small>Python 基础课程讲义</small></span></a><a class="back-home" href="/index.html">课程首页</a></div></header><main class="page-layout"><aside class="course-nav" aria-label="课程章节"><div class="course-nav-inner"><div class="nav-title">课程章节</div><div class="nav-group"><span class="group-icon">🧱</span>01-基础语法</div><ul><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/01.%E5%88%9D%E8%AF%86Python.html">01.初识Python</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/02.%E7%AC%AC%E4%B8%80%E4%B8%AAPython%E7%A8%8B%E5%BA%8F.html">02.第一个Python程序</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/03.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F.html">03.Python语言中的变量</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/04.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6.html">04.Python语言中的运算符</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/05.%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84.html">05.分支结构</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/06.%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84.html">06.循环结构</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/%E5%AE%9E%E9%AA%8C1.%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验1.基础语法综合实验</a></li></ul><div class="nav-group"><span class="group-icon">🗂</span>02-数据结构</div><ul><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/08.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-1.html">08.常用数据结构之列表-1</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/09.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-2.html">09.常用数据结构之列表-2</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/10.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%85%83%E7%BB%84.html">10.常用数据结构之元组</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/11.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2.html">11.常用数据结构之字符串</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/12.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E9%9B%86%E5%90%88.html">12.常用数据结构之集合</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/13.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E5%85%B8.html">13.常用数据结构之字典</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%AE%9E%E9%AA%8C2.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验2.数据结构综合实验</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%AE%9E%E9%AA%8C%E6%89%8B%E5%86%8C.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80%E5%AE%9E%E9%AA%8C.html">实验手册.数据结构基础实验</a></li></ul><div class="nav-group"><span class="group-icon">🔧</span>03-函数与模块</div><ul><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/14.%E5%87%BD%E6%95%B0%E5%92%8C%E6%A8%A1%E5%9D%97.html">14.函数和模块</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/16.%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E8%BF%9B%E9%98%B6.html">16.函数使用进阶</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/17.%E5%87%BD%E6%95%B0%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8.html">17.函数高级应用</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/%E5%AE%9E%E9%AA%8C3.%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验3.函数与模块综合实验</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/%E5%AE%9E%E9%AA%8C%E6%89%8B%E5%86%8C.%E5%87%BD%E6%95%B0%E4%B8%8E%E5%BC%82%E5%B8%B8%E5%9F%BA%E7%A1%80%E5%AE%9E%E9%AA%8C.html">实验手册.函数与异常基础实验</a></li></ul><div class="nav-group"><span class="group-icon">📁</span>04-文件与异常</div><ul><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/21.%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html">21.异常处理</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/22.%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99.html">22.文件读写</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/23.%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96.html">23.对象的序列化和反序列化</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/24.Python%E8%AF%BB%E5%86%99CSV%E6%96%87%E4%BB%B6.html">24.Python读写CSV文件</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/%E5%AE%9E%E9%AA%8C4.%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验4.文件与异常综合实验</a></li></ul><div class="nav-group"><span class="group-icon">🧩</span>05-面向对象</div><ul><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/18.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8.html">18.面向对象编程入门</a></li><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/19.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6.html">19.面向对象编程进阶</a></li></ul><div class="nav-group"><span class="group-icon">🛠</span>06-基础项目</div><ul><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/07.%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84%E5%AE%9E%E6%88%98.html">07.分支和循环结构实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/15.%E5%87%BD%E6%95%B0%E5%BA%94%E7%94%A8%E5%AE%9E%E6%88%98.html">15.函数应用实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/20.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%BA%94%E7%94%A8.html">20.面向对象编程应用</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/30.%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%BA%94%E7%94%A8.html">30.正则表达式的应用</a></li></ul><div class="nav-group"><span class="group-icon">📊</span>拓展-办公自动化</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/24.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-1.html">24.Python读写Excel文件-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/25.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-2.html">25.Python读写Excel文件-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/26.Python%E6%93%8D%E4%BD%9CWord%E5%92%8CPowerPoint%E6%96%87%E4%BB%B6.html">26.Python操作Word和PowerPoint文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/27.Python%E6%93%8D%E4%BD%9CPDF%E6%96%87%E4%BB%B6.html">27.Python操作PDF文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/28.Python%E5%A4%84%E7%90%86%E5%9B%BE%E5%83%8F.html">28.Python处理图像</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/29.Python%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E5%92%8C%E7%9F%AD%E4%BF%A1.html">29.Python发送邮件和短信</a></li></ul><div class="nav-group"><span class="group-icon">🌐</span>拓展-Web与爬虫</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/31.Python%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6.html">31.Python语言进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/32-33.Web%E5%89%8D%E7%AB%AF%E5%85%A5%E9%97%A8.html">32-33.Web前端入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/34-35.%E7%8E%A9%E8%BD%ACLinux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.html">34-35.玩转Linux操作系统</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/36.%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CMySQL%E6%A6%82%E8%BF%B0.html">36.关系型数据库和MySQL概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/37.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDDL.html">37.SQL详解之DDL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/38.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDML.html">38.SQL详解之DML</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/39.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDQL.html">39.SQL详解之DQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/40.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDCL.html">40.SQL详解之DCL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/41.MySQL%E6%96%B0%E7%89%B9%E6%80%A7.html">41.MySQL新特性</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/42.%E8%A7%86%E5%9B%BE%E3%80%81%E5%87%BD%E6%95%B0%E5%92%8C%E8%BF%87%E7%A8%8B.html">42.视图、函数和过程</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/43.%E7%B4%A2%E5%BC%95.html">43.索引</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/44.Python%E6%8E%A5%E5%85%A5MySQL%E6%95%B0%E6%8D%AE%E5%BA%93.html">44.Python接入MySQL数据库</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/45.%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E5%92%8CHiveSQL.html">45.大数据平台和HiveSQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/46.Django%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.html">46.Django快速上手</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/47.%E6%B7%B1%E5%85%A5%E6%A8%A1%E5%9E%8B.html">47.深入模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/48.%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%92%8CAjax%E8%AF%B7%E6%B1%82.html">48.静态资源和Ajax请求</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/49.Cookie%E5%92%8CSession.html">49.Cookie和Session</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/50.%E5%88%B6%E4%BD%9C%E6%8A%A5%E8%A1%A8.html">50.制作报表</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/51.%E6%97%A5%E5%BF%97%E5%92%8C%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7%E6%A0%8F.html">51.日志和调试工具栏</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/52.%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E5%BA%94%E7%94%A8.html">52.中间件的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/53.%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8.html">53.前后端分离开发入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/54.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E5%85%A5%E9%97%A8.html">54.RESTful架构和DRF入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/55.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E8%BF%9B%E9%98%B6.html">55.RESTful架构和DRF进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/56.%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98.html">56.使用缓存</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/57.%E6%8E%A5%E5%85%A5%E4%B8%89%E6%96%B9%E5%B9%B3%E5%8F%B0.html">57.接入三方平台</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/58.%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1.html">58.异步任务和定时任务</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/59.%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95.html">59.单元测试</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/60.%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF.html">60.项目上线</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/61.%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E6%A6%82%E8%BF%B0.html">61.网络数据采集概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%8E%B7%E5%8F%96%E7%BD%91%E7%BB%9C%E8%B5%84%E6%BA%90-1.html">62.用Python获取网络资源-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%A7%A3%E6%9E%90HTML%E9%A1%B5%E9%9D%A2-2.html">62.用Python解析HTML页面-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-1.html">63.Python中的并发编程-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-2.html">63.Python中的并发编程-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-3.html">63.Python中的并发编程-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9C%A8%E7%88%AC%E8%99%AB%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html">63.并发编程在爬虫中的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/64.%E4%BD%BF%E7%94%A8Selenium%E6%8A%93%E5%8F%96%E7%BD%91%E9%A1%B5%E5%8A%A8%E6%80%81%E5%86%85%E5%AE%B9.html">64.使用Selenium抓取网页动态内容</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/65.%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6Scrapy%E7%AE%80%E4%BB%8B.html">65.爬虫框架Scrapy简介</a></li></ul><div class="nav-group"><span class="group-icon">📈</span>拓展-数据分析</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/66.%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A6%82%E8%BF%B0.html">66.数据分析概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/67.%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87.html">67.环境准备</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/68.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-1.html">68.NumPy的应用-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/69.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-2.html">69.NumPy的应用-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/70.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-3.html">70.NumPy的应用-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/71.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-4.html">71.NumPy的应用-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/72.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-1.html">72.深入浅出pandas-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/73.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-2.html">73.深入浅出pandas-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/74.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-3.html">74.深入浅出pandas-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/75.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-4.html">75.深入浅出pandas-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/76.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-5.html">76.深入浅出pandas-5</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/77.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-6.html">77.深入浅出pandas-6</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/78.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-1.html">78.数据可视化-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/79.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-2.html">79.数据可视化-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/80.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-3.html">80.数据可视化-3</a></li></ul><div class="nav-group"><span class="group-icon">🤖</span>拓展-机器学习</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/81.%E6%B5%85%E8%B0%88%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0.html">81.浅谈机器学习</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/82.k%E6%9C%80%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95.html">82.k最近邻算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/83.%E5%86%B3%E7%AD%96%E6%A0%91%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97.html">83.决策树和随机森林</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/84.%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95.html">84.朴素贝叶斯算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/85.%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B.html">85.回归模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/86.K-Means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95.html">86.K-Means聚类算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/87.%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95.html">87.集成学习算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/88.%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B.html">88.神经网络模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/89.%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E5%85%A5%E9%97%A8.html">89.自然语言处理入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/90.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98.html">90.机器学习实战</a></li></ul></div><button class="panel-toggle" type="button" data-panel-toggle="courseNav" aria-expanded="true" aria-label="折叠课程目录" title="折叠课程目录"><svg class="ico-collapse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5 9 12l5.5 5.5"/><path d="M19 6.5 13.5 12 19 17.5"/></svg><svg class="ico-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 6.5 15 12l-5.5 5.5"/><path d="M5 6.5 10.5 12 5 17.5"/></svg></button><button class="panel-rail-icon" type="button" data-panel-rail="courseNav" aria-label="展开课程目录" title="展开课程目录"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 6.5 15 12l-5.5 5.5"/><path d="M5 6.5 10.5 12 5 17.5"/></svg></button></aside><div class="content-area"><details class="mobile-course-nav"><summary>课程章节</summary><div class="mobile-course-links"><div class="nav-group"><span class="group-icon">🧱</span>01-基础语法</div><ul><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/01.%E5%88%9D%E8%AF%86Python.html">01.初识Python</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/02.%E7%AC%AC%E4%B8%80%E4%B8%AAPython%E7%A8%8B%E5%BA%8F.html">02.第一个Python程序</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/03.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F.html">03.Python语言中的变量</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/04.Python%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6.html">04.Python语言中的运算符</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/05.%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84.html">05.分支结构</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/06.%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84.html">06.循环结构</a></li><li><a href="/pages/01-%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/%E5%AE%9E%E9%AA%8C1.%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验1.基础语法综合实验</a></li></ul><div class="nav-group"><span class="group-icon">🗂</span>02-数据结构</div><ul><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/08.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-1.html">08.常用数据结构之列表-1</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/09.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%88%97%E8%A1%A8-2.html">09.常用数据结构之列表-2</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/10.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%85%83%E7%BB%84.html">10.常用数据结构之元组</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/11.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2.html">11.常用数据结构之字符串</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/12.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E9%9B%86%E5%90%88.html">12.常用数据结构之集合</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/13.%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%AD%97%E5%85%B8.html">13.常用数据结构之字典</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%AE%9E%E9%AA%8C2.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验2.数据结构综合实验</a></li><li><a href="/pages/02-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E5%AE%9E%E9%AA%8C%E6%89%8B%E5%86%8C.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80%E5%AE%9E%E9%AA%8C.html">实验手册.数据结构基础实验</a></li></ul><div class="nav-group"><span class="group-icon">🔧</span>03-函数与模块</div><ul><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/14.%E5%87%BD%E6%95%B0%E5%92%8C%E6%A8%A1%E5%9D%97.html">14.函数和模块</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/16.%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E8%BF%9B%E9%98%B6.html">16.函数使用进阶</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/17.%E5%87%BD%E6%95%B0%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8.html">17.函数高级应用</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/%E5%AE%9E%E9%AA%8C3.%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验3.函数与模块综合实验</a></li><li><a href="/pages/03-%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/%E5%AE%9E%E9%AA%8C%E6%89%8B%E5%86%8C.%E5%87%BD%E6%95%B0%E4%B8%8E%E5%BC%82%E5%B8%B8%E5%9F%BA%E7%A1%80%E5%AE%9E%E9%AA%8C.html">实验手册.函数与异常基础实验</a></li></ul><div class="nav-group"><span class="group-icon">📁</span>04-文件与异常</div><ul><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/21.%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html">21.异常处理</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/22.%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99.html">22.文件读写</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/23.%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96.html">23.对象的序列化和反序列化</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/24.Python%E8%AF%BB%E5%86%99CSV%E6%96%87%E4%BB%B6.html">24.Python读写CSV文件</a></li><li><a href="/pages/04-%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8/%E5%AE%9E%E9%AA%8C4.%E6%96%87%E4%BB%B6%E4%B8%8E%E5%BC%82%E5%B8%B8%E7%BB%BC%E5%90%88%E5%AE%9E%E9%AA%8C.html">实验4.文件与异常综合实验</a></li></ul><div class="nav-group"><span class="group-icon">🧩</span>05-面向对象</div><ul><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/18.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8.html">18.面向对象编程入门</a></li><li><a href="/pages/05-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/19.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E8%BF%9B%E9%98%B6.html">19.面向对象编程进阶</a></li></ul><div class="nav-group"><span class="group-icon">🛠</span>06-基础项目</div><ul><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/07.%E5%88%86%E6%94%AF%E5%92%8C%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84%E5%AE%9E%E6%88%98.html">07.分支和循环结构实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/15.%E5%87%BD%E6%95%B0%E5%BA%94%E7%94%A8%E5%AE%9E%E6%88%98.html">15.函数应用实战</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/20.%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E5%BA%94%E7%94%A8.html">20.面向对象编程应用</a></li><li><a href="/pages/06-%E5%9F%BA%E7%A1%80%E9%A1%B9%E7%9B%AE/30.%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%BA%94%E7%94%A8.html">30.正则表达式的应用</a></li></ul><div class="nav-group"><span class="group-icon">📊</span>拓展-办公自动化</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/24.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-1.html">24.Python读写Excel文件-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/25.Python%E8%AF%BB%E5%86%99Excel%E6%96%87%E4%BB%B6-2.html">25.Python读写Excel文件-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/26.Python%E6%93%8D%E4%BD%9CWord%E5%92%8CPowerPoint%E6%96%87%E4%BB%B6.html">26.Python操作Word和PowerPoint文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/27.Python%E6%93%8D%E4%BD%9CPDF%E6%96%87%E4%BB%B6.html">27.Python操作PDF文件</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/28.Python%E5%A4%84%E7%90%86%E5%9B%BE%E5%83%8F.html">28.Python处理图像</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E5%8A%9E%E5%85%AC%E8%87%AA%E5%8A%A8%E5%8C%96/29.Python%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E5%92%8C%E7%9F%AD%E4%BF%A1.html">29.Python发送邮件和短信</a></li></ul><div class="nav-group"><span class="group-icon">🌐</span>拓展-Web与爬虫</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/31.Python%E8%AF%AD%E8%A8%80%E8%BF%9B%E9%98%B6.html">31.Python语言进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/32-33.Web%E5%89%8D%E7%AB%AF%E5%85%A5%E9%97%A8.html">32-33.Web前端入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/34-35.%E7%8E%A9%E8%BD%ACLinux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F.html">34-35.玩转Linux操作系统</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/36.%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8CMySQL%E6%A6%82%E8%BF%B0.html">36.关系型数据库和MySQL概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/37.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDDL.html">37.SQL详解之DDL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/38.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDML.html">38.SQL详解之DML</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/39.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDQL.html">39.SQL详解之DQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/40.SQL%E8%AF%A6%E8%A7%A3%E4%B9%8BDCL.html">40.SQL详解之DCL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/41.MySQL%E6%96%B0%E7%89%B9%E6%80%A7.html">41.MySQL新特性</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/42.%E8%A7%86%E5%9B%BE%E3%80%81%E5%87%BD%E6%95%B0%E5%92%8C%E8%BF%87%E7%A8%8B.html">42.视图、函数和过程</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/43.%E7%B4%A2%E5%BC%95.html">43.索引</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/44.Python%E6%8E%A5%E5%85%A5MySQL%E6%95%B0%E6%8D%AE%E5%BA%93.html">44.Python接入MySQL数据库</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/45.%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E5%92%8CHiveSQL.html">45.大数据平台和HiveSQL</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/46.Django%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B.html">46.Django快速上手</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/47.%E6%B7%B1%E5%85%A5%E6%A8%A1%E5%9E%8B.html">47.深入模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/48.%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%92%8CAjax%E8%AF%B7%E6%B1%82.html">48.静态资源和Ajax请求</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/49.Cookie%E5%92%8CSession.html">49.Cookie和Session</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/50.%E5%88%B6%E4%BD%9C%E6%8A%A5%E8%A1%A8.html">50.制作报表</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/51.%E6%97%A5%E5%BF%97%E5%92%8C%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7%E6%A0%8F.html">51.日志和调试工具栏</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/52.%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E5%BA%94%E7%94%A8.html">52.中间件的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/53.%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8.html">53.前后端分离开发入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/54.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E5%85%A5%E9%97%A8.html">54.RESTful架构和DRF入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/55.RESTful%E6%9E%B6%E6%9E%84%E5%92%8CDRF%E8%BF%9B%E9%98%B6.html">55.RESTful架构和DRF进阶</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/56.%E4%BD%BF%E7%94%A8%E7%BC%93%E5%AD%98.html">56.使用缓存</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/57.%E6%8E%A5%E5%85%A5%E4%B8%89%E6%96%B9%E5%B9%B3%E5%8F%B0.html">57.接入三方平台</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/58.%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1.html">58.异步任务和定时任务</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/59.%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95.html">59.单元测试</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/60.%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF.html">60.项目上线</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/61.%E7%BD%91%E7%BB%9C%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86%E6%A6%82%E8%BF%B0.html">61.网络数据采集概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%8E%B7%E5%8F%96%E7%BD%91%E7%BB%9C%E8%B5%84%E6%BA%90-1.html">62.用Python获取网络资源-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/62.%E7%94%A8Python%E8%A7%A3%E6%9E%90HTML%E9%A1%B5%E9%9D%A2-2.html">62.用Python解析HTML页面-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-1.html">63.Python中的并发编程-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-2.html">63.Python中的并发编程-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.Python%E4%B8%AD%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-3.html">63.Python中的并发编程-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/63.%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9C%A8%E7%88%AC%E8%99%AB%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.html">63.并发编程在爬虫中的应用</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/64.%E4%BD%BF%E7%94%A8Selenium%E6%8A%93%E5%8F%96%E7%BD%91%E9%A1%B5%E5%8A%A8%E6%80%81%E5%86%85%E5%AE%B9.html">64.使用Selenium抓取网页动态内容</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-Web%E4%B8%8E%E7%88%AC%E8%99%AB/65.%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6Scrapy%E7%AE%80%E4%BB%8B.html">65.爬虫框架Scrapy简介</a></li></ul><div class="nav-group"><span class="group-icon">📈</span>拓展-数据分析</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/66.%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A6%82%E8%BF%B0.html">66.数据分析概述</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/67.%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87.html">67.环境准备</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/68.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-1.html">68.NumPy的应用-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/69.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-2.html">69.NumPy的应用-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/70.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-3.html">70.NumPy的应用-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/71.NumPy%E7%9A%84%E5%BA%94%E7%94%A8-4.html">71.NumPy的应用-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/72.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-1.html">72.深入浅出pandas-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/73.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-2.html">73.深入浅出pandas-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/74.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-3.html">74.深入浅出pandas-3</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/75.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-4.html">75.深入浅出pandas-4</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/76.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-5.html">76.深入浅出pandas-5</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/77.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BApandas-6.html">77.深入浅出pandas-6</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/78.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-1.html">78.数据可视化-1</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/79.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-2.html">79.数据可视化-2</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/80.%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-3.html">80.数据可视化-3</a></li></ul><div class="nav-group"><span class="group-icon">🤖</span>拓展-机器学习</div><ul><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/81.%E6%B5%85%E8%B0%88%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0.html">81.浅谈机器学习</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/82.k%E6%9C%80%E8%BF%91%E9%82%BB%E7%AE%97%E6%B3%95.html">82.k最近邻算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/83.%E5%86%B3%E7%AD%96%E6%A0%91%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97.html">83.决策树和随机森林</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/84.%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95.html">84.朴素贝叶斯算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/85.%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B.html">85.回归模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/86.K-Means%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95.html">86.K-Means聚类算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/87.%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95.html">87.集成学习算法</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/88.%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B.html">88.神经网络模型</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/89.%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E5%85%A5%E9%97%A8.html">89.自然语言处理入门</a></li><li><a href="/pages/%E6%8B%93%E5%B1%95-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/90.%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E6%88%98.html">90.机器学习实战</a></li></ul></div></details><article class="lesson"><div class="lesson-content" id="top"><h1 id="实验手册-函数与异常基础实验">实验手册.函数与异常基础实验</h1><h2 id="函数与异常基础实验手册">函数与异常基础实验手册</h2><p>本手册依据第 03 章《函数与模块》与第 04 章《异常处理》的讲义（第 14、16、21 讲）编制，是一份<strong>纯上机练习册</strong>。</p>
+<p>手册由实验总则、九个实验单元和三个附录构成。九个单元里的题目<strong>全部是动手写代码的操作题</strong>，没有需要背诵的概念判断、程序阅读和填空题——每道题都给出明确的步骤要求和一次运行示例，你只要把代码写出来、跑出结果、和示例对照，就算完成了这道题。做完一遍不过瘾的，可以把示例里的数据改一改再跑一次，看看会出什么差别。</p>
+<p>本手册与《实验3.函数与模块综合实验》《实验4.文件与异常综合实验》互补：前者侧重单个知识点的反复练习，后两者侧重完整案例的综合运用。</p>
+<h2 id="实验总则">实验总则</h2><h3 id="适用范围与知识背景">适用范围与知识背景</h3><p>对应讲义：《14.函数和模块》（定义函数、函数的参数、变量作用域、用模块管理函数、标准库中的模块和函数）、《16.函数使用进阶》（Lambda 函数、递归调用、生成器）、《21.异常处理》（异常处理机制、断言）。</p>
+<p>前置知识：变量与基本数据类型、运算符、分支结构、循环结构（for-in 与 while）、break 与 continue、列表与字典的基本操作、<code>random</code> 模块、f-string 格式化输出。</p>
+<p>未涉及内容：把函数作为参数、高阶函数、偏函数、装饰器（属于《17.函数高级应用》的提高内容），以及文件的读写操作。全部题目均可在已学知识范围内完成。</p>
+<h3 id="实验目的">实验目的</h3><ol>
+<li>能独立写出带参数和返回值的函数，熟练使用位置参数、关键字参数、默认参数与可变参数。</li>
+<li>能区分局部变量与全局变量，知道什么时候该用<code>global</code>、什么时候该改用参数和返回值。</li>
+<li>能把一组工具函数拆到独立的模块文件里，并用三种方式导入使用。</li>
+<li>能写出一行式的 Lambda 表达式，并能用它配合<code>sorted</code>函数的<code>key</code>参数自定义排序规则。</li>
+<li>能写出一个带递归出口的递归函数，并理解递归为什么比循环慢。</li>
+<li>能写出一个生成器函数，理解&quot;要一个算一个&quot;的执行方式，并能用生成器处理大批量数据。</li>
+<li>能写出完整的<code>try...except...else...finally</code>结构，会用<code>raise</code>主动抛出异常、会定义简单的自定义异常类型。</li>
+<li>知道断言的作用与限制：断言用于检查程序内部的前提，不用于校验用户输入，并且可以被<code>python -O</code>关闭。</li>
+<li>养成&quot;先写代码、再跑结果、最后对照示例&quot;的上机习惯，遇到差异能自己分析原因。</li>
+</ol>
+<h3 id="实验环境">实验环境</h3><ul>
+<li>Python 3.8 及以上版本。</li>
+<li>任意代码编辑器或 IDE（如 PyCharm、VS Code）。</li>
+<li>建议每题新建独立脚本文件，命名格式为 <code>lab3_单元号_题号.py</code>，例如实验一题目 1 记为 <code>lab3_1_1.py</code>。</li>
+<li>实验三涉及多文件，请把同一单元的模块文件放在同一个文件夹中。</li>
+</ul>
+<h3 id="实验要求与报告规范">实验要求与报告规范</h3><ol>
+<li>每道题按步骤要求独立完成，先把代码写完再运行，不要边想边抄。</li>
+<li>每道题都要跑出与&quot;一次运行示例&quot;一致的结果；如果结果不一致，先自己找出原因并记录下来。</li>
+<li>代码规范：函数名和变量名见名知意，关键函数写文档字符串，必要的逻辑写注释；不要把一行写得太长。</li>
+<li>含随机数的题目连续运行三次，在报告中记录三次结果，并用一句话说明结果不同的原因。</li>
+<li>拓展任务有余力再做，做不出来也不影响本单元的完成情况。</li>
+<li>评定建议：按功能完成度、代码规范性、与示例输出一致性评定；拓展任务完成得好的酌情加分。</li>
+</ol>
+<h2 id="实验一-函数的定义与参数">实验一 函数的定义与参数</h2><p>（对应讲义 14）</p>
+<h3 id="题目-1-1-温度转换与数值工具">题目 1.1 温度转换与数值工具</h3><p>考查知识点：函数定义、参数与返回值、文档字符串、f-string 格式化输出。</p>
+<ol>
+<li>编写函数<code>c2f(celsius)</code>，把摄氏温度转换成华氏温度（公式：华氏 = 摄氏 × 9 / 5 + 32）；再编写<code>f2c(fahrenheit)</code>，把华氏温度转换成摄氏温度（公式：摄氏 = (华氏 − 32) × 5 / 9）。输出 0、100、37.5 三个温度值的双向转换结果。</li>
+<li>编写函数<code>max3(a, b, c)</code>，返回三个数中最大的一个（提示：可以用一次<code>if</code>判断，也可以调用内置函数<code>max</code>）。</li>
+<li>编写函数<code>is_leap(year)</code>，判断某一年是不是闰年：年份能被 400 整除，或者能被 4 整除但不能被 100 整除时，是闰年。输出 2000、1900、2024、2023 年的判断结果。</li>
+<li>编写函数<code>total_price(price, count)</code>，返回购买 count 件单价为 price 的商品的总价，并在主程序中用 f-string 输出形如&quot;总价：xx.xx 元&quot;的文本（提示：格式化小数用<code>:.2f</code>）。</li>
+</ol>
+<p>一次运行示例：</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">text</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-text">0.0 摄氏度 = 32.0 华氏度
+100.0 摄氏度 = 212.0 华氏度
+37.5 摄氏度 = 99.5 华氏度
+最大值： 42
+2000 年是闰年： True
+1900 年是闰年： False
+2024 年是闰年： True
+2023 年是闰年： False
+总价： 128.00 元</code></pre></div><h3 id="题目-1-2-成绩统计小工具">题目 1.2 成绩统计小工具</h3><p>考查知识点：函数拆分、列表遍历、<code>*args</code>可变参数、返回值的多种形式。</p>
+<ol>
+<li>编写函数<code>total_score(scores)</code>，返回成绩列表的总分（列表为空时返回 0）。</li>
+<li>编写函数<code>average(scores)</code>，返回成绩列表的平均分（保留 1 位小数，列表为空时返回 0）。</li>
+<li>编写函数<code>highest(scores)</code>，返回成绩列表中的最高分。</li>
+<li>编写函数<code>report(scores)</code>，把上面三个结果整理成一个字典返回，键分别是<code>&#39;total&#39;</code>、<code>&#39;average&#39;</code>、<code>&#39;highest&#39;</code>，然后在主程序中打印这个字典。</li>
+<li>拓展任务：再写一个<code>grade_of(score)</code>函数，按 90/80/70/60 分档返回&#39;A&#39;/&#39;B&#39;/&#39;C&#39;/&#39;D&#39;/&#39;F&#39;，并让<code>report</code>多返回一个键<code>&#39;grades&#39;</code>，值是每个成绩对应的等级的列表。</li>
+</ol>
+<p>用成绩列表<code>[95, 82, 80]</code>测试，一次运行示例：</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">text</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-text">总分： 257
+平均分： 85.7
+最高分： 95
+统计结果： {'total': 257, 'average': 85.7, 'highest': 95}</code></pre></div><h2 id="实验二-变量作用域">实验二 变量作用域</h2><p>（对应讲义 14）</p>
+<h3 id="题目-2-1-文本统计工具">题目 2.1 文本统计工具</h3><p>考查知识点：局部变量与全局变量的分工、字典的计数用法、函数的返回值。</p>
+<ol>
+<li>编写函数<code>count_words(sentence)</code>，用空格分割句子，统计每个单词出现的次数，返回一个字典（提示：<code>sentence.split()</code>可以按空白分割字符串；字典的计数写法见《13.常用数据结构之字典》）。</li>
+<li>编写函数<code>longest(words)</code>，返回一个列表中最长的单词（提示：内置函数<code>max</code>可以配合<code>key</code>参数使用，也可以自己写循环比较长度）。</li>
+<li>编写函数<code>merge_counters(counter1, counter2)</code>，把两个计数字典合并成一个：同一个键的计数相加，不同的键直接合并。</li>
+<li>拓展任务：把第 3 题的结果再保存到一个全局变量<code>total_counter</code>中，并在主程序中打印出来，观察它与函数内部临时变量的区别。</li>
+</ol>
+<p>一次运行示例：</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">text</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-text">{'Python': 2, 'is': 1, 'fun': 1}
+最长单词： Python
+合并后： {'Python': 3, 'is': 1, 'fun': 1}
+全局累计： {'Python': 3, 'is': 1, 'fun': 1}</code></pre></div><p>思考：第 4 步中，如果把<code>total_counter = merge_counters(...)</code>这一行放到函数内部去写，结果有什么不同？</p>
+<h3 id="题目-2-2-同一个功能的两种写法">题目 2.2 同一个功能的两种写法</h3><p>考查知识点：全局变量与局部变量的差别、<code>global</code>关键字、&quot;参数传入、返回值传出&quot;的编程习惯。</p>
+<ol>
+<li>先用<strong>全局变量</strong>的写法实现&quot;累计购物金额&quot;：定义一个全局变量<code>total</code>，再写一个函数<code>add_price(price)</code>，在函数中用<code>global</code>把价格累加到<code>total</code>上，并打印当前累计金额。</li>
+<li>再用<strong>不用全局变量</strong>的写法实现同样的功能：函数<code>add_price2(total, price)</code>只负责把金额加上并返回新的总额，由主程序拿返回值重新赋值。</li>
+<li>把两种写法的代码都写出来，运行后对比输出，说说它们分别适用于什么场景。</li>
+<li>拓展任务：把第 1 种写法改成一个&quot;不依赖全局变量&quot;的版本，但仍然希望累计金额能在函数之外保留下来，看看该怎么写。</li>
+</ol>
+<p>一次运行示例：</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">text</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-text">写法一（用 global）：
+当前累计金额： 35
+当前累计金额： 83
+函数外的 total = 83
+写法二（用参数和返回值）：
+当前累计金额： 35
+当前累计金额： 83
+函数外的 total = 83</code></pre></div><p>思考：两种写法输出的最终结果完全一样，为什么实际开发中还是更推荐第二种？</p>
+<h2 id="实验三-模块与标准库">实验三 模块与标准库</h2><p>（对应讲义 14）</p>
+<h3 id="题目-3-1-把工具函数拆成模块">题目 3.1 把工具函数拆成模块</h3><p>考查知识点：模块的划分、<code>import</code>与<code>from...import...</code>的用法、模块之间的协作。</p>
+<ol>
+<li>新建文件<code>temperature.py</code>，把题目 1.1 的<code>c2f</code>和<code>f2c</code>两个函数放进去，函数体保持不变。</li>
+<li>新建文件<code>main.py</code>，用<code>import temperature</code>的方式导入，调用<code>temperature.c2f(100)</code>并输出结果。</li>
+<li>在<code>main.py</code>中再用<code>from temperature import c2f</code>导入一次，调用<code>c2f(0)</code>并输出结果。</li>
+<li>再新建一个文件<code>tools.py</code>，其中定义一个函数<code>average(scores)</code>用于计算平均分（列表为空时返回 0），然后在<code>main.py</code>中用<code>from tools import average</code>导入它，输出<code>average([80, 90, 100])</code>的结果。</li>
+<li>拓展任务：把<code>main.py</code>拆成<code>main.py</code>（调用方）和<code>utils.py</code>（被调用方）两个文件，把上面三个函数全部放进<code>utils.py</code>，体会&quot;按职责拆分模块&quot;的好处。</li>
+</ol>
+<p>一次运行示例：</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">text</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-text">100.0 摄氏度 = 212.0 华氏度
+0.0 摄氏度 = 32.0 华氏度
+平均分： 90.0</code></pre></div><p>思考：如果<code>main.py</code>和<code>utils.py</code>都在同一个文件夹下，为什么<code>import utils</code>就能直接找到它？</p>
+<h3 id="题目-3-2-标准库初体验">题目 3.2 标准库初体验</h3><p>考查知识点：标准库模块的导入方式、<code>random</code>、<code>math</code>、<code>string</code>、<code>time</code>模块的常用函数。</p>
+<ol>
+<li>用<code>string</code>模块的<code>digits</code>和<code>ascii_uppercase</code>拼出&quot;数字 + 大写字母&quot;的字符集，用<code>random.choices</code>生成一个 4 位随机验证码并输出。</li>
+<li>用<code>math.sqrt</code>计算 2 的平方根，用<code>math.pi</code>输出圆周率（都保留 4 位小数）。</li>
+<li>用<code>time.time()</code>测量&quot;把 1 到 1000000 求和&quot;这段代码花了多少秒，并输出耗时。</li>
+<li>用<code>random.shuffle</code>把列表<code>[1, 2, 3, 4, 5]</code>打乱后输出。</li>
+<li>拓展任务：把上面四段代码分别写成四个独立的函数，再写一个<code>main()</code>函数依次调用它们。</li>
+</ol>
+<p>一次运行示例（随机部分每次可能不同）：</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">text</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-text">随机验证码： K7M2
+2 的平方根： 1.4142
+圆周率： 3.1416
+求和耗时： 0.0021 秒
+打乱后的列表： [3, 1, 5, 2, 4]</code></pre></div><h2 id="实验四-lambda-函数">实验四 Lambda 函数</h2><p>（对应讲义 16）</p>
+<h3 id="题目-4-1-用-lambda-给数据排序">题目 4.1 用 lambda 给数据排序</h3><p>考查知识点：lambda 表达式的编写、<code>sorted</code>的<code>key</code>与<code>reverse</code>参数、列表生成式与 lambda 的配合。</p>
+<ol>
+<li>编写一个 lambda 函数，判断一个数是不是偶数，然后用<code>sorted</code>函数把列表<code>[5, 12, 3, 8, 20, 1]</code>按&quot;偶数在前、奇数在后&quot;排列（提示：偶数返回 0，奇数返回 1）。</li>
+<li>给定商品列表<code>[(&#39;笔记本&#39;, 5999), (&#39;鼠标&#39;, 99), (&#39;显示器&#39;, 1299), (&#39;键盘&#39;, 299)]</code>，用<code>sorted</code>加 lambda 按价格从低到高排序并输出。</li>
+<li>给定商品列表同上，用<code>sorted</code>加 lambda 按价格从高到低排序并输出。</li>
+<li>拓展任务：把第 2、3 题的排序结果用列表生成式整理成&quot;商品名称&quot;组成的列表，输出出来（例如<code>[&#39;鼠标&#39;, &#39;键盘&#39;, &#39;显示器&#39;, &#39;笔记本&#39;]</code>）。</li>
+</ol>
+<p>一次运行示例：</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">text</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-text">按价格从低到高： [('鼠标', 99), ('键盘', 299), ('显示器', 1299), ('笔记本', 5999)]
+按价格从高到低： [('笔记本', 5999), ('显示器', 1299), ('键盘', 299), ('鼠标', 99)]
+商品名称： ['鼠标', '键盘', '显示器', '笔记本']</code></pre></div><p>思考：如果想按&quot;名称的笔画数&quot;排序（暂时做不到），你会怎么向同伴解释&quot;排序依据&quot;这件事？</p>
+<h3 id="题目-4-2-一行式小工具">题目 4.2 一行式小工具</h3><p>考查知识点：把 lambda 绑定给变量、lambda 的参数个数、在列表上批量应用一个规则。</p>
+<ol>
+<li>把&quot;加 10&quot;&quot;求平方&quot;&quot;判断是不是偶数&quot;这三个规则分别写成 lambda 表达式并绑定给变量<code>add10</code>、<code>square</code>、<code>is_even</code>，逐个调用并输出结果。</li>
+<li>写一个 lambda 表达式，把价格按&quot;打八折&quot;计算（提示：乘以 0.8），用它计算<code>[99, 199, 599]</code>三个价格打折后的结果，输出一个列表。</li>
+<li>用列表生成式把题目 2 的结果整理成字符串列表，例如<code>[&#39;79.2&#39;, &#39;159.2&#39;, &#39;479.2&#39;]</code>（提示：格式化用<code>f&#39;{x:.1f}&#39;</code>）。</li>
+<li>拓展任务：写一个 lambda，把&quot;姓名, 成绩&quot;形式的字符串拆成&quot;姓名&quot;和&quot;成绩&quot;两个部分（提示：字符串的<code>split</code>方法），用它处理<code>[&#39;张三:95&#39;, &#39;李四:82&#39;]</code>，输出形如<code>[(&#39;张三&#39;, 95), (&#39;李四&#39;, 82)]</code>的列表（提示：还要把成绩转成整数）。</li>
+</ol>
+<p>一次运行示例：</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">text</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-text">加 10： 15
+平方： 25
+是不是偶数： False
+打折后： [79.2, 159.20000000000002, 479.20000000000005]
+字符串列表： ['79.2', '159.2', '479.2']</code></pre></div><blockquote>
+<p><strong>注意</strong>：第 4 行输出里的<code>159.20000000000002</code>不是你写错了，这是<strong>浮点数的精度问题</strong>——<code>199 * 0.8</code>在计算机内部算出来就是这么一个略微偏大的数。第 5 行用<code>f&#39;{x:.1f}&#39;</code>格式化之后，它又变回整洁的<code>159.2</code>了。遇到这种情况不必惊慌，用<code>round()</code>或格式化输出收拾一下即可。</p>
+</blockquote>
+<h2 id="实验五-递归调用">实验五 递归调用</h2><p>（对应讲义 16）</p>
+<h3 id="题目-5-1-递归计算幂与最大公约数">题目 5.1 递归计算幂与最大公约数</h3><p>考查知识点：递归函数的设计、递归出口与递归公式。</p>
+<ol>
+<li>编写递归函数<code>power(x, n)</code>，计算 $x$ 的 $n$ 次方（约定：$x^0 = 1$）。输出<code>power(2, 10)</code>和<code>power(3, 4)</code>的结果。</li>
+<li>编写递归函数<code>gcd(a, b)</code>，求两个正整数的最大公约数（提示：$\gcd(a, b) = \gcd(b, a \bmod b)$，当 $b = 0$ 时结果就是 $a$）。输出<code>gcd(48, 18)</code>和<code>gcd(100, 75)</code>的结果。</li>
+<li>编写递归函数<code>digit_sum(num)</code>，计算一个正整数的各位数字之和（提示：先用<code>num % 10</code>取出个位，再用<code>num // 10</code>去掉个位）。输出<code>digit_sum(20240)</code>的结果。</li>
+<li>拓展任务：编写递归函数<code>is_prime(n)</code>判断 n 是否为素数（提示：n 大于 1 且不能被 2 到 $\sqrt{n}$ 之间的任何数整除）。</li>
+</ol>
+<p>一次运行示例：</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">text</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-text">2 的 10 次方 = 1024
+3 的 4 次方 = 81
+48 和 18 的最大公约数 = 6
+100 和 75 的最大公约数 = 25
+20240 的各位数字之和 = 8</code></pre></div><h3 id="题目-5-2-递归与循环的对比实验">题目 5.2 递归与循环的对比实验</h3><p>考查知识点：递归与循环写法的等价性、<code>time</code>模块计时、递归的代价。</p>
+<ol>
+<li>分别用循环和递归两种写法，各写一个计算阶乘的函数<code>fac_loop(num)</code>和<code>fac_rec(num)</code>。</li>
+<li>用<code>time.time()</code>给&quot;循环算 100 次阶乘&quot;和&quot;递归算 100 次阶乘&quot;各计一次时，把耗时输出出来。</li>
+<li>把计算次数改成 1000 次再跑一次，观察两个耗时的差别。</li>
+<li>拓展任务：把递归版改成&quot;带记忆&quot;的版本（提示：用字典保存已经算过的结果），再对比三次的耗时，说说为什么它会变快。</li>
+</ol>
+<p>一次运行示例（耗时每次可能不同）：</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">text</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-text">循环计算 100 次耗时： 0.0001 秒
+递归计算 100 次耗时： 0.0001 秒
+循环计算 1000 次耗时： 0.0005 秒
+递归计算 1000 次耗时： 0.0009 秒</code></pre></div><p>思考：第 3 步中递归版的耗时已经比循环版大了不少——请把次数改成 10000 再跑一次，差距会变得非常明显。递归每调用一层都要创建新的栈帧，而循环只是在同一个函数里反复执行，这是它们速度差异的根源。</p>
+<h2 id="实验六-生成器">实验六 生成器</h2><p>（对应讲义 16）</p>
+<h3 id="题目-6-1-自己动手写生成器">题目 6.1 自己动手写生成器</h3><p>考查知识点：生成器函数的编写、<code>yield</code>的作用、<code>next()</code>函数、生成器表达式。</p>
+<ol>
+<li>编写生成器函数<code>fib_gen(n)</code>，依次产出前 $n$ 个斐波那契数（从 0 开始），并用<code>for</code>循环把它们打印出来（每次打印一行）。</li>
+<li>编写生成器函数<code>count_up()</code>，使用<code>while True</code>无限地产出 1、2、3、4、5……，在主程序中用<code>next()</code>连续取 5 个值并打印。注意：无限生成器不能用<code>for</code>循环直接遍历，否则程序永远不会结束。</li>
+<li>用列表生成式和生成器表达式分别计算 1 到 10 的平方，把结果打印出来，比较两者的类型有什么不同。</li>
+<li>拓展任务：写一个生成器函数<code>multiples(n)</code>，依次产出 n 的倍数（n、2n、3n……直到 100），用<code>for</code>循环取出前 5 个并打印。</li>
+</ol>
+<p>一次运行示例：</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">text</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-text">0
+1
+1
+2
+3
+5
+8
+13
+21
+34
+取到的 5 个值： 1 2 3 4 5
+列表生成式的结果： [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+生成器表达式的结果： [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]</code></pre></div><h3 id="题目-6-2-用生成器处理一批数据">题目 6.2 用生成器处理一批数据</h3><p>考查知识点：生成器的&quot;惰性&quot;特点、边产出边处理、内存占用的差别。</p>
+<ol>
+<li>编写生成器函数<code>even_numbers(n)</code>，依次产出 1 到 n 之间的所有偶数。</li>
+<li>用<code>for</code>循环遍历它，<strong>边产出边累加</strong>，输出偶数之和。</li>
+<li>再把全部偶数先收进一个列表，然后求和，对比两种写法的输出是否相同。</li>
+<li>拓展任务：把第 2 步的 n 改成 1000000，观察两种写法分别能不能跑得动、耗时差多少。</li>
+</ol>
+<p>一次运行示例：</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">text</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-text">边产出边求和： 2550
+列表长度： 50
+列表求和： 2550</code></pre></div><p>思考：第 4 步中，如果把 1000000 改成 10000000000，程序会卡在哪里？为什么？</p>
+<h2 id="实验七-异常处理">实验七 异常处理</h2><p>（对应讲义 21）</p>
+<h3 id="题目-7-1-成绩录入与参数校验">题目 7.1 成绩录入与参数校验</h3><p>考查知识点：<code>try...except...else...finally</code>、<code>raise</code>主动抛出异常、循环中的异常处理。</p>
+<ol>
+<li>编写函数<code>check_score(score)</code>，如果成绩不在 0 到 100 之间，就用<code>raise</code>抛出一个<code>ValueError</code>，提示信息为&quot;成绩必须在 0~100 之间&quot;；否则返回成绩本身。</li>
+<li>编写函数<code>input_score()</code>，用<code>while True</code>循环提示用户输入成绩并调用<code>check_score</code>校验：输入的不是整数时提示&quot;请输入一个整数&quot;，成绩超出范围时提示异常信息，两种情况都继续循环，直到输入合法才返回该成绩。</li>
+<li>编写函数<code>average(scores)</code>，返回成绩列表的平均值；如果列表为空，就抛出<code>ValueError</code>（提示信息为&quot;成绩列表不能为空&quot;）。</li>
+<li>拓展任务：定义一个自定义异常类型<code>ScoreError(Exception)</code>，让第 1 题中的成绩越界改用它抛出，并在主程序中分别用<code>except ScoreError</code>和<code>except ValueError</code>捕获，看看两者的差别。</li>
+</ol>
+<p>一次运行示例（输入 88）：</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">text</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-text">请输入成绩（0~100）：88
+录入成功，成绩是： 88</code></pre></div><h3 id="题目-7-2-异常处理综合练习">题目 7.2 异常处理综合练习</h3><p>考查知识点：自定义异常、多个<code>except</code>分支、<code>else</code>与<code>finally</code>、异常信息的展示。</p>
+<ol>
+<li>定义自定义异常类型<code>ScoreError(Exception)</code>，再编写函数<code>check_score(score)</code>：成绩不是数字时抛出<code>ScoreError</code>（提示信息为&quot;成绩必须是数字&quot;），成绩不在 0<del>100 之间时也抛出<code>ScoreError</code>（提示信息为&quot;成绩必须在 0</del>100 之间&quot;）。</li>
+<li>编写函数<code>input_scores()</code>，循环录入若干个成绩（提示信息用&quot;请输入成绩（输入 q 结束）：&quot;），输入<code>q</code>时结束录入；输入不合法时打印提示并继续录入。</li>
+<li>在主程序中调用<code>input_scores()</code>，录入结束后用<code>try...except</code>调用<code>average</code>计算平均分，如果成绩列表为空就捕获异常并给出友好提示。</li>
+<li>拓展任务：给<code>input_scores()</code>加上<code>finally</code>代码块，在里面输出一句&quot;本次录入结束&quot;，观察它是在正常结束、还是出错退出时执行的。</li>
+</ol>
+<p>一次运行示例：</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">text</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-text">请输入成绩（输入 q 结束）：95
+请输入成绩（输入 q 结束）：120
+输入有误： 成绩必须在 0~100 之间
+请输入成绩（输入 q 结束）：abc
+输入有误： 成绩必须是数字
+请输入成绩（输入 q 结束）：q
+录入的成绩： [95.0]
+平均分： 95.0
+本次录入结束</code></pre></div><h2 id="实验八-断言">实验八 断言</h2><p>（对应讲义 21）</p>
+<h3 id="题目-8-1-给函数加上-保险丝">题目 8.1 给函数加上"保险丝"</h3><p>考查知识点：用断言表达函数的前置条件、把断言与异常处理配合使用、断言可以被关闭。</p>
+<ol>
+<li>编写函数<code>average(scores)</code>，在函数开头加上断言：当成绩列表为空时，断言信息为&quot;成绩列表不能为空&quot;；断言通过后再计算并返回平均分。</li>
+<li>在主程序中用<code>try...except AssertionError</code>调用它，分别传入空列表和<code>[80, 90, 100]</code>，观察输出。</li>
+<li>把函数拆成两个版本：一个用断言做检查，一个用<code>if</code>加<code>raise</code>做检查，分别调用，比较两种写法的差别。</li>
+<li>拓展任务：用<code>python -O</code>再运行一次程序，记录输出的变化，并回答：为什么实际开发中不能把关键的校验逻辑只写在断言里？</li>
+</ol>
+<p>一次运行示例：</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">text</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-text">出错了： 成绩列表不能为空
+平均分： 90.0</code></pre></div><h2 id="实验九-综合运用">实验九 综合运用</h2><p>（对应讲义 14、16、21）</p>
+<h3 id="题目-9-1-成绩管理小工具">题目 9.1 成绩管理小工具</h3><p>考查知识点：函数拆分、模块化、参数与返回值、异常处理、作用域、排序的综合运用。</p>
+<ol>
+<li>新建文件<code>score_utils.py</code>，在其中定义三个函数：<code>is_valid_score(score)</code>判断成绩是否在 0~100 之间；<code>average(scores)</code>返回平均分（列表为空时抛出<code>ValueError</code>）；<code>grade_of(score)</code>按 90/80/70/60 分档返回&#39;A&#39;/&#39;B&#39;/&#39;C&#39;/&#39;D&#39;/&#39;F&#39;。</li>
+<li>新建文件<code>main.py</code>，用<code>from score_utils import ...</code>导入上面的函数，读取用户输入的若干个成绩（用一个空格分隔的字符串），逐个用<code>is_valid_score</code>校验。</li>
+<li>对合法的成绩调用<code>average</code>与<code>grade_of</code>，输出平均分和每个成绩对应的等级；用<code>try...except</code>捕获<code>average</code>在列表为空时抛出的异常并给出友好提示。</li>
+<li>拓展任务：把每个学生（姓名 + 成绩）保存为一个元组，收集到列表中，用一个自己写的循环函数找出成绩最高的学生（不要使用<code>sorted</code>的<code>key</code>参数），输出他的姓名和成绩；然后再写一行用 lambda 配合<code>sorted</code>的<code>key</code>参数的写法，比较两种写法的输出。</li>
+</ol>
+<p>一次运行示例：</p>
+<div class="code-wrap"><div class="code-head"><span class="code-lang">text</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-text">请输入成绩（空格分隔）：95 82 67 120 abc 78
+平均分： 80.5
+等级： A B D C
+最高分： 小明 95</code></pre></div><h3 id="题目-9-2-选做-自定义异常与断言">题目 9.2 选做：自定义异常与断言</h3><p>考查知识点：自定义异常类型、断言、异常处理的完整练习。</p>
+<ol>
+<li>定义自定义异常类型<code>StudentError(Exception)</code>，再编写函数<code>enroll(name, score)</code>：姓名为空或成绩非法时，分别抛出带有提示信息的<code>StudentError</code>。</li>
+<li>在主程序中用<code>try...except StudentError as e</code>捕获并打印异常信息。</li>
+<li>给<code>enroll</code>再加一条断言：姓名不能超过 10 个字符，断言信息为&quot;姓名过长&quot;。</li>
+</ol>
+<p>思考：第 1 步用<code>raise</code>、第 3 步用<code>assert</code>，两者在本程序中的分工有什么不同？</p>
+<h2 id="附录a-常用内置函数速查表">附录A 常用内置函数速查表</h2><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>abs(x)</code></td>
+<td>返回一个数的绝对值，例如：<code>abs(-1.3)</code>会返回<code>1.3</code>。</td>
+</tr>
+<tr>
+<td><code>bin(n)</code></td>
+<td>把一个整数转换成以<code>&#39;0b&#39;</code>开头的二进制字符串。</td>
+</tr>
+<tr>
+<td><code>chr(n)</code></td>
+<td>将Unicode编码转换成对应的字符。</td>
+</tr>
+<tr>
+<td><code>hex(n)</code></td>
+<td>把一个整数转换成以<code>&#39;0x&#39;</code>开头的十六进制字符串。</td>
+</tr>
+<tr>
+<td><code>input(prompt)</code></td>
+<td>从输入中读取一行，返回读到的字符串。</td>
+</tr>
+<tr>
+<td><code>len(obj)</code></td>
+<td>获取字符串、列表等的长度。</td>
+</tr>
+<tr>
+<td><code>max(...)</code></td>
+<td>返回多个参数或一个可迭代对象中的最大值，例如：<code>max(3, 9, 2)</code>会返回<code>9</code>。</td>
+</tr>
+<tr>
+<td><code>min(...)</code></td>
+<td>返回多个参数或一个可迭代对象中的最小值，例如：<code>min(3, 9, 2)</code>会返回<code>2</code>。</td>
+</tr>
+<tr>
+<td><code>ord(ch)</code></td>
+<td>将字符转换成对应的Unicode编码。</td>
+</tr>
+<tr>
+<td><code>pow(a, b)</code></td>
+<td>求幂运算，例如：<code>pow(2, 3)</code>会返回<code>8</code>。</td>
+</tr>
+<tr>
+<td><code>print(...)</code></td>
+<td>打印输出，多个参数之间用空格分隔。</td>
+</tr>
+<tr>
+<td><code>range(n)</code></td>
+<td>构造一个范围序列，例如：<code>range(5)</code>会产生<code>0</code>到<code>4</code>的整数序列。</td>
+</tr>
+<tr>
+<td><code>round(x, n)</code></td>
+<td>按照指定的精度进行四舍五入，例如：<code>round(3.14159, 2)</code>会返回<code>3.14</code>。</td>
+</tr>
+<tr>
+<td><code>sum(obj)</code></td>
+<td>对一个序列中的项从左到右进行求和运算，例如：<code>sum(range(1, 101))</code>会返回<code>5050</code>。</td>
+</tr>
+<tr>
+<td><code>type(obj)</code></td>
+<td>返回对象的类型，例如：<code>type(10)</code>会返回<code>&#39;int&#39;</code>。</td>
+</tr>
+</tbody></table>
+<p>常用标准库模块：<code>math</code>（数学函数）、<code>random</code>（随机数）、<code>time</code>（时间）、<code>os</code>（操作系统）、<code>sys</code>（解释器参数）、<code>string</code>（常用字符集合）。</p>
+<h2 id="附录b-常见异常类型速查表">附录B 常见异常类型速查表</h2><table>
+<thead>
+<tr>
+<th>异常类型</th>
+<th>什么时候会出现</th>
+<th>典型例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ZeroDivisionError</code></td>
+<td>除数为零</td>
+<td><code>10 / 0</code></td>
+</tr>
+<tr>
+<td><code>ValueError</code></td>
+<td>值的类型对，但取值不合法</td>
+<td><code>int(&#39;abc&#39;)</code></td>
+</tr>
+<tr>
+<td><code>TypeError</code></td>
+<td>类型不匹配</td>
+<td><code>&#39;a&#39; + 1</code></td>
+</tr>
+<tr>
+<td><code>NameError</code></td>
+<td>使用了不存在的名字</td>
+<td><code>print(undefined_name)</code></td>
+</tr>
+<tr>
+<td><code>IndexError</code></td>
+<td>下标越界</td>
+<td><code>[1, 2, 3][10]</code></td>
+</tr>
+<tr>
+<td><code>KeyError</code></td>
+<td>字典中不存在的键</td>
+<td><code>{&#39;a&#39;: 1}[&#39;b&#39;]</code></td>
+</tr>
+<tr>
+<td><code>AttributeError</code></td>
+<td>对象没有这个属性或方法</td>
+<td><code>&#39;abc&#39;.uppercase()</code></td>
+</tr>
+<tr>
+<td><code>AssertionError</code></td>
+<td>断言失败</td>
+<td><code>assert False, &#39;出错&#39;</code></td>
+</tr>
+<tr>
+<td><code>StopIteration</code></td>
+<td>迭代器已经没有下一个值了</td>
+<td>取完生成器后再<code>next()</code></td>
+</tr>
+<tr>
+<td><code>FileNotFoundError</code></td>
+<td>文件不存在</td>
+<td><code>open(&#39;不存在.txt&#39;)</code></td>
+</tr>
+<tr>
+<td><code>ImportError</code></td>
+<td>模块导入失败</td>
+<td><code>import 不存在的模块</code></td>
+</tr>
+<tr>
+<td><code>RecursionError</code></td>
+<td>递归层数超过限制</td>
+<td>递归没有出口</td>
+</tr>
+</tbody></table>
+<p>提示：几乎所有的常见异常都继承自<code>Exception</code>，所以<code>except Exception</code>可以兜住它们；但实际开发中应尽量捕获具体的异常类型。</p>
+<h2 id="附录c-编程实验题评分要点">附录C 编程实验题评分要点</h2><ol>
+<li><strong>题目 1.1</strong>：函数名与参数名见名知意；公式正确；输出格式与示例一致；闰年判断要同时考虑 400、4、100 三个条件。</li>
+<li><strong>题目 1.2</strong>：四个函数职责清晰；空列表的情况要返回合理的默认值而不是让除零发生；返回字典时键名与示例一致。</li>
+<li><strong>题目 2.1</strong>：字典计数写法正确；<code>longest</code>能处理长度相同的多个单词（取第一个即可）；第 4 步能说出全局变量与局部变量的差别。</li>
+<li><strong>题目 2.2</strong>：两种写法都写对了；能说清楚<code>global</code>的作用；能解释为什么更推荐&quot;参数传入、返回值传出&quot;。</li>
+<li><strong>题目 3.1</strong>：模块文件与主程序分文件保存；三种导入方式都实际用过一次；能解释为什么同目录下可以直接<code>import</code>。</li>
+<li><strong>题目 3.2</strong>：四个标准库模块都用上了；函数拆分合理；随机相关的输出连续跑三次记录。</li>
+<li><strong>题目 4.1</strong>：能正确写出 lambda 表达式（参数在冒号前、表达式在冒号后）；第 1 题的&quot;偶数在前&quot;要能说出是让偶数返回 0、奇数返回 1；第 2、3 题要正确使用<code>key</code>和<code>reverse</code>；第 4 题的列表生成式写法正确。</li>
+<li><strong>题目 4.2</strong>：三个 lambda 都写对了；能说出 lambda 的返回值就是表达式的结果；第 4 题的字符串拆分和类型转换都正确。</li>
+<li><strong>题目 5.1</strong>：递归出口与递归公式都正确；<code>gcd</code>的参数顺序要满足 a &gt;= b；<code>digit_sum</code>用<code>//</code>去掉个位；选做的<code>is_prime</code>要能正确处理 1 和 2。</li>
+<li><strong>题目 5.2</strong>：循环版和递归版结果一致；计时代码位置正确（计时的范围要包含整个循环）；能解释为什么递归更慢；选做的带记忆版本要能说明原理。</li>
+<li><strong>题目 6.1</strong>：生成器函数里有<code>yield</code>；无限生成器用<code>next()</code>取用而不是用<code>for</code>遍历；能说出列表生成式与生成器表达式在内存占用上的差别。</li>
+<li><strong>题目 6.2</strong>：两种求和方式结果一致；能解释&quot;边产出边处理&quot;为什么更省内存；第 4 步的实验结论正确。</li>
+<li><strong>题目 7.1</strong>：两个异常分支分别对应不同的错误提示；自定义异常类能被单独捕获；第 4 步能说明两种异常类型的捕获范围。</li>
+<li><strong>题目 7.2</strong>：自定义异常类的定义正确；<code>except</code>的顺序没有覆盖问题；<code>finally</code>在正常结束和出错时都执行；异常信息写得清楚。</li>
+<li><strong>题目 8.1</strong>：断言的位置要放在函数开头；用<code>python -O</code>对比运行后能解释断言被关闭的后果。</li>
+<li><strong>题目 9.1</strong>：模块拆分合理；异常处理覆盖了空列表和非法输入两种情况；拓展任务中两种排序写法输出相同。</li>
+<li><strong>题目 9.2</strong>（选做）：自定义异常能被单独捕获；断言与<code>raise</code>的分工说得清楚。</li>
+</ol>
+<h3 id="知识点总结">知识点总结</h3><h4 id="一-函数的定义-调用与返回值">一、函数的定义、调用与返回值</h4><ul>
+<li>用 <code>def</code> 定义函数：<code>def 函数名(参数列表):</code>，行末的 <code>:</code> 不能漏，函数体统一缩进 4 个空格。</li>
+<li>函数体中用 <code>return</code> 交出结果；<code>return</code> 语句之后的代码不再执行；没有写 <code>return</code> 的函数调用后返回 <code>None</code>。</li>
+<li>一次调用只返回一个值，需要多个结果时返回元组或字典；一个函数可以写多个 <code>return</code>，由不同的条件决定走哪一条。</li>
+<li>定义时写的名字叫形参，调用时传入的值叫实参；调用函数必须写括号并给出实参。</li>
+<li>关键函数在函数体第一行写文档字符串（<code>&quot;&quot;&quot;...&quot;&quot;&quot;</code>），说明用途、参数和返回值。</li>
+</ul>
+<h4 id="二-函数参数的常用形式">二、函数参数的常用形式</h4><ul>
+<li>位置参数：按顺序一一对应，最常用。</li>
+<li>关键字参数：调用时写成 <code>名字=值</code>，顺序可以与定义不同，可读性更好。</li>
+<li>默认参数：定义时写成 <code>def f(x, step=1)</code>，调用时可以不传；<strong>有默认值的参数必须放在无默认值参数的后面</strong>。</li>
+<li>可变位置参数 <code>*args</code>：把多余的位置实参收集成一个元组。</li>
+<li>可变关键字参数 <code>**kwargs</code>：把多余的关键字实参收集成一个字典。</li>
+<li>调用时可用 <code>*</code> 和 <code>**</code> 拆开传参：<code>f(*nums)</code> 把列表或元组拆成位置实参，<code>f(**info)</code> 把字典拆成关键字实参。</li>
+</ul>
+<h4 id="三-变量作用域">三、变量作用域</h4><ul>
+<li>函数内部创建、函数外部无法直接访问的变量是局部变量；在函数外部定义的变量是全局变量，函数内可以读取。</li>
+<li>函数内要修改全局变量，必须先写 <code>global</code> 声明，并且 <code>global</code> 语句要写在函数体的最前面。</li>
+<li>更推荐&quot;参数传入、返回值传出&quot;：函数不依赖全局状态，才便于测试和复用。</li>
+<li>全局变量在循环中持续累加容易得到意料之外的结果，做累计时优先用返回值或可变对象参数。</li>
+</ul>
+<h4 id="四-模块与标准库">四、模块与标准库</h4><ul>
+<li>模块就是一个 <code>.py</code> 文件；把一组工具函数放进模块，再用 <code>import</code> 引入。</li>
+<li>三种导入写法：<code>import 模块名</code>（用 <code>模块名.函数名()</code> 调用）、<code>import 模块名 as 别名</code>、<code>from 模块名 import 函数名</code>（直接使用函数名）。</li>
+<li>脚本所在目录会被自动加入模块搜索路径，所以同目录的模块可以直接 <code>import</code>。</li>
+<li>在模块文件里用 <code>if __name__ == &quot;__main__&quot;:</code> 保护主程序代码，避免模块被导入时自动执行。</li>
+<li>常用标准库：<code>math</code>（数学函数）、<code>random</code>（随机数）、<code>time</code>（时间）、<code>os</code>（操作系统）、<code>sys</code>（解释器参数）、<code>string</code>（常用字符集合）；用到前先 <code>import</code>。</li>
+</ul>
+<h4 id="五-lambda-函数">五、Lambda 函数</h4><ul>
+<li><code>lambda 参数: 表达式</code> 写出一行式匿名函数，返回值就是表达式的结果，不能写多条语句。</li>
+<li>典型用途是配合 <code>sorted</code> 的 <code>key</code> 参数自定义排序规则，例如 <code>sorted(students, key=lambda s: s[&#39;score&#39;])</code>。</li>
+<li><code>reverse=True</code> 表示降序；需要多条件排序时让 <code>key</code> 返回元组，例如 <code>key=lambda s: (-s[&#39;score&#39;], s[&#39;name&#39;])</code>。</li>
+<li>逻辑长或需要复用时优先写命名函数；<code>lambda</code> 适合&quot;只用一次、逻辑很短&quot;的场景。</li>
+</ul>
+<h4 id="六-递归调用">六、递归调用</h4><ul>
+<li>递归函数自己调用自己，必须有<strong>递归出口</strong>（终止条件），否则运行时会抛出 <code>RecursionError</code>。</li>
+<li>写法三步：先找出口，再写递推关系，最后写调用；<code>gcd</code>、<code>factorial</code>、汉诺塔是典型例子。</li>
+<li>递归比循环慢、占用更多内存（每一层调用都保留一份局部变量），能用循环解决的场景优先用循环。</li>
+</ul>
+<h4 id="七-生成器">七、生成器</h4><ul>
+<li>函数体中用 <code>yield</code> 一次产出一个值，它就是生成器函数；调用它得到生成器对象。</li>
+<li><code>yield</code> 的作用是&quot;暂停并交出一个值&quot;，<code>return</code> 是&quot;结束并交出结果&quot;，两者不能混为一谈。</li>
+<li>取值用 <code>next(生成器)</code> 或 <code>for</code> 循环；无限生成器只能用 <code>next()</code> 逐个取，用 <code>for</code> 遍历会停不下来。</li>
+<li>生成器表达式 <code>(表达式 for 元素 in 序列)</code> 与列表生成式写法相近，但边算边用，内存占用小，适合处理大批量数据。</li>
+</ul>
+<h4 id="八-异常处理">八、异常处理</h4><ul>
+<li>语法结构：<code>try</code> 放可能出错的代码，<code>except</code> 捕获并处理，<code>else</code> 在没有异常时执行，<code>finally</code> 无论如何都执行。</li>
+<li><code>except</code> 要捕获具体的异常类型（例如 <code>except ValueError as e:</code>），<code>except Exception</code> 只作兜底，不能用它代替具体处理。</li>
+<li><code>raise</code> 主动抛出异常，用于把不合法的情况交给上层处理；自定义异常写成 <code>class MyError(Exception):</code>。</li>
+<li>常见异常：<code>ValueError</code>（值不合法）、<code>TypeError</code>（类型不匹配）、<code>ZeroDivisionError</code>（除零）、<code>IndexError</code>（下标越界）、<code>KeyError</code>（键不存在）、<code>NameError</code>（名字未定义）、<code>FileNotFoundError</code>（文件不存在）、<code>ImportError</code>（模块不存在）、<code>StopIteration</code>（迭代结束）、<code>RecursionError</code>（递归过深）。</li>
+<li>异常处理写在真正可能失败的那一步，不要用一个大 <code>try</code> 把整个程序包起来，否则真实错误会被掩盖。</li>
+</ul>
+<h4 id="九-断言">九、断言</h4><ul>
+<li><code>assert 条件, &quot;提示信息&quot;</code>：条件为假时抛出 <code>AssertionError</code>，用来检查程序内部的前提。</li>
+<li>断言只用于&quot;程序员自己的错误&quot;，不用于校验用户输入；用户输入要用 <code>if</code> 判断并抛异常。</li>
+<li><code>python -O</code> 会关闭断言，所以关键校验不能只依赖 <code>assert</code>。</li>
+</ul>
+<h4 id="十-命名规则与代码风格">十、命名规则与代码风格</h4><ul>
+<li>函数名、变量名、模块名用小写加下划线（<code>total_score</code>、<code>count_words</code>）；常量用全大写（<code>MAX_SIZE</code>）。</li>
+<li>函数名用动词（<code>get_score</code>、<code>average</code>），返回布尔值的函数以 <code>is_</code> 开头（<code>is_leap</code>、<code>is_valid_score</code>）。</li>
+<li>模块名简短且有意义（<code>temperature.py</code>、<code>score_utils.py</code>）；实验脚本按 <code>lab3_单元号_题号.py</code> 命名。</li>
+<li>一行只做一件事，关键逻辑写注释，关键函数写文档字符串，函数与模块之间用空行分隔。</li>
+<li>含随机数的程序每次输出可能不同，报告中要记录多次运行结果并说明原因。</li>
+</ul>
+<h4 id="十一-复习时的易错点">十一、复习时的易错点</h4><ul>
+<li>漏写行末的 <code>:</code> 或缩进不一致，导致 <code>IndentationError</code>。</li>
+<li>把 <code>return</code> 写在 <code>print</code> 之后，函数变成&quot;只打印不返回&quot;。</li>
+<li>默认参数定义在无默认值参数之前，调用时报 <code>SyntaxError</code>。</li>
+<li>认为 <code>global</code> 声明可以写在函数中间——它必须位于函数体最前面。</li>
+<li>以为 <code>import 模块名</code> 后可以直接使用模块里的函数名，忘了写 <code>模块名.函数名()</code>。</li>
+<li>递归函数没有出口，运行时报 <code>RecursionError</code>。</li>
+<li>用 <code>for</code> 遍历无限生成器，程序永远停不下来。</li>
+<li><code>except Exception</code> 一把抓，真实错误信息被吞掉。</li>
+<li>用 <code>assert</code> 校验用户输入，程序加上 <code>-O</code> 参数后就失效。</li>
+</ul>
+<h4 id="十二-学习重点">十二、学习重点</h4><ul>
+<li>能独立写出带参数、带返回值、带文档字符串的函数，熟练使用位置参数、关键字参数、默认参数与 <code>*args</code>。</li>
+<li>能说清局部变量与全局变量的区别，需要共享状态时优先选择&quot;参数传入、返回值传出&quot;。</li>
+<li>能把工具函数拆成独立模块，用三种导入方式调用，并用 <code>if __name__ == &quot;__main__&quot;:</code> 保护主程序。</li>
+<li>能用 <code>lambda</code> 配合 <code>sorted(key=...)</code> 写出单条件与多条件排序。</li>
+<li>能写出带出口的递归函数，并能解释递归比循环慢的原因。</li>
+<li>能写出发成器函数，理解 <code>yield</code> 与 <code>return</code> 的区别，能说明生成器省内存的原理。</li>
+<li>能写出完整的 <code>try...except...else...finally</code> 结构，能用 <code>raise</code> 抛异常、能定义自定义异常类。</li>
+<li>能说清断言的适用场景，并知道 <code>python -O</code> 会关闭断言。</li>
+</ul>
+</div></article></div><aside class="lesson-toc" aria-label="本页目录"><div class="lesson-toc-inner"><div class="toc-title">本页目录</div><ul><li class="toc-level-2"><a href="#函数与异常基础实验手册">函数与异常基础实验手册</a></li><li class="toc-level-2"><a href="#实验总则">实验总则</a></li><li class="toc-level-3"><a href="#适用范围与知识背景">适用范围与知识背景</a></li><li class="toc-level-3"><a href="#实验目的">实验目的</a></li><li class="toc-level-3"><a href="#实验环境">实验环境</a></li><li class="toc-level-3"><a href="#实验要求与报告规范">实验要求与报告规范</a></li><li class="toc-level-2"><a href="#实验一-函数的定义与参数">实验一 函数的定义与参数</a></li><li class="toc-level-3"><a href="#题目-1-1-温度转换与数值工具">题目 1.1 温度转换与数值工具</a></li><li class="toc-level-3"><a href="#题目-1-2-成绩统计小工具">题目 1.2 成绩统计小工具</a></li><li class="toc-level-2"><a href="#实验二-变量作用域">实验二 变量作用域</a></li><li class="toc-level-3"><a href="#题目-2-1-文本统计工具">题目 2.1 文本统计工具</a></li><li class="toc-level-3"><a href="#题目-2-2-同一个功能的两种写法">题目 2.2 同一个功能的两种写法</a></li><li class="toc-level-2"><a href="#实验三-模块与标准库">实验三 模块与标准库</a></li><li class="toc-level-3"><a href="#题目-3-1-把工具函数拆成模块">题目 3.1 把工具函数拆成模块</a></li><li class="toc-level-3"><a href="#题目-3-2-标准库初体验">题目 3.2 标准库初体验</a></li><li class="toc-level-2"><a href="#实验四-lambda-函数">实验四 Lambda 函数</a></li><li class="toc-level-3"><a href="#题目-4-1-用-lambda-给数据排序">题目 4.1 用 lambda 给数据排序</a></li><li class="toc-level-3"><a href="#题目-4-2-一行式小工具">题目 4.2 一行式小工具</a></li><li class="toc-level-2"><a href="#实验五-递归调用">实验五 递归调用</a></li><li class="toc-level-3"><a href="#题目-5-1-递归计算幂与最大公约数">题目 5.1 递归计算幂与最大公约数</a></li><li class="toc-level-3"><a href="#题目-5-2-递归与循环的对比实验">题目 5.2 递归与循环的对比实验</a></li><li class="toc-level-2"><a href="#实验六-生成器">实验六 生成器</a></li><li class="toc-level-3"><a href="#题目-6-1-自己动手写生成器">题目 6.1 自己动手写生成器</a></li><li class="toc-level-3"><a href="#题目-6-2-用生成器处理一批数据">题目 6.2 用生成器处理一批数据</a></li><li class="toc-level-2"><a href="#实验七-异常处理">实验七 异常处理</a></li><li class="toc-level-3"><a href="#题目-7-1-成绩录入与参数校验">题目 7.1 成绩录入与参数校验</a></li><li class="toc-level-3"><a href="#题目-7-2-异常处理综合练习">题目 7.2 异常处理综合练习</a></li><li class="toc-level-2"><a href="#实验八-断言">实验八 断言</a></li><li class="toc-level-3"><a href="#题目-8-1-给函数加上-保险丝">题目 8.1 给函数加上"保险丝"</a></li><li class="toc-level-2"><a href="#实验九-综合运用">实验九 综合运用</a></li><li class="toc-level-3"><a href="#题目-9-1-成绩管理小工具">题目 9.1 成绩管理小工具</a></li><li class="toc-level-3"><a href="#题目-9-2-选做-自定义异常与断言">题目 9.2 选做：自定义异常与断言</a></li><li class="toc-level-2"><a href="#附录a-常用内置函数速查表">附录A 常用内置函数速查表</a></li><li class="toc-level-2"><a href="#附录b-常见异常类型速查表">附录B 常见异常类型速查表</a></li><li class="toc-level-2"><a href="#附录c-编程实验题评分要点">附录C 编程实验题评分要点</a></li><li class="toc-level-3"><a href="#知识点总结">知识点总结</a></li></ul><a class="to-top" href="#top">回到顶部</a></div><button class="panel-toggle" type="button" data-panel-toggle="lessonToc" aria-expanded="true" aria-label="折叠本页目录" title="折叠本页目录"><svg class="ico-collapse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 6.5 15 12l-5.5 5.5"/><path d="M5 6.5 10.5 12 5 17.5"/></svg><svg class="ico-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5 9 12l5.5 5.5"/><path d="M19 6.5 13.5 12 19 17.5"/></svg></button><button class="panel-rail-icon" type="button" data-panel-rail="lessonToc" aria-label="展开本页目录" title="展开本页目录"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5 9 12l5.5 5.5"/><path d="M19 6.5 13.5 12 19 17.5"/></svg></button></aside></main><footer>by天才程序员</footer><script src="/script.js"></script></body></html>
