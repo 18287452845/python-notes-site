@@ -12,7 +12,7 @@
 <p>这句话对初学者来说可能不那么容易理解，但是我可以先为大家圈出几个关键词：<strong>对象</strong>（object）、<strong>类</strong>（class）、<strong>封装</strong>（encapsulation）、<strong>继承</strong>（inheritance）、<strong>多态</strong>（polymorphism）。</p>
 <p>我们先说说类和对象这两个词。在面向对象编程中，<strong>类是一个抽象的概念，对象是一个具体的概念</strong>。我们把同一类对象的共同特征抽取出来就是一个类，比如我们经常说的人类，这是一个抽象概念，而我们每个人就是人类的这个抽象概念下的实实在在的存在，也就是一个对象。简而言之，<strong>类是对象的蓝图和模板，对象是类的实例，是可以接受消息的实体</strong>。</p>
 <p>在面向对象编程的世界中，<strong>一切皆为对象</strong>，<strong>对象都有属性和行为</strong>，<strong>每个对象都是独一无二的</strong>，而且<strong>对象一定属于某个类</strong>。对象的属性是对象的静态特征，对象的行为是对象的动态特征。按照上面的说法，如果我们把拥有共同特征的对象的属性和行为都抽取出来，就可以定义出一个类。</p>
-<p><img src="/assets/20210731182741-20250605165224-59ykypq.png"" alt="" loading="lazy"></p>
+<p><img src="/assets/oop_class_and_object.jpg"" alt="类与对象：类是蓝图，对象是实例" loading="lazy"></p>
 <h3 id="定义类">定义类</h3><p>在 Python 语言中，我们可以使用<code>class</code>关键字加上类名来定义类，通过缩进我们可以确定类的代码块，就如同定义函数那样。在类的代码块中，我们需要写一些函数，我们说过类是一个抽象概念，那么这些函数就是我们对一类对象共同的动态特征的提取。写在类里面的函数我们通常称之为<strong>方法</strong>，方法就是对象的行为，也就是对象可以接收的消息。方法的第一个参数通常都是<code>self</code>，它代表了接收这个消息的对象本身。</p>
 <div class="code-wrap"><div class="code-head"><span class="code-lang">python</span><button class="copy-code" type="button" aria-label="复制代码">复制</button></div><pre><code class="language-python">class Student:
 
@@ -60,6 +60,7 @@ stu2 = Student('王大锤', 25)
 stu1.study('Python程序设计')    # 测试正在学习Python程序设计.
 stu2.play()                    # 王大锤正在玩游戏.</code></pre></div><h3 id="面向对象的支柱">面向对象的支柱</h3><p>面向对象编程有三大支柱，就是我们之前给大家划重点的时候圈出的三个词：<strong>封装</strong>、<strong>继承</strong>和<strong>多态</strong>。后面两个概念在下一节课中会详细说明，这里我们先说一下什么是封装。我自己对封装的理解是：<strong>隐藏一切可以隐藏的实现细节，只向外界暴露简单的调用接口</strong>。我们在类中定义的对象方法其实就是一种封装，这种封装可以让我们在创建对象之后，只需要给对象发送一个消息就可以执行方法中的代码，也就是说我们在只知道方法的名字和参数（方法的外部视图），不知道方法内部实现细节（方法的内部视图）的情况下就完成了对方法的使用。</p>
 <p>举一个例子，假如要控制一个机器人帮我倒杯水，如果不使用面向对象编程，不做任何的封装，那么就需要向这个机器人发出一系列的指令，如站起来、向左转、向前走5步、拿起面前的水杯、向后转、向前走10步、弯腰、放下水杯、按下出水按钮、等待10秒、松开出水按钮、拿起水杯、向右转、向前走5步、放下水杯等，才能完成这个简单的操作，想想都觉得麻烦。按照面向对象编程的思想，我们可以将倒水的操作封装到机器人的一个方法中，当需要机器人帮我们倒水的时候，只需要向机器人对象发出倒水的消息就可以了，这样做不是更好吗？</p>
+<p><img src="/assets/oop_three_pillars.jpg"" alt="面向对象的三大支柱：封装、继承与多态" loading="lazy"></p>
 <p>在很多场景下，面向对象编程其实就是一个三步走的问题。第一步定义类，第二步创建对象，第三步给对象发消息。当然，有的时候我们是不需要第一步的，因为我们想用的类可能已经存在了。之前我们说过，Python内置的<code>list</code>、<code>set</code>、<code>dict</code>其实都是类，如果要创建列表、集合、字典对象，我们就不用自定义类了。当然，有的类并不是 Python 标准库中直接提供的，它可能来自于第三方的代码，如何安装和使用三方代码在后续课程中会进行讨论。在某些特殊的场景中，我们会用到名为“内置对象”的对象，所谓“内置对象”就是说上面三步走的第一步和第二步都不需要了，因为类已经存在而且对象已然创建过了，直接向对象发消息就可以了，这也就是我们常说的“开箱即用”。</p>
 <h3 id="面向对象案例">面向对象案例</h3><h4 id="例子1-时钟">例子1：时钟</h4><blockquote>
 <p><strong>要求</strong>：定义一个类描述数字时钟，提供走字和显示时间的功能。</p>
@@ -136,8 +137,8 @@ p2 = Point(6, 9)
 print(p1)  # 调用对象的__str__魔法方法
 print(p2)
 print(p1.distance_to(p2))</code></pre></div><h3 id="总结">总结</h3><p>面向对象编程是一种非常流行的编程范式，除此之外还有<strong>指令式编程</strong>、<strong>函数式编程</strong>等编程范式。由于现实世界是由对象构成的，而对象是可以接收消息的实体，所以<strong>面向对象编程更符合人类正常的思维习惯</strong>。类是抽象的，对象是具体的，有了类就能创建对象，有了对象就可以接收消息，这就是面向对象编程的基础。定义类的过程是一个抽象的过程，找到对象公共的属性属于数据抽象，找到对象公共的方法属于行为抽象。抽象的过程是一个仁者见仁智者见智的过程，对同一类对象进行抽象可能会得到不同的结果，如下图所示。</p>
-<p><img src="/assets/20210731182914-20250605165224-92g9ks6.png"" alt="" loading="lazy"></p>
+<p><img src="/assets/oop_abstraction_views.jpg"" alt="抽象的结果取决于你站在什么视角" loading="lazy"></p>
 <blockquote>
-<p><strong>说明：</strong>  本节课的插图来自于 Grady Booc 等撰写的《面向对象分析与设计》一书，该书是讲解面向对象编程的经典著作，有兴趣的读者可以购买和阅读这本书来了解更多的面向对象的相关知识。</p>
+<p><strong>说明：</strong>  Grady Booch 等人撰写的《面向对象分析与设计》是讲解面向对象编程的经典著作，有兴趣的读者可以购买和阅读这本书来了解更多的面向对象的相关知识。</p>
 </blockquote>
 </div></article></div><aside class="lesson-toc" aria-label="本页目录"><div class="lesson-toc-inner"><div class="toc-title">本页目录</div><ul><li class="toc-level-2"><a href="#面向对象编程入门">面向对象编程入门</a></li><li class="toc-level-3"><a href="#类和对象">类和对象</a></li><li class="toc-level-3"><a href="#定义类">定义类</a></li><li class="toc-level-3"><a href="#创建和使用对象">创建和使用对象</a></li><li class="toc-level-3"><a href="#初始化方法">初始化方法</a></li><li class="toc-level-3"><a href="#面向对象的支柱">面向对象的支柱</a></li><li class="toc-level-3"><a href="#面向对象案例">面向对象案例</a></li><li class="toc-level-3"><a href="#总结">总结</a></li></ul><a class="to-top" href="#top">回到顶部</a></div><button class="panel-toggle" type="button" data-panel-toggle="lessonToc" aria-expanded="true" aria-label="折叠本页目录" title="折叠本页目录"><svg class="ico-collapse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 6.5 15 12l-5.5 5.5"/><path d="M5 6.5 10.5 12 5 17.5"/></svg><svg class="ico-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5 9 12l5.5 5.5"/><path d="M19 6.5 13.5 12 19 17.5"/></svg></button><button class="panel-rail-icon" type="button" data-panel-rail="lessonToc" aria-label="展开本页目录" title="展开本页目录"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5 9 12l5.5 5.5"/><path d="M19 6.5 13.5 12 19 17.5"/></svg></button></aside></main><footer>by天才程序员</footer><script src="/script.js"></script></body></html>
